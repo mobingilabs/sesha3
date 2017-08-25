@@ -7,7 +7,7 @@ script:
 - go test -v $(go list ./... | grep -v /vendor/) -cover
 - go build -v
 before_deploy:
-- tar cvzf app.tar.gz codedeploygo-travis2s3 appspec.yml scripts/
+- tar cvzf app.tar.gz sesha3 appspec.yml scripts/
 - mkdir -p dpl_cd_upload
 - cp app.tar.gz dpl_cd_upload/
 deploy:
