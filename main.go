@@ -7,7 +7,7 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Version 2: "+time.Now().String())
+	fmt.Fprintf(w, "Version 3: "+time.Now().String())
 }
 
 func main() {
