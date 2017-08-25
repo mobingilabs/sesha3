@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/sesha3
+    destination: /home/ubuntu/sesha3/
 permissions:
   - object: /
     pattern: "**"
@@ -20,7 +20,7 @@ hooks:
   AfterInstall:
     - location: scripts/after_install.sh
       timeout: 300
-      runas: ubuntu
+      runas: root
   ApplicationStart:
     - location: scripts/application_start.sh
       timeout: 300
