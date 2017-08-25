@@ -1,0 +1,35 @@
+os:
+- linux
+language: go
+go:
+- master
+script:
+- go test -v $(go list ./... | grep -v /vendor/) -cover
+- go build -v
+deploy:
+- provider: s3
+  access_key_id: AKIAINLJDAMNCZZ5NRDA
+  secret_access_key: &1
+    secure: OZKB69HDjTvvGT8aZO45dI2HxMeuYTQYqPbbRhdLCSttTF0vXta7skz04+JS1XmkBa/TX0Pa4XpbpkTW4nJBccL0k0kXJyRZUJTJ5rknsmSgH8uYApgzq1lYgRvLNbpujuOzlaUcJieEu+ciBEQwL05Do8ZoFKXp3Eec9uovgC1T9AHyBk6WnDX9kJnntsvm0CNBzaAXEoG2q1Z0qmcntWz21fotqgsKKLSQvadqFG4rGV7GuvrqNKel+wzsfy68+UMOPaAw+A78xZl3chAJX3A+8+Mm/4ZDOwFMlQF7evJmp8N/7HinSTddNRxIHFDgjif+aPCO1AB36u2YLMdJLl3z5zaP++zw05mlL6x5Gzh/zQ/iAyH7dzGEwAledl9z3rnffKIdbRqY2BV+HxmNuWP4dBxqFDr4fRXKqCeODEmo9LwmYYBUAw9sF5P/WOGMCMwacPxhF+ZFSyhU7j7ZVgqAiT4Iep8KwdOcAlHwZ+iXfxp/H0yASxP30VDJV1rfMHg/iFwTCr7SA91PN2I3DTnuht38789l8I9zqEcnm8mHaBlgX0dz42xs+o08bHSYR6wtQZ6CXBATMLV5dGo1QFh83f6tSyc3hAFUR384hCr3cWuQ/Ui20geQMv5QrQcjeCOh8y7pTFolP2v39qgp6W27HhmwncKr1aDktN96CDg=
+  local_dir: dpl_cd_upload
+  skip_cleanup: true
+  on: &2
+    repo: flowerinthenight/codedeploygo-travis2s3
+    branch: master
+  bucket: codedeploygo-travis2s3
+  upload_dir: latest
+  region: ap-northeast-1
+- provider: codedeploy
+  access_key_id: AKIAINLJDAMNCZZ5NRDA
+  secret_access_key: *1
+  bucket: codedeploygo-travis2s3
+  key: latest/app.tar.gz
+  bundle_type: tgz
+  application: codeploygo-travis2s3
+  deployment_group: codeploygo-travis2s3-dg
+  region: ap-northeast-1
+  on: *2
+before_deploy:
+  - tar cvzf app.tar.gz codedeploygo-travis2s3 appspec.yml scripts/
+  - mkdir -p dpl_cd_upload
+  - cp app.tar.gz dpl_cd_upload/
