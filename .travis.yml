@@ -1,5 +1,5 @@
 os:
-- linux
+  - linux
 language: go
 go:
 - master
@@ -7,6 +7,29 @@ script:
 - go test -v $(go list ./... | grep -v /vendor/) -cover
 - go build -v
 before_deploy:
-  - tar cvzf app.tar.gz codedeploygo-travis2s3 appspec.yml scripts/
-  - mkdir -p dpl_cd_upload
-  - cp app.tar.gz dpl_cd_upload/
+- tar cvzf app.tar.gz codedeploygo-travis2s3 appspec.yml scripts/
+- mkdir -p dpl_cd_upload
+- cp app.tar.gz dpl_cd_upload/
+deploy:
+- provider: s3
+  access_key_id: AKIAINLJDAMNCZZ5NRDA
+  secret_access_key: &1
+    secure: rHgRElkx4z1Ne4KvrHvsx8nWK/jiF/xfvYfwtXm3pWgxQLpt6ansHcjM93JDr1AxywmtgkMmjzxN4w1T85dHASZFt06llbdwNUDcAn1ZsmAg0U+vDrF/OrISAdLyeunM7WLMFAqlwyU+Iu0jVdtFv7dDbn85ZGQs5R03XDO5dD3rrOmdr6PfRQZlPXeCttPf0VsNwqO75lIb0shxzdCcJUUwIkA2IICpBWWHbqBqcmH5eqDF4kGGPFR4/4uuw5SW9VyXTUOEaQeKxOv6wJcBDTEc8CD9gyYnbaku6JCUJE3L8PgatjJzslefjdPvDjVDVMdgByJy+1ijAnzCeZ6E7eGltDbTPIl9c+cir/dNG0y0z0Bsl6oJV8al40dyDOfU0J23zT+/gmK+SP5sXMl8Wnhq6EO9z9wvcwnNnDdNf2Vpcl834PWJTCtYmhrWBxPoBykKiZQEJTGDVqrdEZpNtui7Yy08Wk+q/o7ueVht3wQuXQDNPYHrUttQDDAyNYo/4hY47atUasnWKs/PRA9C1cuq5wOeu1Ns/dA7sZVLqJzeBnf1Y/QkSHC7psMEqxLgCiIpGnis4Ywt9fH8U4xhQ8H1NJ262T8PbjXjJQkHOGezbKHLXE2rogGYVXGL7IRXY7O3k8CHGaZoWGJAV+MyMxzRciIT1aHvXH2s35ud/Fk=
+  local_dir: dpl_cd_upload
+  skip_cleanup: true
+  on: &2
+    repo: mobingilabs/sesha3
+    branch: develop
+  bucket: sesha3-dev
+  upload_dir: latest
+  region: ap-northeast-1
+- provider: codedeploy
+  access_key_id: AKIAINLJDAMNCZZ5NRDA
+  secret_access_key: *1
+  bucket: sesha3-dev
+  key: latest/app.tar.gz
+  bundle_type: tgz
+  application: sesha3dev
+  deployment_group: sesha3dev-deploygroup
+  region: ap-northeast-1
+  on: *2
