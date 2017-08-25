@@ -1,5 +1,5 @@
 os:
-  - linux
+- linux
 language: go
 go:
 - master
@@ -8,10 +8,8 @@ script:
 - go build -v
 before_deploy:
 - tar cvzf app.tar.gz sesha3 appspec.yml scripts/
-- ls -laF
 - mkdir -p dpl_cd_upload
 - cp app.tar.gz dpl_cd_upload/
-- ls -laF dpl_cd_upload/
 deploy:
 - provider: s3
   access_key_id: AKIAINLJDAMNCZZ5NRDA
