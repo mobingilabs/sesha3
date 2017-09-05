@@ -26,7 +26,7 @@ const (
 	awsRegion = "ap-northeast-1"
 
 	devdomain  = "sesha3.labs.mobingi.com"
-	devinst    = "i-0dc4d12c80f412f68"
+	devinst    = "i-0d6ff50d6caef8ffa"
 	devprofile = "sesha3"
 
 	// domain       = "testyuto.labs.mobingi.com"

@@ -55,7 +55,7 @@ func (c *context) Start(get message) error {
 		ec2req.Openport()
 		svrtool := filepath.Dir(name) + "/tools/" + runtime.GOOS + "/gotty"
 		certpath := filepath.Dir(name) + "/certs/"
-		ssh := "/usr/bin/ssh -i " + "./tmp/" + get.Stackid + ".pem " + get.User + "@" + get.Ip
+		ssh := "/usr/bin/ssh -oStrictHostKeyChecking=no -i " + "./tmp/" + get.Stackid + ".pem " + get.User + "@" + get.Ip
 		shell := "grep ec2-user /etc/passwd | cut -d: -f7"
 		dshellb, _ := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
 		defaultshell := strings.TrimSpace(string(dshellb))
@@ -75,7 +75,7 @@ func (c *context) Start(get message) error {
 			"--title-format", "Mobingi - {{ .Command }}",
 			"bash",
 			"-c",
-			ssh+" -oStrictHostKeyChecking=no -t \"export TMOUT="+timeout+" && "+defaultshell+" --login \"",
+			ssh+" -t \"export TMOUT="+timeout+" && "+defaultshell+" --login \"",
 		)
 
 		con, err := c.Cmd.CombinedOutput()
