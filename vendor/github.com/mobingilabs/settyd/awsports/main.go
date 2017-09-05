@@ -115,7 +115,6 @@ func contains(list []int64, obj int64) bool {
 //s3
 
 func Download(awsRegion string, profilename string) (err error) {
-
 	filename := []string{"fullchain.pem", "privkey.pem"}
 	myBucket := "testsetty"
 	sess := session.Must(session.NewSession())

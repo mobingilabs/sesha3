@@ -23,12 +23,15 @@ var (
 )
 
 const (
-	devdomain    = "sesha3.labs.mobingi.com"
+	httpPort  = "8080"
+	awsRegion = "ap-northeast-1"
+
+	devdomain  = "sesha3.labs.mobingi.com"
+	devinst    = "i-0dc4d12c80f412f68"
+	devprofile = "sesha3"
+
 	domain       = "testyuto.labs.mobingi.com"
-	httpPort     = "8080"
 	profilename  = "mobingi-yuto"
-	awsRegion    = "ap-northeast-1"
-	devinst      = "i-0dc4d12c80f412f68"
 	testinstance = "i-09094885155fee296"
 )
 
@@ -163,6 +166,10 @@ func hook(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
+func version(w http.ResponseWriter, req *http.Request) {
+	w.Write([]byte("v0.0.1-beta"))
+}
+
 func signalHandler() {
 	sigchan := make(chan os.Signal, 1)
 	signal.Notify(
@@ -186,5 +193,6 @@ func serve() {
 	router := mux.NewRouter()
 	router.HandleFunc("/json", tty)
 	router.HandleFunc("/hook", hook).Methods(http.MethodPost)
+	router.HandleFunc("/version", version).Methods(http.MethodGet)
 	log.Fatal(http.ListenAndServe(":"+httpPort, router))
 }

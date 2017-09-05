@@ -9,8 +9,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var dev bool
-
 var rootCmd = &cobra.Command{
 	Use:   "sesha3",
 	Short: "Secure Shell and Application Access Server",
@@ -35,7 +33,7 @@ var rootCmd = &cobra.Command{
 
 func init() {
 	rootCmd.Flags().SortFlags = false
-	rootCmd.PersistentFlags().BoolVar(&dev, "dev", false, "run server as dev")
+	rootCmd.PersistentFlags().String("env", "dev", "dev, test, prod")
 }
 
 func main() {
