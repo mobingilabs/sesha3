@@ -8,11 +8,9 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"os/signal"
 	"strconv"
 	"strings"
 
-	"syscall"
 	"time"
 
 	"github.com/gorilla/mux"
@@ -175,25 +173,6 @@ func hook(w http.ResponseWriter, req *http.Request) {
 
 func version(w http.ResponseWriter, req *http.Request) {
 	w.Write([]byte("v0.0.1-beta"))
-}
-
-func signalHandler() {
-	sigchan := make(chan os.Signal, 1)
-	signal.Notify(
-		sigchan,
-		syscall.SIGINT,
-		syscall.SIGTERM,
-	)
-
-	go func() {
-		for {
-			s := <-sigchan
-			switch s {
-			case syscall.SIGINT, syscall.SIGTERM:
-				os.Exit(0)
-			}
-		}
-	}()
 }
 
 func serve() {

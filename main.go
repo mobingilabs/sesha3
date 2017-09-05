@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/mobingilabs/settyd/awsports"
 	"github.com/spf13/cobra"
@@ -24,9 +26,9 @@ var rootCmd = &cobra.Command{
 			os.Mkdir("./certs", 0700)
 		}
 
-		err = awsports.Download(awsRegion, profilename)
+		env := GetCliStringFlag(cmd, "env")
+		err = awsports.Download(env, awsRegion, profilename)
 		fmt.Println(err)
-		signalHandler()
 		serve()
 	},
 }
@@ -36,7 +38,27 @@ func init() {
 	rootCmd.PersistentFlags().String("env", "dev", "dev, test, prod")
 }
 
+func signalHandler() {
+	sigchan := make(chan os.Signal, 1)
+	signal.Notify(
+		sigchan,
+		syscall.SIGINT,
+		syscall.SIGTERM,
+	)
+
+	go func() {
+		for {
+			s := <-sigchan
+			switch s {
+			case syscall.SIGINT, syscall.SIGTERM:
+				os.Exit(0)
+			}
+		}
+	}()
+}
+
 func main() {
+	signalHandler()
 	if err := rootCmd.Execute(); err != nil {
 		log.Fatalln(err)
 	}
