@@ -75,7 +75,7 @@ func (c *context) Start(get message) error {
 			"--title-format", "Mobingi - {{ .Command }}",
 			"bash",
 			"-c",
-			ssh+" -t \"export TMOUT="+timeout+" && "+defaultshell+" --login \"",
+			ssh+" -oStrictHostKeyChecking=no -t \"export TMOUT="+timeout+" && "+defaultshell+" --login \"",
 		)
 
 		con, err := c.Cmd.CombinedOutput()
