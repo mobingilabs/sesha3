@@ -29,9 +29,9 @@ const (
 	devinst    = "i-0dc4d12c80f412f68"
 	devprofile = "sesha3"
 
-	domain       = "testyuto.labs.mobingi.com"
-	profilename  = "mobingi-yuto"
-	testinstance = "i-09094885155fee296"
+	// domain       = "testyuto.labs.mobingi.com"
+	// profilename  = "mobingi-yuto"
+	// testinstance = "i-09094885155fee296"
 )
 
 func getjson(w http.ResponseWriter, r *http.Request) interface{} {

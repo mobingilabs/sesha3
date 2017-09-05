@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/ec2"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
+	"github.com/pkg/errors"
 )
 
 type SecurityGroupRequest struct {
@@ -114,10 +115,26 @@ func contains(list []int64, obj int64) bool {
 
 //s3
 
-func Download(awsRegion string, profilename string) (err error) {
-
+func Download(env string, awsRegion string, profilename string) (err error) {
 	filename := []string{"fullchain.pem", "privkey.pem"}
-	myBucket := "testsetty"
+	var myBucket string
+
+	switch env {
+	case "prod":
+	case "dev":
+		myBucket = "sesha3-dev"
+	case "test":
+		myBucket = "testsetty"
+	default:
+		err = errors.New("invalid env value")
+		return
+	}
+
+	if myBucket == "" {
+		err = errors.New("bucket name cannot be empty")
+		return
+	}
+
 	sess := session.Must(session.NewSession())
 	cred := credentials.NewSharedCredentials("", profilename)
 	svc := s3.New(sess, &aws.Config{Credentials: cred,

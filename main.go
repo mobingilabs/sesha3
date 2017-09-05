@@ -7,7 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/mobingilabs/settyd/awsports"
+	"github.com/mobingilabs/sesha3/awsports"
 	"github.com/spf13/cobra"
 )
 
@@ -27,7 +27,7 @@ var rootCmd = &cobra.Command{
 		}
 
 		env := GetCliStringFlag(cmd, "env")
-		err = awsports.Download(env, awsRegion, profilename)
+		err = awsports.Download(env, awsRegion, devprofile)
 		fmt.Println(err)
 		serve()
 	},

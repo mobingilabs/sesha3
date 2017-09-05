@@ -12,7 +12,7 @@ import (
 	"sync"
 	"syscall"
 
-	"github.com/mobingilabs/settyd/awsports"
+	"github.com/mobingilabs/sesha3/awsports"
 	"github.com/pkg/errors"
 )
 
@@ -41,7 +41,7 @@ func (c *context) Start(get message) error {
 
 	c.kill()
 
-	ec2req := awsports.Make(profilename, awsRegion, testinstance)
+	ec2req := awsports.Make(devprofile, awsRegion, devinst)
 	name, err := os.Executable()
 	if err != nil {
 		return errors.Wrap(err, "get executable name failed")
@@ -62,7 +62,7 @@ func (c *context) Start(get message) error {
 		timeout := get.Timeout
 		c.Cmd = exec.Command(svrtool,
 			"--port", fmt.Sprint(ec2req.RequestPort),
-			"--notify-url", "http://"+domain+":"+httpPort+"/hook",
+			"--notify-url", "http://"+devdomain+":"+httpPort+"/hook",
 			"-w",
 			"--random-url",
 			"--random-url-length", "36",
@@ -144,6 +144,6 @@ func (c *context) GetFullURL() string {
 		return furl
 	}
 
-	furl += "https://" + domain + ":" + c.HttpsPort + rurl.EscapedPath()
+	furl += "https://" + devdomain + ":" + c.HttpsPort + rurl.EscapedPath()
 	return furl
 }

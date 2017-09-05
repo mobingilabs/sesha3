@@ -8,6 +8,12 @@
   version = "v1.10.37"
 
 [[projects]]
+  name = "github.com/dgrijalva/jwt-go"
+  packages = ["."]
+  revision = "d2709f9f1f31ebcda9651b03077758c1f3a0018c"
+  version = "v3.0.0"
+
+[[projects]]
   name = "github.com/go-ini/ini"
   packages = ["."]
   revision = "20b96f641a5ea98f2f8619ff4f3e061cff4833bd"
@@ -38,12 +44,6 @@
   version = "0.2.2"
 
 [[projects]]
-  branch = "master"
-  name = "github.com/mobingilabs/settyd"
-  packages = ["awsports"]
-  revision = "c970e042eb696a5a3e0037cd018b891614996273"
-
-[[projects]]
   name = "github.com/pkg/errors"
   packages = ["."]
   revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
@@ -64,6 +64,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "eb51fa2040f40e4124044aeffc4ec7f6d9867031367d4202055278973c9beb1e"
+  inputs-digest = "7ba6d5578c52b0d032b9882b99d7eedd07ac7bf3e9af31f7137b90d3ff8ba821"
   solver-name = "gps-cdcl"
   solver-version = 1
