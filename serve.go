@@ -172,7 +172,7 @@ func hook(w http.ResponseWriter, req *http.Request) {
 }
 
 func version(w http.ResponseWriter, req *http.Request) {
-	w.Write([]byte("v0.0.1-beta"))
+	w.Write([]byte("v0.0.2-beta"))
 }
 
 func serve() {
