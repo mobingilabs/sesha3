@@ -16,7 +16,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/mobingilabs/settyd/token"
+	"github.com/mobingilabs/sesha3/token"
 )
 
 var (
