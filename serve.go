@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	"github.com/mobingilabs/sesha3/token"
 )
 
 var (
@@ -97,6 +98,12 @@ func sshkey(w http.ResponseWriter, r *http.Request) message {
 
 func tty(w http.ResponseWriter, r *http.Request) {
 	var get message
+	tokenerr, tokenmessage := token.GetToken(w, r)
+	if tokenerr != true {
+		w.Write([]byte(tokenmessage))
+		return
+	}
+
 	if r.Method == "POST" {
 		w.WriteHeader(http.StatusBadRequest)
 	}
@@ -170,6 +177,7 @@ func version(w http.ResponseWriter, req *http.Request) {
 
 func serve() {
 	router := mux.NewRouter()
+	router.HandleFunc("/token", token.Settoken)
 	router.HandleFunc("/json", tty)
 	router.HandleFunc("/hook", hook).Methods(http.MethodPost)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
