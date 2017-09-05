@@ -2,15 +2,42 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-	"time"
+	"log"
+	"os"
+
+	"github.com/mobingilabs/settyd/awsports"
+	"github.com/spf13/cobra"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Version 3: "+time.Now().String())
+var rootCmd = &cobra.Command{
+	Use:   "sesha3",
+	Short: "Secure Shell and Application Access Server",
+	Long:  "Mobingi Secure Shell and Application Access Server.",
+	Run: func(cmd *cobra.Command, args []string) {
+		log.Println("hello")
+		_, err := os.Stat("./certs/")
+
+		if err == nil {
+			fmt.Println("./certs detected.")
+		} else {
+			fmt.Println("./certs not detected. mkdir ./certs")
+			os.Mkdir("./certs", 0700)
+		}
+
+		err = awsports.Download(awsRegion, profilename)
+		fmt.Println(err)
+		signalHandler()
+		serve()
+	},
+}
+
+func init() {
+	rootCmd.Flags().SortFlags = false
+	rootCmd.PersistentFlags().String("env", "dev", "dev, test, prod")
 }
 
 func main() {
-	http.HandleFunc("/", handler)
-	http.ListenAndServe(":80", nil)
+	if err := rootCmd.Execute(); err != nil {
+		log.Fatalln(err)
+	}
 }
