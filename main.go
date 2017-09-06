@@ -19,6 +19,7 @@ var rootCmd = &cobra.Command{
 		log.Println("hello!")
 		env := GetCliStringFlag(cmd, "env")
 		syslogging = GetCliStringFlag(cmd, "syslog")
+		_, err := os.Stat("./certs/")
 		if syslogging == "enable" {
 			logger, err = syslog.New(syslog.LOG_NOTICE|syslog.LOG_USER, "sesha3")
 			if err != nil {
@@ -26,7 +27,6 @@ var rootCmd = &cobra.Command{
 			}
 			log.SetOutput(logger)
 		}
-		_, err := os.Stat("./certs/")
 
 		if err == nil {
 			log.Println("./certs detected.")
