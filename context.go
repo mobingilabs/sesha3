@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"log"
 	"net/url"
@@ -9,8 +10,6 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
-	"sync"
-	"syscall"
 
 	"github.com/mobingilabs/sesha3/awsports"
 	"github.com/pkg/errors"
@@ -26,31 +25,25 @@ type message struct {
 }
 
 type context struct {
-	Mu        sync.Mutex
 	Online    bool
-	ClientURL string
 	TtyURL    string
 	Cmd       *exec.Cmd
 	HttpsPort string
 }
 
 // Start initializes an instance of gotty and return the url.
-func (c *context) Start(get message) error {
-	c.Mu.Lock()
-	defer c.Mu.Unlock()
-
-	c.kill()
-
+func (c *context) Start(get message) (ret string, err error) {
 	ec2req := awsports.Make(devprofile, awsRegion, devinst)
 	name, err := os.Executable()
 	if err != nil {
-		return errors.Wrap(err, "get executable name failed")
+		return ret, errors.Wrap(err, "get executable name failed")
 	}
 
 	log.Println("name:", name)
 
 	c.HttpsPort = fmt.Sprint(ec2req.RequestPort)
 
+	ttyurl := make(chan string)
 	go func() {
 		ec2req.Openport()
 		svrtool := filepath.Dir(name) + "/tools/" + runtime.GOOS + "/gotty"
@@ -62,7 +55,6 @@ func (c *context) Start(get message) error {
 		timeout := get.Timeout
 		c.Cmd = exec.Command(svrtool,
 			"--port", fmt.Sprint(ec2req.RequestPort),
-			"--notify-url", "http://"+devdomain+":"+httpPort+"/hook",
 			"-w",
 			"--random-url",
 			"--random-url-length", "36",
@@ -78,62 +70,37 @@ func (c *context) Start(get message) error {
 			ssh+" -t \"export TMOUT="+timeout+" && "+defaultshell+" --login \"",
 		)
 
-		con, err := c.Cmd.CombinedOutput()
+		errpipe, err := c.Cmd.StderrPipe()
 		if err != nil {
 			fmt.Println(err)
+			ec2req.Closeport()
 		}
+		c.Cmd.Start()
+		scanner := bufio.NewScanner(errpipe)
+		out := ""
+		for scanner.Scan() {
+			if strings.Index(scanner.Text(), "URL") != -1 {
+				tmpurl := scanner.Text()
+				out = strings.Split(tmpurl, "URL: ")[1]
+				break
+			}
+			fmt.Println(scanner.Text())
+		}
+		ttyurl <- out
+		c.Cmd.Wait()
 		ec2req.Closeport()
-		fmt.Println(string(con), "finish!")
+		fmt.Println("gotty finish!")
 		err = os.Remove("./tmp/" + get.Stackid + ".pem")
 		fmt.Println("Delete!", err)
 		if err != nil {
 			fmt.Println(err)
 		}
-		fmt.Println(string(con))
 	}()
-
-	return nil
-}
-
-func (c *context) SetClientURL(cu string) {
-	c.Mu.Lock()
-	defer c.Mu.Unlock()
-
-	c.ClientURL = cu
-}
-
-func (c *context) kill() {
-	c.Online = false
-	c.ClientURL = ""
-	if c.Cmd == nil {
-		return
-	}
-
-	if c.Cmd.Process == nil {
-		return
-	}
-
-	if c.Cmd.Process.Pid > 0 {
-		err := c.Cmd.Process.Signal(syscall.Signal(syscall.SIGTERM))
-		log.Printf("SIGTERM on pid %d returned: %v\n", c.Cmd.Process.Pid, err)
-		if err != nil {
-			err = c.Cmd.Process.Signal(syscall.Signal(syscall.SIGKILL))
-			log.Printf("SIGKILL on pid %d returned: %v\n", c.Cmd.Process.Pid, err)
-		}
-	}
-}
-
-func (c *context) SetRandomURL(ru string) {
-	c.Mu.Lock()
-	defer c.Mu.Unlock()
-	c.TtyURL = ru
-	c.Online = true
+	ret = <-ttyurl
+	return
 }
 
 func (c *context) GetFullURL() string {
-	c.Mu.Lock()
-	defer c.Mu.Unlock()
-
 	var furl string
 	if !c.Online {
 		return furl

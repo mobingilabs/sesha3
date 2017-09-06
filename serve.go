@@ -17,10 +17,6 @@ import (
 	"github.com/mobingilabs/sesha3/token"
 )
 
-var (
-	ctx context
-)
-
 const (
 	httpPort  = "80"
 	awsRegion = "ap-northeast-1"
@@ -29,9 +25,9 @@ const (
 	devinst    = "i-0d6ff50d6caef8ffa"
 	devprofile = "sesha3"
 
-	// domain       = "testyuto.labs.mobingi.com"
-	// profilename  = "mobingi-yuto"
-	// testinstance = "i-09094885155fee296"
+	//devdomain  = "testyuto.labs.mobingi.com"
+	//devinst    = "i-09094885155fee296"
+	//devprofile = "mobingi-yuto"
 )
 
 func getjson(w http.ResponseWriter, r *http.Request) interface{} {
@@ -97,6 +93,7 @@ func sshkey(w http.ResponseWriter, r *http.Request) message {
 }
 
 func tty(w http.ResponseWriter, r *http.Request) {
+	var ctx context
 	var get message
 	tokenerr, tokenmessage := token.GetToken(w, r)
 	if tokenerr != true {
@@ -112,22 +109,21 @@ func tty(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(`{"error":"` + "AccessDenied. Key URL unenable." + `"}`))
 		return
 	}
-	err := ctx.Start(get)
+	randomurl, err := ctx.Start(get)
+	if randomurl == "" {
+		w.Write([]byte(`{"error":"cannot initialize secure tty access"}`))
+		return
+	} else {
+		ctx.Online = true
+	}
 	if err != nil {
 		w.Write([]byte(`{"error":"` + err.Error() + `"}`))
 		return
 	}
 
 	var fullurl string
-
-	// wait for 5 seconds (at most) if we can get a tty url
-	for i := 0; i < 5000; i++ {
-		fullurl = ctx.GetFullURL()
-		if fullurl != "" {
-			break
-		}
-		time.Sleep(time.Millisecond * 1)
-	}
+	ctx.TtyURL = randomurl
+	fullurl = ctx.GetFullURL()
 
 	if fullurl == "" {
 		w.Write([]byte(`{"error":"cannot initialize secure tty access"}`))
@@ -137,40 +133,6 @@ func tty(w http.ResponseWriter, r *http.Request) {
 	payload := `{"tty_url":"` + fullurl + `"}`
 	w.Write([]byte(payload))
 }
-
-func hook(w http.ResponseWriter, req *http.Request) {
-	defer req.Body.Close()
-	body, err := ioutil.ReadAll(req.Body)
-	if err != nil {
-		log.Println("err:", err)
-	}
-
-	fmt.Println("[notification]")
-	fmt.Println(string(body))
-
-	var m map[string]interface{}
-	err = json.Unmarshal(body, &m)
-
-	if err == nil {
-		u, ok := m["urls"]
-		if ok {
-			urls := u.([]interface{})
-			u0 := fmt.Sprintf("%s", urls[0])
-			log.Println("url:", u0)
-			ctx.SetRandomURL(u0)
-		}
-
-		cu, ok := m["client_url"]
-		if ok {
-			url := fmt.Sprintf("%s", cu)
-			log.Println("client url:", url)
-			ctx.SetClientURL(url)
-		}
-	}
-
-	w.WriteHeader(http.StatusOK)
-}
-
 func version(w http.ResponseWriter, req *http.Request) {
 	w.Write([]byte("v0.0.2-beta"))
 }
@@ -179,7 +141,6 @@ func serve() {
 	router := mux.NewRouter()
 	router.HandleFunc("/token", token.Settoken)
 	router.HandleFunc("/json", tty)
-	router.HandleFunc("/hook", hook).Methods(http.MethodPost)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
 	log.Fatal(http.ListenAndServe(":"+httpPort, router))
 }
