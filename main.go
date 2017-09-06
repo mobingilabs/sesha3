@@ -5,6 +5,7 @@ import (
 	"log/syslog"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"syscall"
 
 	"github.com/mobingilabs/sesha3/awsports"
@@ -16,8 +17,10 @@ var rootCmd = &cobra.Command{
 	Short: "Secure Shell and Application Access Server",
 	Long:  "Mobingi Secure Shell and Application Access Server.",
 	Run: func(cmd *cobra.Command, args []string) {
+		name, err := os.Executable()
+		sourcedir := filepath.Dir(name)
 		env := GetCliStringFlag(cmd, "env")
-		_, err := os.Stat("./certs/")
+		_, cerr := os.Stat(sourcedir + "/certs/")
 
 		if syslogging {
 			logger, err = syslog.New(syslog.LOG_NOTICE|syslog.LOG_USER, "sesha3")
@@ -27,11 +30,11 @@ var rootCmd = &cobra.Command{
 			log.SetOutput(logger)
 		}
 
-		if err == nil {
-			log.Println("./certs detected.")
+		if cerr == nil {
+			log.Println(sourcedir + "/certs detected.")
 		} else {
-			log.Println("./certs not detected. mkdir ./certs")
-			os.Mkdir("./certs", 0700)
+			log.Println(sourcedir + "/certs not detected. mkdir certs dir")
+			os.Mkdir(sourcedir+"/certs", 0700)
 		}
 
 		domain = GetCliStringFlag(cmd, "domain")
