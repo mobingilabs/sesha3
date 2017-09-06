@@ -37,9 +37,9 @@ func makeRsa() {
 	self.rsa = filepath.Dir(self.name) + "/token/rsa/"
 	_, err := os.Stat(self.rsa)
 	if err == nil {
-		log.Println(self.rsa + "/token/rsa detected.")
+		log.Println(self.rsa + " detected.")
 	} else {
-		log.Println(self.rsa + "/token/rsa not detected. mkdir" + self.rsa + "/token/rsa")
+		log.Println(self.rsa + " not detected. mkdir" + self.rsa)
 		os.Mkdir(self.rsa, 0700)
 	}
 	priv, err := rsa.GenerateKey(rand.Reader, 2048)
