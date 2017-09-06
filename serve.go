@@ -21,13 +21,13 @@ const (
 	httpPort  = "8080"
 	awsRegion = "ap-northeast-1"
 
-	//devdomain  = "sesha3.labs.mobingi.com"
-	//devinst    = "i-0d6ff50d6caef8ffa"
-	//devprofile = "sesha3"
+	devdomain  = "sesha3.labs.mobingi.com"
+	devinst    = "i-0d6ff50d6caef8ffa"
+	devprofile = "sesha3"
 
-	devdomain  = "testyuto.labs.mobingi.com"
-	devinst    = "i-09094885155fee296"
-	devprofile = "mobingi-yuto"
+	//devdomain  = "testyuto.labs.mobingi.com"
+	//devinst    = "i-09094885155fee296"
+	//devprofile = "mobingi-yuto"
 )
 
 func getjson(w http.ResponseWriter, r *http.Request) interface{} {
