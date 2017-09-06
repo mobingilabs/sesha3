@@ -16,7 +16,6 @@ var rootCmd = &cobra.Command{
 	Short: "Secure Shell and Application Access Server",
 	Long:  "Mobingi Secure Shell and Application Access Server.",
 	Run: func(cmd *cobra.Command, args []string) {
-		log.Println("hello!")
 		env := GetCliStringFlag(cmd, "env")
 		syslogging = GetCliStringFlag(cmd, "syslog")
 		_, err := os.Stat("./certs/")
