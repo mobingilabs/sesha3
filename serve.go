@@ -77,7 +77,11 @@ func getjson(w http.ResponseWriter, r *http.Request) interface{} {
 }
 
 func sshkey(w http.ResponseWriter, r *http.Request) message {
-	get := getjson(w, r).(message)
+	get, ok := getjson(w, r).(message)
+	if !ok {
+		get.Err = -1
+		return get
+	}
 	url := get.Pem
 	resp, err := http.Get(url)
 	if err != nil {
