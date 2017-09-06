@@ -1,0 +1,28 @@
+version: "{build}"
+
+platform: x64
+
+clone_folder: c:\gopath\src\github.com\mobingilabs\mobingi-sdk-go
+
+environment:
+  GOPATH: c:\gopath
+  GOVERSION: 1.9
+
+install:  
+  - rmdir c:\go /s /q
+  - appveyor DownloadFile https://storage.googleapis.com/golang/go%GOVERSION%.windows-amd64.msi
+  - msiexec /i go%GOVERSION%.windows-amd64.msi /q
+  - set Path=c:\go\bin;c:\gopath\bin;%Path%
+  - go version
+  - go env
+
+build: false
+deploy: false
+
+test_script:
+  - for /f "" %%G in ('go list github.com/mobingilabs/mobingi-sdk-go/... ^| find /i /v "/vendor/"') do (go test -v %%G -cover & IF ERRORLEVEL == 1 EXIT 1)
+
+notifications:
+  - provider: Slack
+    incoming_webhook:
+      secure: JrW1YiaNWR8kRkpmFriLtdpVPuYsQCI9Moadv4158OzGcdqzIRn4K+MAmzVQpCSIrOdiAAKoEh3ErSB/GtJqOHd4sONvvnsZwudjwL5QVZA=
