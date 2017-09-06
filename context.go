@@ -76,17 +76,17 @@ func (c *context) Start(get message) (ret string, err error) {
 		}
 		c.Cmd.Start()
 		scanner := bufio.NewScanner(errpipe)
-		ec2req.Closeport()
 		for scanner.Scan() {
 			out := ""
-			if strings.Index(scanner.Text(), "Alternative URL") != -1 {
+			if strings.Index(scanner.Text(), "URL") != -1 {
 				tmpurl := scanner.Text()
 				out = strings.Split(tmpurl, "URL: ")[1]
 				ttyurl <- out
-				break
 			}
+			fmt.Println(scanner.Text())
 		}
 		c.Cmd.Wait()
+		ec2req.Closeport()
 		fmt.Println("gotty finish!")
 		err = os.Remove("./tmp/" + get.Stackid + ".pem")
 		fmt.Println("Delete!", err)
