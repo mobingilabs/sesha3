@@ -33,8 +33,7 @@ type my struct {
 }
 
 func makeRsa() {
-	self.name, _ = os.Executable()
-	self.rsa = filepath.Dir(self.name) + "/token/rsa/"
+	self.rsa = os.TempDir() + "/token/rsa/"
 	_, err := os.Stat(self.rsa)
 	if err == nil {
 		log.Println(self.rsa + " detected.")
@@ -56,9 +55,9 @@ func makeRsa() {
 
 	pemblock := &pem.Block{Type: "RSA PRIVATE KEY", Bytes: privDer}
 	pubblock := &pem.Block{Type: "RSA PUBLIC KEY", Bytes: pubDer}
-	privFile, err := os.OpenFile(self.rsa+self.user+".pem", os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
+	privFile, err := os.OpenFile(self.rsa+self.user+"token.pem", os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
 	defer privFile.Close()
-	pubFile, err := os.OpenFile(self.rsa+self.user+".pem.pub", os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
+	pubFile, err := os.OpenFile(self.rsa+self.user+"token.pem.pub", os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
 	defer pubFile.Close()
 	if err != nil {
 		log.Fatal(err)
@@ -122,9 +121,9 @@ func Settoken(w http.ResponseWriter, r *http.Request) {
 	cred := credp.(tokenReq)
 	self.user = cred.Username
 	makeRsa()
-	defaultPrivKey, _ := ioutil.ReadFile(self.rsa + self.user + ".pem")
+	defaultPrivKey, _ := ioutil.ReadFile(self.rsa + self.user + "token.pem")
 	token := genJWT(w, r)
-	self.pub, _ = ioutil.ReadFile(self.rsa + self.user + ".pem.pub")
+	self.pub, _ = ioutil.ReadFile(self.rsa + self.user + "token.pem.pub")
 	// JWTに署名する
 	key, _ := jwt.ParseRSAPrivateKeyFromPEM(defaultPrivKey)
 	tokenTxt, err := token.SignedString(key)
