@@ -40,7 +40,8 @@ func makeRsa() {
 		log.Println(self.rsa + " detected.")
 	} else {
 		log.Println(self.rsa + " not detected. mkdir" + self.rsa)
-		os.Mkdir(self.rsa, 0700)
+		err = os.Mkdir(self.rsa, 0700)
+		log.Println(err)
 	}
 	priv, err := rsa.GenerateKey(rand.Reader, 2048)
 	privDer := x509.MarshalPKCS1PrivateKey(priv)
