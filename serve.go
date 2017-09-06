@@ -25,7 +25,7 @@ var (
 	region     string // set by cli flag
 	ec2id      string // set by cli flag
 	credprof   string // set by cli flag
-	syslogging string // set by cli flag
+	syslogging bool   // set by cli flag
 	logger     *syslog.Writer
 
 /*

@@ -19,7 +19,8 @@ var rootCmd = &cobra.Command{
 		env := GetCliStringFlag(cmd, "env")
 		syslogging = GetCliStringFlag(cmd, "syslog")
 		_, err := os.Stat("./certs/")
-		if syslogging == "enable" {
+
+		if syslogging {
 			logger, err = syslog.New(syslog.LOG_NOTICE|syslog.LOG_USER, "sesha3")
 			if err != nil {
 				panic(err)
@@ -47,7 +48,7 @@ var rootCmd = &cobra.Command{
 func init() {
 	rootCmd.Flags().SortFlags = false
 	rootCmd.PersistentFlags().String("env", "dev", "values: dev, test, prod")
-	rootCmd.PersistentFlags().String("syslog", "disable", "values: enable, disable")
+	rootCmd.PersistentFlags().BoolVar(&syslogging, "syslog", false, "set log output to syslog")
 	rootCmd.PersistentFlags().String("domain", "sesha3.labs.mobingi.com", "server domain")
 	rootCmd.PersistentFlags().String("port", "80", "server port")
 	rootCmd.PersistentFlags().String("aws-region", "ap-northeast-1", "aws region")
