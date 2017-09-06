@@ -34,7 +34,7 @@ type my struct {
 
 func makeRsa() {
 	self.name, _ = os.Executable()
-	self.rsa = filepath.Dir(self.name) + "/token/rsa"
+	self.rsa = filepath.Dir(self.name) + "/token/rsa/"
 	_, err := os.Stat(self.rsa)
 	if err == nil {
 		log.Println(self.rsa + "/token/rsa detected.")
