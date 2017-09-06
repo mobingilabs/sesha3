@@ -41,7 +41,7 @@ func (c *context) Start(get message) error {
 
 	c.kill()
 
-	ec2req := awsports.Make(devprofile, awsRegion, devinst)
+	ec2req := awsports.Make(credprof, region, ec2id)
 	name, err := os.Executable()
 	if err != nil {
 		return errors.Wrap(err, "get executable name failed")
@@ -62,7 +62,7 @@ func (c *context) Start(get message) error {
 		timeout := get.Timeout
 		c.Cmd = exec.Command(svrtool,
 			"--port", fmt.Sprint(ec2req.RequestPort),
-			"--notify-url", "http://"+devdomain+":"+httpPort+"/hook",
+			"--notify-url", "http://"+domain+":"+port+"/hook",
 			"-w",
 			"--random-url",
 			"--random-url-length", "36",
@@ -144,6 +144,6 @@ func (c *context) GetFullURL() string {
 		return furl
 	}
 
-	furl += "https://" + devdomain + ":" + c.HttpsPort + rurl.EscapedPath()
+	furl += "https://" + domain + ":" + c.HttpsPort + rurl.EscapedPath()
 	return furl
 }
