@@ -13,6 +13,7 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -36,9 +37,9 @@ func makeRsa() {
 	self.rsa = filepath.Dir(self.name) + "/token/rsa/"
 	_, err := os.Stat(self.rsa)
 	if err == nil {
-		fmt.Println("./token/rsa detected.")
+		log.Println("./token/rsa detected.")
 	} else {
-		fmt.Println("./token/rsa not detected. mkdir ./token/rsa")
+		log.Println("./token/rsa not detected. mkdir ./token/rsa")
 		os.Mkdir(self.rsa, 0700)
 	}
 	priv, err := rsa.GenerateKey(rand.Reader, 2048)
@@ -63,7 +64,7 @@ func makeRsa() {
 	}
 	pem.Encode(privFile, pemblock)
 	pem.Encode(pubFile, pubblock)
-	fmt.Println("token pem file generated.")
+	log.Println("token pem file generated.")
 }
 
 type tokenReq struct {
@@ -127,7 +128,7 @@ func Settoken(w http.ResponseWriter, r *http.Request) {
 	key, _ := jwt.ParseRSAPrivateKeyFromPEM(defaultPrivKey)
 	tokenTxt, err := token.SignedString(key)
 	self.token = tokenTxt
-	fmt.Println("token generated")
+	log.Println("token generated")
 
 	if err != nil {
 		log.Fatal(err)

@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"os"
 	"time"
+	"log"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
@@ -68,13 +69,13 @@ func (s *SecurityGroupRequest) OpenedList() {
 func (s *SecurityGroupRequest) Openport() {
 	svc := s.Ec2client
 	p, err := svc.AuthorizeSecurityGroupIngress(s.AuthorizeSecurityGroupIngressInput)
-	fmt.Println("!!!!!!!!!!!!!!!open:", s.RequestPort, p, err)
+	log.Println("port open:", s.RequestPort, p, err)
 }
 
 func (s *SecurityGroupRequest) Closeport() {
 	svc := s.Ec2client
 	p, err := svc.RevokeSecurityGroupIngress(s.RevokeSecurityGroupIngressInput)
-	fmt.Println("!!!!!!!!!!!!!!!close:", s.RequestPort, p, err)
+	log.Println("port close:", s.RequestPort, p, err)
 }
 
 func Make(profilename string, awsRegion string, instanceID string) (req SecurityGroupRequest) {
@@ -153,9 +154,9 @@ func Download(env string, awsRegion string, profilename string) (err error) {
 			Key:    aws.String(i),
 		})
 		if err != nil {
-			return fmt.Errorf("failed to upload file, %v", err)
+			return fmt.Errorf("failed to download file, %v", err)
 		}
-		fmt.Printf("file downloaded, %d bytes\n", n)
+		log.Printf("file downloaded, %d bytes\n", n)
 	}
 	return
 }

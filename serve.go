@@ -2,10 +2,10 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
+	"log/syslog"
 	"net/http"
 	"os"
 	"strconv"
@@ -25,6 +25,8 @@ var (
 	region   string // set by cli flag
 	ec2id    string // set by cli flag
 	credprof string // set by cli flag
+	syslogging string // set by cli flag
+	logger *syslog.Writer
 /*
 const (
 	httpPort  = "80"
@@ -85,7 +87,7 @@ func sshkey(w http.ResponseWriter, r *http.Request) message {
 	url := get.Pem
 	resp, err := http.Get(url)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 	}
 	defer resp.Body.Close()
 	byteArray, _ := ioutil.ReadAll(resp.Body)
@@ -98,7 +100,7 @@ func sshkey(w http.ResponseWriter, r *http.Request) message {
 	_, err = os.Stat("./tmp/")
 
 	if err == nil {
-		fmt.Println("./tmp detected.")
+		log.Println("./tmp detected.")
 	} else {
 		os.Mkdir("./tmp", 0700)
 	}
