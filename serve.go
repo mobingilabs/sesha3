@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
 	"github.com/mobingilabs/sesha3/token"
 	"github.com/spf13/cobra"
 )
@@ -120,18 +121,18 @@ func tty(w http.ResponseWriter, r *http.Request) {
 	}
 	get = sshkey(w, r)
 	if get.Err == -1 {
-		w.Write([]byte(`{"error":"` + "AccessDenied. Key URL unenable." + `"}`))
+		w.Write(sesha3.NewSimpleError("access denied, key url disabled").Marshal())
 		return
 	}
 	randomurl, err := ctx.Start(get)
 	if randomurl == "" {
-		w.Write([]byte(`{"error":"cannot initialize secure tty access"}`))
+		w.Write(sesha3.NewSimpleError("cannot initialize secure tty access").Marshal())
 		return
 	} else {
 		ctx.Online = true
 	}
 	if err != nil {
-		w.Write([]byte(`{"error":"` + err.Error() + `"}`))
+		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
 
@@ -140,7 +141,7 @@ func tty(w http.ResponseWriter, r *http.Request) {
 	fullurl = ctx.GetFullURL()
 
 	if fullurl == "" {
-		w.Write([]byte(`{"error":"cannot initialize secure tty access"}`))
+		w.Write(sesha3.NewSimpleError("cannot initialize secure tty access").Marshal())
 		return
 	}
 
@@ -148,7 +149,7 @@ func tty(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(payload))
 }
 func version(w http.ResponseWriter, req *http.Request) {
-	w.Write([]byte("v0.0.2-beta"))
+	w.Write([]byte(`{"version":"v0.0.2-beta"}`))
 }
 
 func serve(cmd *cobra.Command) {

@@ -44,6 +44,12 @@
   version = "0.2.2"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/mobingilabs/mobingi-sdk-go"
+  packages = ["mobingi/sesha3"]
+  revision = "e8f32c4ea22051d5fd0bf08cca7a05c889daf1a1"
+
+[[projects]]
   name = "github.com/pkg/errors"
   packages = ["."]
   revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
@@ -64,6 +70,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "7ba6d5578c52b0d032b9882b99d7eedd07ac7bf3e9af31f7137b90d3ff8ba821"
+  inputs-digest = "99398dbeb8c0155e5ed61715e588ffcd41d0cb56d1c6b99d5ca88f087db010a8"
   solver-name = "gps-cdcl"
   solver-version = 1
