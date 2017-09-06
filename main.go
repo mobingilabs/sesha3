@@ -28,10 +28,10 @@ var rootCmd = &cobra.Command{
 
 		env := GetCliStringFlag(cmd, "env")
 		syslogging = GetCliStringFlag(cmd, "syslog")
-		if syslogging == "enable"{
+		if syslogging == "enable" {
 			logger, err = syslog.New(syslog.LOG_NOTICE|syslog.LOG_USER, "sesha3")
 			if err != nil {
-			panic(err)
+				panic(err)
 			}
 			log.SetOutput(logger)
 		}

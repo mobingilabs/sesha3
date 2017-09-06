@@ -19,14 +19,15 @@ import (
 )
 
 var (
-	ctx      context
-	domain   string // set by cli flag
-	port     string // set by cli flag
-	region   string // set by cli flag
-	ec2id    string // set by cli flag
-	credprof string // set by cli flag
+	ctx        context
+	domain     string // set by cli flag
+	port       string // set by cli flag
+	region     string // set by cli flag
+	ec2id      string // set by cli flag
+	credprof   string // set by cli flag
 	syslogging string // set by cli flag
-	logger *syslog.Writer
+	logger     *syslog.Writer
+
 /*
 const (
 	httpPort  = "80"
