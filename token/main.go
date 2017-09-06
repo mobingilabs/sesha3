@@ -38,7 +38,7 @@ func makeRsa() {
 		log.Println(self.rsa + " detected.")
 	} else {
 		log.Println(self.rsa + " not detected. mkdir" + self.rsa)
-		err = os.Mkdir(self.rsa, 0700)
+		err = os.MkdirAll(self.rsa, 0700)
 		log.Println("mkdir err : ", err)
 	}
 	priv, err := rsa.GenerateKey(rand.Reader, 2048)
