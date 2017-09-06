@@ -72,7 +72,7 @@ func (c *context) Start(get message) (ret string, err error) {
 
 		errpipe, err := c.Cmd.StderrPipe()
 		if err != nil {
-			fmt.Println(err)
+			log.Println(err)
 			ec2req.Closeport()
 		}
 		c.Cmd.Start()
@@ -84,16 +84,16 @@ func (c *context) Start(get message) (ret string, err error) {
 				out = strings.Split(tmpurl, "URL: ")[1]
 				break
 			}
-			fmt.Println(scanner.Text())
+			log.Println(scanner.Text())
 		}
 		ttyurl <- out
 		c.Cmd.Wait()
 		ec2req.Closeport()
-		fmt.Println("gotty finish!")
+		log.Println("gotty finish!")
 		err = os.Remove("./tmp/" + get.Stackid + ".pem")
-		fmt.Println("Delete!", err)
+		log.Println("Delete!", err)
 		if err != nil {
-			fmt.Println(err)
+			log.Println(err)
 		}
 	}()
 	ret = <-ttyurl
