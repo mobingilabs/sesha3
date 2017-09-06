@@ -124,9 +124,6 @@ func tty(w http.ResponseWriter, r *http.Request) {
 	var fullurl string
 	ctx.TtyURL = randomurl
 	fullurl = ctx.GetFullURL()
-	if fullurl != "" {
-		break
-	}
 
 	if fullurl == "" {
 		w.Write([]byte(`{"error":"cannot initialize secure tty access"}`))

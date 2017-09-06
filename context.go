@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"log"
 	"net/url"
@@ -9,7 +10,6 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
-	"syscall"
 
 	"github.com/mobingilabs/sesha3/awsports"
 	"github.com/pkg/errors"
@@ -36,7 +36,7 @@ func (c *context) Start(get message) (ret string, err error) {
 	ec2req := awsports.Make(devprofile, awsRegion, devinst)
 	name, err := os.Executable()
 	if err != nil {
-		return errors.Wrap(err, "get executable name failed")
+		return ret, errors.Wrap(err, "get executable name failed")
 	}
 
 	log.Println("name:", name)
@@ -70,12 +70,12 @@ func (c *context) Start(get message) (ret string, err error) {
 			ssh+" -t \"export TMOUT="+timeout+" && "+defaultshell+" --login \"",
 		)
 
-		stderr, err := c.Cmd.StderrPipe()
+		errpipe, err := c.Cmd.StderrPipe()
 		if err != nil {
 			fmt.Println(err)
 		}
-		con.Start()
-		scanner := bufio.NewScanner(stderr)
+		c.Cmd.Start()
+		scanner := bufio.NewScanner(errpipe)
 		ec2req.Closeport()
 		for scanner.Scan() {
 			out := ""
@@ -86,7 +86,7 @@ func (c *context) Start(get message) (ret string, err error) {
 				break
 			}
 		}
-		connect.Wait()
+		c.Cmd.Wait()
 		fmt.Println("gotty finish!")
 		err = os.Remove("./tmp/" + get.Stackid + ".pem")
 		fmt.Println("Delete!", err)
