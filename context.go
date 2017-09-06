@@ -33,7 +33,7 @@ type context struct {
 
 // Start initializes an instance of gotty and return the url.
 func (c *context) Start(get message) (ret string, err error) {
-	ec2req := awsports.Make(devprofile, awsRegion, devinst)
+	ec2req := awsports.Make(credprof, region, ec2id)
 	name, err := os.Executable()
 	if err != nil {
 		return ret, errors.Wrap(err, "get executable name failed")
@@ -111,6 +111,6 @@ func (c *context) GetFullURL() string {
 		return furl
 	}
 
-	furl += "https://" + devdomain + ":" + c.HttpsPort + rurl.EscapedPath()
+	furl += "https://" + domain + ":" + c.HttpsPort + rurl.EscapedPath()
 	return furl
 }

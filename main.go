@@ -27,15 +27,24 @@ var rootCmd = &cobra.Command{
 		}
 
 		env := GetCliStringFlag(cmd, "env")
-		err = awsports.Download(env, awsRegion, devprofile)
+		domain = GetCliStringFlag(cmd, "domain")
+		region = GetCliStringFlag(cmd, "aws-region")
+		ec2id = GetCliStringFlag(cmd, "ec2-id")
+		credprof = GetCliStringFlag(cmd, "cred-profile")
+		err = awsports.Download(env, region, credprof)
 		fmt.Println(err)
-		serve()
+		serve(cmd)
 	},
 }
 
 func init() {
 	rootCmd.Flags().SortFlags = false
-	rootCmd.PersistentFlags().String("env", "dev", "dev, test, prod")
+	rootCmd.PersistentFlags().String("env", "dev", "values: dev, test, prod")
+	rootCmd.PersistentFlags().String("domain", "sesha3.labs.mobingi.com", "server domain")
+	rootCmd.PersistentFlags().String("port", "80", "server port")
+	rootCmd.PersistentFlags().String("aws-region", "ap-northeast-1", "aws region")
+	rootCmd.PersistentFlags().String("ec2-id", "i-0d6ff50d6caef8ffa", "ec2 server instance id")
+	rootCmd.PersistentFlags().String("cred-profile", "sesha3", "aws credenfile profile name")
 }
 
 func signalHandler() {

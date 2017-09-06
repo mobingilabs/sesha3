@@ -15,8 +15,17 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/mobingilabs/sesha3/token"
+	"github.com/spf13/cobra"
 )
 
+var (
+	ctx      context
+	domain   string // set by cli flag
+	port     string // set by cli flag
+	region   string // set by cli flag
+	ec2id    string // set by cli flag
+	credprof string // set by cli flag
+/*
 const (
 	httpPort  = "80"
 	awsRegion = "ap-northeast-1"
@@ -28,6 +37,7 @@ const (
 	//devdomain  = "testyuto.labs.mobingi.com"
 	//devinst    = "i-09094885155fee296"
 	//devprofile = "mobingi-yuto"
+*/
 )
 
 func getjson(w http.ResponseWriter, r *http.Request) interface{} {
@@ -137,10 +147,11 @@ func version(w http.ResponseWriter, req *http.Request) {
 	w.Write([]byte("v0.0.2-beta"))
 }
 
-func serve() {
+func serve(cmd *cobra.Command) {
+	port := GetCliStringFlag(cmd, "port")
 	router := mux.NewRouter()
 	router.HandleFunc("/token", token.Settoken)
 	router.HandleFunc("/json", tty)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
-	log.Fatal(http.ListenAndServe(":"+httpPort, router))
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }
