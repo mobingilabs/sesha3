@@ -18,7 +18,7 @@ import (
 )
 
 const (
-	httpPort  = "8080"
+	httpPort  = "80"
 	awsRegion = "ap-northeast-1"
 
 	devdomain  = "sesha3.labs.mobingi.com"

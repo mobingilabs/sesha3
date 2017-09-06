@@ -73,18 +73,20 @@ func (c *context) Start(get message) (ret string, err error) {
 		errpipe, err := c.Cmd.StderrPipe()
 		if err != nil {
 			fmt.Println(err)
+			ec2req.Closeport()
 		}
 		c.Cmd.Start()
 		scanner := bufio.NewScanner(errpipe)
+		out := ""
 		for scanner.Scan() {
-			out := ""
 			if strings.Index(scanner.Text(), "URL") != -1 {
 				tmpurl := scanner.Text()
 				out = strings.Split(tmpurl, "URL: ")[1]
-				ttyurl <- out
+				break
 			}
 			fmt.Println(scanner.Text())
 		}
+		ttyurl <- out
 		c.Cmd.Wait()
 		ec2req.Closeport()
 		fmt.Println("gotty finish!")
