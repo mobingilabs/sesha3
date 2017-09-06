@@ -17,15 +17,6 @@ var rootCmd = &cobra.Command{
 	Long:  "Mobingi Secure Shell and Application Access Server.",
 	Run: func(cmd *cobra.Command, args []string) {
 		log.Println("hello!")
-		_, err := os.Stat("./certs/")
-
-		if err == nil {
-			log.Println("./certs detected.")
-		} else {
-			log.Println("./certs not detected. mkdir ./certs")
-			os.Mkdir("./certs", 0700)
-		}
-
 		env := GetCliStringFlag(cmd, "env")
 		syslogging = GetCliStringFlag(cmd, "syslog")
 		if syslogging == "enable" {
@@ -34,6 +25,14 @@ var rootCmd = &cobra.Command{
 				panic(err)
 			}
 			log.SetOutput(logger)
+		}
+		_, err := os.Stat("./certs/")
+
+		if err == nil {
+			log.Println("./certs detected.")
+		} else {
+			log.Println("./certs not detected. mkdir ./certs")
+			os.Mkdir("./certs", 0700)
 		}
 
 		domain = GetCliStringFlag(cmd, "domain")
