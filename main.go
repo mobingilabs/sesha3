@@ -9,6 +9,7 @@ import (
 	"syscall"
 
 	"github.com/mobingilabs/sesha3/awsports"
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
 
@@ -34,7 +35,10 @@ var rootCmd = &cobra.Command{
 			log.Println(sourcedir + "/certs detected.")
 		} else {
 			log.Println(sourcedir + "/certs not detected. mkdir certs dir")
-			os.Mkdir(sourcedir+"/certs", 0700)
+			err = os.MkdirAll(sourcedir+"/certs", 0700)
+			if err != nil {
+				log.Println("error:", errors.Wrap(err, "mkdirall failed"))
+			}
 		}
 
 		domain = GetCliStringFlag(cmd, "domain")

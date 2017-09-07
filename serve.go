@@ -152,7 +152,7 @@ func tty(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(payload))
 }
 func version(w http.ResponseWriter, req *http.Request) {
-	w.Write([]byte(`{"version":"v0.0.3-beta"}`))
+	w.Write([]byte(`{"version":"v0.0.4-beta"}`))
 }
 
 func serve(cmd *cobra.Command) {
