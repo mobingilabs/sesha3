@@ -47,10 +47,6 @@ const (
 )
 
 func getjson(w http.ResponseWriter, r *http.Request) interface{} {
-	if r.Method != "POST" {
-		return 0
-	}
-
 	if r.Header.Get("Content-Type") != "application/json" {
 		return 0
 	}
@@ -121,10 +117,6 @@ func tty(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if r.Method == "POST" {
-		w.WriteHeader(http.StatusBadRequest)
-	}
-
 	get = sshkey(w, r)
 	if get.Err == -1 {
 		w.Write(sesha3.NewSimpleError("access denied, key url disabled").Marshal())
@@ -166,7 +158,7 @@ func redirect(w http.ResponseWriter, req *http.Request) {
 	}
 
 	d.Info("redirect to:", target)
-	http.Redirect(w, req, target, http.StatusTemporaryRedirect)
+	http.Redirect(w, req, target, http.StatusMovedPermanently)
 }
 
 func serve(cmd *cobra.Command) {
@@ -176,8 +168,8 @@ func serve(cmd *cobra.Command) {
 	certfolder := cmdline.Dir() + "/certs"
 	port := GetCliStringFlag(cmd, "port")
 	router := mux.NewRouter()
-	router.HandleFunc("/token", token.Settoken)
-	router.HandleFunc("/json", tty)
+	router.HandleFunc("/token", token.Settoken).Methods(http.MethodGet)
+	router.HandleFunc("/json", tty).Methods(http.MethodGet)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
 	err := http.ListenAndServeTLS(":"+port, certfolder+"/fullchain.pem", certfolder+"/privkey.pem", router)
 	d.ErrorExit(err, 1)
