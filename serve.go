@@ -170,6 +170,9 @@ func redirect(w http.ResponseWriter, req *http.Request) {
 }
 
 func serve(cmd *cobra.Command) {
+	// redirect every http request to https
+	go http.ListenAndServe(":80", http.HandlerFunc(redirect))
+	// everything else will be https
 	certfolder := cmdline.Dir() + "/certs"
 	port := GetCliStringFlag(cmd, "port")
 	router := mux.NewRouter()
