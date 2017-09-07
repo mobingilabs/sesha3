@@ -27,27 +27,12 @@ var rootCmd = &cobra.Command{
 			log.SetOutput(logger)
 		}
 
-		// name, err := os.Executable()
-		// sourcedir := filepath.Dir(name)
 		srcdir := cmdline.Dir()
 		d.Info("srcdir:", srcdir)
-		// _, err = os.Stat(srcdir + "/certs/")
 		if !private.Exists(srcdir + "/certs") {
 			err := os.MkdirAll(srcdir+"/certs", os.ModePerm)
 			d.ErrorExit(err, 1)
 		}
-
-		/*
-			if err == nil {
-				log.Println(srcdir + "/certs detected.")
-			} else {
-				log.Println(srcdir + "/certs not detected. mkdir certs dir")
-				err = os.MkdirAll(srcdir+"/certs", 0700)
-				if err != nil {
-					log.Println("error:", errors.Wrap(err, "mkdirall failed"))
-				}
-			}
-		*/
 
 		env := GetCliStringFlag(cmd, "env")
 		domain = GetCliStringFlag(cmd, "domain")
@@ -67,7 +52,7 @@ func init() {
 	rootCmd.PersistentFlags().String("env", "dev", "values: dev, test, prod")
 	rootCmd.PersistentFlags().BoolVar(&syslogging, "syslog", false, "set log output to syslog")
 	rootCmd.PersistentFlags().String("domain", "sesha3.labs.mobingi.com", "server domain")
-	rootCmd.PersistentFlags().String("port", "80", "server port")
+	rootCmd.PersistentFlags().String("port", "443", "server port")
 	rootCmd.PersistentFlags().String("aws-region", "ap-northeast-1", "aws region")
 	rootCmd.PersistentFlags().String("ec2-id", "i-0d6ff50d6caef8ffa", "ec2 server instance id")
 	rootCmd.PersistentFlags().String("cred-profile", "sesha3", "aws credenfile profile name")

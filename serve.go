@@ -15,6 +15,8 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
+	"github.com/mobingilabs/mobingi-sdk-go/pkg/cmdline"
+	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/token"
 	"github.com/spf13/cobra"
 )
@@ -157,11 +159,23 @@ func version(w http.ResponseWriter, req *http.Request) {
 	w.Write([]byte(`{"version":"v0.0.5-beta"}`))
 }
 
+func redirect(w http.ResponseWriter, req *http.Request) {
+	target := "https://" + req.Host + req.URL.Path
+	if len(req.URL.RawQuery) > 0 {
+		target += "?" + req.URL.RawQuery
+	}
+
+	d.Info("redirect to:", target)
+	http.Redirect(w, req, target, http.StatusTemporaryRedirect)
+}
+
 func serve(cmd *cobra.Command) {
+	certfolder := cmdline.Dir() + "/certs"
 	port := GetCliStringFlag(cmd, "port")
 	router := mux.NewRouter()
 	router.HandleFunc("/token", token.Settoken)
 	router.HandleFunc("/json", tty)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
-	log.Fatal(http.ListenAndServe(":"+port, router))
+	err := http.ListenAndServeTLS(":"+port, certfolder+"/fullchain.pem", certfolder+"/privkey.pem", router)
+	d.ErrorExit(err, 1)
 }
