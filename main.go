@@ -5,12 +5,12 @@ import (
 	"log/syslog"
 	"os"
 	"os/signal"
-	"path/filepath"
 	"syscall"
 
+	"github.com/mobingilabs/mobingi-sdk-go/pkg/cmdline"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
+	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/awsports"
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
 
@@ -27,25 +27,34 @@ var rootCmd = &cobra.Command{
 			log.SetOutput(logger)
 		}
 
-		name, err := os.Executable()
-		sourcedir := filepath.Dir(name)
-		env := GetCliStringFlag(cmd, "env")
-		_, err = os.Stat(sourcedir + "/certs/")
-		if err == nil {
-			log.Println(sourcedir + "/certs detected.")
-		} else {
-			log.Println(sourcedir + "/certs not detected. mkdir certs dir")
-			err = os.MkdirAll(sourcedir+"/certs", 0700)
-			if err != nil {
-				log.Println("error:", errors.Wrap(err, "mkdirall failed"))
-			}
+		// name, err := os.Executable()
+		// sourcedir := filepath.Dir(name)
+		srcdir := cmdline.Dir()
+		d.Info("srcdir:", srcdir)
+		// _, err = os.Stat(srcdir + "/certs/")
+		if !private.Exists(srcdir + "/certs") {
+			err := os.MkdirAll(srcdir+"/certs", os.ModePerm)
+			d.ErrorExit(err, 1)
 		}
 
+		/*
+			if err == nil {
+				log.Println(srcdir + "/certs detected.")
+			} else {
+				log.Println(srcdir + "/certs not detected. mkdir certs dir")
+				err = os.MkdirAll(srcdir+"/certs", 0700)
+				if err != nil {
+					log.Println("error:", errors.Wrap(err, "mkdirall failed"))
+				}
+			}
+		*/
+
+		env := GetCliStringFlag(cmd, "env")
 		domain = GetCliStringFlag(cmd, "domain")
 		region = GetCliStringFlag(cmd, "aws-region")
 		ec2id = GetCliStringFlag(cmd, "ec2-id")
 		credprof = GetCliStringFlag(cmd, "cred-profile")
-		err = awsports.Download(env, region, credprof)
+		err := awsports.Download(env, region, credprof)
 		log.Println(err)
 		serve(cmd)
 		d.Info()
