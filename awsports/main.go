@@ -136,7 +136,7 @@ func Download(env string, awsRegion string, profilename string) error {
 	}
 
 	sess := session.Must(session.NewSession())
-	cred := credentials.NewSharedCredentials("", profilename)
+	cred := credentials.NewSharedCredentials("/root/.aws/credentials", profilename)
 	svc := s3.New(sess, &aws.Config{
 		Credentials: cred,
 		Region:      aws.String(awsRegion),
