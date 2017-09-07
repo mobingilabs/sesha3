@@ -122,11 +122,13 @@ func tty(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		w.WriteHeader(http.StatusBadRequest)
 	}
+
 	get = sshkey(w, r)
 	if get.Err == -1 {
 		w.Write(sesha3.NewSimpleError("access denied, key url disabled").Marshal())
 		return
 	}
+
 	randomurl, err := ctx.Start(get)
 	if randomurl == "" {
 		w.Write(sesha3.NewSimpleError("cannot initialize secure tty access").Marshal())
@@ -134,6 +136,7 @@ func tty(w http.ResponseWriter, r *http.Request) {
 	} else {
 		ctx.Online = true
 	}
+
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
@@ -142,7 +145,6 @@ func tty(w http.ResponseWriter, r *http.Request) {
 	var fullurl string
 	ctx.TtyURL = randomurl
 	fullurl = ctx.GetFullURL()
-
 	if fullurl == "" {
 		w.Write(sesha3.NewSimpleError("cannot initialize secure tty access").Marshal())
 		return
@@ -152,7 +154,7 @@ func tty(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(payload))
 }
 func version(w http.ResponseWriter, req *http.Request) {
-	w.Write([]byte(`{"version":"v0.0.4-beta"}`))
+	w.Write([]byte(`{"version":"v0.0.5-beta"}`))
 }
 
 func serve(cmd *cobra.Command) {
