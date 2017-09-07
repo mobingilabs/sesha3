@@ -28,6 +28,8 @@ var rootCmd = &cobra.Command{
 			if err != nil {
 				panic(err)
 			}
+
+			log.SetFlags(0)
 			log.SetOutput(logger)
 		}
 
