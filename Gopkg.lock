@@ -14,6 +14,12 @@
   version = "v3.0.0"
 
 [[projects]]
+  name = "github.com/fatih/color"
+  packages = ["."]
+  revision = "570b54cabe6b8eb0bc2dfce68d964677d63b5260"
+  version = "v1.5.0"
+
+[[projects]]
   name = "github.com/go-ini/ini"
   packages = ["."]
   revision = "20b96f641a5ea98f2f8619ff4f3e061cff4833bd"
@@ -44,9 +50,21 @@
   version = "0.2.2"
 
 [[projects]]
+  name = "github.com/mattn/go-colorable"
+  packages = ["."]
+  revision = "167de6bfdfba052fa6b2d3664c8f5272e23c9072"
+  version = "v0.0.9"
+
+[[projects]]
+  name = "github.com/mattn/go-isatty"
+  packages = ["."]
+  revision = "fc9e8d8ef48496124e79ae0df75490096eccf6fe"
+  version = "v0.0.2"
+
+[[projects]]
   branch = "master"
   name = "github.com/mobingilabs/mobingi-sdk-go"
-  packages = ["mobingi/sesha3"]
+  packages = ["mobingi/sesha3","pkg/debug"]
   revision = "e8f32c4ea22051d5fd0bf08cca7a05c889daf1a1"
 
 [[projects]]
@@ -67,9 +85,15 @@
   revision = "e57e3eeb33f795204c1ca35f56c44f83227c6e66"
   version = "v1.0.0"
 
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/sys"
+  packages = ["unix"]
+  revision = "9aade4d3a3b7e6d876cd3823ad20ec45fc035402"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "99398dbeb8c0155e5ed61715e588ffcd41d0cb56d1c6b99d5ca88f087db010a8"
+  inputs-digest = "8681bb8595a28034d980528dc673c21bf2779e4a129a3c1ec3c153ad949c6442"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"syscall"
 
+	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/awsports"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
@@ -18,22 +19,19 @@ var rootCmd = &cobra.Command{
 	Short: "Secure Shell and Application Access Server",
 	Long:  "Mobingi Secure Shell and Application Access Server.",
 	Run: func(cmd *cobra.Command, args []string) {
-		name, err := os.Executable()
-		sourcedir := filepath.Dir(name)
-		env := GetCliStringFlag(cmd, "env")
-		_, cerr := os.Stat(sourcedir + "/certs/")
-
 		if syslogging {
-			logger, err = syslog.New(syslog.LOG_NOTICE|syslog.LOG_USER, "sesha3")
-			if err != nil {
-				panic(err)
-			}
+			logger, err := syslog.New(syslog.LOG_NOTICE|syslog.LOG_USER, "sesha3")
+			d.ErrorExit(err, 1)
 
 			log.SetFlags(0)
 			log.SetOutput(logger)
 		}
 
-		if cerr == nil {
+		name, err := os.Executable()
+		sourcedir := filepath.Dir(name)
+		env := GetCliStringFlag(cmd, "env")
+		_, err = os.Stat(sourcedir + "/certs/")
+		if err == nil {
 			log.Println(sourcedir + "/certs detected.")
 		} else {
 			log.Println(sourcedir + "/certs not detected. mkdir certs dir")
@@ -50,6 +48,7 @@ var rootCmd = &cobra.Command{
 		err = awsports.Download(env, region, credprof)
 		log.Println(err)
 		serve(cmd)
+		d.Info()
 	},
 }
 
