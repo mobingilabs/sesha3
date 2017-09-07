@@ -55,9 +55,10 @@ var rootCmd = &cobra.Command{
 		ec2id = GetCliStringFlag(cmd, "ec2-id")
 		credprof = GetCliStringFlag(cmd, "cred-profile")
 		err := awsports.Download(env, region, credprof)
-		log.Println(err)
+		d.ErrorExit(err, 1)
+
+		// our main server
 		serve(cmd)
-		d.Info()
 	},
 }
 

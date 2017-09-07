@@ -1,11 +1,10 @@
 package awsports
 
 import (
-	"fmt"
+	"log"
 	"math/rand"
 	"os"
 	"time"
-	"log"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
@@ -13,6 +12,8 @@ import (
 	"github.com/aws/aws-sdk-go/service/ec2"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
+	"github.com/mobingilabs/mobingi-sdk-go/pkg/cmdline"
+	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/pkg/errors"
 )
 
@@ -116,7 +117,7 @@ func contains(list []int64, obj int64) bool {
 
 //s3
 
-func Download(env string, awsRegion string, profilename string) (err error) {
+func Download(env string, awsRegion string, profilename string) error {
 	filename := []string{"fullchain.pem", "privkey.pem"}
 	var myBucket string
 
@@ -127,25 +128,26 @@ func Download(env string, awsRegion string, profilename string) (err error) {
 	case "test":
 		myBucket = "testsetty"
 	default:
-		err = errors.New("invalid env value")
-		return
+		return errors.New("invalid env value")
 	}
 
 	if myBucket == "" {
-		err = errors.New("bucket name cannot be empty")
-		return
+		return errors.New("bucket name cannot be empty")
 	}
 
 	sess := session.Must(session.NewSession())
 	cred := credentials.NewSharedCredentials("", profilename)
-	svc := s3.New(sess, &aws.Config{Credentials: cred,
-		Region: aws.String(awsRegion)})
+	svc := s3.New(sess, &aws.Config{
+		Credentials: cred,
+		Region:      aws.String(awsRegion),
+	})
+
 	downloader := s3manager.NewDownloaderWithClient(svc)
-	err = nil
 	for _, i := range filename {
-		f, err := os.Create("./certs/" + i)
+		fl := cmdline.Dir() + "/certs/" + i
+		f, err := os.Create(fl)
 		if err != nil {
-			return fmt.Errorf("failed to create file %q, %v", i, err)
+			return errors.Wrapf(err, "create %s failed", fl)
 		}
 
 		// Write the contents of S3 Object to the file
@@ -153,12 +155,15 @@ func Download(env string, awsRegion string, profilename string) (err error) {
 			Bucket: aws.String(myBucket),
 			Key:    aws.String(i),
 		})
+
 		if err != nil {
-			return fmt.Errorf("failed to download file, %v", err)
+			return errors.Wrap(err, "s3 download failed")
 		}
-		log.Printf("file downloaded, %d bytes\n", n)
+
+		d.Info("file:", i, "|", "bytes:", n)
 	}
-	return
+
+	return nil
 }
 
 //example code
