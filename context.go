@@ -3,16 +3,15 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"log"
 	"net/url"
 	"os"
 	"os/exec"
-	"path/filepath"
 	"runtime"
 	"strings"
 
+	"github.com/mobingilabs/mobingi-sdk-go/pkg/cmdline"
+	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/awsports"
-	"github.com/pkg/errors"
 )
 
 /*
@@ -40,21 +39,21 @@ type context struct {
 // Start initializes an instance of gotty and return the url.
 func (c *context) Start() (ret string, err error) {
 	ec2req := awsports.Make(credprof, region, ec2id)
-	name, err := os.Executable()
-	if err != nil {
-		return ret, errors.Wrap(err, "get executable name failed")
-	}
-
-	log.Println("name:", name)
+	/*
+		name, err := os.Executable()
+		if err != nil {
+			return ret, errors.Wrap(err, "get executable name failed")
+		}
+	*/
 
 	c.HttpsPort = fmt.Sprint(ec2req.RequestPort)
 
 	ttyurl := make(chan string)
 	go func() {
 		ec2req.Openport()
-		svrtool := filepath.Dir(name) + "/tools/" + runtime.GOOS + "/gotty"
-		certpath := filepath.Dir(name) + "/certs/"
-		ssh := "/usr/bin/ssh -oStrictHostKeyChecking=no -i " + "./tmp/" + c.StackId + ".pem " + c.User + "@" + c.Ip
+		svrtool := cmdline.Dir() + "/tools/" + runtime.GOOS + "/gotty"
+		certpath := cmdline.Dir() + "/certs/"
+		ssh := "/usr/bin/ssh -oStrictHostKeyChecking=no -i " + os.TempDir() + "/" + c.StackId + ".pem " + c.User + "@" + c.Ip
 		shell := "grep ec2-user /etc/passwd | cut -d: -f7"
 		dshellb, _ := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
 		defaultshell := strings.TrimSpace(string(dshellb))
@@ -78,9 +77,10 @@ func (c *context) Start() (ret string, err error) {
 
 		errpipe, err := c.Cmd.StderrPipe()
 		if err != nil {
-			log.Println(err)
+			d.Error(err)
 			ec2req.Closeport()
 		}
+
 		c.Cmd.Start()
 		scanner := bufio.NewScanner(errpipe)
 		out := ""
@@ -90,18 +90,24 @@ func (c *context) Start() (ret string, err error) {
 				out = strings.Split(tmpurl, "URL: ")[1]
 				break
 			}
-			log.Println(scanner.Text())
+
+			d.Info(scanner.Text())
 		}
+
 		ttyurl <- out
 		c.Cmd.Wait()
 		ec2req.Closeport()
-		log.Println("gotty finish!")
-		err = os.Remove("./tmp/" + c.StackId + ".pem")
-		log.Println("Delete!", err)
+		d.Info("gotty done")
+
+		// delete pem file when done
+		err = os.Remove(os.TempDir() + "/" + c.StackId + ".pem")
 		if err != nil {
-			log.Println(err)
+			d.Error(err)
+		} else {
+			d.Info("gotty done")
 		}
 	}()
+
 	ret = <-ttyurl
 	return
 }
