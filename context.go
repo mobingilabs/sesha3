@@ -99,8 +99,6 @@ func (c *context) Start() (ret string, err error) {
 		err = os.Remove(os.TempDir() + "/" + c.StackId + ".pem")
 		if err != nil {
 			d.Error(err)
-		} else {
-			d.Info("gotty done")
 		}
 	}()
 
