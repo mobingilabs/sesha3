@@ -82,7 +82,7 @@ func (s *SecurityGroupRequest) Closeport() {
 func Make(profilename string, awsRegion string, instanceID string) (req SecurityGroupRequest) {
 	req = SecurityGroupRequest{
 		Sess:       session.Must(session.NewSession()),
-		Cred:       credentials.NewSharedCredentials("", profilename),
+		Cred:       credentials.NewSharedCredentials("/root/.aws/credentials", profilename),
 		InstanceID: instanceID,
 	}
 	req.Ec2client = ec2.New(req.Sess, &aws.Config{Credentials: req.Cred,
