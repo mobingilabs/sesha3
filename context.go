@@ -39,18 +39,14 @@ type context struct {
 // Start initializes an instance of gotty and return the url.
 func (c *context) Start() (ret string, err error) {
 	ec2req := awsports.Make(credprof, region, ec2id)
-	/*
-		name, err := os.Executable()
-		if err != nil {
-			return ret, errors.Wrap(err, "get executable name failed")
-		}
-	*/
-
 	c.HttpsPort = fmt.Sprint(ec2req.RequestPort)
-
 	ttyurl := make(chan string)
 	go func() {
-		ec2req.Openport()
+		err := ec2req.Openport()
+		if err != nil {
+			d.Error(err)
+		}
+
 		svrtool := cmdline.Dir() + "/tools/" + runtime.GOOS + "/gotty"
 		certpath := cmdline.Dir() + "/certs/"
 		ssh := "/usr/bin/ssh -oStrictHostKeyChecking=no -i " + os.TempDir() + "/" + c.StackId + ".pem " + c.User + "@" + c.Ip

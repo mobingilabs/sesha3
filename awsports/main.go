@@ -1,7 +1,6 @@
 package awsports
 
 import (
-	"log"
 	"math/rand"
 	"os"
 	"time"
@@ -67,16 +66,26 @@ func (s *SecurityGroupRequest) OpenedList() {
 	}
 }
 
-func (s *SecurityGroupRequest) Openport() {
+func (s *SecurityGroupRequest) Openport() error {
 	svc := s.Ec2client
 	p, err := svc.AuthorizeSecurityGroupIngress(s.AuthorizeSecurityGroupIngressInput)
-	log.Println("port open:", s.RequestPort, p, err)
+	if err != nil {
+		return errors.Wrap(err, "open port failed")
+	}
+
+	d.Info("port open:", s.RequestPort, p)
+	return nil
 }
 
-func (s *SecurityGroupRequest) Closeport() {
+func (s *SecurityGroupRequest) Closeport() error {
 	svc := s.Ec2client
 	p, err := svc.RevokeSecurityGroupIngress(s.RevokeSecurityGroupIngressInput)
-	log.Println("port close:", s.RequestPort, p, err)
+	if err != nil {
+		return errors.Wrap(err, "close port failed")
+	}
+
+	d.Info("port close:", s.RequestPort, p)
+	return nil
 }
 
 func Make(profilename string, awsRegion string, instanceID string) (req SecurityGroupRequest) {
