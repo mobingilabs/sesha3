@@ -111,11 +111,14 @@ func sshkey(w http.ResponseWriter, r *http.Request) message {
 func tty(w http.ResponseWriter, r *http.Request) {
 	var ctx context
 	var get message
-	tokenerr, tokenmessage := token.GetToken(w, r)
-	if tokenerr != true {
-		w.Write([]byte(tokenmessage))
-		return
-	}
+
+	/*
+		tokenerr, tokenmessage := token.GetToken(w, r)
+		if tokenerr != true {
+			w.Write([]byte(tokenmessage))
+			return
+		}
+	*/
 
 	get = sshkey(w, r)
 	if get.Err == -1 {
