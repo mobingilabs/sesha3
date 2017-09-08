@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log/syslog"
 	"net/http"
+	"net/url"
 	"os"
 
 	"github.com/gorilla/mux"
@@ -143,7 +144,10 @@ func tty(w http.ResponseWriter, r *http.Request) {
 	}
 
 	pemurl := m["pem"]
-	resp, err := http.Get(pemurl)
+	d.Info("rawurl:", pemurl)
+	qurl := url.QueryEscape(pemurl)
+	d.Info("escaped url:", qurl)
+	resp, err := http.Get(qurl)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
