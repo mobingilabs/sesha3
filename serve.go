@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
@@ -138,7 +139,8 @@ func tty(w http.ResponseWriter, r *http.Request) {
 	d.Info("req:", string(body))
 
 	var m map[string]interface{}
-	err = json.Unmarshal(body, &m)
+	sbody := strings.Replace(string(body), `\`, "", -1)
+	err = json.Unmarshal([]byte(sbody), &m)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
