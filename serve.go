@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log/syslog"
 	"net/http"
@@ -136,7 +137,7 @@ func tty(w http.ResponseWriter, r *http.Request) {
 
 	d.Info("req:", string(body))
 
-	var m map[string]string
+	var m map[string]interface{}
 	err = json.Unmarshal(body, &m)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
@@ -145,7 +146,7 @@ func tty(w http.ResponseWriter, r *http.Request) {
 
 	pemurl := m["pem"]
 	d.Info("rawurl:", pemurl)
-	qurl := url.QueryEscape(pemurl)
+	qurl := url.QueryEscape(fmt.Sprintf("%v", pemurl))
 	d.Info("escaped url:", qurl)
 	resp, err := http.Get(qurl)
 	if err != nil {
@@ -160,10 +161,10 @@ func tty(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ctx.User = m["user"]
-	ctx.Ip = m["ip"]
-	ctx.StackId = m["stackid"]
-	ctx.Timeout = m["timeout"]
+	ctx.User = fmt.Sprintf("%v", m["user"])
+	ctx.Ip = fmt.Sprintf("%v", m["ip"])
+	ctx.StackId = fmt.Sprintf("%v", m["stackid"])
+	ctx.Timeout = fmt.Sprintf("%v", m["timeout"])
 	d.Info("ctx:", ctx)
 	d.Info("pem:", string(body))
 	pemfile := os.TempDir() + "/" + ctx.StackId + ".pem"
