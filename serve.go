@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 	"log/syslog"
 	"net/http"
-	"net/url"
 	"os"
 	"strings"
 
@@ -148,9 +147,9 @@ func tty(w http.ResponseWriter, r *http.Request) {
 
 	pemurl := m["pem"]
 	d.Info("rawurl:", pemurl)
-	qurl := url.QueryEscape(fmt.Sprintf("%v", pemurl))
-	d.Info("escaped url:", qurl)
-	resp, err := http.Get(qurl)
+	// qurl := url.QueryEscape(fmt.Sprintf("%v", pemurl))
+	// d.Info("escaped url:", qurl)
+	resp, err := http.Get(fmt.Sprintf("%v", pemurl))
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
