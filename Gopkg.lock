@@ -4,8 +4,8 @@
 [[projects]]
   name = "github.com/aws/aws-sdk-go"
   packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/shareddefaults","private/protocol","private/protocol/ec2query","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/restxml","private/protocol/xml/xmlutil","service/ec2","service/s3","service/s3/s3iface","service/s3/s3manager","service/sts"]
-  revision = "452caf156d7a643d59e81af90f09a2f9814f2833"
-  version = "v1.10.39"
+  revision = "fa78289ae88a6b6a59e326885edc00612ed265f3"
+  version = "v1.10.40"
 
 [[projects]]
   name = "github.com/dgrijalva/jwt-go"
@@ -64,8 +64,8 @@
 [[projects]]
   branch = "master"
   name = "github.com/mobingilabs/mobingi-sdk-go"
-  packages = ["mobingi/sesha3","pkg/cmdline","pkg/debug"]
-  revision = "0927d0efb4e445f435b9a1e607330f62f79580cb"
+  packages = ["mobingi/sesha3","pkg/cmdline","pkg/debug","pkg/private"]
+  revision = "7d9f9511a063554da3d8f342ec4926b33be500e8"
 
 [[projects]]
   name = "github.com/pkg/errors"
@@ -89,11 +89,11 @@
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
-  revision = "9aade4d3a3b7e6d876cd3823ad20ec45fc035402"
+  revision = "a45f55524b7ec57890cfa6c6bc06b47f877be0d1"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "6f45e3ae43d16ed8989f9bd305ea810d3a4144cc912d0d65ec0fa28ed5662b41"
+  inputs-digest = "15554eda479385a5aadcc320edc56badfdb7b3ce89545172420a34ea2e4a1430"
   solver-name = "gps-cdcl"
   solver-version = 1
