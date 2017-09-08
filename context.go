@@ -15,6 +15,7 @@ import (
 	"github.com/pkg/errors"
 )
 
+/*
 type message struct {
 	Pem     string
 	User    string
@@ -23,16 +24,21 @@ type message struct {
 	Timeout string
 	Err     int
 }
+*/
 
 type context struct {
 	Online    bool
 	TtyURL    string
 	Cmd       *exec.Cmd
 	HttpsPort string
+	User      string
+	Ip        string
+	StackId   string
+	Timeout   string
 }
 
 // Start initializes an instance of gotty and return the url.
-func (c *context) Start(get message) (ret string, err error) {
+func (c *context) Start() (ret string, err error) {
 	ec2req := awsports.Make(credprof, region, ec2id)
 	name, err := os.Executable()
 	if err != nil {
@@ -48,11 +54,11 @@ func (c *context) Start(get message) (ret string, err error) {
 		ec2req.Openport()
 		svrtool := filepath.Dir(name) + "/tools/" + runtime.GOOS + "/gotty"
 		certpath := filepath.Dir(name) + "/certs/"
-		ssh := "/usr/bin/ssh -oStrictHostKeyChecking=no -i " + "./tmp/" + get.Stackid + ".pem " + get.User + "@" + get.Ip
+		ssh := "/usr/bin/ssh -oStrictHostKeyChecking=no -i " + "./tmp/" + c.StackId + ".pem " + c.User + "@" + c.Ip
 		shell := "grep ec2-user /etc/passwd | cut -d: -f7"
 		dshellb, _ := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
 		defaultshell := strings.TrimSpace(string(dshellb))
-		timeout := get.Timeout
+		timeout := c.Timeout
 		c.Cmd = exec.Command(svrtool,
 			"--port", fmt.Sprint(ec2req.RequestPort),
 			"-w",
@@ -90,7 +96,7 @@ func (c *context) Start(get message) (ret string, err error) {
 		c.Cmd.Wait()
 		ec2req.Closeport()
 		log.Println("gotty finish!")
-		err = os.Remove("./tmp/" + get.Stackid + ".pem")
+		err = os.Remove("./tmp/" + c.StackId + ".pem")
 		log.Println("Delete!", err)
 		if err != nil {
 			log.Println(err)

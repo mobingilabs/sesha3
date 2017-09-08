@@ -2,16 +2,10 @@ package main
 
 import (
 	"encoding/json"
-	"io"
 	"io/ioutil"
-	"log"
 	"log/syslog"
 	"net/http"
 	"os"
-	"strconv"
-	"strings"
-
-	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
@@ -46,6 +40,7 @@ const (
 */
 )
 
+/*
 func getjson(w http.ResponseWriter, r *http.Request) interface{} {
 	if r.Header.Get("Content-Type") != "application/json" {
 		return 0
@@ -78,39 +73,48 @@ func getjson(w http.ResponseWriter, r *http.Request) interface{} {
 	return jsonBody
 }
 
-func sshkey(w http.ResponseWriter, r *http.Request) message {
+func sshkey(w http.ResponseWriter, r *http.Request) ([]byte, error) {
 	get, ok := getjson(w, r).(message)
 	if !ok {
-		get.Err = -1
-		return get
+		return nil, errors.New("get input failed")
 	}
+
 	url := get.Pem
 	resp, err := http.Get(url)
 	if err != nil {
-		log.Println(err)
+		return nil, errors.Wrap(err, "http get pem failed")
 	}
+
 	defer resp.Body.Close()
-	byteArray, _ := ioutil.ReadAll(resp.Body)
-	rsakey := string(byteArray)                      // stringで鍵を取得
-	if strings.Index(rsakey, `AccessDenied`) != -1 { //URL judge
-		get.Err = -1
+		byteArray, _ := ioutil.ReadAll(resp.Body)
+		rsakey := string(byteArray)                      // stringで鍵を取得
+		if strings.Index(rsakey, `AccessDenied`) != -1 { //URL judge
+			get.Err = -1
+			return get
+		}
+
+		_, err = os.Stat("./tmp/")
+
+		if err == nil {
+			log.Println("./tmp detected.")
+		} else {
+			os.Mkdir("./tmp", 0700)
+		}
+		ioutil.WriteFile("./tmp/"+get.Stackid+".pem", []byte(rsakey), 0600)
 		return get
+
+	b, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, errors.Wrap(err, "readall failed")
 	}
 
-	_, err = os.Stat("./tmp/")
-
-	if err == nil {
-		log.Println("./tmp detected.")
-	} else {
-		os.Mkdir("./tmp", 0700)
-	}
-	ioutil.WriteFile("./tmp/"+get.Stackid+".pem", []byte(rsakey), 0600)
-	return get
+	return b, nil
 }
+*/
 
 func tty(w http.ResponseWriter, r *http.Request) {
 	var ctx context
-	var get message
+	// var get message
 
 	/*
 		tokenerr, tokenmessage := token.GetToken(w, r)
@@ -120,23 +124,62 @@ func tty(w http.ResponseWriter, r *http.Request) {
 		}
 	*/
 
-	get = sshkey(w, r)
-	if get.Err == -1 {
-		w.Write(sesha3.NewSimpleError("access denied, key url disabled").Marshal())
+	// get = sshkey(w, r)
+
+	defer r.Body.Close()
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
 
-	randomurl, err := ctx.Start(get)
+	d.Info("req:", string(body))
+
+	var m map[string]string
+	err = json.Unmarshal(body, &m)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+
+	pemurl := m["pem"]
+	resp, err := http.Get(pemurl)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+
+	defer resp.Body.Close()
+	body, err = ioutil.ReadAll(resp.Body)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+
+	ctx.User = m["user"]
+	ctx.Ip = m["ip"]
+	ctx.StackId = m["stackid"]
+	ctx.Timeout = m["timeout"]
+	d.Info("ctx:", ctx)
+	d.Info("pem:", string(body))
+	pemfile := os.TempDir() + "/" + ctx.StackId + ".pem"
+	err = ioutil.WriteFile(pemfile, body, 0600)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+
+	randomurl, err := ctx.Start()
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+
 	if randomurl == "" {
 		w.Write(sesha3.NewSimpleError("cannot initialize secure tty access").Marshal())
 		return
 	} else {
 		ctx.Online = true
-	}
-
-	if err != nil {
-		w.Write(sesha3.NewSimpleError(err).Marshal())
-		return
 	}
 
 	var fullurl string
