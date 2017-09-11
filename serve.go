@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"log/syslog"
 	"net/http"
 	"os"
@@ -164,7 +165,16 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	ctx.Timeout = fmt.Sprintf("%v", m["timeout"])
 	d.Info("ctx:", ctx)
 	d.Info("pem:", string(body))
-	pemfile := os.TempDir() + "/" + ctx.StackId + ".pem"
+	pemdir := os.TempDir() + "/user/"
+	_, err = os.Stat(pemdir)
+	if err == nil {
+		log.Println(pemdir + " detected.")
+	} else {
+		log.Println(pemdir + " not detected. mkdir" + pemdir)
+		err = os.MkdirAll(pemdir, 0700)
+		log.Println("mkdir err : ", err)
+	}
+	pemfile := os.TempDir() + "/user/" + ctx.StackId + ".pem"
 	err = ioutil.WriteFile(pemfile, body, 0600)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
