@@ -52,7 +52,7 @@ func (c *context) Start() (ret string, err error) {
 		ssh := "/usr/bin/ssh -oStrictHostKeyChecking=no -i " + os.TempDir() + "/user/" + c.StackId + ".pem " + c.User + "@" + c.Ip
 		shell := "grep " + c.User + " /etc/passwd | cut -d: -f7"
 		dshellb, _ := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
-		d.Info("default:" + dshellb)
+		d.Info(dshellb)
 		defaultshell := strings.TrimSpace(string(dshellb))
 		d.Info("default:" + defaultshell)
 		timeout := c.Timeout
