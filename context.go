@@ -51,8 +51,9 @@ func (c *context) Start() (ret string, err error) {
 		certpath := cmdline.Dir() + "/certs/"
 		ssh := "/usr/bin/ssh -oStrictHostKeyChecking=no -i " + os.TempDir() + "/user/" + c.StackId + ".pem " + c.User + "@" + c.Ip
 		shell := "grep " + c.User + " /etc/passwd | cut -d: -f7"
-		dshellb, _ := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
+		dshellb, err := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
 		d.Info(dshellb)
+		d.Info(err)
 		defaultshell := strings.TrimSpace(string(dshellb))
 		d.Info("default:" + defaultshell)
 		timeout := c.Timeout
