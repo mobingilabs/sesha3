@@ -138,6 +138,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 
 	var m map[string]interface{}
 	sbody := strings.Replace(string(body), `\`, "", -1)
+	sbody := strings.Replace(string(body), `u0026`, "&", -1)
 	err = json.Unmarshal([]byte(sbody), &m)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
