@@ -53,6 +53,7 @@ func (c *context) Start() (ret string, err error) {
 		d.Info(ssh)
 		shell := "grep " + c.User + " /etc/passwd | cut -d: -f7"
 		dshellb, err := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
+		d.Info(ssh + " -t " + shell)
 		d.Info(dshellb)
 		d.Info(err)
 		defaultshell := strings.TrimSpace(string(dshellb))
