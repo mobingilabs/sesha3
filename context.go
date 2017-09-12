@@ -50,6 +50,7 @@ func (c *context) Start() (ret string, err error) {
 		svrtool := cmdline.Dir() + "/tools/" + runtime.GOOS + "/gotty"
 		certpath := cmdline.Dir() + "/certs/"
 		ssh := "/usr/bin/ssh -oStrictHostKeyChecking=no -i " + os.TempDir() + "/user/" + c.StackId + ".pem " + c.User + "@" + c.Ip
+		d.Info(ssh)
 		shell := "grep " + c.User + " /etc/passwd | cut -d: -f7"
 		dshellb, err := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
 		d.Info(dshellb)
