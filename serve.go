@@ -144,8 +144,8 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	}
 
 	pemurl := m["pem"].(string)
-	pemurl = strings.Replace(pemurl, `\`, "", -1)
-	pemurl = strings.Replace(pemurl, `u0026`, "&", -1)
+	//	pemurl = strings.Replace(pemurl, `\`, "", -1)
+	//	pemurl = strings.Replace(pemurl, `u0026`, "&", -1)
 	d.Info("rawurl:", pemurl)
 	resp, err := http.Get(fmt.Sprintf("%v", pemurl))
 	if err != nil {
