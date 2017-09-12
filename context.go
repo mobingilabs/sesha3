@@ -96,7 +96,7 @@ func (c *context) Start() (ret string, err error) {
 		d.Info("gotty done")
 
 		// delete pem file when done
-		err = os.Remove(os.TempDir() + "/" + c.StackId + ".pem")
+		err = os.Remove(os.TempDir() + "/user/" + c.StackId + ".pem")
 		if err != nil {
 			d.Error(err)
 		}
