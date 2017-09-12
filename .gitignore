@@ -3,3 +3,4 @@ certs/*
 token/rsa/*
 tmp
 example.sh
+tags

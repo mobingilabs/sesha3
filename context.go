@@ -53,6 +53,7 @@ func (c *context) Start() (ret string, err error) {
 		shell := "grep ec2-user /etc/passwd | cut -d: -f7"
 		dshellb, _ := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
 		defaultshell := strings.TrimSpace(string(dshellb))
+		log.Println(defaultshell)
 		timeout := c.Timeout
 		c.Cmd = exec.Command(svrtool,
 			"--port", fmt.Sprint(ec2req.RequestPort),
