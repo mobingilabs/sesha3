@@ -58,7 +58,8 @@ func (c *context) Start() (ret string, err error) {
 		d.Info(err)
 		defaultshell := strings.TrimSpace(string(dshellb))
 		d.Info("default:" + defaultshell)
-		timeout := c.Timeout
+		timeout := "export TMOUT=" + c.Timeout
+		term := "export TERM=xterm"
 		c.Cmd = exec.Command(svrtool,
 			"--port", fmt.Sprint(ec2req.RequestPort),
 			"-w",
@@ -73,7 +74,7 @@ func (c *context) Start() (ret string, err error) {
 			"--title-format", "Mobingi - {{ .Command }}",
 			"bash",
 			"-c",
-			ssh+" -t \"export TMOUT="+timeout+" && "+defaultshell+" --login \"",
+			ssh+" -t \""+timeout+" && "+term+" && "+defaultshell+" --login \"",
 		)
 
 		errpipe, err := c.Cmd.StderrPipe()
