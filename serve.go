@@ -8,7 +8,6 @@ import (
 	"log/syslog"
 	"net/http"
 	"os"
-	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
