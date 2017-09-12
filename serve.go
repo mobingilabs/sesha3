@@ -137,15 +137,15 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	d.Info("req:", string(body))
 
 	var m map[string]interface{}
-	sbody := strings.Replace(string(body), `\`, "", -1)
-	sbody = strings.Replace(string(body), `u0026`, "&", -1)
-	err = json.Unmarshal([]byte(sbody), &m)
+	err = json.Unmarshal(body, &m)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
 
-	pemurl := m["pem"]
+	pemurl := m["pem"].(string)
+	pemurl = strings.Replace(pemurl, `\`, "", -1)
+	pemurl = strings.Replace(pemurl, `u0026`, "&", -1)
 	d.Info("rawurl:", pemurl)
 	resp, err := http.Get(fmt.Sprintf("%v", pemurl))
 	if err != nil {
