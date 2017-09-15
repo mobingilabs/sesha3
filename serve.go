@@ -116,10 +116,6 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 }
 
 func describeSessions(w http.ResponseWriter, req *http.Request) {
-	w.Write([]byte(`{"version":"v0.0.7-beta"}`))
-}
-
-func version(w http.ResponseWriter, req *http.Request) {
 	ds := ttys.Describe()
 	b, err := json.Marshal(ds)
 	if err != nil {
@@ -128,6 +124,10 @@ func version(w http.ResponseWriter, req *http.Request) {
 	}
 
 	w.Write(b)
+}
+
+func version(w http.ResponseWriter, req *http.Request) {
+	w.Write([]byte(`{"version":"v0.0.7-beta"}`))
 }
 
 func redirect(w http.ResponseWriter, req *http.Request) {
