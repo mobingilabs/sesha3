@@ -82,6 +82,15 @@ func (c *session) Start() (ret string, err error) {
 		}
 
 		c.Cmd.Start()
+
+		go func() {
+			d.Info("start pipe to stdout")
+			outscan := bufio.NewScanner(outpipe)
+			for outscan.Scan() {
+				d.Info("scan[outpipe]:", outscan.Text())
+			}
+		}()
+
 		d.Info("start pipe to stdout")
 		scanner := bufio.NewScanner(errpipe)
 		out := ""
@@ -94,14 +103,6 @@ func (c *session) Start() (ret string, err error) {
 				break
 			}
 		}
-
-		go func() {
-			d.Info("start pipe to stdout")
-			outscan := bufio.NewScanner(outpipe)
-			for outscan.Scan() {
-				d.Info("scan[outpipe]:", outscan.Text())
-			}
-		}()
 
 		ttyurl <- out
 		c.Cmd.Wait()
