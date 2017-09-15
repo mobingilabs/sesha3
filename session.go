@@ -150,6 +150,8 @@ func (c *session) Start() (string, error) {
 					d.Error(errors.Wrap(err, "sigkill failed"))
 				}
 			}
+		} else {
+			d.Info("gotty closed normally")
 		}
 	}()
 
