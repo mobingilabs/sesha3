@@ -18,7 +18,6 @@ import (
 )
 
 var (
-	ss         sessions
 	domain     string // set by cli flag
 	port       string // set by cli flag
 	region     string // set by cli flag
@@ -94,6 +93,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	ttys.Add(sess)
 	if randomurl == "" {
 		w.Write(sesha3.NewSimpleError("cannot initialize secure tty access").Marshal())
 		return

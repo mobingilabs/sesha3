@@ -8,6 +8,8 @@ import (
 	"github.com/pkg/errors"
 )
 
+var ttys sessions
+
 type sessions struct {
 	sync.Mutex
 	ss []session
@@ -17,6 +19,7 @@ func (s *sessions) Add(item session) {
 	s.Lock()
 	defer s.Unlock()
 	s.ss = append(s.ss, item)
+	d.Info("session added:", item.Id())
 }
 
 func (s *sessions) Remove(id string) error {
@@ -36,6 +39,7 @@ func (s *sessions) Remove(id string) error {
 
 	s.ss[idx] = s.ss[len(s.ss)-1] // replace it with the last one
 	s.ss = s.ss[:len(s.ss)-1]     // remove the last one
+	d.Info("session removed:", id)
 	return nil
 }
 

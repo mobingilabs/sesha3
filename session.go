@@ -41,6 +41,7 @@ func (s *session) Id() string {
 
 // Start initializes an instance of gotty and return the url.
 func (c *session) Start() (string, error) {
+	// set member 'id'
 	d.Info("starting session:", c.Id())
 
 	// try to open port for gotty
