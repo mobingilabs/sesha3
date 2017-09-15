@@ -53,14 +53,14 @@ func (s *session) Start() (string, error) {
 	fnClosePort := func() {
 		err := ec2req.ClosePort()
 		if err != nil {
-			d.Error(errors.Wrap(err, "close port failed"))
+			s.error(errors.Wrap(err, "close port failed"))
 		}
 	}
 
 	go func() {
 		err := ec2req.OpenPort()
 		if err != nil {
-			d.Error(errors.Wrap(err, "open port failed"))
+			s.error(errors.Wrap(err, "open port failed"))
 		}
 
 		svrtool := cmdline.Dir() + "/tools/" + runtime.GOOS + "/gotty"
@@ -69,13 +69,13 @@ func (s *session) Start() (string, error) {
 		shell := "grep " + s.User + " /etc/passwd | cut -d: -f7"
 		dshellb, err := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
 		if err != nil {
-			d.Error(errors.Wrap(err, "ssh shell exec failed"))
+			s.error(errors.Wrap(err, "ssh shell exec failed"))
 		}
 
-		d.Info(ssh + " -t " + shell)
-		d.Info("shell-out:", string(dshellb))
+		s.info(ssh + " -t " + shell)
+		s.info("shell-out:", string(dshellb))
 		defaultshell := strings.TrimSpace(string(dshellb))
-		d.Info("default:", defaultshell)
+		s.info("default:", defaultshell)
 		timeout := "export TMOUT=" + s.Timeout
 		term := "export TERM=xterm"
 		s.Cmd = exec.Command(svrtool,
@@ -97,35 +97,35 @@ func (s *session) Start() (string, error) {
 
 		errpipe, err := s.Cmd.StderrPipe()
 		if err != nil {
-			d.Error(errors.Wrap(err, "stderr pipe connect failed"))
+			s.error(errors.Wrap(err, "stderr pipe connect failed"))
 			fnClosePort()
 		}
 
 		s.Cmd.Start()
 
 		go func() {
-			d.Info("start pipe to stderr")
+			s.info("start pipe to stderr")
 			errscan := bufio.NewScanner(errpipe)
 			found := false
 			for {
 				chk := errscan.Scan()
 				if !chk {
 					if errscan.Err() != nil {
-						d.Error(errors.Wrap(err, "stderr scan failed"))
+						s.error(errors.Wrap(err, "stderr scan failed"))
 					}
 
-					d.Info("end stderr pipe")
+					s.info("end stderr pipe")
 					break
 				}
 
 				stxt := errscan.Text()
-				d.Info("scan[errpipe]:", stxt)
+				s.info("scan[errpipe]:", stxt)
 
 				if !found {
 					if strings.Index(stxt, "URL") != -1 {
 						tmpurl := stxt
 						ttyurl <- strings.Split(tmpurl, "URL: ")[1]
-						d.Info("url found")
+						s.info("url found")
 						found = true
 					}
 				}
@@ -138,18 +138,18 @@ func (s *session) Start() (string, error) {
 
 		err = s.Cmd.Wait()
 		if err != nil {
-			d.Error(errors.Wrap(err, "cmd wait failed"))
+			s.error(errors.Wrap(err, "cmd wait failed"))
 		}
 
 		fnClosePort()
 		err = os.Remove(os.TempDir() + "/user/" + s.StackId + ".pem")
 		if err != nil {
-			d.Error(errors.Wrap(err, "delete pem failed"))
+			s.error(errors.Wrap(err, "delete pem failed"))
 		}
 
 		ttys.Remove(s.Id())
 		wsclose <- "__closed__"
-		d.Info("gotty done")
+		s.info("gotty done")
 	}()
 
 	ret := <-ttyurl
@@ -166,11 +166,11 @@ func (s *session) Start() (string, error) {
 				time.Sleep(time.Second * 1)
 				err := s.Cmd.Process.Signal(syscall.SIGTERM)
 				if err != nil {
-					d.Error(errors.Wrap(err, "sigterm failed"))
+					s.error(errors.Wrap(err, "sigterm failed"))
 					// when all else fail
 					err = s.Cmd.Process.Signal(syscall.SIGKILL)
 					if err != nil {
-						d.Error(errors.Wrap(err, "sigkill failed"))
+						s.error(errors.Wrap(err, "sigkill failed"))
 					}
 				}
 			}
@@ -196,5 +196,11 @@ func (s *session) GetFullURL() string {
 }
 
 func (s *session) info(v ...interface{}) {
-	d.Info("["+s.Id()+"]", v)
+	m := fmt.Sprint(v...)
+	d.Info("["+s.Id()+"]", m)
+}
+
+func (s *session) error(v ...interface{}) {
+	m := fmt.Sprint(v...)
+	d.Error("["+s.Id()+"]", m)
 }
