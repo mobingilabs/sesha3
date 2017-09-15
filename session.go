@@ -14,18 +14,7 @@ import (
 	"github.com/mobingilabs/sesha3/awsports"
 )
 
-/*
-type message struct {
-	Pem     string
-	User    string
-	Ip      string
-	Stackid string
-	Timeout string
-	Err     int
-}
-*/
-
-type context struct {
+type session struct {
 	Online    bool
 	TtyURL    string
 	Cmd       *exec.Cmd
@@ -37,7 +26,7 @@ type context struct {
 }
 
 // Start initializes an instance of gotty and return the url.
-func (c *context) Start() (ret string, err error) {
+func (c *session) Start() (ret string, err error) {
 	ec2req := awsports.Make(credprof, region, ec2id)
 	c.HttpsPort = fmt.Sprint(ec2req.RequestPort)
 	ttyurl := make(chan string)
@@ -93,7 +82,7 @@ func (c *context) Start() (ret string, err error) {
 				break
 			}
 
-			d.Info(scanner.Text())
+			d.Info("scan[errpipe]:", scanner.Text())
 		}
 
 		ttyurl <- out
@@ -112,7 +101,7 @@ func (c *context) Start() (ret string, err error) {
 	return
 }
 
-func (c *context) GetFullURL() string {
+func (c *session) GetFullURL() string {
 	var furl string
 	if !c.Online {
 		return furl

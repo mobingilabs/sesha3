@@ -18,7 +18,6 @@ import (
 )
 
 var (
-	ctx        context
 	domain     string // set by cli flag
 	port       string // set by cli flag
 	region     string // set by cli flag
@@ -115,7 +114,7 @@ func sshkey(w http.ResponseWriter, r *http.Request) ([]byte, error) {
 */
 
 func ttyurl(w http.ResponseWriter, r *http.Request) {
-	var ctx context
+	var sess session
 	// var get message
 
 	/*
@@ -157,11 +156,11 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ctx.User = fmt.Sprintf("%v", m["user"])
-	ctx.Ip = fmt.Sprintf("%v", m["ip"])
-	ctx.StackId = fmt.Sprintf("%v", m["stackid"])
-	ctx.Timeout = fmt.Sprintf("%v", m["timeout"])
-	d.Info("ctx:", ctx)
+	sess.User = fmt.Sprintf("%v", m["user"])
+	sess.Ip = fmt.Sprintf("%v", m["ip"])
+	sess.StackId = fmt.Sprintf("%v", m["stackid"])
+	sess.Timeout = fmt.Sprintf("%v", m["timeout"])
+	d.Info("sess:", sess)
 	d.Info("pem:", string(body))
 	pemdir := os.TempDir() + "/user/"
 	_, err = os.Stat(pemdir)
@@ -172,14 +171,14 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 		err = os.MkdirAll(pemdir, 0700)
 		log.Println("mkdir err : ", err)
 	}
-	pemfile := os.TempDir() + "/user/" + ctx.StackId + ".pem"
+	pemfile := os.TempDir() + "/user/" + sess.StackId + ".pem"
 	err = ioutil.WriteFile(pemfile, body, 0600)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
 
-	randomurl, err := ctx.Start()
+	randomurl, err := sess.Start()
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
@@ -189,12 +188,12 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 		w.Write(sesha3.NewSimpleError("cannot initialize secure tty access").Marshal())
 		return
 	} else {
-		ctx.Online = true
+		sess.Online = true
 	}
 
 	var fullurl string
-	ctx.TtyURL = randomurl
-	fullurl = ctx.GetFullURL()
+	sess.TtyURL = randomurl
+	fullurl = sess.GetFullURL()
 	if fullurl == "" {
 		w.Write(sesha3.NewSimpleError("cannot initialize secure tty access").Marshal())
 		return
