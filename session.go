@@ -117,7 +117,11 @@ func (c *session) Start() (string, error) {
 			}
 		}()
 
-		c.Cmd.Wait()
+		err = c.Cmd.Wait()
+		if err != nil {
+			d.Error(errors.Wrap(err, "cmd wait failed"))
+		}
+
 		err = ec2req.ClosePort()
 		if err != nil {
 			d.Error(errors.Wrap(err, "close port failed"))
@@ -145,10 +149,12 @@ func (c *session) Start() (string, error) {
 			err := c.Cmd.Process.Signal(syscall.SIGTERM)
 			if err != nil {
 				d.Error(errors.Wrap(err, "sigterm failed"))
-				err = c.Cmd.Process.Signal(syscall.SIGKILL)
-				if err != nil {
-					d.Error(errors.Wrap(err, "sigkill failed"))
-				}
+				/*
+					err = c.Cmd.Process.Signal(syscall.SIGKILL)
+					if err != nil {
+						d.Error(errors.Wrap(err, "sigkill failed"))
+					}
+				*/
 			}
 		} else {
 			d.Info("gotty closed normally")
