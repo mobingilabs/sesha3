@@ -127,14 +127,14 @@ func (c *session) Start() (string, error) {
 			d.Error(errors.Wrap(err, "close port failed"))
 		}
 
-		wsclose <- "__closed__"
-		d.Info("gotty done")
-
 		// delete pem file when done
 		err = os.Remove(os.TempDir() + "/user/" + c.StackId + ".pem")
 		if err != nil {
 			d.Error(errors.Wrap(err, "delete pem failed"))
 		}
+
+		wsclose <- "__closed__"
+		d.Info("gotty done")
 	}()
 
 	ret := <-ttyurl
