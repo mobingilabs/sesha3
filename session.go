@@ -47,7 +47,7 @@ func (c *session) Start() (ret string, err error) {
 		}
 
 		d.Info(ssh + " -t " + shell)
-		d.Info(dshellb)
+		d.Info("shell-out:", string(dshellb))
 		defaultshell := strings.TrimSpace(string(dshellb))
 		d.Info("default:", defaultshell)
 		timeout := "export TMOUT=" + c.Timeout
@@ -82,19 +82,21 @@ func (c *session) Start() (ret string, err error) {
 		}
 
 		c.Cmd.Start()
+		d.Info("start pipe to stdout")
 		scanner := bufio.NewScanner(errpipe)
 		out := ""
 		for scanner.Scan() {
-			if strings.Index(scanner.Text(), "URL") != -1 {
-				tmpurl := scanner.Text()
+			stxt := scanner.Text()
+			d.Info("scan[errpipe]:", stxt)
+			if strings.Index(stxt, "URL") != -1 {
+				tmpurl := stxt
 				out = strings.Split(tmpurl, "URL: ")[1]
 				break
 			}
-
-			d.Info("scan[errpipe]:", scanner.Text())
 		}
 
 		go func() {
+			d.Info("start pipe to stdout")
 			outscan := bufio.NewScanner(outpipe)
 			for outscan.Scan() {
 				d.Info("scan[outpipe]:", outscan.Text())
