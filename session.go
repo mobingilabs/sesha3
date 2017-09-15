@@ -161,8 +161,8 @@ func (s *session) Start() (string, error) {
 			case "__closed__":
 				s.info("gotty closed normally")
 			default:
-				d.Info("close detected: [", wsc, "]")
-				d.Info("attempt to close gotty...")
+				s.info("close detected: [", wsc, "]")
+				s.info("attempt to close gotty...")
 				time.Sleep(time.Second * 1)
 				err := s.Cmd.Process.Signal(syscall.SIGTERM)
 				if err != nil {
