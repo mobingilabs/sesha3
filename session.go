@@ -86,7 +86,17 @@ func (c *session) Start() (ret string, err error) {
 		go func() {
 			d.Info("start pipe to stdout")
 			outscan := bufio.NewScanner(outpipe)
-			for outscan.Scan() {
+			for {
+				chk := outscan.Scan()
+				if !chk {
+					if outscan.Err() != nil {
+						d.Error(errors.Wrap(err, "stdout scan failed"))
+					}
+
+					d.Info("end stdout pipe")
+					break
+				}
+
 				d.Info("scan[outpipe]:", outscan.Text())
 			}
 		}()
@@ -94,12 +104,23 @@ func (c *session) Start() (ret string, err error) {
 		d.Info("start pipe to stderr")
 		scanner := bufio.NewScanner(errpipe)
 		out := ""
-		for scanner.Scan() {
+		for {
+			chk := scanner.Scan()
+			if !chk {
+				if scanner.Err() != nil {
+					d.Error(errors.Wrap(err, "stderr scan failed"))
+				}
+
+				d.Info("end stderr pipe")
+				break
+			}
+
 			stxt := scanner.Text()
 			d.Info("scan[errpipe]:", stxt)
 			if strings.Index(stxt, "URL") != -1 {
 				tmpurl := stxt
 				out = strings.Split(tmpurl, "URL: ")[1]
+				d.Info("end stderr pipe")
 				break
 			}
 		}
