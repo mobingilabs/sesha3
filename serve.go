@@ -149,7 +149,7 @@ func serve(cmd *cobra.Command) {
 	router := mux.NewRouter()
 	router.HandleFunc("/token", token.Settoken).Methods(http.MethodGet)
 	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
-	router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
+	// router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
 	err := http.ListenAndServeTLS(":"+port, certfolder+"/fullchain.pem", certfolder+"/privkey.pem", router)
 	d.ErrorExit(err, 1)
