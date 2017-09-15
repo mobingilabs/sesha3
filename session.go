@@ -42,7 +42,7 @@ func (s *session) Id() string {
 // Start initializes an instance of gotty and return the url.
 func (s *session) Start() (string, error) {
 	// set member 'id'
-	d.Info("starting session:", s.Id())
+	s.info("starting session:", s.Id())
 
 	// try to open port for gotty
 	ec2req := awsports.Make(credprof, region, ec2id)
@@ -159,7 +159,7 @@ func (s *session) Start() (string, error) {
 		for wsc := range wsclose {
 			switch wsc {
 			case "__closed__":
-				d.Info("gotty closed normally")
+				s.info("gotty closed normally")
 			default:
 				d.Info("close detected: [", wsc, "]")
 				d.Info("attempt to close gotty...")
@@ -193,4 +193,8 @@ func (s *session) GetFullURL() string {
 
 	furl += "https://" + domain + ":" + s.HttpsPort + rurl.EscapedPath()
 	return furl
+}
+
+func (s *session) info(v ...interface{}) {
+	d.Info("["+s.Id()+"]", v)
 }
