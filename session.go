@@ -12,6 +12,7 @@ import (
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/cmdline"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/awsports"
+	"github.com/pkg/errors"
 )
 
 type session struct {
@@ -33,20 +34,22 @@ func (c *session) Start() (ret string, err error) {
 	go func() {
 		err := ec2req.Openport()
 		if err != nil {
-			d.Error(err)
+			d.Error(errors.Wrap(err, "open port failed"))
 		}
 
 		svrtool := cmdline.Dir() + "/tools/" + runtime.GOOS + "/gotty"
 		certpath := cmdline.Dir() + "/certs/"
 		ssh := "/usr/bin/ssh -oStrictHostKeyChecking=no -i " + os.TempDir() + "/user/" + c.StackId + ".pem " + c.User + "@" + c.Ip
-		d.Info(ssh)
 		shell := "grep " + c.User + " /etc/passwd | cut -d: -f7"
 		dshellb, err := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
+		if err != nil {
+			d.Error(errors.Wrap(err, "ssh shell exec failed"))
+		}
+
 		d.Info(ssh + " -t " + shell)
 		d.Info(dshellb)
-		d.Info(err)
 		defaultshell := strings.TrimSpace(string(dshellb))
-		d.Info("default:" + defaultshell)
+		d.Info("default:", defaultshell)
 		timeout := "export TMOUT=" + c.Timeout
 		term := "export TERM=xterm"
 		c.Cmd = exec.Command(svrtool,
@@ -66,9 +69,15 @@ func (c *session) Start() (ret string, err error) {
 			ssh+" -t \""+timeout+" && "+term+" && "+defaultshell+" --login \"",
 		)
 
+		outpipe, err := c.Cmd.StdoutPipe()
+		if err != nil {
+			d.Error(errors.Wrap(err, "stdout pipe connect failed"))
+			ec2req.Closeport()
+		}
+
 		errpipe, err := c.Cmd.StderrPipe()
 		if err != nil {
-			d.Error(err)
+			d.Error(errors.Wrap(err, "stderr pipe connect failed"))
 			ec2req.Closeport()
 		}
 
@@ -84,6 +93,13 @@ func (c *session) Start() (ret string, err error) {
 
 			d.Info("scan[errpipe]:", scanner.Text())
 		}
+
+		go func() {
+			outscan := bufio.NewScanner(outpipe)
+			for outscan.Scan() {
+				d.Info("scan[outpipe]:", outscan.Text())
+			}
+		}()
 
 		ttyurl <- out
 		c.Cmd.Wait()

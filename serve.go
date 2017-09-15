@@ -160,7 +160,6 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	sess.Ip = fmt.Sprintf("%v", m["ip"])
 	sess.StackId = fmt.Sprintf("%v", m["stackid"])
 	sess.Timeout = fmt.Sprintf("%v", m["timeout"])
-	d.Info("sess:", sess)
 	d.Info("pem:", string(body))
 	pemdir := os.TempDir() + "/user/"
 	if !private.Exists(pemdir) {
