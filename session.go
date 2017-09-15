@@ -133,9 +133,8 @@ func (c *session) Start() (string, error) {
 			d.Error(errors.Wrap(err, "delete pem failed"))
 		}
 
-		d.Info("[1]gotty done")
 		wsclose <- "__closed__"
-		d.Info("[2]gotty done")
+		d.Info("gotty done")
 	}()
 
 	ret := <-ttyurl
