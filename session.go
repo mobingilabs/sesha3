@@ -133,8 +133,9 @@ func (c *session) Start() (string, error) {
 			d.Error(errors.Wrap(err, "delete pem failed"))
 		}
 
+		d.Info("[1]gotty done")
 		wsclose <- "__closed__"
-		d.Info("gotty done")
+		d.Info("[2]gotty done")
 	}()
 
 	ret := <-ttyurl
@@ -143,7 +144,7 @@ func (c *session) Start() (string, error) {
 	go func() {
 		wsc := <-wsclose
 		if wsc != "__closed__" {
-			d.Info("websocket close detected:", wsc)
+			d.Info("close detected: [", wsc, "]")
 			d.Info("attempt to close gotty...")
 			time.Sleep(time.Second * 1)
 			err := c.Cmd.Process.Signal(syscall.SIGTERM)
