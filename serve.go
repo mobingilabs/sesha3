@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"log/syslog"
 	"net/http"
 	"os"
@@ -13,6 +12,7 @@ import (
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/cmdline"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
+	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/token"
 	"github.com/spf13/cobra"
 )
@@ -163,14 +163,12 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	d.Info("sess:", sess)
 	d.Info("pem:", string(body))
 	pemdir := os.TempDir() + "/user/"
-	_, err = os.Stat(pemdir)
-	if err == nil {
-		log.Println(pemdir + " detected.")
-	} else {
-		log.Println(pemdir + " not detected. mkdir" + pemdir)
+	if !private.Exists(pemdir) {
+		d.Info("create", pemdir)
 		err = os.MkdirAll(pemdir, 0700)
-		log.Println("mkdir err : ", err)
+		d.ErrorExit(err, 1)
 	}
+
 	pemfile := os.TempDir() + "/user/" + sess.StackId + ".pem"
 	err = ioutil.WriteFile(pemfile, body, 0600)
 	if err != nil {
