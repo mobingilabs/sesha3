@@ -70,12 +70,6 @@ func (c *session) Start() (ret string, err error) {
 			ssh+" -t \""+timeout+" && "+term+" && "+defaultshell+" --login \"",
 		)
 
-		outpipe, err := c.Cmd.StdoutPipe()
-		if err != nil {
-			d.Error(errors.Wrap(err, "stdout pipe connect failed"))
-			ec2req.ClosePort()
-		}
-
 		errpipe, err := c.Cmd.StderrPipe()
 		if err != nil {
 			d.Error(errors.Wrap(err, "stderr pipe connect failed"))
@@ -85,48 +79,31 @@ func (c *session) Start() (ret string, err error) {
 		c.Cmd.Start()
 
 		go func() {
-			d.Info("start pipe to stdout")
-			outscan := bufio.NewScanner(outpipe)
+			d.Info("start pipe to stderr")
+			errscan := bufio.NewScanner(errpipe)
+			out := ""
 			for {
-				chk := outscan.Scan()
+				chk := errscan.Scan()
 				if !chk {
-					if outscan.Err() != nil {
-						d.Error(errors.Wrap(err, "stdout scan failed"))
+					if errscan.Err() != nil {
+						d.Error(errors.Wrap(err, "stderr scan failed"))
 					}
 
-					d.Info("end stdout pipe")
+					d.Info("end stderr pipe")
 					break
 				}
 
-				d.Info("scan[outpipe]:", outscan.Text())
+				stxt := errscan.Text()
+				d.Info("scan[errpipe]:", stxt)
+				if strings.Index(stxt, "URL") != -1 {
+					tmpurl := stxt
+					out = strings.Split(tmpurl, "URL: ")[1]
+					d.Info("end stderr pipe")
+					ttyurl <- out
+				}
 			}
 		}()
 
-		d.Info("start pipe to stderr")
-		scanner := bufio.NewScanner(errpipe)
-		out := ""
-		for {
-			chk := scanner.Scan()
-			if !chk {
-				if scanner.Err() != nil {
-					d.Error(errors.Wrap(err, "stderr scan failed"))
-				}
-
-				d.Info("end stderr pipe")
-				break
-			}
-
-			stxt := scanner.Text()
-			d.Info("scan[errpipe]:", stxt)
-			if strings.Index(stxt, "URL") != -1 {
-				tmpurl := stxt
-				out = strings.Split(tmpurl, "URL: ")[1]
-				d.Info("end stderr pipe")
-				break
-			}
-		}
-
-		ttyurl <- out
 		c.Cmd.Wait()
 		ec2req.ClosePort()
 		d.Info("gotty done")
