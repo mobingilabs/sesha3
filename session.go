@@ -91,7 +91,7 @@ func (c *session) Start() (ret string, err error) {
 			}
 		}()
 
-		d.Info("start pipe to stdout")
+		d.Info("start pipe to stderr")
 		scanner := bufio.NewScanner(errpipe)
 		out := ""
 		for scanner.Scan() {
