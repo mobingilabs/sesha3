@@ -18,6 +18,7 @@ import (
 )
 
 var (
+	ss         sessions
 	domain     string // set by cli flag
 	port       string // set by cli flag
 	region     string // set by cli flag
@@ -29,7 +30,6 @@ var (
 
 func ttyurl(w http.ResponseWriter, r *http.Request) {
 	var sess session
-	// var get message
 
 	/*
 		tokenerr, tokenmessage := token.GetToken(w, r)

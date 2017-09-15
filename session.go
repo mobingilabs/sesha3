@@ -15,9 +15,11 @@ import (
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/awsports"
 	"github.com/pkg/errors"
+	uuid "github.com/satori/go.uuid"
 )
 
 type session struct {
+	id        string
 	Online    bool
 	TtyURL    string
 	Cmd       *exec.Cmd
@@ -28,12 +30,31 @@ type session struct {
 	Timeout   string
 }
 
+func (s *session) Id() string {
+	if s.id == "" {
+		u1 := uuid.NewV4()
+		s.id = fmt.Sprintf("%s", u1)
+	}
+
+	return s.id
+}
+
 // Start initializes an instance of gotty and return the url.
 func (c *session) Start() (string, error) {
+	d.Info("starting session:", c.Id())
+
+	// try to open port for gotty
 	ec2req := awsports.Make(credprof, region, ec2id)
 	c.HttpsPort = fmt.Sprint(ec2req.RequestPort)
 	ttyurl := make(chan string)
 	wsclose := make(chan string)
+
+	fnClosePort := func() {
+		err := ec2req.ClosePort()
+		if err != nil {
+			d.Error(errors.Wrap(err, "close port failed"))
+		}
+	}
 
 	go func() {
 		err := ec2req.OpenPort()
@@ -76,10 +97,7 @@ func (c *session) Start() (string, error) {
 		errpipe, err := c.Cmd.StderrPipe()
 		if err != nil {
 			d.Error(errors.Wrap(err, "stderr pipe connect failed"))
-			err = ec2req.ClosePort()
-			if err != nil {
-				d.Error(errors.Wrap(err, "close port failed"))
-			}
+			fnClosePort()
 		}
 
 		c.Cmd.Start()
@@ -122,12 +140,7 @@ func (c *session) Start() (string, error) {
 			d.Error(errors.Wrap(err, "cmd wait failed"))
 		}
 
-		err = ec2req.ClosePort()
-		if err != nil {
-			d.Error(errors.Wrap(err, "close port failed"))
-		}
-
-		// delete pem file when done
+		fnClosePort()
 		err = os.Remove(os.TempDir() + "/user/" + c.StackId + ".pem")
 		if err != nil {
 			d.Error(errors.Wrap(err, "delete pem failed"))
@@ -152,6 +165,7 @@ func (c *session) Start() (string, error) {
 				err := c.Cmd.Process.Signal(syscall.SIGTERM)
 				if err != nil {
 					d.Error(errors.Wrap(err, "sigterm failed"))
+					// when all else fail
 					err = c.Cmd.Process.Signal(syscall.SIGKILL)
 					if err != nil {
 						d.Error(errors.Wrap(err, "sigkill failed"))
