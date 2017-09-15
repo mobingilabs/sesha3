@@ -93,7 +93,9 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// add this session to our list of running sessions
 	ttys.Add(sess)
+
 	if randomurl == "" {
 		w.Write(sesha3.NewSimpleError("cannot initialize secure tty access").Marshal())
 		return

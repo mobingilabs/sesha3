@@ -40,13 +40,13 @@ func (s *session) Id() string {
 }
 
 // Start initializes an instance of gotty and return the url.
-func (c *session) Start() (string, error) {
+func (s *session) Start() (string, error) {
 	// set member 'id'
-	d.Info("starting session:", c.Id())
+	d.Info("starting session:", s.Id())
 
 	// try to open port for gotty
 	ec2req := awsports.Make(credprof, region, ec2id)
-	c.HttpsPort = fmt.Sprint(ec2req.RequestPort)
+	s.HttpsPort = fmt.Sprint(ec2req.RequestPort)
 	ttyurl := make(chan string)
 	wsclose := make(chan string)
 
@@ -65,8 +65,8 @@ func (c *session) Start() (string, error) {
 
 		svrtool := cmdline.Dir() + "/tools/" + runtime.GOOS + "/gotty"
 		certpath := cmdline.Dir() + "/certs/"
-		ssh := "/usr/bin/ssh -oStrictHostKeyChecking=no -i " + os.TempDir() + "/user/" + c.StackId + ".pem " + c.User + "@" + c.Ip
-		shell := "grep " + c.User + " /etc/passwd | cut -d: -f7"
+		ssh := "/usr/bin/ssh -oStrictHostKeyChecking=no -i " + os.TempDir() + "/user/" + s.StackId + ".pem " + s.User + "@" + s.Ip
+		shell := "grep " + s.User + " /etc/passwd | cut -d: -f7"
 		dshellb, err := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
 		if err != nil {
 			d.Error(errors.Wrap(err, "ssh shell exec failed"))
@@ -76,9 +76,9 @@ func (c *session) Start() (string, error) {
 		d.Info("shell-out:", string(dshellb))
 		defaultshell := strings.TrimSpace(string(dshellb))
 		d.Info("default:", defaultshell)
-		timeout := "export TMOUT=" + c.Timeout
+		timeout := "export TMOUT=" + s.Timeout
 		term := "export TERM=xterm"
-		c.Cmd = exec.Command(svrtool,
+		s.Cmd = exec.Command(svrtool,
 			"--port", fmt.Sprint(ec2req.RequestPort),
 			"-w",
 			"--random-url",
@@ -95,13 +95,13 @@ func (c *session) Start() (string, error) {
 			ssh+" -t \""+timeout+" && "+term+" && "+defaultshell+" --login \"",
 		)
 
-		errpipe, err := c.Cmd.StderrPipe()
+		errpipe, err := s.Cmd.StderrPipe()
 		if err != nil {
 			d.Error(errors.Wrap(err, "stderr pipe connect failed"))
 			fnClosePort()
 		}
 
-		c.Cmd.Start()
+		s.Cmd.Start()
 
 		go func() {
 			d.Info("start pipe to stderr")
@@ -136,17 +136,18 @@ func (c *session) Start() (string, error) {
 			}
 		}()
 
-		err = c.Cmd.Wait()
+		err = s.Cmd.Wait()
 		if err != nil {
 			d.Error(errors.Wrap(err, "cmd wait failed"))
 		}
 
 		fnClosePort()
-		err = os.Remove(os.TempDir() + "/user/" + c.StackId + ".pem")
+		err = os.Remove(os.TempDir() + "/user/" + s.StackId + ".pem")
 		if err != nil {
 			d.Error(errors.Wrap(err, "delete pem failed"))
 		}
 
+		ttys.Remove(s.Id())
 		wsclose <- "__closed__"
 		d.Info("gotty done")
 	}()
@@ -163,11 +164,11 @@ func (c *session) Start() (string, error) {
 				d.Info("close detected: [", wsc, "]")
 				d.Info("attempt to close gotty...")
 				time.Sleep(time.Second * 1)
-				err := c.Cmd.Process.Signal(syscall.SIGTERM)
+				err := s.Cmd.Process.Signal(syscall.SIGTERM)
 				if err != nil {
 					d.Error(errors.Wrap(err, "sigterm failed"))
 					// when all else fail
-					err = c.Cmd.Process.Signal(syscall.SIGKILL)
+					err = s.Cmd.Process.Signal(syscall.SIGKILL)
 					if err != nil {
 						d.Error(errors.Wrap(err, "sigkill failed"))
 					}
@@ -179,17 +180,17 @@ func (c *session) Start() (string, error) {
 	return ret, nil
 }
 
-func (c *session) GetFullURL() string {
+func (s *session) GetFullURL() string {
 	var furl string
-	if !c.Online {
+	if !s.Online {
 		return furl
 	}
 
-	rurl, err := url.Parse(c.TtyURL)
+	rurl, err := url.Parse(s.TtyURL)
 	if err != nil {
 		return furl
 	}
 
-	furl += "https://" + domain + ":" + c.HttpsPort + rurl.EscapedPath()
+	furl += "https://" + domain + ":" + s.HttpsPort + rurl.EscapedPath()
 	return furl
 }
