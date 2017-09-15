@@ -71,6 +71,13 @@ func signalHandler() {
 			s := <-sigchan
 			switch s {
 			case syscall.SIGINT, syscall.SIGTERM:
+				// try cleanup remaining sessions, if any
+				d.Info("remaining sessions:", ttys.Count())
+				errs := ttys.TerminateAll()
+				if len(errs) > 0 {
+					d.Error(errs)
+				}
+
 				os.Exit(0)
 			}
 		}
