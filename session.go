@@ -123,6 +123,7 @@ func (c *session) Start() (string, error) {
 			d.Error(errors.Wrap(err, "close port failed"))
 		}
 
+		wsclose <- "__closed__"
 		d.Info("gotty done")
 
 		// delete pem file when done
@@ -137,15 +138,17 @@ func (c *session) Start() (string, error) {
 	// workaround for websocket close not exiting gotty immediately
 	go func() {
 		wsc := <-wsclose
-		d.Info("websocket close detected:", wsc)
-		d.Info("attempt to close gotty...")
-		time.Sleep(time.Second * 1)
-		err := c.Cmd.Process.Signal(syscall.SIGTERM)
-		if err != nil {
-			d.Error(errors.Wrap(err, "sigterm failed"))
-			err = c.Cmd.Process.Signal(syscall.SIGKILL)
+		if wsc != "__closed__" {
+			d.Info("websocket close detected:", wsc)
+			d.Info("attempt to close gotty...")
+			time.Sleep(time.Second * 1)
+			err := c.Cmd.Process.Signal(syscall.SIGTERM)
 			if err != nil {
-				d.Error(errors.Wrap(err, "sigkill failed"))
+				d.Error(errors.Wrap(err, "sigterm failed"))
+				err = c.Cmd.Process.Signal(syscall.SIGKILL)
+				if err != nil {
+					d.Error(errors.Wrap(err, "sigkill failed"))
+				}
 			}
 		}
 	}()
