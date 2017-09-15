@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/cmdline"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
+	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/pkg/errors"
 )
 
@@ -98,7 +99,9 @@ func Make(profilename string, awsRegion string, instanceID string) (req Security
 		Region: aws.String(awsRegion)})
 	req.SecurityInfoSet()
 	req.OpenedList()
-	req.RequestPort = req.random(1024, 65535)
+	port, _ := private.GetFreePort()
+	// req.RequestPort = req.random(1024, 65535)
+	req.RequestPort = int64(port)
 	req.CreatePortRequest()
 	return
 }
