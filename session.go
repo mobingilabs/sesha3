@@ -142,21 +142,23 @@ func (c *session) Start() (string, error) {
 
 	// workaround for websocket close not exiting gotty immediately
 	go func() {
-		wsc := <-wsclose
-		if wsc != "__closed__" {
-			d.Info("close detected: [", wsc, "]")
-			d.Info("attempt to close gotty...")
-			time.Sleep(time.Second * 1)
-			err := c.Cmd.Process.Signal(syscall.SIGTERM)
-			if err != nil {
-				d.Error(errors.Wrap(err, "sigterm failed"))
-				err = c.Cmd.Process.Signal(syscall.SIGKILL)
+		for wsc := range wsclose {
+			switch wsc {
+			case "__closed__":
+				d.Info("gotty closed normally")
+			default:
+				d.Info("close detected: [", wsc, "]")
+				d.Info("attempt to close gotty...")
+				time.Sleep(time.Second * 1)
+				err := c.Cmd.Process.Signal(syscall.SIGTERM)
 				if err != nil {
-					d.Error(errors.Wrap(err, "sigkill failed"))
+					d.Error(errors.Wrap(err, "sigterm failed"))
+					err = c.Cmd.Process.Signal(syscall.SIGKILL)
+					if err != nil {
+						d.Error(errors.Wrap(err, "sigkill failed"))
+					}
 				}
 			}
-		} else {
-			d.Info("gotty closed normally")
 		}
 	}()
 
