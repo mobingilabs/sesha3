@@ -115,7 +115,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(payload))
 }
 func version(w http.ResponseWriter, req *http.Request) {
-	w.Write([]byte(`{"version":"v0.0.6-beta"}`))
+	w.Write([]byte(`{"version":"v0.0.7-beta"}`))
 }
 
 func redirect(w http.ResponseWriter, req *http.Request) {
