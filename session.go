@@ -149,12 +149,10 @@ func (c *session) Start() (string, error) {
 			err := c.Cmd.Process.Signal(syscall.SIGTERM)
 			if err != nil {
 				d.Error(errors.Wrap(err, "sigterm failed"))
-				/*
-					err = c.Cmd.Process.Signal(syscall.SIGKILL)
-					if err != nil {
-						d.Error(errors.Wrap(err, "sigkill failed"))
-					}
-				*/
+				err = c.Cmd.Process.Signal(syscall.SIGKILL)
+				if err != nil {
+					d.Error(errors.Wrap(err, "sigkill failed"))
+				}
 			}
 		} else {
 			d.Info("gotty closed normally")
