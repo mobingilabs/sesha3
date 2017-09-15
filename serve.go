@@ -114,8 +114,20 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	payload := `{"tty_url":"` + fullurl + `"}`
 	w.Write([]byte(payload))
 }
-func version(w http.ResponseWriter, req *http.Request) {
+
+func describeSessions(w http.ResponseWriter, req *http.Request) {
 	w.Write([]byte(`{"version":"v0.0.7-beta"}`))
+}
+
+func version(w http.ResponseWriter, req *http.Request) {
+	ds := ttys.Describe()
+	b, err := json.Marshal(ds)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+
+	w.Write(b)
 }
 
 func redirect(w http.ResponseWriter, req *http.Request) {
@@ -131,12 +143,13 @@ func redirect(w http.ResponseWriter, req *http.Request) {
 func serve(cmd *cobra.Command) {
 	// redirect every http request to https
 	// go http.ListenAndServe(":80", http.HandlerFunc(redirect))
-	// everything else will be https
+	// everything else will be https i
 	certfolder := cmdline.Dir() + "/certs"
 	port := GetCliStringFlag(cmd, "port")
 	router := mux.NewRouter()
 	router.HandleFunc("/token", token.Settoken).Methods(http.MethodGet)
 	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
+	router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
 	err := http.ListenAndServeTLS(":"+port, certfolder+"/fullchain.pem", certfolder+"/privkey.pem", router)
 	d.ErrorExit(err, 1)

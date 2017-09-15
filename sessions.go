@@ -49,6 +49,31 @@ func (s *sessions) Count() int {
 	return len(s.ss)
 }
 
+type SessionsDescribe struct {
+	Id        string `json:"id"`
+	Url       string `json:"url"`
+	HttpsPort string `json:"port"`
+	Pid       int    `json:"pid"`
+}
+
+func (s *sessions) Describe() []SessionsDescribe {
+	s.Lock()
+	defer s.Lock()
+	ret := make([]SessionsDescribe, 0)
+	for _, sess := range s.ss {
+		tmp := SessionsDescribe{
+			Id:        sess.Id(),
+			Url:       sess.TtyURL,
+			HttpsPort: sess.HttpsPort,
+			Pid:       sess.Cmd.Process.Pid,
+		}
+
+		ret = append(ret, tmp)
+	}
+
+	return ret
+}
+
 func (s *sessions) TerminateAll() []error {
 	s.Lock()
 	defer s.Unlock()
