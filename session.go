@@ -27,10 +27,11 @@ type session struct {
 }
 
 // Start initializes an instance of gotty and return the url.
-func (c *session) Start() (ret string, err error) {
+func (c *session) Start() (string, error) {
 	ec2req := awsports.Make(credprof, region, ec2id)
 	c.HttpsPort = fmt.Sprint(ec2req.RequestPort)
 	ttyurl := make(chan string)
+	wsclose := make(chan string)
 
 	go func() {
 		err := ec2req.OpenPort()
@@ -73,7 +74,10 @@ func (c *session) Start() (ret string, err error) {
 		errpipe, err := c.Cmd.StderrPipe()
 		if err != nil {
 			d.Error(errors.Wrap(err, "stderr pipe connect failed"))
-			ec2req.ClosePort()
+			err = ec2req.ClosePort()
+			if err != nil {
+				d.Error(errors.Wrap(err, "close port failed"))
+			}
 		}
 
 		c.Cmd.Start()
@@ -104,22 +108,37 @@ func (c *session) Start() (ret string, err error) {
 						found = true
 					}
 				}
+
+				if strings.Index(stxt, "websocket: close") != -1 {
+					wsclose <- stxt
+				}
 			}
 		}()
 
 		c.Cmd.Wait()
-		ec2req.ClosePort()
+		err = ec2req.ClosePort()
+		if err != nil {
+			d.Error(errors.Wrap(err, "close port failed"))
+		}
+
 		d.Info("gotty done")
 
 		// delete pem file when done
 		err = os.Remove(os.TempDir() + "/user/" + c.StackId + ".pem")
 		if err != nil {
-			d.Error(err)
+			d.Error(errors.Wrap(err, "delete pem failed"))
 		}
 	}()
 
-	ret = <-ttyurl
-	return
+	ret := <-ttyurl
+
+	// workaround for websocket close not exiting gotty immediately
+	go func() {
+		wsc := <-wsclose
+		d.Info("websocket close detected:", wsc)
+	}()
+
+	return ret, nil
 }
 
 func (c *session) GetFullURL() string {
