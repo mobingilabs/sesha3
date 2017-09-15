@@ -111,8 +111,7 @@ func (c *session) Start() (string, error) {
 					}
 				}
 
-				if strings.Index(stxt, "Command exited for") != -1 ||
-					strings.Index(stxt, "Connection closed") != -1 {
+				if strings.Index(stxt, "Connection closed") != -1 {
 					wsclose <- stxt
 				}
 			}
