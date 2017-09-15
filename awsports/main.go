@@ -67,7 +67,7 @@ func (s *SecurityGroupRequest) OpenedList() {
 	}
 }
 
-func (s *SecurityGroupRequest) Openport() error {
+func (s *SecurityGroupRequest) OpenPort() error {
 	svc := s.Ec2client
 	p, err := svc.AuthorizeSecurityGroupIngress(s.AuthorizeSecurityGroupIngressInput)
 	if err != nil {
@@ -78,7 +78,7 @@ func (s *SecurityGroupRequest) Openport() error {
 	return nil
 }
 
-func (s *SecurityGroupRequest) Closeport() error {
+func (s *SecurityGroupRequest) ClosePort() error {
 	svc := s.Ec2client
 	p, err := svc.RevokeSecurityGroupIngress(s.RevokeSecurityGroupIngressInput)
 	if err != nil {

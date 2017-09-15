@@ -31,8 +31,9 @@ func (c *session) Start() (ret string, err error) {
 	ec2req := awsports.Make(credprof, region, ec2id)
 	c.HttpsPort = fmt.Sprint(ec2req.RequestPort)
 	ttyurl := make(chan string)
+
 	go func() {
-		err := ec2req.Openport()
+		err := ec2req.OpenPort()
 		if err != nil {
 			d.Error(errors.Wrap(err, "open port failed"))
 		}
@@ -72,13 +73,13 @@ func (c *session) Start() (ret string, err error) {
 		outpipe, err := c.Cmd.StdoutPipe()
 		if err != nil {
 			d.Error(errors.Wrap(err, "stdout pipe connect failed"))
-			ec2req.Closeport()
+			ec2req.ClosePort()
 		}
 
 		errpipe, err := c.Cmd.StderrPipe()
 		if err != nil {
 			d.Error(errors.Wrap(err, "stderr pipe connect failed"))
-			ec2req.Closeport()
+			ec2req.ClosePort()
 		}
 
 		c.Cmd.Start()
@@ -127,7 +128,7 @@ func (c *session) Start() (ret string, err error) {
 
 		ttyurl <- out
 		c.Cmd.Wait()
-		ec2req.Closeport()
+		ec2req.ClosePort()
 		d.Info("gotty done")
 
 		// delete pem file when done
