@@ -81,7 +81,7 @@ func (c *session) Start() (ret string, err error) {
 		go func() {
 			d.Info("start pipe to stderr")
 			errscan := bufio.NewScanner(errpipe)
-			out := ""
+			found := false
 			for {
 				chk := errscan.Scan()
 				if !chk {
@@ -95,11 +95,14 @@ func (c *session) Start() (ret string, err error) {
 
 				stxt := errscan.Text()
 				d.Info("scan[errpipe]:", stxt)
-				if strings.Index(stxt, "URL") != -1 {
-					tmpurl := stxt
-					out = strings.Split(tmpurl, "URL: ")[1]
-					d.Info("end stderr pipe")
-					ttyurl <- out
+
+				if !found {
+					if strings.Index(stxt, "URL") != -1 {
+						tmpurl := stxt
+						ttyurl <- strings.Split(tmpurl, "URL: ")[1]
+						d.Info("url found")
+						found = true
+					}
 				}
 			}
 		}()
