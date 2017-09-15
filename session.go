@@ -8,6 +8,8 @@ import (
 	"os/exec"
 	"runtime"
 	"strings"
+	"syscall"
+	"time"
 
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/cmdline"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
@@ -136,6 +138,16 @@ func (c *session) Start() (string, error) {
 	go func() {
 		wsc := <-wsclose
 		d.Info("websocket close detected:", wsc)
+		d.Info("attempt to close gotty...")
+		time.Sleep(time.Second * 1)
+		err := c.Cmd.Process.Signal(syscall.SIGTERM)
+		if err != nil {
+			d.Error(errors.Wrap(err, "sigterm failed"))
+			err = c.Cmd.Process.Signal(syscall.SIGKILL)
+			if err != nil {
+				d.Error(errors.Wrap(err, "sigkill failed"))
+			}
+		}
 	}()
 
 	return ret, nil
