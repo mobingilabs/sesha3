@@ -83,6 +83,7 @@ func (s *session) Start() (string, error) {
 			"-w",
 			"--random-url",
 			"--random-url-length", "36",
+			"--timeout 10",
 			"-once",
 			"--tls",
 			"--tls-crt",
