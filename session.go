@@ -166,8 +166,19 @@ func (s *session) Start() (string, error) {
 				s.info("gotty closed normally")
 			default:
 				s.info("close detected: [", wsc, "]")
-				s.info("attempt to close gotty...")
 				time.Sleep(time.Second * 1)
+
+				// close aws port before terminate
+				s.info("attempt close port:", s.HttpsPort)
+				if s.portReq != nil {
+					err := s.portReq.ClosePort()
+					if err != nil {
+						s.error(errors.Wrap(err, "close port failed"))
+					}
+				}
+
+				// attempt to kill gotty process
+				s.info("attempt to close gotty with pid: ", s.Cmd.Process.Pid)
 				err := s.Cmd.Process.Signal(syscall.SIGTERM)
 				if err != nil {
 					s.error(errors.Wrap(err, "sigterm failed"))
