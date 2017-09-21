@@ -43,7 +43,7 @@ func (s *session) Id() string {
 // Start initializes an instance of gotty and return the url.
 func (s *session) Start() (string, error) {
 	// set member 'id'
-	s.info("starting session:", s.Id())
+	s.info("starting session: ", s.Id())
 
 	// try to open port for gotty
 	ec2req := awsports.Make(credprof, region, ec2id)
@@ -75,9 +75,9 @@ func (s *session) Start() (string, error) {
 		}
 
 		s.info(ssh + " -t " + shell)
-		s.info("shell-out:", string(dshellb))
+		s.info("shell-out: ", string(dshellb))
 		defaultshell := strings.TrimSpace(string(dshellb))
-		s.info("default:", defaultshell)
+		s.info("default: ", defaultshell)
 		timeout := "export TMOUT=" + s.Timeout
 		term := "export TERM=xterm"
 		s.Cmd = exec.Command(svrtool,
@@ -98,7 +98,7 @@ func (s *session) Start() (string, error) {
 			ssh+" -t \""+timeout+" && "+term+" && "+defaultshell+" --login \"",
 		)
 
-		s.info("svrtool args:", s.Cmd.Args)
+		s.info("svrtool args: ", s.Cmd.Args)
 		errpipe, err := s.Cmd.StderrPipe()
 		if err != nil {
 			s.error(errors.Wrap(err, "stderr pipe connect failed"))
@@ -123,7 +123,7 @@ func (s *session) Start() (string, error) {
 				}
 
 				stxt := errscan.Text()
-				s.info("scan[errpipe]:", stxt)
+				s.info("scan[errpipe]: ", stxt)
 
 				if !found {
 					if strings.Index(stxt, "URL") != -1 {
