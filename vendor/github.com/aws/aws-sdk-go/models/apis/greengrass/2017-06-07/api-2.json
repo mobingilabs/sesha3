@@ -968,23 +968,6 @@
       },
       "errors" : [ ]
     },
-    "ResetDeployments" : {
-      "name" : "ResetDeployments",
-      "http" : {
-        "method" : "POST",
-        "requestUri" : "/greengrass/groups/{GroupId}/deployments/$reset",
-        "responseCode" : 200
-      },
-      "input" : {
-        "shape" : "ResetDeploymentsRequest"
-      },
-      "output" : {
-        "shape" : "ResetDeploymentsResponse"
-      },
-      "errors" : [ {
-        "shape" : "BadRequestException"
-      } ]
-    },
     "UpdateConnectivityInfo" : {
       "name" : "UpdateConnectivityInfo",
       "http" : {
@@ -1890,9 +1873,6 @@
         "DeploymentId" : {
           "shape" : "__string"
         },
-        "DeploymentType" : {
-          "shape" : "DeploymentType"
-        },
         "GroupArn" : {
           "shape" : "__string"
         }
@@ -1900,7 +1880,7 @@
     },
     "DeploymentType" : {
       "type" : "string",
-      "enum" : [ "NewDeployment", "Redeployment", "ResetDeployment", "ForceResetDeployment" ]
+      "enum" : [ "NewDeployment", "Redeployment" ]
     },
     "Deployments" : {
       "type" : "list",
@@ -2188,12 +2168,6 @@
       "members" : {
         "DeploymentStatus" : {
           "shape" : "__string"
-        },
-        "DeploymentType" : {
-          "shape" : "DeploymentType"
-        },
-        "ErrorDetails" : {
-          "shape" : "ErrorDetails"
         },
         "ErrorMessage" : {
           "shape" : "__string"
@@ -3252,36 +3226,6 @@
       },
       "value" : {
         "shape" : "__string"
-      }
-    },
-    "ResetDeploymentsRequest" : {
-      "type" : "structure",
-      "members" : {
-        "AmznClientToken" : {
-          "shape" : "__string",
-          "location" : "header",
-          "locationName" : "X-Amzn-Client-Token"
-        },
-        "Force" : {
-          "shape" : "__boolean"
-        },
-        "GroupId" : {
-          "shape" : "__string",
-          "location" : "uri",
-          "locationName" : "GroupId"
-        }
-      },
-      "required" : [ "GroupId" ]
-    },
-    "ResetDeploymentsResponse" : {
-      "type" : "structure",
-      "members" : {
-        "DeploymentArn" : {
-          "shape" : "__string"
-        },
-        "DeploymentId" : {
-          "shape" : "__string"
-        }
       }
     },
     "Subscription" : {
