@@ -80,15 +80,15 @@ func (s *sessions) TerminateAll() []error {
 	ret := make([]error, 0)
 	for _, sess := range s.ss {
 		// close aws port before terminate
-		err := sess.portReq.ClosePort()
 		d.Info("attempt close port:", sess.HttpsPort)
+		err := sess.portReq.ClosePort()
 		if err != nil {
 			d.Error(err)
 		}
 
 		// try kill process
-		err = sess.Cmd.Process.Signal(syscall.SIGTERM)
 		d.Info("attempt kill pid:", sess.Cmd.Process.Pid)
+		err = sess.Cmd.Process.Signal(syscall.SIGTERM)
 		if err != nil {
 			err := errors.Wrap(err, "sigterm failed")
 			ret = append(ret, err)
