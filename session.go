@@ -28,6 +28,7 @@ type session struct {
 	Ip        string
 	StackId   string
 	Timeout   string
+	portReq   *awsports.SecurityGroupRequest
 }
 
 func (s *session) Id() string {
@@ -46,6 +47,7 @@ func (s *session) Start() (string, error) {
 
 	// try to open port for gotty
 	ec2req := awsports.Make(credprof, region, ec2id)
+	s.portReq = &ec2req
 	s.HttpsPort = fmt.Sprint(ec2req.RequestPort)
 	ttyurl := make(chan string)
 	wsclose := make(chan string)

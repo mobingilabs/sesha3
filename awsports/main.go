@@ -89,21 +89,25 @@ func (s *SecurityGroupRequest) ClosePort() error {
 	return nil
 }
 
-func Make(profilename string, awsRegion string, instanceID string) (req SecurityGroupRequest) {
-	req = SecurityGroupRequest{
+func Make(profilename string, awsRegion string, instanceID string) SecurityGroupRequest {
+	req := SecurityGroupRequest{
 		Sess:       session.Must(session.NewSession()),
 		Cred:       credentials.NewSharedCredentials("/root/.aws/credentials", profilename),
 		InstanceID: instanceID,
 	}
-	req.Ec2client = ec2.New(req.Sess, &aws.Config{Credentials: req.Cred,
-		Region: aws.String(awsRegion)})
+
+	req.Ec2client = ec2.New(req.Sess, &aws.Config{
+		Credentials: req.Cred,
+		Region:      aws.String(awsRegion),
+	})
+
 	req.SecurityInfoSet()
 	req.OpenedList()
 	port, _ := private.GetFreePort()
 	// req.RequestPort = req.random(1024, 65535)
 	req.RequestPort = int64(port)
 	req.CreatePortRequest()
-	return
+	return req
 }
 
 func (s *SecurityGroupRequest) random(min int64, max int64) int64 {
