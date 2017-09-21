@@ -80,6 +80,7 @@ func (s *sessions) TerminateAll() []error {
 	ret := make([]error, 0)
 	for _, sess := range s.ss {
 		err := sess.Cmd.Process.Signal(syscall.SIGTERM)
+		d.Info("attempt kill pid:", sess.Cmd.Process.Pid)
 		if err != nil {
 			err := errors.Wrap(err, "sigterm failed")
 			ret = append(ret, err)
