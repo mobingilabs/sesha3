@@ -7446,7 +7446,10 @@
     },
     "ElasticGpuSet":{
       "type":"list",
-      "member":{"shape":"ElasticGpus"}
+      "member":{
+        "shape":"ElasticGpus",
+        "locationName":"item"
+      }
     },
     "ElasticGpuSpecification":{
       "type":"structure",
@@ -9452,6 +9455,13 @@
         "shape":"String",
         "locationName":"InstanceId"
       }
+    },
+    "InstanceInterruptionBehavior":{
+      "type":"string",
+      "enum":[
+        "stop",
+        "terminate"
+      ]
     },
     "InstanceIpv6Address":{
       "type":"structure",
@@ -12402,7 +12412,8 @@
         "ValidUntil":{
           "shape":"DateTime",
           "locationName":"validUntil"
-        }
+        },
+        "InstanceInterruptionBehavior":{"shape":"InstanceInterruptionBehavior"}
       }
     },
     "RequestSpotInstancesResult":{
@@ -14241,6 +14252,10 @@
         "ReplaceUnhealthyInstances":{
           "shape":"Boolean",
           "locationName":"replaceUnhealthyInstances"
+        },
+        "InstanceInterruptionBehavior":{
+          "shape":"InstanceInterruptionBehavior",
+          "locationName":"instanceInterruptionBehavior"
         }
       }
     },
@@ -14345,6 +14360,10 @@
         "ValidUntil":{
           "shape":"DateTime",
           "locationName":"validUntil"
+        },
+        "InstanceInterruptionBehavior":{
+          "shape":"InstanceInterruptionBehavior",
+          "locationName":"instanceInterruptionBehavior"
         }
       }
     },

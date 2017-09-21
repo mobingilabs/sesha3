@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"strings"
 
 	"github.com/mobingilabs/mobingi-sdk-go/client"
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/session"
@@ -59,25 +60,147 @@ func (r *registry) GetRegistryToken(in *GetRegistryTokenInput) (*client.Response
 	return resp, body, token, nil
 }
 
-type GetTagDigestInput struct {
-	ImageName string
-	TagName   string
+type GetUserCatalogInput struct {
+	Service string
+	Scope   string
 }
 
-func (r *registry) GetTagDigest(in *GetTagDigestInput) (*client.Response, []byte, string, error) {
-	var digest string
+func (r *registry) GetUserCatalog(in *GetUserCatalogInput) (*client.Response, []byte, []string, error) {
+	if in == nil {
+		return nil, nil, nil, errors.New("input cannot be nil")
+	}
 
-	/*
-		if in == nil {
-			return nil, nil, digest, errors.New("input cannot be nil")
+	if in.Service == "" {
+		in.Service = "Mobingi Docker Registry"
+	}
+
+	if in.Scope == "" {
+		in.Scope = "registry:catalog:*"
+	}
+
+	tokenIn := &GetRegistryTokenInput{
+		Service: in.Service,
+		Scope:   in.Scope,
+	}
+
+	resp, body, token, err := r.GetRegistryToken(tokenIn)
+	if err != nil {
+		return resp, body, nil, errors.Wrap(err, "get token failed")
+	}
+
+	r.session.AccessToken = token
+	ep := r.session.RegistryEndpoint() + "/_catalog"
+	req, err := http.NewRequest(http.MethodGet, ep, nil)
+	req.Header.Add("Authorization", "Bearer "+r.session.AccessToken)
+	resp, body, err = r.client.Do(req)
+	if err != nil {
+		return resp, body, nil, errors.Wrap(err, "client do failed")
+	}
+
+	type catalog struct {
+		Repositories []string `json:"repositories"`
+	}
+
+	var ct catalog
+	err = json.Unmarshal(body, &ct)
+	if err != nil {
+		return resp, nil, nil, errors.Wrap(err, "unmarshal failed")
+	}
+
+	ret := make([]string, 0)
+	for _, v := range ct.Repositories {
+		pair := strings.Split(v, "/")
+		if len(pair) == 2 {
+			if pair[0] == r.session.Config.Username {
+				ret = append(ret, v)
+			}
 		}
+	}
 
-		ep := r.session.RegistryEndpoint() + "/alm/pem?stack_id=" + in.StackId
-		path := fmt.Sprintf("/%s/%s/manifests/%s", userpass.Username, pair[0], pair[1])
-		req, err := http.NewRequest(http.MethodGet, ep, nil)
-	*/
+	return resp, nil, ret, nil
+}
 
-	return nil, nil, digest, nil
+type GetTagsListInput struct {
+	Service string
+	Scope   string
+	Image   string
+}
+
+func (r *registry) GetTagsList(in *GetTagsListInput) (*client.Response, []byte, error) {
+	if in == nil {
+		return nil, nil, errors.New("input cannot be nil")
+	}
+
+	if in.Service == "" {
+		in.Service = "Mobingi Docker Registry"
+	}
+
+	if in.Scope == "" {
+		in.Scope = fmt.Sprintf("repository:%s/%s:pull", r.session.Config.Username, in.Image)
+	}
+
+	tokenIn := &GetRegistryTokenInput{
+		Service: in.Service,
+		Scope:   in.Scope,
+	}
+
+	resp, body, token, err := r.GetRegistryToken(tokenIn)
+	if err != nil {
+		return resp, body, errors.Wrap(err, "get token failed")
+	}
+
+	r.session.AccessToken = token
+	ep := r.session.RegistryEndpoint() + "/" + r.session.Config.Username + "/" + in.Image + "/tags/list"
+	req, err := http.NewRequest(http.MethodGet, ep, nil)
+	req.Header.Add("Authorization", "Bearer "+r.session.AccessToken)
+	resp, body, err = r.client.Do(req)
+	if err != nil {
+		return resp, body, errors.Wrap(err, "client do failed")
+	}
+
+	return resp, body, nil
+}
+
+type GetTagManifestInput struct {
+	Service string
+	Scope   string
+	Image   string
+	Tag     string
+}
+
+func (r *registry) GetTagManifest(in *GetTagManifestInput) (*client.Response, []byte, error) {
+	if in == nil {
+		return nil, nil, errors.New("input cannot be nil")
+	}
+
+	if in.Service == "" {
+		in.Service = "Mobingi Docker Registry"
+	}
+
+	if in.Scope == "" {
+		in.Scope = fmt.Sprintf("repository:%s/%s:pull", r.session.Config.Username, in.Image)
+	}
+
+	tokenIn := &GetRegistryTokenInput{
+		Service: in.Service,
+		Scope:   in.Scope,
+	}
+
+	resp, body, token, err := r.GetRegistryToken(tokenIn)
+	if err != nil {
+		return resp, body, errors.Wrap(err, "get token failed")
+	}
+
+	r.session.AccessToken = token
+	ep := r.session.RegistryEndpoint() + "/" + r.session.Config.Username + "/" + in.Image + "/manifests/" + in.Tag
+	req, err := http.NewRequest(http.MethodGet, ep, nil)
+	req.Header.Add("Authorization", "Bearer "+r.session.AccessToken)
+	resp, body, err = r.client.Do(req)
+	if err != nil {
+		return resp, body, errors.Wrap(err, "client do failed")
+	}
+
+	return resp, body, nil
 }
 
 func New(s *session.Session) *registry {
