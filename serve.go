@@ -127,7 +127,7 @@ func describeSessions(w http.ResponseWriter, req *http.Request) {
 }
 
 func version(w http.ResponseWriter, req *http.Request) {
-	w.Write([]byte(`{"version":"v0.0.10-beta"}`))
+	w.Write([]byte(`{"version":"v0.0.11-beta"}`))
 }
 
 func redirect(w http.ResponseWriter, req *http.Request) {
