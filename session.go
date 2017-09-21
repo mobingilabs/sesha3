@@ -166,10 +166,10 @@ func (s *session) Start() (string, error) {
 				s.info("gotty closed normally")
 			default:
 				s.info("close detected: [", wsc, "]")
-				time.Sleep(time.Second * 1)
+				time.Sleep(time.Second * 2)
 
 				// close aws port before terminate
-				s.info("attempt close port:", s.HttpsPort)
+				s.info("attempt close port: ", s.HttpsPort)
 				if s.portReq != nil {
 					err := s.portReq.ClosePort()
 					if err != nil {
