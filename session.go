@@ -98,6 +98,7 @@ func (s *session) Start() (string, error) {
 			ssh+" -t \""+timeout+" && "+term+" && "+defaultshell+" --login \"",
 		)
 
+		s.info("svrtool args:", s.Cmd.Args)
 		errpipe, err := s.Cmd.StderrPipe()
 		if err != nil {
 			s.error(errors.Wrap(err, "stderr pipe connect failed"))
