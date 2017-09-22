@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 
 	"time"
 
@@ -138,12 +139,15 @@ func Settoken(w http.ResponseWriter, r *http.Request) {
 
 func GetToken(w http.ResponseWriter, r *http.Request) (bool, string) {
 	tokenjson := r.Header.Get("Authorization")
+	tokenjson = strings.TrimPrefix(tokenjson, "Bearer ")
 	tokens := tokenGet{}
 	json.Unmarshal([]byte(tokenjson), &tokens)
 	token := tokens.Key
 	parsedToken, _ := parseTokenTxt(token)
-	//claims := *parsedToken.Claims.(*tokenReq)
+	claims := *parsedToken.Claims.(*tokenReq)
 	payload := ""
+	log.Println("tokentest_user:", claims.Username)
+	log.Println("tokentest_pass:", claims.Passwd)
 	tf := false
 	if parsedToken.Valid {
 		payload = fmt.Sprint("your token is valid ", parsedToken.Valid)
