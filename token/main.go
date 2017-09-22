@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 
 	"time"
 
@@ -138,6 +139,7 @@ func Settoken(w http.ResponseWriter, r *http.Request) {
 
 func GetToken(w http.ResponseWriter, r *http.Request) (bool, string) {
 	tokenjson := r.Header.Get("Authorization")
+	tokenjson = strings.TrimPrefix(token, "Bearer ")
 	tokens := tokenGet{}
 	json.Unmarshal([]byte(tokenjson), &tokens)
 	token := tokens.Key

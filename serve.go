@@ -30,13 +30,11 @@ var (
 func ttyurl(w http.ResponseWriter, r *http.Request) {
 	var sess session
 
-	/*
-		tokenerr, tokenmessage := token.GetToken(w, r)
-		if tokenerr != true {
-			w.Write([]byte(tokenmessage))
-			return
-		}
-	*/
+	tokenerr, tokenmessage := token.GetToken(w, r)
+	if tokenerr != true {
+		w.Write([]byte(tokenmessage))
+		return
+	}
 
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
