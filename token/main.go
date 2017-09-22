@@ -137,7 +137,7 @@ func Settoken(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetToken(w http.ResponseWriter, r *http.Request) (bool, string) {
-	tokenjson := r.Header.Get("Token")
+	tokenjson := r.Header.Get("Authorization")
 	tokens := tokenGet{}
 	json.Unmarshal([]byte(tokenjson), &tokens)
 	token := tokens.Key
