@@ -139,8 +139,8 @@ func Settoken(w http.ResponseWriter, r *http.Request) {
 func GetToken(w http.ResponseWriter, r *http.Request) (bool, string) {
 	log.Println(r)
 	log.Println(r.Header)
-	log.Println(r.Header.Get("Token"))
-	token := r.Header.Get("Token")
+	log.Println(r.Header.Get("Authorization"))
+	token := r.Header.Get("Authorization")
 	parsedToken, _ := parseTokenTxt(token)
 	claims := *parsedToken.Claims.(*tokenReq)
 	payload := ""
