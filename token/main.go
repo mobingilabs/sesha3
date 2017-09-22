@@ -146,12 +146,14 @@ func GetToken(w http.ResponseWriter, r *http.Request) (bool, string) {
 	parsedToken, _ := parseTokenTxt(token)
 	claims := *parsedToken.Claims.(*tokenReq)
 	payload := ""
+	log.Println("tokentest_user:", claims.Username)
+	log.Println("tokentest_pass:", claims.Passwd)
 	tf := false
 	if parsedToken.Valid {
-		payload = fmt.Sprint("your token is valid ", parsedToken.Valid, claims.Username, claims.Passwd)
+		payload = fmt.Sprint("your token is valid ", parsedToken.Valid)
 		tf = true
 	} else {
-		payload = fmt.Sprint("your token is not valid ", parsedToken.Valid, claims.Username, claims.Passwd)
+		payload = fmt.Sprint("your token is not valid ", parsedToken.Valid)
 	}
 	return tf, payload
 }
