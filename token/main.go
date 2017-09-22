@@ -12,7 +12,6 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"strings"
 
 	"time"
 
@@ -141,11 +140,7 @@ func GetToken(w http.ResponseWriter, r *http.Request) (bool, string) {
 	log.Println(r)
 	log.Println(r.Header)
 	log.Println(r.Header.Get("Authorization"))
-	tokenjson := r.Header.Get("Authorization")
-	tokenjson = strings.TrimPrefix(tokenjson, "Bearer ")
-	tokens := tokenGet{}
-	json.Unmarshal([]byte(tokenjson), &tokens)
-	token := tokens.Key
+	token := r.Header.Get("Authorization")
 	parsedToken, _ := parseTokenTxt(token)
 	claims := *parsedToken.Claims.(*tokenReq)
 	payload := ""
