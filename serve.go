@@ -36,7 +36,6 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	d.Info(tokenmessage)
-
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
