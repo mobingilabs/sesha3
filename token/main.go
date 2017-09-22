@@ -142,7 +142,9 @@ func GetToken(w http.ResponseWriter, r *http.Request) (bool, string) {
 	json.Unmarshal([]byte(tokenjson), &tokens)
 	token := tokens.Key
 	parsedToken, _ := parseTokenTxt(token)
-	//claims := *parsedToken.Claims.(*tokenReq)
+	claims := *parsedToken.Claims.(*tokenReq)
+	log.Println("!!!!!!!!!!" + claims.Username)
+	log.Println("!!!!!!!!!!" + claims.Passwd)
 	payload := ""
 	tf := false
 	if parsedToken.Valid {
