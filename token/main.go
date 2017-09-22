@@ -139,6 +139,7 @@ func Settoken(w http.ResponseWriter, r *http.Request) {
 
 func GetToken(w http.ResponseWriter, r *http.Request) (bool, string) {
 	tokenjson := r.Header.Get("Authorization")
+	log.Println(tokenjson)
 	tokenjson = strings.TrimPrefix(tokenjson, "Bearer ")
 	tokens := tokenGet{}
 	json.Unmarshal([]byte(tokenjson), &tokens)

@@ -29,7 +29,6 @@ var (
 
 func ttyurl(w http.ResponseWriter, r *http.Request) {
 	var sess session
-
 	tokenerr, tokenmessage := token.GetToken(w, r)
 	if tokenerr != true {
 		w.Write([]byte(tokenmessage))
