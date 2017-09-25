@@ -158,7 +158,7 @@ func CheckToken(credential string, region string, token_user string, token_pass 
 	table := db.Table("MC_IDENTITY")
 	var results []Event
 	err := table.Get("username", token_user).All(&results)
-	log.Println("dynamodb:" + err)
+	log.Println("dynamodb:", err)
 	ret := false
 	for _, data := range results {
 		if token_pass == data.Pass {
