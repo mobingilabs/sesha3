@@ -97,6 +97,9 @@ func genJWT(w http.ResponseWriter, r *http.Request) *jwt.Token {
 	var req tokenReq
 	credp := getjson(w, r, req)
 	cred := credp.(tokenReq)
+	log.Println("tokengenerate_cred:", cred)
+	log.Println("set_token_user:", cred.Username)
+	log.Println("token_pass:", cred.Passwd)
 	expire := time.Hour * 800
 	cred.ExpiresAt = time.Now().Add(expire).Unix()
 	token := jwt.NewWithClaims(jwt.GetSigningMethod("RS512"), cred)
@@ -120,6 +123,8 @@ func Settoken(w http.ResponseWriter, r *http.Request) {
 	credp := getjson(w, r, req)
 	cred := credp.(tokenReq)
 	log.Println("tokengenerate_cred:", cred)
+	log.Println("set_token_user:", cred.Username)
+	log.Println("token_pass:", cred.Passwd)
 	self.user = cred.Username
 	makeRsa()
 	defaultPrivKey, _ := ioutil.ReadFile(self.rsa + self.user + "token.pem")
