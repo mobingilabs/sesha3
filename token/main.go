@@ -93,10 +93,7 @@ func getjson(w http.ResponseWriter, r *http.Request, inputType interface{}) inte
 	return nil
 }
 
-func genJWT(w http.ResponseWriter, r *http.Request) *jwt.Token {
-	var req tokenReq
-	credp := getjson(w, r, req)
-	cred := credp.(tokenReq)
+func genJWT(cred tokenReq) *jwt.Token {
 	log.Println("tokengenerate_cred:", cred)
 	log.Println("set_token_user:", cred.Username)
 	log.Println("token_pass:", cred.Passwd)
@@ -128,7 +125,7 @@ func Settoken(w http.ResponseWriter, r *http.Request) {
 	self.user = cred.Username
 	makeRsa()
 	defaultPrivKey, _ := ioutil.ReadFile(self.rsa + self.user + "token.pem")
-	token := genJWT(w, r)
+	token := genJWT(cred)
 	self.pub, _ = ioutil.ReadFile(self.rsa + self.user + "token.pem.pub")
 	// JWTに署名する
 	key, _ := jwt.ParseRSAPrivateKeyFromPEM(defaultPrivKey)
