@@ -161,6 +161,7 @@ func CheckToken(credential string, region string, token_user string, token_pass 
 	ret := false
 	for _, data := range results {
 		if token_pass == data.Pass {
+			log.Println("token_user_check: sucess")
 			ret = true
 		}
 	}
