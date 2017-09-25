@@ -1,12 +1,17 @@
 package token
 
 import (
+	"crypto/md5"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/json"
 	"encoding/pem"
 	"fmt"
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/guregu/dynamo"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -140,23 +145,50 @@ func Settoken(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(payload))
 }
 
-func GetToken(w http.ResponseWriter, r *http.Request) (bool, string) {
-	log.Println("bearer:", r.Header.Get("Authorization"))
+type Event struct {
+	Username string `dynamo:"username"`
+	Pass     string `dynamo:"password"`
+}
+
+func CheckToken(credential string, region string, token_user string, token_pass string) (bool, error) {
+	cred := credentials.NewSharedCredentials("", credential)
+	db := dynamo.New(session.New(), &aws.Config{Region: aws.String(region),
+		Credentials: cred,
+	})
+	table := db.Table("MC_IDENTITY")
+	var results []Event
+	err := table.Get("username", token_user).All(&results)
+	ret := false
+	for _, data := range results {
+		if token_pass == data.Pass {
+			ret = true
+		}
+	}
+	return ret, err
+}
+
+func GetToken(r *http.Request, credential string, awsRegion string) (bool, string) {
 	token := strings.Split(r.Header.Get("Authorization"), " ")[1]
 	log.Println("token:", token)
 	parsedToken, _ := parseTokenTxt(token)
 	log.Println(parsedToken)
 	claims := *parsedToken.Claims.(*tokenReq)
-	log.Println("claims:", claims)
 	payload := ""
-	log.Println("tokentest_user:", claims.Username)
-	log.Println("tokentest_pass:", claims.Passwd)
+	token_user := claims.Username
+	token_pass := fmt.Sprintf("%x", md5.Sum([]byte(claims.Passwd)))
+	log.Println("token_user:", token_user)
+	log.Println("token_pass:", token_pass)
+
 	tf := false
 	if parsedToken.Valid {
 		payload = fmt.Sprint("your token is valid ", parsedToken.Valid)
 		tf = true
 	} else {
 		payload = fmt.Sprint("your token is not valid ", parsedToken.Valid)
+	}
+	tf, err := CheckToken(credential, awsRegion, token_user, token_pass)
+	if tf == false {
+		payload = fmt.Sprint("your username or password is not valid ", err)
 	}
 	return tf, payload
 }
