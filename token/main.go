@@ -143,6 +143,7 @@ func Settoken(w http.ResponseWriter, r *http.Request) {
 type Event struct {
 	Username string `dynamo:"username"`
 	Pass     string `dynamo:"password"`
+	Status   string `dynamo:"status"`
 }
 
 func CheckToken(credential string, region string, token_user string, token_pass string) (bool, error) {
@@ -155,6 +156,11 @@ func CheckToken(credential string, region string, token_user string, token_pass 
 	err := table.Get("username", token_user).All(&results)
 	ret := false
 	for _, data := range results {
+		if data.Status == "deleted" {
+			ret = false
+			d.Info("token_ALMuser_check: status=deleted,username", data.Username)
+			break
+		}
 		if token_pass == data.Pass {
 			d.Info("token_ALMuser_check: sucess")
 			ret = true
