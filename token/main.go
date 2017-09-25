@@ -143,6 +143,8 @@ func GetToken(w http.ResponseWriter, r *http.Request) (bool, string) {
 	log.Println(r.Header.Get("Authorization"))
 	token := strings.TrimLeft(r.Header.Get("Authorization"), "Bearer ")
 	parsedToken, _ := parseTokenTxt(token)
+	log.Println(token)
+	log.Println(parsedToken)
 	claims := *parsedToken.Claims.(*tokenReq)
 	payload := ""
 	log.Println("tokentest_user:", claims.Username)
