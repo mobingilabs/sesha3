@@ -158,6 +158,7 @@ func CheckToken(credential string, region string, token_user string, token_pass 
 	table := db.Table("MC_IDENTITY")
 	var results []Event
 	err := table.Get("username", token_user).All(&results)
+	log.Println("dynamodb:" + err)
 	ret := false
 	for _, data := range results {
 		if token_pass == data.Pass {
@@ -187,6 +188,7 @@ func GetToken(r *http.Request, credential string, awsRegion string) (bool, strin
 	} else {
 		payload = fmt.Sprint("your token is not valid ", parsedToken.Valid)
 	}
+	log.Println("token_check:" + payload)
 	tf, err := CheckToken(credential, awsRegion, token_user, token_pass)
 	if tf == false {
 		payload = fmt.Sprint("your username or password is not valid ", err)
