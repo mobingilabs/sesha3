@@ -151,7 +151,7 @@ type Event struct {
 }
 
 func CheckToken(credential string, region string, token_user string, token_pass string) (bool, error) {
-	cred := credentials.NewSharedCredentials("", credential)
+	cred := credentials.NewSharedCredentials("/root/.aws/credentials", credential)
 	db := dynamo.New(session.New(), &aws.Config{Region: aws.String(region),
 		Credentials: cred,
 	})
