@@ -19,6 +19,7 @@ import (
 	"strconv"
 	"strings"
 
+	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -41,11 +42,11 @@ func makeRsa() {
 	self.rsa = os.TempDir() + "/token/rsa/"
 	_, err := os.Stat(self.rsa)
 	if err == nil {
-		log.Println(self.rsa + " detected.")
+		d.Info(self.rsa + " detected.")
 	} else {
-		log.Println(self.rsa + " not detected. mkdir" + self.rsa)
+		d.Info(self.rsa + " not detected. mkdir" + self.rsa)
 		err = os.MkdirAll(self.rsa, 0700)
-		log.Println("mkdir err : ", err)
+		d.Info("mkdir err : ", err)
 	}
 	priv, err := rsa.GenerateKey(rand.Reader, 2048)
 	privDer := x509.MarshalPKCS1PrivateKey(priv)
@@ -69,7 +70,7 @@ func makeRsa() {
 	}
 	pem.Encode(privFile, pemblock)
 	pem.Encode(pubFile, pubblock)
-	log.Println("token pem file generated.")
+	d.Info("token pem file generated.")
 }
 
 type tokenReq struct {
@@ -99,9 +100,6 @@ func getjson(w http.ResponseWriter, r *http.Request, inputType interface{}) inte
 }
 
 func genJWT(cred tokenReq) *jwt.Token {
-	log.Println("tokengenerate_cred:", cred)
-	log.Println("set_token_user:", cred.Username)
-	log.Println("token_pass:", cred.Passwd)
 	expire := time.Hour * 800
 	cred.ExpiresAt = time.Now().Add(expire).Unix()
 	token := jwt.NewWithClaims(jwt.GetSigningMethod("RS512"), cred)
@@ -124,9 +122,6 @@ func Settoken(w http.ResponseWriter, r *http.Request) {
 	var req tokenReq
 	credp := getjson(w, r, req)
 	cred := credp.(tokenReq)
-	log.Println("tokengenerate_cred:", cred)
-	log.Println("set_token_user:", cred.Username)
-	log.Println("token_pass:", cred.Passwd)
 	self.user = cred.Username
 	makeRsa()
 	defaultPrivKey, _ := ioutil.ReadFile(self.rsa + self.user + "token.pem")
@@ -136,7 +131,7 @@ func Settoken(w http.ResponseWriter, r *http.Request) {
 	key, _ := jwt.ParseRSAPrivateKeyFromPEM(defaultPrivKey)
 	tokenTxt, err := token.SignedString(key)
 	self.token = tokenTxt
-	log.Println("token generated")
+	d.Info("token generated")
 
 	if err != nil {
 		log.Fatal(err)
@@ -158,11 +153,10 @@ func CheckToken(credential string, region string, token_user string, token_pass 
 	table := db.Table("MC_IDENTITY")
 	var results []Event
 	err := table.Get("username", token_user).All(&results)
-	log.Println("dynamodb:", err)
 	ret := false
 	for _, data := range results {
 		if token_pass == data.Pass {
-			log.Println("token_user_check: sucess")
+			d.Info("token_ALMuser_check: sucess")
 			ret = true
 		}
 	}
@@ -171,24 +165,24 @@ func CheckToken(credential string, region string, token_user string, token_pass 
 
 func GetToken(r *http.Request, credential string, awsRegion string) (bool, string) {
 	token := strings.Split(r.Header.Get("Authorization"), " ")[1]
-	log.Println("token:", token)
+	d.Info("token:", token)
 	parsedToken, _ := parseTokenTxt(token)
-	log.Println(parsedToken)
+	d.Info(parsedToken)
 	claims := *parsedToken.Claims.(*tokenReq)
 	payload := ""
 	token_user := claims.Username
 	token_pass := fmt.Sprintf("%x", md5.Sum([]byte(claims.Passwd)))
-	log.Println("token_user:", token_user)
-	log.Println("token_pass:", token_pass)
+	d.Info("token_user:", token_user)
+	d.Info("token_pass:", "xxxxx")
 
 	tf := false
 	if parsedToken.Valid {
-		payload = fmt.Sprint("your token is valid ", parsedToken.Valid)
+		payload = fmt.Sprint("your token is valid :", parsedToken.Valid)
 		tf = true
 	} else {
-		payload = fmt.Sprint("your token is not valid ", parsedToken.Valid)
+		payload = fmt.Sprint("your token is not valid :", parsedToken.Valid)
 	}
-	log.Println("token_check:" + payload)
+	d.Info("token_check:" + payload)
 	tf, err := CheckToken(credential, awsRegion, token_user, token_pass)
 	if tf == false {
 		payload = fmt.Sprint("your username or password is not valid ", err)
