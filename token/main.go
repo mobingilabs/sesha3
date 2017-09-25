@@ -144,6 +144,7 @@ func GetToken(w http.ResponseWriter, r *http.Request) (bool, string) {
 	parsedToken, _ := parseTokenTxt(token)
 	log.Println(parsedToken)
 	claims := *parsedToken.Claims.(*tokenReq)
+	log.Println("claims:", claims)
 	payload := ""
 	log.Println("tokentest_user:", claims.Username)
 	log.Println("tokentest_pass:", claims.Passwd)
