@@ -9,9 +9,15 @@
 
 [[projects]]
   name = "github.com/aws/aws-sdk-go"
-  packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/shareddefaults","private/protocol","private/protocol/ec2query","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/restxml","private/protocol/xml/xmlutil","service/ec2","service/s3","service/s3/s3iface","service/s3/s3manager","service/sts"]
+  packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/shareddefaults","private/protocol","private/protocol/ec2query","private/protocol/json/jsonutil","private/protocol/jsonrpc","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/restxml","private/protocol/xml/xmlutil","service/dynamodb","service/dynamodb/dynamodbattribute","service/dynamodb/dynamodbiface","service/ec2","service/s3","service/s3/s3iface","service/s3/s3manager","service/sts"]
   revision = "599f09b4d88b78336612acd62e94e6ae87334b4b"
   version = "v1.10.49"
+
+[[projects]]
+  name = "github.com/cenkalti/backoff"
+  packages = ["."]
+  revision = "61153c768f31ee5f130071d08fc82b85208528de"
+  version = "v1.1.0"
 
 [[projects]]
   branch = "master"
@@ -54,6 +60,12 @@
   packages = ["."]
   revision = "ea4d1f681babbce9545c9c5f3d5194a789c89f5b"
   version = "v1.2.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/guregu/dynamo"
+  packages = [".","internal/exprs"]
+  revision = "1d2203aef9357343034c5c5e098b3c2b769dd941"
 
 [[projects]]
   name = "github.com/inconshreveable/mousetrap"
@@ -123,6 +135,12 @@
 
 [[projects]]
   branch = "master"
+  name = "golang.org/x/net"
+  packages = ["context"]
+  revision = "0744d001aa8470aaa53df28d32e5ceeb8af9bd70"
+
+[[projects]]
+  branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix","windows"]
   revision = "b6e1ae21643682ce023deb8d152024597b0e9bb4"
@@ -130,6 +148,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "70bc50e332d706b877711a840868a23272848d73882a763c68729082020586ed"
+  inputs-digest = "a6b4479fa6d69dd4f825177059d0ac935248d43e0e043948879842d71293c827"
   solver-name = "gps-cdcl"
   solver-version = 1
