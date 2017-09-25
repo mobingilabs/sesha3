@@ -119,6 +119,7 @@ func Settoken(w http.ResponseWriter, r *http.Request) {
 	var req tokenReq
 	credp := getjson(w, r, req)
 	cred := credp.(tokenReq)
+	log.Println("tokengenerate_cred:", cred)
 	self.user = cred.Username
 	makeRsa()
 	defaultPrivKey, _ := ioutil.ReadFile(self.rsa + self.user + "token.pem")
