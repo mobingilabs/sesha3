@@ -139,7 +139,7 @@ func Settoken(w http.ResponseWriter, r *http.Request) {
 
 func GetToken(w http.ResponseWriter, r *http.Request) (bool, string) {
 	log.Println("bearer:", r.Header.Get("Authorization"))
-	token := strings.TrimLeft(r.Header.Get("Authorization"), "Bearer ")
+	token := strings.Split(r.Header.Get("Authorization"), " ")[1]
 	log.Println("token:", token)
 	parsedToken, _ := parseTokenTxt(token)
 	log.Println(parsedToken)
