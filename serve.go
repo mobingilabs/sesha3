@@ -25,6 +25,7 @@ var (
 	credprof   string // set by cli flag
 	syslogging bool   // set by cli flag
 	logger     *syslog.Writer
+	notificate sesha3.Notificate
 )
 
 func ttyurl(w http.ResponseWriter, r *http.Request) {
@@ -142,6 +143,16 @@ func serve(cmd *cobra.Command) {
 	// redirect every http request to https
 	// go http.ListenAndServe(":80", http.HandlerFunc(redirect))
 	// everything else will be https i
+
+	//check notification flags
+	notificateArray, _ := cmd.Flags().GetStringArray("notification")
+	for _, i := range notificateArray {
+		if i == "slack" {
+			notificate.slack = true
+		}
+	}
+	d.Info(notificate)
+
 	certfolder := cmdline.Dir() + "/certs"
 	port := GetCliStringFlag(cmd, "port")
 	router := mux.NewRouter()

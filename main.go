@@ -53,6 +53,7 @@ func init() {
 	rootCmd.PersistentFlags().BoolVar(&syslogging, "syslog", false, "set log output to syslog")
 	rootCmd.PersistentFlags().String("domain", "sesha3.labs.mobingi.com", "server domain")
 	rootCmd.PersistentFlags().String("port", "443", "server port")
+	rootCmd.PersistentFlags().StringArray("notification", []string{"slack"}, "values: slack")
 	rootCmd.PersistentFlags().String("aws-region", "ap-northeast-1", "aws region")
 	rootCmd.PersistentFlags().String("ec2-id", "i-0d6ff50d6caef8ffa", "ec2 server instance id")
 	rootCmd.PersistentFlags().String("cred-profile", "sesha3", "aws credenfile profile name")
