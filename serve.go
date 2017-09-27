@@ -148,7 +148,7 @@ func serve(cmd *cobra.Command) {
 	notificateArray, _ := cmd.Flags().GetStringArray("notification")
 	for _, i := range notificateArray {
 		if i == "slack" {
-			notificate.slack = true
+			notificate.Slack = true
 		}
 	}
 	d.Info(notificate)

@@ -94,7 +94,7 @@
   branch = "notification"
   name = "github.com/mobingilabs/mobingi-sdk-go"
   packages = ["client","mobingi/alm","mobingi/credentials","mobingi/sesha3","mobingi/session","pkg/cmdline","pkg/debug","pkg/private"]
-  revision = "10b54910dd5a3b3eac7f15ffbd4933f19ef3d585"
+  revision = "e713ee2aff8b23cf5bc8ee84af4f7a5fa63eeade"
 
 [[projects]]
   name = "github.com/moul/gotty-client"
@@ -136,7 +136,7 @@
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context"]
-  revision = "278c6cf336eb9139d63479da09da0cfb40fdc4c8"
+  revision = "0a9397675ba34b2845f758fe3cd68828369c6517"
 
 [[projects]]
   branch = "master"
