@@ -151,7 +151,7 @@ func serve(cmd *cobra.Command) {
 			notificate.Slack = true
 		}
 	}
-	d.Info(notificate)
+	d.Info("notificate: ", notificate)
 
 	certfolder := cmdline.Dir() + "/certs"
 	port := GetCliStringFlag(cmd, "port")
