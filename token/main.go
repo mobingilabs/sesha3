@@ -173,6 +173,7 @@ func CheckToken(credential string, region string, token_user string, token_pass 
 }
 
 func GetToken(r *http.Request, credential string, awsRegion string) error {
+	err := nil
 	token := strings.Split(r.Header.Get("Authorization"), " ")[1]
 	d.Info("token:", token)
 	parsedToken, _ := parseTokenTxt(token)
