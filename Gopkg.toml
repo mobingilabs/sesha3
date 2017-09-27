@@ -21,7 +21,7 @@
 #  version = "2.4.0"
 
 [[constraint]]
-  branch = "master"
+  branch = "notification"
   name = "github.com/mobingilabs/mobingi-sdk-go"
 
 [[constraint]]
