@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/guregu/dynamo"
+	"github.com/pkg/errors"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -171,7 +172,7 @@ func CheckToken(credential string, region string, token_user string, token_pass 
 	return ret, err
 }
 
-func GetToken(r *http.Request, credential string, awsRegion string) (bool, string) {
+func GetToken(r *http.Request, credential string, awsRegion string) error {
 	token := strings.Split(r.Header.Get("Authorization"), " ")[1]
 	d.Info("token:", token)
 	parsedToken, _ := parseTokenTxt(token)
@@ -185,17 +186,16 @@ func GetToken(r *http.Request, credential string, awsRegion string) (bool, strin
 
 	tf := false
 	if parsedToken.Valid {
-		payload = fmt.Sprint("your token is valid :", parsedToken.Valid)
 		tf = true
 	} else {
-		payload = fmt.Sprint("your token is not valid :", parsedToken.Valid)
+		err = errors.New("your token is not valid ")
 	}
-	d.Info("token_check:" + payload)
+	d.Info("token_check:", tf)
 	tf, err := CheckToken(credential, awsRegion, token_user, token_pass)
 	if tf == false {
-		payload = fmt.Sprint("your username or password is not valid ", err)
+		err = errors.Wrap(err, "your username or password is not valid ")
 	}
-	return tf, payload
+	return err
 }
 
 //func Test() {

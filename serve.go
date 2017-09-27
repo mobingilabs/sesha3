@@ -29,11 +29,11 @@ var (
 
 func ttyurl(w http.ResponseWriter, r *http.Request) {
 	var sess session
-	tokenerr, tokenmessage := token.GetToken(r,
+	err := token.GetToken(r,
 		credprof, region,
 	)
-	if tokenerr != true {
-		w.Write([]byte(tokenmessage))
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
 	defer r.Body.Close()
