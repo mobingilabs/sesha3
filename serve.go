@@ -18,15 +18,25 @@ import (
 )
 
 var (
-	domain     string // set by cli flag
-	port       string // set by cli flag
-	region     string // set by cli flag
-	ec2id      string // set by cli flag
-	credprof   string // set by cli flag
-	syslogging bool   // set by cli flag
-	logger     *syslog.Writer
-	notificate sesha3.Notificate
+	domain         string // set by cli flag
+	port           string // set by cli flag
+	region         string // set by cli flag
+	ec2id          string // set by cli flag
+	credprof       string // set by cli flag
+	syslogging     bool   // set by cli flag
+	logger         *syslog.Writer
+	notificate     sesha3.Notificate
+	notificatePool []error
 )
+
+func errcheck() {
+	for {
+		if len(notificatePool) > 0 {
+			v, notificatePool := pop(notificatePool)
+			_ = notificate.WebhookNotification(v)
+		}
+	}
+}
 
 func ttyurl(w http.ResponseWriter, r *http.Request) {
 	var sess session
@@ -35,14 +45,14 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	)
 	err = fmt.Errorf("%s", "slack err test")
 	if err != nil {
-		err = notificate.WebhookNotification(err)
+		notificatePool = append(notificatePool, err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		err = notificate.WebhookNotification(err)
+		notificatePool = append(notificatePool, err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
@@ -52,7 +62,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	var m map[string]interface{}
 	err = json.Unmarshal(body, &m)
 	if err != nil {
-		err = notificate.WebhookNotification(err)
+		notificatePool = append(notificatePool, err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
@@ -61,7 +71,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	d.Info("rawurl:", pemurl)
 	resp, err := http.Get(fmt.Sprintf("%v", pemurl))
 	if err != nil {
-		err = notificate.WebhookNotification(err)
+		notificatePool = append(notificatePool, err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
@@ -69,7 +79,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	defer resp.Body.Close()
 	body, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
-		err = notificate.WebhookNotification(err)
+		notificatePool = append(notificatePool, err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
@@ -95,7 +105,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 
 	randomurl, err := sess.Start()
 	if err != nil {
-		err = notificate.WebhookNotification(err)
+		notificatePool = append(notificatePool, err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
@@ -103,8 +113,8 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	// add this session to our list of running sessions
 	ttys.Add(sess)
 	if randomurl == "" {
-		err_s := "cannot initialize secure tty access"
-		err = notificate.WebhookNotification(err_s)
+		err := fmt.Errorf("%s", "cannot initialize secure tty access")
+		notificatePool = append(notificatePool, err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	} else {
@@ -115,8 +125,8 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	sess.TtyURL = randomurl
 	fullurl = sess.GetFullURL()
 	if fullurl == "" {
-		err_s := "cannot initialize secure tty access"
-		err = notificate.WebhookNotification(err_s)
+		err := fmt.Errorf("%s", "cannot initialize secure tty access")
+		notificatePool = append(notificatePool, err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
@@ -152,6 +162,7 @@ func redirect(w http.ResponseWriter, req *http.Request) {
 }
 
 func serve(cmd *cobra.Command) {
+	go errcheck()
 	// redirect every http request to https
 	// go http.ListenAndServe(":80", http.HandlerFunc(redirect))
 	// everything else will be https i
