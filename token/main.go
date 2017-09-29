@@ -51,9 +51,6 @@ func makeRsa() {
 	}
 	d.Info("private start")
 	priv, err := rsa.GenerateKey(rand.Reader, 2048)
-	if err != nil {
-		log.Fatal(err)
-	}
 	d.Info("private pre")
 	privDer := x509.MarshalPKCS1PrivateKey(priv)
 	d.Info("private")
