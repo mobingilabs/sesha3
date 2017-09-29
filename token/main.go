@@ -60,6 +60,8 @@ func makeRsa() {
 		log.Fatal(err)
 	}
 
+	d.Info("pem data generated")
+
 	pemblock := &pem.Block{Type: "RSA PRIVATE KEY", Bytes: privDer}
 	pubblock := &pem.Block{Type: "RSA PUBLIC KEY", Bytes: pubDer}
 	privFile, err := os.OpenFile(self.rsa+self.user+"token.pem", os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)

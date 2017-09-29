@@ -189,6 +189,7 @@ func serve(cmd *cobra.Command) {
 
 	certfolder := cmdline.Dir() + "/certs"
 	port := GetCliStringFlag(cmd, "port")
+
 	router := mux.NewRouter()
 	router.HandleFunc("/token", token.Settoken).Methods(http.MethodGet)
 	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
