@@ -184,6 +184,8 @@ func serve(cmd *cobra.Command) {
 	}
 	notificate.Cred = credprof
 	notificate.Region = region
+	d.Info(credprof)
+	d.Info(region)
 	surl, _ := notificate.Dynamoget("slack")
 	d.Info("notificate: ", surl)
 
