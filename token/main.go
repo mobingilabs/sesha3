@@ -123,6 +123,7 @@ func parseTokenTxt(tokenTxt string) (*jwt.Token, error) {
 
 func Settoken(w http.ResponseWriter, r *http.Request) {
 	var req tokenReq
+	d.Info("settoken start")
 	credp := getjson(w, r, req)
 	cred := credp.(tokenReq)
 	self.user = cred.Username
