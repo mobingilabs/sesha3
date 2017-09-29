@@ -184,6 +184,7 @@ func serve(cmd *cobra.Command) {
 		}
 	}
 	d.Info("notificate: ", notificate)
+	d.Info(os.Getenv("SLACK"))
 
 	certfolder := cmdline.Dir() + "/certs"
 	port := GetCliStringFlag(cmd, "port")
