@@ -53,9 +53,9 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	)
 	err = fmt.Errorf("%s", "slack err test")
 	if err != nil {
-		d.Info("append try")
+		d.Info("debug:append try")
 		notificatePool = append(notificatePool, err)
-		d.Info("append end")
+		d.Info("debug:append end")
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
@@ -175,7 +175,7 @@ func serve(cmd *cobra.Command) {
 	// redirect every http request to https
 	// go http.ListenAndServe(":80", http.HandlerFunc(redirect))
 	// everything else will be https i
-	//go errcheck()
+	go errcheck()
 
 	//check notification flags
 	notificateArray, _ := cmd.Flags().GetStringArray("notification")
