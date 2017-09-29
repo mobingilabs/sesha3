@@ -26,16 +26,23 @@ var (
 	syslogging     bool   // set by cli flag
 	logger         *syslog.Writer
 	notificate     sesha3.Notificate
-	notificatePool []error
+	notificatePool []error = []error{}
 )
 
 func errcheck() {
 	for {
 		if len(notificatePool) > 0 {
-			v, notificatePool := pop(notificatePool)
+			var v error
+			v, notificatePool = pop(notificatePool)
 			_ = notificate.WebhookNotification(v)
 		}
 	}
+}
+
+func pop(slice []error) (error, []error) {
+	ans := slice[len(slice)-1]
+	slice = slice[:len(slice)-1]
+	return ans, slice
 }
 
 func ttyurl(w http.ResponseWriter, r *http.Request) {
