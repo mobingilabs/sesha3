@@ -33,6 +33,7 @@ func errcheck() {
 	for {
 		if len(notificatePool) > 0 {
 			var v error
+			d.Info("post start")
 			v, notificatePool = pop(notificatePool)
 			_ = notificate.WebhookNotification(v)
 		}
@@ -52,6 +53,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	)
 	err = fmt.Errorf("%s", "slack err test")
 	if err != nil {
+		d.Info("append err")
 		notificatePool = append(notificatePool, err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
