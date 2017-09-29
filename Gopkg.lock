@@ -10,8 +10,8 @@
 [[projects]]
   name = "github.com/aws/aws-sdk-go"
   packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/shareddefaults","private/protocol","private/protocol/ec2query","private/protocol/json/jsonutil","private/protocol/jsonrpc","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/restxml","private/protocol/xml/xmlutil","service/dynamodb","service/dynamodb/dynamodbattribute","service/dynamodb/dynamodbiface","service/ec2","service/s3","service/s3/s3iface","service/s3/s3manager","service/sts"]
-  revision = "93c0610f5cfe455cdccfdbe17bb0276764e62f1f"
-  version = "v1.12.0"
+  revision = "c652f9369083515c3ddf1fbaf6df68da2c101545"
+  version = "v1.12.1"
 
 [[projects]]
   name = "github.com/cenkalti/backoff"
@@ -94,7 +94,7 @@
   branch = "notification"
   name = "github.com/mobingilabs/mobingi-sdk-go"
   packages = ["client","mobingi/alm","mobingi/credentials","mobingi/sesha3","mobingi/session","pkg/cmdline","pkg/debug","pkg/private"]
-  revision = "f6d2ce39aa62e786f4c410512cc0ffd2a8f2fb28"
+  revision = "9633ce9a01059fa828043b70159c95941dfa9fcd"
 
 [[projects]]
   name = "github.com/moul/gotty-client"
@@ -130,7 +130,7 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
-  revision = "847319b7fc94cab682988f93da778204da164588"
+  revision = "76eec36fa14229c4b25bb894c2d0e591527af429"
 
 [[projects]]
   branch = "master"
