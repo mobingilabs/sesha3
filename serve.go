@@ -185,6 +185,8 @@ func serve(cmd *cobra.Command) {
 	d.Info("notificate: ", notificate)
 	d.Info("SLACK:", os.Getenv("SLACK"))
 	d.Info("SHELL:", os.Getenv("SHELL"))
+	d.Info("USER:", os.Getenv("USER"))
+	d.Info("HOME:", os.Getenv("HOME"))
 
 	certfolder := cmdline.Dir() + "/certs"
 	port := GetCliStringFlag(cmd, "port")
