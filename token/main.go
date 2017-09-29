@@ -49,7 +49,9 @@ func makeRsa() {
 		err = os.MkdirAll(self.rsa, 0700)
 		d.Info("mkdir err : ", err)
 	}
+	d.Info("private start")
 	priv, err := rsa.GenerateKey(rand.Reader, 2048)
+	d.Info("private pre")
 	privDer := x509.MarshalPKCS1PrivateKey(priv)
 	d.Info("private")
 	if err != nil {
