@@ -53,8 +53,9 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	)
 	err = fmt.Errorf("%s", "slack err test")
 	if err != nil {
-		d.Info("append err")
+		d.Info("append try")
 		notificatePool = append(notificatePool, err)
+		d.Info("append end")
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
