@@ -175,7 +175,6 @@ func serve(cmd *cobra.Command) {
 	// everything else will be https i
 	//d.Info("debug:errcheck start")
 	//go errcheck()
-
 	//check notification flags
 	notificateArray, _ := cmd.Flags().GetStringArray("notification")
 	for _, i := range notificateArray {
