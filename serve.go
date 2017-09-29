@@ -25,7 +25,10 @@ var (
 	credprof   string // set by cli flag
 	syslogging bool   // set by cli flag
 	logger     *syslog.Writer
-	notificate sesha3.Notificate
+	notificate sesha3.Notificate = sesha3.Notificate{
+		Cred:   credprof,
+		Region: region,
+	}
 	//notificatePool []error = []error{}
 )
 
@@ -182,11 +185,8 @@ func serve(cmd *cobra.Command) {
 			notificate.Slack = true
 		}
 	}
-	d.Info("notificate: ", notificate)
-	d.Info("SLACK:", os.Getenv("SLACK"))
-	d.Info("SHELL:", os.Getenv("SHELL"))
-	d.Info("USER:", os.Getenv("USER"))
-	d.Info("HOME:", os.Getenv("HOME"))
+	surl, _ := notificate.Dynamoget("slack")
+	d.Info("notificate: ", surl)
 
 	certfolder := cmdline.Dir() + "/certs"
 	port := GetCliStringFlag(cmd, "port")
