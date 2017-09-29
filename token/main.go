@@ -132,6 +132,7 @@ func Settoken(w http.ResponseWriter, r *http.Request) {
 	makeRsa()
 	defaultPrivKey, _ := ioutil.ReadFile(self.rsa + self.user + "token.pem")
 	token := genJWT(cred)
+	d.Info("debug:get token data")
 	self.pub, _ = ioutil.ReadFile(self.rsa + self.user + "token.pem.pub")
 	// JWTに署名する
 	key, _ := jwt.ParseRSAPrivateKeyFromPEM(defaultPrivKey)
