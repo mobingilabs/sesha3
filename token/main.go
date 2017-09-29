@@ -123,10 +123,12 @@ func parseTokenTxt(tokenTxt string) (*jwt.Token, error) {
 
 func Settoken(w http.ResponseWriter, r *http.Request) {
 	var req tokenReq
-	d.Info("settoken start")
+	d.Info("debug:settoken start")
 	credp := getjson(w, r, req)
+	d.Info("debug:getjson")
 	cred := credp.(tokenReq)
 	self.user = cred.Username
+	d.Info("debug:get username")
 	makeRsa()
 	defaultPrivKey, _ := ioutil.ReadFile(self.rsa + self.user + "token.pem")
 	token := genJWT(cred)
