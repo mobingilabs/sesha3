@@ -86,6 +86,7 @@ func signalHandler() {
 }
 
 func main() {
+	go errcheck()
 	signalHandler()
 	if err := rootCmd.Execute(); err != nil {
 		log.Fatalln(err)
