@@ -50,6 +50,7 @@ func makeRsa() {
 		d.Info("mkdir err : ", err)
 	}
 	d.Info("private start")
+	d.Info(rand.Reader)
 	priv, err := rsa.GenerateKey(rand.Reader, 2048)
 	d.Info("private pre")
 	privDer := x509.MarshalPKCS1PrivateKey(priv)
