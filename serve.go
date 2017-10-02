@@ -28,6 +28,14 @@ var (
 	notificate sesha3.Notificate
 )
 
+func errcheck(err error) {
+	_ = notificate.WebhookNotification(err)
+}
+
+func hookpost(err error) {
+	go errcheck(err)
+}
+
 func ttyurl(w http.ResponseWriter, r *http.Request) {
 	var sess session
 	err := token.GetToken(r,
@@ -38,7 +46,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	err = fmt.Errorf("%s", "slack post test")
 
 	if err != nil {
-		_ = notificate.WebhookNotification(err)
+		hookpost(err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
@@ -159,7 +167,6 @@ func serve(cmd *cobra.Command) {
 	// everything else will be https i
 	//check notification flags
 	d.Info("serve:start")
-	d.Info("debug:errcheck start")
 	notificateArray, err := cmd.Flags().GetStringArray("notification")
 	d.Info("serve:get notification flags", err)
 	for _, i := range notificateArray {
