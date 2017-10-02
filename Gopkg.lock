@@ -94,7 +94,7 @@
   branch = "notification"
   name = "github.com/mobingilabs/mobingi-sdk-go"
   packages = ["client","mobingi/alm","mobingi/credentials","mobingi/sesha3","mobingi/session","pkg/cmdline","pkg/debug","pkg/private"]
-  revision = "e77414cfceb9983c4332f035135c785001db7eb3"
+  revision = "abcecc9a423af96160564cc7249f4c38a34c83a2"
 
 [[projects]]
   name = "github.com/moul/gotty-client"
