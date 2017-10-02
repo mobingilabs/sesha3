@@ -83,6 +83,7 @@ func (s *sessions) TerminateAll() []error {
 		d.Info("attempt close port:", sess.HttpsPort)
 		err := sess.portReq.ClosePort()
 		if err != nil {
+			hookpost(err)
 			d.Error(err)
 		}
 
@@ -91,6 +92,7 @@ func (s *sessions) TerminateAll() []error {
 		err = sess.Cmd.Process.Signal(syscall.SIGTERM)
 		if err != nil {
 			err := errors.Wrap(err, "sigterm failed")
+			hookpost(err)
 			ret = append(ret, err)
 			d.Error(err)
 			// when all else fail
