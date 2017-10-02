@@ -212,5 +212,6 @@ func serve(cmd *cobra.Command) {
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
 	err = http.ListenAndServeTLS(":"+port, certfolder+"/fullchain.pem", certfolder+"/privkey.pem", router)
 	hookpost(err)
+	hookpost("sesha3 server is stopped")
 	d.ErrorExit(err, 1)
 }
