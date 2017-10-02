@@ -197,11 +197,6 @@ func serve(cmd *cobra.Command) {
 			notificate.Slack = true
 		}
 	}
-	notificate.Cred = credprof
-	notificate.Region = region
-	nobj, _ := notificate.Dynamoget()
-	notificate.URLs = nobj
-	notificate.Valid = true
 	hookpost("sesha3 server is started.")
 
 	certfolder := cmdline.Dir() + "/certs"

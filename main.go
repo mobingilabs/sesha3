@@ -39,6 +39,11 @@ var rootCmd = &cobra.Command{
 		region = GetCliStringFlag(cmd, "aws-region")
 		ec2id = GetCliStringFlag(cmd, "ec2-id")
 		credprof = GetCliStringFlag(cmd, "cred-profile")
+		notificate.Cred = credprof
+		notificate.Region = region
+		nobj, _ := notificate.Dynamoget()
+		notificate.URLs = nobj
+		notificate.Valid = true
 		err := awsports.Download(env, region, credprof)
 		d.ErrorExit(err, 1)
 
