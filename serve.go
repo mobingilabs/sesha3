@@ -175,8 +175,8 @@ func serve(cmd *cobra.Command) {
 	// redirect every http request to https
 	// go http.ListenAndServe(":80", http.HandlerFunc(redirect))
 	// everything else will be https i
-	//d.Info("debug:errcheck start")
-	//go errcheck()
+	d.Info("debug:errcheck start")
+	go errcheck()
 	//check notification flags
 	d.Info("serve:start")
 	d.Info("credprof:", credprof)
