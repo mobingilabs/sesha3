@@ -178,6 +178,7 @@ func serve(cmd *cobra.Command) {
 	//d.Info("debug:errcheck start")
 	//go errcheck()
 	//check notification flags
+	d.Info("serve:start")
 	notificateArray, _ := cmd.Flags().GetStringArray("notification")
 	for _, i := range notificateArray {
 		if i == "slack" {
