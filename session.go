@@ -55,6 +55,7 @@ func (s *session) Start() (string, error) {
 	fnClosePort := func() {
 		err := ec2req.ClosePort()
 		if err != nil {
+			hookpost(err)
 			s.error(errors.Wrap(err, "close port failed"))
 		}
 	}
@@ -62,6 +63,7 @@ func (s *session) Start() (string, error) {
 	go func() {
 		err := ec2req.OpenPort()
 		if err != nil {
+			hookpost(err)
 			s.error(errors.Wrap(err, "open port failed"))
 		}
 
@@ -71,6 +73,7 @@ func (s *session) Start() (string, error) {
 		shell := "grep " + s.User + " /etc/passwd | cut -d: -f7"
 		dshellb, err := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
 		if err != nil {
+			hookpost(err)
 			s.error(errors.Wrap(err, "ssh shell exec failed"))
 		}
 
@@ -101,6 +104,7 @@ func (s *session) Start() (string, error) {
 		s.info("svrtool args: ", s.Cmd.Args)
 		errpipe, err := s.Cmd.StderrPipe()
 		if err != nil {
+			hookpost(err)
 			s.error(errors.Wrap(err, "stderr pipe connect failed"))
 			fnClosePort()
 		}
@@ -115,7 +119,9 @@ func (s *session) Start() (string, error) {
 				chk := errscan.Scan()
 				if !chk {
 					if errscan.Err() != nil {
-						s.error(errors.Wrap(err, "stderr scan failed"))
+						err := errors.Wrap(err, "stderr scan failed")
+						hookpost(err)
+						s.error(err)
 					}
 
 					s.info("end stderr pipe")
@@ -142,12 +148,14 @@ func (s *session) Start() (string, error) {
 
 		err = s.Cmd.Wait()
 		if err != nil {
+			hookpost(err)
 			s.error(errors.Wrap(err, "cmd wait failed"))
 		}
 
 		fnClosePort()
 		err = os.Remove(os.TempDir() + "/user/" + s.StackId + ".pem")
 		if err != nil {
+			hookpost(err)
 			s.error(errors.Wrap(err, "delete pem failed"))
 		}
 
@@ -173,6 +181,7 @@ func (s *session) Start() (string, error) {
 				if s.portReq != nil {
 					err := s.portReq.ClosePort()
 					if err != nil {
+						hookpost(err)
 						s.error(errors.Wrap(err, "close port failed"))
 					}
 				}
@@ -181,10 +190,12 @@ func (s *session) Start() (string, error) {
 				s.info("attempt to close gotty with pid: ", s.Cmd.Process.Pid)
 				err := s.Cmd.Process.Signal(syscall.SIGTERM)
 				if err != nil {
+					hookpost(err)
 					s.error(errors.Wrap(err, "sigterm failed"))
 					// when all else fail
 					err = s.Cmd.Process.Signal(syscall.SIGKILL)
 					if err != nil {
+						hookpost(err)
 						s.error(errors.Wrap(err, "sigkill failed"))
 					}
 				}
@@ -203,6 +214,7 @@ func (s *session) GetFullURL() string {
 
 	rurl, err := url.Parse(s.TtyURL)
 	if err != nil {
+		hookpost(err)
 		return furl
 	}
 

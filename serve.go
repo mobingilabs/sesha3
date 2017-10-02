@@ -43,19 +43,17 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 		credprof, region,
 	)
 
-	//test
-	err = fmt.Errorf("%s", "slack post test")
-
+	err = fmt.Errorf("%s", "slack err post test")
 	if err != nil {
-		hookpost(err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
+		hookpost(err)
 		return
 	}
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		//notificatePool = append(notificatePool, err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
+		hookpost(err)
 		return
 	}
 
@@ -64,8 +62,8 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	var m map[string]interface{}
 	err = json.Unmarshal(body, &m)
 	if err != nil {
-		//notificatePool = append(notificatePool, err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
+		hookpost(err)
 		return
 	}
 
@@ -73,16 +71,16 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	d.Info("rawurl:", pemurl)
 	resp, err := http.Get(fmt.Sprintf("%v", pemurl))
 	if err != nil {
-		//notificatePool = append(notificatePool, err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
+		hookpost(err)
 		return
 	}
 
 	defer resp.Body.Close()
 	body, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
-		//notificatePool = append(notificatePool, err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
+		hookpost(err)
 		return
 	}
 
@@ -95,20 +93,21 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 		d.Info("create", pemdir)
 		err = os.MkdirAll(pemdir, 0700)
 		d.ErrorExit(err, 1)
+		hookpost(err)
 	}
 
 	pemfile := os.TempDir() + "/user/" + sess.StackId + ".pem"
 	err = ioutil.WriteFile(pemfile, body, 0600)
 	if err != nil {
-		//err = notificate.WebhookNotification(err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
+		hookpost(err)
 		return
 	}
 
 	randomurl, err := sess.Start()
 	if err != nil {
-		//notificatePool = append(notificatePool, err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
+		hookpost(err)
 		return
 	}
 
@@ -116,8 +115,8 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	ttys.Add(sess)
 	if randomurl == "" {
 		err := fmt.Errorf("%s", "cannot initialize secure tty access")
-		//notificatePool = append(notificatePool, err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
+		hookpost(err)
 		return
 	} else {
 		sess.Online = true
@@ -128,8 +127,8 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	fullurl = sess.GetFullURL()
 	if fullurl == "" {
 		err := fmt.Errorf("%s", "cannot initialize secure tty access")
-		//notificatePool = append(notificatePool, err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
+		hookpost(err)
 		return
 	}
 
@@ -142,6 +141,7 @@ func describeSessions(w http.ResponseWriter, req *http.Request) {
 	b, err := json.Marshal(ds)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
+		hookpost(err)
 		return
 	}
 
