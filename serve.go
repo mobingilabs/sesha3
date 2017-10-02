@@ -18,33 +18,15 @@ import (
 )
 
 var (
-	domain         string // set by cli flag
-	port           string // set by cli flag
-	region         string // set by cli flag
-	ec2id          string // set by cli flag
-	credprof       string // set by cli flag
-	syslogging     bool   // set by cli flag
-	logger         *syslog.Writer
-	notificate     sesha3.Notificate
-	notificatePool []error = []error{}
+	domain     string // set by cli flag
+	port       string // set by cli flag
+	region     string // set by cli flag
+	ec2id      string // set by cli flag
+	credprof   string // set by cli flag
+	syslogging bool   // set by cli flag
+	logger     *syslog.Writer
+	notificate sesha3.Notificate
 )
-
-func errcheck() {
-	for {
-		if len(notificatePool) > 0 {
-			var v error
-			d.Info("post start")
-			v, notificatePool = pop(notificatePool)
-			_ = notificate.WebhookNotification(v)
-		}
-	}
-}
-
-func pop(slice []error) (error, []error) {
-	ans := slice[len(slice)-1]
-	slice = slice[:len(slice)-1]
-	return ans, slice
-}
 
 func ttyurl(w http.ResponseWriter, r *http.Request) {
 	var sess session
@@ -56,9 +38,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	err = fmt.Errorf("%s", "slack post test")
 
 	if err != nil {
-		d.Info("debug:append try")
-		notificatePool = append(notificatePool, err)
-		d.Info("debug:append end")
+		_ = notificate.WebhookNotification(err)
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
@@ -188,12 +168,14 @@ func serve(cmd *cobra.Command) {
 			notificate.Slack = true
 		}
 	}
-	d.Info("serve:check notification flags")
 	notificate.Cred = credprof
-	d.Info("serve:set credprof to notificate")
 	notificate.Region = region
-	surlobj, _ := notificate.Dynamoget()
-	d.Info("notificate: ", surlobj.Slack)
+	nobj, err := notificate.Dynamoget()
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+	notificate.URLs = nobj
 
 	certfolder := cmdline.Dir() + "/certs"
 	port := GetCliStringFlag(cmd, "port")
