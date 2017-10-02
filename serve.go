@@ -175,12 +175,10 @@ func serve(cmd *cobra.Command) {
 	// redirect every http request to https
 	// go http.ListenAndServe(":80", http.HandlerFunc(redirect))
 	// everything else will be https i
-	d.Info("debug:errcheck start")
-	go errcheck()
 	//check notification flags
 	d.Info("serve:start")
-	d.Info("credprof:", credprof)
-	d.Info("region:", region)
+	d.Info("debug:errcheck start")
+	go errcheck()
 	notificateArray, err := cmd.Flags().GetStringArray("notification")
 	d.Info("serve:get notification flags", err)
 	for _, i := range notificateArray {
