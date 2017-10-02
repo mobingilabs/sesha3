@@ -184,9 +184,10 @@ func serve(cmd *cobra.Command) {
 			notificate.Slack = true
 		}
 	}
+	d.Info("serve:check notification flags")
 	notificate.Cred = credprof
 	notificate.Region = region
-	d.Info(credprof)
+	d.Info(notificate.Cred)
 	d.Info(region)
 	surl, _ := notificate.Dynamoget("slack")
 	d.Info("notificate: ", surl)
