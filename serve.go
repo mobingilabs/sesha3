@@ -189,7 +189,6 @@ func serve(cmd *cobra.Command) {
 	// go http.ListenAndServe(":80", http.HandlerFunc(redirect))
 	// everything else will be https i
 	//check notification flags
-	d.Info("serve:start")
 	notificateArray, err := cmd.Flags().GetStringArray("notification")
 	d.Info("serve:get notification flags", err)
 	for _, i := range notificateArray {
@@ -212,5 +211,6 @@ func serve(cmd *cobra.Command) {
 	// router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
 	err = http.ListenAndServeTLS(":"+port, certfolder+"/fullchain.pem", certfolder+"/privkey.pem", router)
+	hookpost(err)
 	d.ErrorExit(err, 1)
 }
