@@ -43,7 +43,6 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 		credprof, region,
 	)
 
-	err = fmt.Errorf("%s", "slack err post test")
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		hookpost(err)
