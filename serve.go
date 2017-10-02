@@ -202,7 +202,7 @@ func serve(cmd *cobra.Command) {
 	nobj, _ := notificate.Dynamoget()
 	notificate.URLs = nobj
 	notificate.Valid = true
-	hookpost("sesha3 server is started")
+	hookpost("sesha3 server is started.")
 
 	certfolder := cmdline.Dir() + "/certs"
 	port := GetCliStringFlag(cmd, "port")
@@ -214,6 +214,6 @@ func serve(cmd *cobra.Command) {
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
 	err = http.ListenAndServeTLS(":"+port, certfolder+"/fullchain.pem", certfolder+"/privkey.pem", router)
 	hookpost(err)
-	hookpost("sesha3 server is stopped")
+	hookpost("sesha3 server is stopped.")
 	d.ErrorExit(err, 1)
 }
