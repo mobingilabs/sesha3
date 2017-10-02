@@ -54,7 +54,6 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 
 	//test
 	err = fmt.Errorf("%s", "slack post test")
-	_ = notificate.WebhookNotification(err)
 
 	if err != nil {
 		d.Info("debug:append try")
