@@ -52,11 +52,11 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 		credprof, region,
 	)
 
-	err = fmt.Errorf("%s", "slack post test")
+	//	err = fmt.Errorf("%s", "slack post test")
 	if err != nil {
 		//		d.Info("debug:append try")
 		//		notificatePool = append(notificatePool, err)
-		_ = notificate.WebhookNotification(err)
+		//_ = notificate.WebhookNotification(err)
 		//		d.Info("debug:append end")
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
