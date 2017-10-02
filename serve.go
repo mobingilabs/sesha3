@@ -183,6 +183,7 @@ func serve(cmd *cobra.Command) {
 	port := GetCliStringFlag(cmd, "port")
 
 	router := mux.NewRouter()
+	hookpost(fmt.Errorf("%s", "sesha3 server is started"))
 	router.HandleFunc("/token", token.Settoken).Methods(http.MethodGet)
 	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
 	// router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
