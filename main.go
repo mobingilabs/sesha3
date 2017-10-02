@@ -76,6 +76,8 @@ func signalHandler() {
 				d.Info("remaining sessions:", ttys.Count())
 				if notificate.Valid {
 					hookpost("sesha3 server is stopped.")
+				} else {
+					d.Info("notification:", "Invalid")
 				}
 				errs := ttys.TerminateAll()
 				if len(errs) > 0 {
