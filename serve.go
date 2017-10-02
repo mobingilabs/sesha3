@@ -28,15 +28,36 @@ var (
 	notificate sesha3.Notificate
 )
 
-func errcheck(err error) {
-	err = notificate.WebhookNotification(err)
+func errcheck(v interface{}) {
+	var err error
+	switch v.(type) {
+	case string:
+		p_string := v.(string)
+		err = notificate.WebhookNotification(p_string)
+	case error:
+		p_string := v.(string)
+		err = notificate.WebhookNotification(p_string)
+	default:
+		p_string := fmt.Sprintf("%s", v)
+		err = notificate.WebhookNotification(p_string)
+	}
 	if err != nil {
 		d.ErrorExit(err, 1)
 	}
 }
 
-func hookpost(err error) {
-	go errcheck(err)
+func hookpost(v interface{}) {
+	switch v.(type) {
+	case string:
+		err := v.(string)
+		go errcheck(err)
+	case error:
+		err := v.(error)
+		go errcheck(err)
+	default:
+		err := fmt.Sprintf("%s", v)
+		go errcheck(err)
+	}
 }
 
 func ttyurl(w http.ResponseWriter, r *http.Request) {
@@ -180,6 +201,7 @@ func serve(cmd *cobra.Command) {
 	notificate.Region = region
 	nobj, _ := notificate.Dynamoget()
 	notificate.URLs = nobj
+	hookpost("sesha3 server is started")
 
 	certfolder := cmdline.Dir() + "/certs"
 	port := GetCliStringFlag(cmd, "port")
@@ -189,7 +211,6 @@ func serve(cmd *cobra.Command) {
 	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
 	// router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
-	hookpost(fmt.Errorf("%s", "sesha3 server is started"))
 	err = http.ListenAndServeTLS(":"+port, certfolder+"/fullchain.pem", certfolder+"/privkey.pem", router)
 	d.ErrorExit(err, 1)
 }
