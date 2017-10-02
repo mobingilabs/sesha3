@@ -30,7 +30,9 @@ var (
 
 func errcheck(err error) {
 	err = notificate.WebhookNotification(err)
-	d.ErrorExit(err, 1)
+	if err != nil {
+		d.ErrorExit(err, 1)
+	}
 }
 
 func hookpost(err error) {
