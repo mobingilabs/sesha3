@@ -192,7 +192,7 @@ func serve(cmd *cobra.Command) {
 	notificate.Region = region
 	d.Info("notificate:", notificate.Cred)
 	d.Info("notificate:", region)
-	surl, _ := notificate.Dynamoget("slack")
+	surl, _ := notificate.Dynamoget("sesha3")
 	d.Info("notificate: ", surl)
 
 	certfolder := cmdline.Dir() + "/certs"
