@@ -190,10 +190,8 @@ func serve(cmd *cobra.Command) {
 	notificate.Cred = credprof
 	d.Info("serve:set credprof to notificate")
 	notificate.Region = region
-	d.Info("notificate:", notificate.Cred)
-	d.Info("notificate:", region)
-	surl, _ := notificate.Dynamoget()
-	d.Info("notificate: ", surl)
+	surlobj, _ := notificate.Dynamoget()
+	d.Info("notificate: ", surlobj.Slack)
 
 	certfolder := cmdline.Dir() + "/certs"
 	port := GetCliStringFlag(cmd, "port")
