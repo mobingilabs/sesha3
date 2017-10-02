@@ -51,8 +51,6 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	err := token.GetToken(r,
 		credprof, region,
 	)
-	slackurl, err := notificate.Dynamoget("slack")
-	d.Info("dynamo: ", slackurl)
 	if err != nil {
 		//d.Info("debug:append try")
 		//notificatePool = append(notificatePool, err)
@@ -179,7 +177,8 @@ func serve(cmd *cobra.Command) {
 	//go errcheck()
 	//check notification flags
 	d.Info("serve:start")
-	notificateArray, _ := cmd.Flags().GetStringArray("notification")
+	notificateArray, err := cmd.Flags().GetStringArray("notification")
+	d.Info("serve:get notification flags", err)
 	for _, i := range notificateArray {
 		if i == "slack" {
 			notificate.Slack = true
@@ -200,6 +199,6 @@ func serve(cmd *cobra.Command) {
 	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
 	// router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
-	err := http.ListenAndServeTLS(":"+port, certfolder+"/fullchain.pem", certfolder+"/privkey.pem", router)
+	err = http.ListenAndServeTLS(":"+port, certfolder+"/fullchain.pem", certfolder+"/privkey.pem", router)
 	d.ErrorExit(err, 1)
 }
