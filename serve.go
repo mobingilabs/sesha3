@@ -160,7 +160,6 @@ func serve(cmd *cobra.Command) {
 	//check notification flags
 	d.Info("serve:start")
 	d.Info("debug:errcheck start")
-	go errcheck()
 	notificateArray, err := cmd.Flags().GetStringArray("notification")
 	d.Info("serve:get notification flags", err)
 	for _, i := range notificateArray {
@@ -170,11 +169,7 @@ func serve(cmd *cobra.Command) {
 	}
 	notificate.Cred = credprof
 	notificate.Region = region
-	nobj, err := notificate.Dynamoget()
-	if err != nil {
-		w.Write(sesha3.NewSimpleError(err).Marshal())
-		return
-	}
+	nobj, _ := notificate.Dynamoget()
 	notificate.URLs = nobj
 
 	certfolder := cmdline.Dir() + "/certs"
