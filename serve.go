@@ -29,22 +29,22 @@ var (
 	notificatePool []error = []error{}
 )
 
-func errcheck() {
-	for {
-		if len(notificatePool) > 0 {
-			var v error
-			d.Info("post start")
-			v, notificatePool = pop(notificatePool)
-			_ = notificate.WebhookNotification(v)
-		}
-	}
-}
-
-func pop(slice []error) (error, []error) {
-	ans := slice[len(slice)-1]
-	slice = slice[:len(slice)-1]
-	return ans, slice
-}
+//func errcheck() {
+//	for {
+//		if len(notificatePool) > 0 {
+//			var v error
+//			d.Info("post start")
+//			v, notificatePool = pop(notificatePool)
+//			_ = notificate.WebhookNotification(v)
+//		}
+//	}
+//}
+//
+//func pop(slice []error) (error, []error) {
+//	ans := slice[len(slice)-1]
+//	slice = slice[:len(slice)-1]
+//	return ans, slice
+//}
 
 func ttyurl(w http.ResponseWriter, r *http.Request) {
 	var sess session
@@ -54,9 +54,10 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 
 	err = fmt.Errorf("%s", "slack post test")
 	if err != nil {
-		d.Info("debug:append try")
-		notificatePool = append(notificatePool, err)
-		d.Info("debug:append end")
+		//		d.Info("debug:append try")
+		//		notificatePool = append(notificatePool, err)
+		_ = notificate.WebhookNotification(err)
+		//		d.Info("debug:append end")
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
@@ -177,8 +178,8 @@ func serve(cmd *cobra.Command) {
 	// everything else will be https i
 	//check notification flags
 	d.Info("serve:start")
-	d.Info("debug:errcheck start")
-	go errcheck()
+	//	d.Info("debug:errcheck start")
+	//	go errcheck()
 	notificateArray, err := cmd.Flags().GetStringArray("notification")
 	d.Info("serve:get notification flags", err)
 	for _, i := range notificateArray {
