@@ -177,6 +177,8 @@ func serve(cmd *cobra.Command) {
 	//go errcheck()
 	//check notification flags
 	d.Info("serve:start")
+	d.Info("credprof:", credprof)
+	d.Info("region:", region)
 	notificateArray, err := cmd.Flags().GetStringArray("notification")
 	d.Info("serve:get notification flags", err)
 	for _, i := range notificateArray {
@@ -186,6 +188,7 @@ func serve(cmd *cobra.Command) {
 	}
 	d.Info("serve:check notification flags")
 	notificate.Cred = credprof
+	d.Info("serve:set credprof to notificate")
 	notificate.Region = region
 	d.Info(notificate.Cred)
 	d.Info(region)
