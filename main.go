@@ -73,6 +73,7 @@ func signalHandler() {
 			switch s {
 			case syscall.SIGINT, syscall.SIGTERM:
 				// try cleanup remaining sessions, if any
+				d.Info("notificate:", notificate.Valid)
 				d.Info("remaining sessions:", ttys.Count())
 				if notificate.Valid {
 					hookpost("sesha3 server is stopped.")
