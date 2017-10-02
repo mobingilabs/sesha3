@@ -51,7 +51,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	err := token.GetToken(r,
 		credprof, region,
 	)
-	slackurl, err = notificate.Dynamoget("slack")
+	slackurl, err := notificate.Dynamoget("slack")
 	d.Info("dynamo: ", slackurl)
 	if err != nil {
 		//d.Info("debug:append try")
