@@ -159,6 +159,7 @@ func CheckToken(credential string, region string, token_user string, token_pass 
 	db := dynamo.New(session.New(), &aws.Config{Region: aws.String(region),
 		Credentials: cred,
 	})
+
 	table := db.Table("MC_IDENTITY")
 	var results []Event
 	err := table.Get("username", token_user).All(&results)
@@ -166,16 +167,18 @@ func CheckToken(credential string, region string, token_user string, token_pass 
 	for _, data := range results {
 		if data.Status == "deleted" {
 			ret = false
-			d.Info("token_ALMuser_check: status=deleted,username=", data.Username)
+			d.Info("token_ALMuser_check: status = deleted, username = ", data.Username)
 			break
 		} else {
-			d.Info("token_ALMuser_check: status=OK,username=", data.Username)
+			d.Info("token_ALMuser_check: status = OK, username = ", data.Username)
 		}
+
 		if token_pass == data.Pass {
 			d.Info("token_ALMuser_check: sucess")
 			ret = true
 		}
 	}
+
 	return ret, err
 }
 
