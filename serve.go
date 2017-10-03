@@ -7,6 +7,7 @@ import (
 	"log/syslog"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
@@ -14,7 +15,6 @@ import (
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
-	"github.com/mobingilabs/sesha3/token"
 	"github.com/spf13/cobra"
 )
 
@@ -107,15 +107,30 @@ func generateToken(w http.ResponseWriter, r *http.Request) {
 
 func ttyurl(w http.ResponseWriter, r *http.Request) {
 	var sess session
-	err := token.GetToken(r,
-		credprof, region,
-	)
+	var m map[string]interface{}
 
-	if err != nil {
-		w.Write(sesha3.NewSimpleError(err).Marshal())
-		hookpost(err)
+	auth := strings.Split(r.Header.Get("Authorization"), " ")
+	if len(auth) != 2 {
+		w.WriteHeader(401)
 		return
 	}
+
+	ctx, err := jwt.NewCtx()
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+
+	token := auth[1]
+	pt, err := ctx.ParseToken(token)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+
+	nc := pt.Claims.(*jwt.WrapperClaims)
+	u, ok := nc.Data["username"]
+	d.Info("user:", u, ok)
 
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
@@ -125,9 +140,8 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	d.Info("req:", string(body))
-
-	var m map[string]interface{}
+	d.Info("token:", token)
+	d.Info("body:", string(body))
 	err = json.Unmarshal(body, &m)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
