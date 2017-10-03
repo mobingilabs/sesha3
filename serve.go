@@ -12,6 +12,7 @@ import (
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/cmdline"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
+	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/token"
 	"github.com/spf13/cobra"
@@ -61,6 +62,31 @@ func hookpost(v interface{}) {
 		err := fmt.Sprintf("%s", v)
 		go errcheck(err)
 	}
+}
+
+func generateToken(w http.ResponseWriter, r *http.Request) {
+	ctx, err := jwt.NewCtx()
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+
+	_ = ctx
+
+	defer r.Body.Close()
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		hookpost(err)
+		return
+	}
+
+	d.Info("body:", string(body))
+
+	/*
+		payload := `{"key":"` + stoken + `"}`
+		w.Write([]byte(payload))
+	*/
 }
 
 func ttyurl(w http.ResponseWriter, r *http.Request) {
@@ -208,7 +234,8 @@ func serve(cmd *cobra.Command) {
 	port := GetCliStringFlag(cmd, "port")
 
 	router := mux.NewRouter()
-	router.HandleFunc("/token", token.Settoken).Methods(http.MethodGet)
+	// router.HandleFunc("/token", token.Settoken).Methods(http.MethodGet)
+	router.HandleFunc("/token", generateToken).Methods(http.MethodGet)
 	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
 	// router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
