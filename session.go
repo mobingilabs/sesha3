@@ -11,6 +11,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/cmdline"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/awsports"
@@ -61,6 +62,9 @@ func (s *session) Start() (string, error) {
 	}
 
 	go func() {
+		sesha3.MetricsConnect.Add(1)
+		defer sesha3.MetricsConnect.Add(-1)
+
 		err := ec2req.OpenPort()
 		if err != nil {
 			hookpost(err)
