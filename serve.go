@@ -47,6 +47,9 @@ func errcheck(v interface{}) {
 }
 
 func hookpost(v interface{}) {
+	// test
+	return
+
 	switch v.(type) {
 	case string:
 		err := v.(string)
@@ -208,7 +211,5 @@ func serve(cmd *cobra.Command) {
 	// router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
 	err = http.ListenAndServeTLS(":"+port, certfolder+"/fullchain.pem", certfolder+"/privkey.pem", router)
-	hookpost(err)
-	hookpost("sesha3 server is stopped.")
 	d.ErrorExit(err, 1)
 }
