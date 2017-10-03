@@ -100,6 +100,7 @@ func generateToken(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	d.Info("generated token:", stoken)
 	payload := `{"key":"` + stoken + `"}`
 	w.Write([]byte(payload))
 }
