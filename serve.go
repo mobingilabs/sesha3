@@ -137,7 +137,6 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 
 	md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
 	ok, err := token.CheckToken(credprof, region, fmt.Sprintf("%s", u), md5p)
-	d.Info("check:", ok, err)
 	if !ok {
 		w.WriteHeader(401)
 		return
