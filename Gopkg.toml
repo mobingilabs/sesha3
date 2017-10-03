@@ -34,8 +34,9 @@
   name = "github.com/guregu/dynamo"
 
 [[constraint]]
+  branch = "metrics"
   name = "github.com/mobingilabs/mobingi-sdk-go"
-  version = "0.1.0"
+  #version = "0.1.0"
 
 [[constraint]]
   name = "github.com/pkg/errors"

@@ -112,6 +112,8 @@ func generateToken(w http.ResponseWriter, r *http.Request) {
 }
 
 func ttyurl(w http.ResponseWriter, r *http.Request) {
+	sesha3.MetricsConnect.Add(1)
+	defer sesha3.MetricsConnect.Add(-1)
 	var sess session
 	var m map[string]interface{}
 

@@ -91,10 +91,10 @@
   version = "v0.0.3"
 
 [[projects]]
+  branch = "metrics"
   name = "github.com/mobingilabs/mobingi-sdk-go"
   packages = ["client","mobingi/alm","mobingi/credentials","mobingi/sesha3","mobingi/session","pkg/cmdline","pkg/debug","pkg/jwt","pkg/private"]
-  revision = "4d2ff01b76b2d595d23d9223cb7df23a9662e925"
-  version = "v0.1.2"
+  revision = "a766027750309d89bb58592ff857b2b892d705bd"
 
 [[projects]]
   name = "github.com/moul/gotty-client"
@@ -147,6 +147,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "c367a25a605f3ca647537a6f3112ee9d229f779f924cd098f247b112e84b17fd"
+  inputs-digest = "fe64973581a40a46419c953479ae6fdd15d7ae374bc9269066c3021e513e460f"
   solver-name = "gps-cdcl"
   solver-version = 1
