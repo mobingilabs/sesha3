@@ -71,8 +71,6 @@ func generateToken(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_ = ctx
-
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -81,12 +79,29 @@ func generateToken(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	d.Info("body:", string(body))
+	type creds_t struct {
+		Username string `json:"username"`
+		Password string `json:"passwd"`
+	}
 
-	/*
-		payload := `{"key":"` + stoken + `"}`
-		w.Write([]byte(payload))
-	*/
+	var up creds_t
+	err = json.Unmarshal(body, &up)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+
+	m := make(map[string]interface{})
+	m["username"] = up.Username
+	m["password"] = up.Password
+	_, stoken, err := ctx.GenerateToken(m)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+
+	payload := `{"key":"` + stoken + `"}`
+	w.Write([]byte(payload))
 }
 
 func ttyurl(w http.ResponseWriter, r *http.Request) {
