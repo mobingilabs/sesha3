@@ -16,7 +16,6 @@ import (
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
-	"github.com/mobingilabs/sesha3/token"
 	"github.com/spf13/cobra"
 )
 
@@ -136,7 +135,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	d.Info("user:", u)
 
 	md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
-	ok, err := token.CheckToken(credprof, region, fmt.Sprintf("%s", u), md5p)
+	ok, err := CheckToken(credprof, region, fmt.Sprintf("%s", u), md5p)
 	if !ok {
 		w.WriteHeader(401)
 		return
