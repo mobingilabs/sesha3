@@ -71,6 +71,12 @@ func hookpost(v interface{}) {
 }
 
 func generateToken(w http.ResponseWriter, r *http.Request) {
+	//metrics
+	sesha3.MetricsConnect.Add(1)
+	defer sesha3.MetricsConnect.Add(-1)
+	sesha3.MetricsTokenRequest.Add(1)
+	defer sesha3.MetricsTokenRequest.Add(-1)
+
 	ctx, err := jwt.NewCtx()
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
@@ -112,8 +118,12 @@ func generateToken(w http.ResponseWriter, r *http.Request) {
 }
 
 func ttyurl(w http.ResponseWriter, r *http.Request) {
+	//metrics
 	sesha3.MetricsConnect.Add(1)
 	defer sesha3.MetricsConnect.Add(-1)
+	sesha3.MetricsTTYRequest.Add(1)
+	defer sesha3.MetricsTTYRequest.Add(-1)
+
 	var sess session
 	var m map[string]interface{}
 
@@ -255,6 +265,8 @@ func describeSessions(w http.ResponseWriter, req *http.Request) {
 }
 
 func version(w http.ResponseWriter, req *http.Request) {
+	sesha3.MetricsConnect.Add(1)
+	defer sesha3.MetricsConnect.Add(-1)
 	w.Write([]byte(`{"version":"v0.0.13-beta"}`))
 }
 
@@ -292,8 +304,8 @@ func serve(cmd *cobra.Command) {
 	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
 	// router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
-	//https://sesha3.labs.mobingi.com/debug : you can see metrics
-	router.Handle("/debug", sesha3.MetricsHandler)
+	//https://sesha3.labs.mobingi.com/debug/vars : you can see metrics
+	router.Handle("/debug/vars", sesha3.MetricsHandler)
 	err = http.ListenAndServeTLS(":"+port, certfolder+"/fullchain.pem", certfolder+"/privkey.pem", router)
 	d.ErrorExit(err, 1)
 }
