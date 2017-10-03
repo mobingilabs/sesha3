@@ -36,13 +36,19 @@ func errcheck(v interface{}) {
 	switch v.(type) {
 	case string:
 		str := v.(string)
-		err = notifier.WebhookNotification(str)
+		if str != "" {
+			err = notifier.WebhookNotification(str)
+		}
 	case error:
-		str := v.(error).Error()
-		err = notifier.WebhookNotification(str)
+		terr := v.(error)
+		if terr != nil {
+			err = notifier.WebhookNotification(terr.Error())
+		}
 	default:
 		str := fmt.Sprintf("%v", v)
-		err = notifier.WebhookNotification(str)
+		if str != "" {
+			err = notifier.WebhookNotification(str)
+		}
 	}
 
 	if err != nil {
