@@ -280,7 +280,7 @@ func serve(cmd *cobra.Command) {
 		}
 	}
 
-	hookpost("sesha3 server is started.")
+	hookpost("sesha3 server is started")
 
 	certfolder := cmdline.Dir() + "/certs"
 	port := GetCliStringFlag(cmd, "port")
