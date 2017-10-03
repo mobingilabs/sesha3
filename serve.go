@@ -16,6 +16,7 @@ import (
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
 
@@ -27,31 +28,29 @@ var (
 	credprof   string // set by cli flag
 	syslogging bool   // set by cli flag
 	logger     *syslog.Writer
-	notificate sesha3.Notificate
+	notifier   sesha3.Notificate
 )
 
 func errcheck(v interface{}) {
 	var err error
 	switch v.(type) {
 	case string:
-		p_string := v.(string)
-		err = notificate.WebhookNotification(p_string)
+		str := v.(string)
+		err = notifier.WebhookNotification(str)
 	case error:
-		p_string := v.(string)
-		err = notificate.WebhookNotification(p_string)
+		str := v.(error).Error()
+		err = notifier.WebhookNotification(str)
 	default:
-		p_string := fmt.Sprintf("%s", v)
-		err = notificate.WebhookNotification(p_string)
+		str := fmt.Sprintf("%v", v)
+		err = notifier.WebhookNotification(str)
 	}
+
 	if err != nil {
-		d.ErrorExit(err, 1)
+		d.Error(errors.Wrap(err, "webhook notify failed"))
 	}
 }
 
 func hookpost(v interface{}) {
-	// temporary disable
-	return
-
 	switch v.(type) {
 	case string:
 		err := v.(string)
@@ -60,7 +59,7 @@ func hookpost(v interface{}) {
 		err := v.(error)
 		go errcheck(err)
 	default:
-		err := fmt.Sprintf("%s", v)
+		err := fmt.Sprintf("%v", v)
 		go errcheck(err)
 	}
 }
@@ -271,7 +270,7 @@ func serve(cmd *cobra.Command) {
 	d.Info("serve:get notification flags", err)
 	for _, i := range notificateArray {
 		if i == "slack" {
-			notificate.Slack = true
+			notifier.Slack = true
 		}
 	}
 

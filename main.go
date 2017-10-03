@@ -39,11 +39,11 @@ var rootCmd = &cobra.Command{
 		region = GetCliStringFlag(cmd, "aws-region")
 		ec2id = GetCliStringFlag(cmd, "ec2-id")
 		credprof = GetCliStringFlag(cmd, "cred-profile")
-		notificate.Cred = credprof
-		notificate.Region = region
-		nobj, _ := notificate.Dynamoget()
-		notificate.URLs = nobj
-		notificate.Valid = true
+		notifier.Cred = credprof
+		notifier.Region = region
+		nobj, _ := notifier.Dynamoget()
+		notifier.URLs = nobj
+		notifier.Valid = true
 		err := awsports.Download(env, region, credprof)
 		d.ErrorExit(err, 1)
 
@@ -78,9 +78,9 @@ func signalHandler() {
 			switch s {
 			case syscall.SIGINT, syscall.SIGTERM:
 				// try cleanup remaining sessions, if any
-				d.Info("notificate:", notificate.Valid)
+				d.Info("notifier:", notifier.Valid)
 				d.Info("remaining sessions:", ttys.Count())
-				if notificate.Valid {
+				if notifier.Valid {
 					hookpost("sesha3 server is stopped.")
 				} else {
 					d.Info("notification:", "Invalid")
