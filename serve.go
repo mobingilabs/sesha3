@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/md5"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -15,6 +16,7 @@ import (
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
+	"github.com/mobingilabs/sesha3/token"
 	"github.com/spf13/cobra"
 )
 
@@ -121,16 +123,21 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	token := auth[1]
-	pt, err := ctx.ParseToken(token)
+	btoken := auth[1]
+	pt, err := ctx.ParseToken(btoken)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
 
 	nc := pt.Claims.(*jwt.WrapperClaims)
-	u, ok := nc.Data["username"]
-	d.Info("user:", u, ok)
+	u, _ := nc.Data["username"]
+	p, _ := nc.Data["password"]
+	d.Info("user:", u)
+
+	md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
+	ok, err := token.CheckToken(credprof, region, fmt.Sprintf("%s", u), md5p)
+	d.Info("check:", ok, err)
 
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
@@ -140,7 +147,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	d.Info("token:", token)
+	d.Info("token:", btoken)
 	d.Info("body:", string(body))
 	err = json.Unmarshal(body, &m)
 	if err != nil {
@@ -174,8 +181,11 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	if !private.Exists(pemdir) {
 		d.Info("create", pemdir)
 		err = os.MkdirAll(pemdir, 0700)
-		d.ErrorExit(err, 1)
-		hookpost(err)
+		if err != nil {
+			w.Write(sesha3.NewSimpleError(err).Marshal())
+			hookpost(err)
+			return
+		}
 	}
 
 	pemfile := os.TempDir() + "/user/" + sess.StackId + ".pem"
@@ -264,7 +274,6 @@ func serve(cmd *cobra.Command) {
 	port := GetCliStringFlag(cmd, "port")
 
 	router := mux.NewRouter()
-	// router.HandleFunc("/token", token.Settoken).Methods(http.MethodGet)
 	router.HandleFunc("/token", generateToken).Methods(http.MethodGet)
 	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
 	// router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
