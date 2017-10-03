@@ -135,7 +135,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	d.Info("user:", u)
 
 	md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
-	ok, err := CheckToken(credprof, region, fmt.Sprintf("%s", u), md5p)
+	ok, err := checkToken(credprof, region, fmt.Sprintf("%s", u), md5p)
 	if !ok {
 		w.WriteHeader(401)
 		return

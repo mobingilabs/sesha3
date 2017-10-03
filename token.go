@@ -8,20 +8,20 @@ import (
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 )
 
-type Event struct {
+type event struct {
 	Username string `dynamo:"username"`
 	Pass     string `dynamo:"password"`
 	Status   string `dynamo:"status"`
 }
 
-func CheckToken(credential string, region string, token_user string, token_pass string) (bool, error) {
+func checkToken(credential string, region string, token_user string, token_pass string) (bool, error) {
 	cred := credentials.NewSharedCredentials("/root/.aws/credentials", credential)
 	db := dynamo.New(as.New(), &aws.Config{Region: aws.String(region),
 		Credentials: cred,
 	})
 
 	table := db.Table("MC_IDENTITY")
-	var results []Event
+	var results []event
 	err := table.Get("username", token_user).All(&results)
 	ret := false
 	for _, data := range results {
