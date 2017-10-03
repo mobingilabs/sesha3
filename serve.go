@@ -292,6 +292,7 @@ func serve(cmd *cobra.Command) {
 	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
 	// router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
+	router.Handle("/debug", sesha3.MetricsHandler)
 	err = http.ListenAndServeTLS(":"+port, certfolder+"/fullchain.pem", certfolder+"/privkey.pem", router)
 	d.ErrorExit(err, 1)
 }
