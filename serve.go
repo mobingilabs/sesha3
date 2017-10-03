@@ -47,7 +47,7 @@ func errcheck(v interface{}) {
 }
 
 func hookpost(v interface{}) {
-	// test
+	// temporary disable
 	return
 
 	switch v.(type) {
@@ -74,6 +74,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 		hookpost(err)
 		return
 	}
+
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -190,7 +191,7 @@ func redirect(w http.ResponseWriter, req *http.Request) {
 func serve(cmd *cobra.Command) {
 	// redirect every http request to https
 	// go http.ListenAndServe(":80", http.HandlerFunc(redirect))
-	// everything else will be https i
+	// everything else will be https
 
 	//check notification flags
 	notificateArray, err := cmd.Flags().GetStringArray("notification")
@@ -200,6 +201,7 @@ func serve(cmd *cobra.Command) {
 			notificate.Slack = true
 		}
 	}
+
 	hookpost("sesha3 server is started.")
 
 	certfolder := cmdline.Dir() + "/certs"

@@ -1,29 +1,26 @@
 package token
 
 import (
-	"crypto/md5"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/json"
 	"encoding/pem"
 	"fmt"
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"
-	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/guregu/dynamo"
-	"github.com/pkg/errors"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 	"strconv"
 	"strings"
-
-	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"time"
 
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials"
+	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/guregu/dynamo"
+	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 )
 
 var (
@@ -185,27 +182,31 @@ func CheckToken(credential string, region string, token_user string, token_pass 
 func GetToken(r *http.Request, credential string, awsRegion string) error {
 	token := strings.Split(r.Header.Get("Authorization"), " ")[1]
 	d.Info("token:", token)
-	parsedToken, _ := parseTokenTxt(token)
-	d.Info(parsedToken)
-	claims := *parsedToken.Claims.(*tokenReq)
-	token_user := claims.Username
-	token_pass := fmt.Sprintf("%x", md5.Sum([]byte(claims.Passwd)))
-	d.Info("token_user:", token_user)
-	d.Info("token_pass:", "xxxxx")
+	return nil
 
-	tf := false
-	var err error = nil
-	if parsedToken.Valid {
-		tf = true
-	} else {
-		err = errors.New("your token is not valid ")
-	}
-	d.Info("token_check:", tf)
-	tf, err = CheckToken(credential, awsRegion, token_user, token_pass)
-	if tf == false {
-		err = errors.Wrap(err, "your username or password is not valid ")
-	}
-	return err
+	/*
+		parsedToken, _ := parseTokenTxt(token)
+		d.Info(parsedToken)
+		claims := *parsedToken.Claims.(*tokenReq)
+		token_user := claims.Username
+		token_pass := fmt.Sprintf("%x", md5.Sum([]byte(claims.Passwd)))
+		d.Info("token_user:", token_user)
+		d.Info("token_pass:", "xxxxx")
+
+		tf := false
+		var err error = nil
+		if parsedToken.Valid {
+			tf = true
+		} else {
+			err = errors.New("your token is not valid ")
+		}
+		d.Info("token_check:", tf)
+		tf, err = CheckToken(credential, awsRegion, token_user, token_pass)
+		if tf == false {
+			err = errors.Wrap(err, "your username or password is not valid ")
+		}
+		return err
+	*/
 }
 
 //func Test() {
