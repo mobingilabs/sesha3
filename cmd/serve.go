@@ -43,6 +43,16 @@ func ServeCmd() *cobra.Command {
 }
 
 func serve(cmd *cobra.Command, args []string) {
+	obj, err := notify.Notifier.Dynamoget()
+	if err != nil {
+		d.ErrorD(err)
+	}
+
+	notify.Notifier.URLs = obj
+	notify.Notifier.Cred = params.CredProfile
+	notify.Notifier.Region = params.Region
+	notify.Notifier.Valid = true
+
 	if params.UseSyslog {
 		logger, err := syslog.New(syslog.LOG_NOTICE|syslog.LOG_USER, "sesha3")
 		if err != nil {
@@ -61,13 +71,7 @@ func serve(cmd *cobra.Command, args []string) {
 		notify.HookPost(errors.Wrap(err, "create certs folder failed (fatal)"))
 	}
 
-	notify.Notifier.Cred = params.CredProfile
-	notify.Notifier.Region = params.Region
-	obj, _ := notify.Notifier.Dynamoget()
-	notify.Notifier.URLs = obj
-	notify.Notifier.Valid = true
-
-	err := awsports.Download(params.Environment, params.Region, params.CredProfile)
+	err = awsports.Download(params.Environment, params.Region, params.CredProfile)
 	if err != nil {
 		notify.HookPost(errors.Wrap(err, "server failed, fatal"))
 		d.ErrorTraceExit(err, 1)
