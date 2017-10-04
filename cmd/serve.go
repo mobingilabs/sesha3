@@ -55,6 +55,12 @@ func serve(cmd *cobra.Command, args []string) {
 		log.SetOutput(logger)
 	}
 
+	eps, _ := cmd.Flags().GetStringArray("notify-endpoints")
+	err = notify.Notifier.Init(eps)
+	if err != nil {
+		d.Error(err)
+	}
+
 	d.Info("--- server start ---")
 	d.Info("url:", params.Domain+":"+params.Port)
 	d.Info("syslog:", params.UseSyslog)
@@ -77,13 +83,6 @@ func serve(cmd *cobra.Command, args []string) {
 	// redirect every http request to https
 	// go http.ListenAndServe(":80", http.HandlerFunc(redirect))
 	// everything else will be https
-
-	// check notification flags
-	eps, _ := cmd.Flags().GetStringArray("notify-endpoints")
-	err = notify.Notifier.Init(eps)
-	if err != nil {
-		d.Error(err)
-	}
 
 	startm := "--- server start ---\n"
 	startm += "url: " + params.Domain + "\n"
