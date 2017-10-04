@@ -85,7 +85,22 @@ func serve(cmd *cobra.Command, args []string) {
 		d.Error(err)
 	}
 
-	notify.HookPost("sesha3 server is started")
+	/*
+		d.Info("--- server start ---")
+		d.Info("url:", params.Domain+":"+params.Port)
+		d.Info("syslog:", params.UseSyslog)
+		d.Info("region:", params.Region)
+		d.Info("server ec2:", params.Ec2Id)
+		d.Info("credprof:", params.CredProfile)
+	*/
+	startm := "--- server start ---\n"
+	startm += "url: " + params.Domain + "\n"
+	startm += "syslog: " + fmt.Sprintf("%v", params.UseSyslog) + "\n"
+	startm += "region: " + params.Region + "\n"
+	startm += "server ec2: " + params.Ec2Id + "\n"
+	startm += "credprofile: " + params.CredProfile
+	notify.HookPost(startm)
+
 	certfolder := cmdline.Dir() + "/certs"
 	router := mux.NewRouter()
 	router.HandleFunc("/token", generateToken).Methods(http.MethodGet)
