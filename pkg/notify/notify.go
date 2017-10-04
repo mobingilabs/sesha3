@@ -76,7 +76,7 @@ func (n *HttpNotifier) getSlackUrl() (EventN, error) {
 }
 
 func (n *HttpNotifier) Notify(v interface{}) error {
-	if !n.valid != true {
+	if !n.valid {
 		return errors.New("not properly initialized")
 	}
 
