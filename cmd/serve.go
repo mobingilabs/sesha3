@@ -23,7 +23,6 @@ import (
 	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/mobingilabs/sesha3/pkg/session"
 	"github.com/mobingilabs/sesha3/pkg/token"
-	"github.com/mobingilabs/sesha3/pkg/util"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
@@ -40,20 +39,17 @@ func ServeCmd() *cobra.Command {
 
 	cmd.Flags().SortFlags = false
 	cmd.Flags().StringVar(&params.Domain, "domain", "sesha3.labs.mobingi.com", "server domain")
-	cmd.Flags().String("port", "443", "server port")
+	cmd.Flags().StringVar(&params.Port, "port", "443", "server port")
 	return cmd
 }
 
 func serve(cmd *cobra.Command, args []string) {
-	notify.Notifier.Cred = params.CredProfile
-	notify.Notifier.Region = params.Region
-	obj, err := notify.Notifier.Dynamoget()
-	if err != nil {
-		d.ErrorD(err)
-	}
-
-	notify.Notifier.URLs = obj
-	notify.Notifier.Valid = true
+	d.Info("--- server start ---")
+	d.Info("url:", params.Domain+":"+params.Port)
+	d.Info("syslog:", params.UseSyslog)
+	d.Info("region:", params.Region)
+	d.Info("server ec2:", params.Ec2Id)
+	d.Info("credprof:", params.CredProfile)
 
 	if params.UseSyslog {
 		logger, err := syslog.New(syslog.LOG_NOTICE|syslog.LOG_USER, "sesha3")
@@ -73,7 +69,7 @@ func serve(cmd *cobra.Command, args []string) {
 		notify.HookPost(errors.Wrap(err, "create certs folder failed (fatal)"))
 	}
 
-	err = awsports.Download(params.Environment, params.Region, params.CredProfile)
+	err := awsports.Download(params.Environment, params.Region, params.CredProfile)
 	if err != nil {
 		notify.HookPost(errors.Wrap(err, "server failed, fatal"))
 		d.ErrorTraceExit(err, 1)
@@ -85,10 +81,9 @@ func serve(cmd *cobra.Command, args []string) {
 
 	// check notification flags
 	eps, _ := cmd.Flags().GetStringArray("notify-endpoints")
-	for _, i := range eps {
-		if i == "slack" {
-			notify.Notifier.Slack = true
-		}
+	err = notify.Notifier.Init(eps)
+	if err != nil {
+		d.Error(err)
 	}
 
 	notify.HookPost("sesha3 server is started")
@@ -100,7 +95,7 @@ func serve(cmd *cobra.Command, args []string) {
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
 	// https://sesha3.labs.mobingi.com/debug/vars
 	router.Handle("/debug/vars", metrics.MetricsHandler)
-	err = http.ListenAndServeTLS(":"+util.GetCliStringFlag(cmd, "port"),
+	err = http.ListenAndServeTLS(":"+params.Port,
 		certfolder+"/fullchain.pem",
 		certfolder+"/privkey.pem",
 		router)

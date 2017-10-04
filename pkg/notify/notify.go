@@ -1,10 +1,8 @@
 package notify
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
-	"net/http"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -12,48 +10,76 @@ import (
 	as "github.com/aws/aws-sdk-go/aws/session"
 	"github.com/guregu/dynamo"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
+	"github.com/mobingilabs/mobingi-sdk-go/pkg/notification"
+	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/pkg/errors"
 )
 
 type EventN struct {
-	Server_name string `dynamo:"server_name"`
-	Slack       string `dynamo:"slack"`
+	ServerName string `dynamo:"server_name"`
+	SlackUrl   string `dynamo:"slack"`
 }
 
-type Notificate struct {
-	Slack  bool
-	Cred   string
-	Region string
-	URLs   EventN
-	Valid  bool
+type HttpNotifier struct {
+	region    string
+	credprof  string
+	notifiers []notification.Notifier
+	valid     bool
 }
 
-func (n *Notificate) Dynamoget() (EventN, error) {
+func (n *HttpNotifier) Init(eps []string) error {
+	n.region = params.Region
+	n.credprof = params.CredProfile
+	n.notifiers = make([]notification.Notifier, 0)
+
+	// iterate endpoints
+	for _, ep := range eps {
+		switch ep {
+		case "slack":
+			su, err := n.getSlackUrl()
+			if err != nil {
+				debug.Error(err)
+				return err
+			}
+
+			hn := notification.NewSimpleHttpNotify(su.SlackUrl)
+			n.notifiers = append(n.notifiers, hn)
+		default:
+			hn := notification.NewSimpleHttpNotify(ep)
+			n.notifiers = append(n.notifiers, hn)
+		}
+	}
+
+	if len(n.notifiers) == 0 {
+		return errors.New("no notify endpoints")
+	}
+
+	n.valid = true
+	return nil
+}
+
+func (n *HttpNotifier) getSlackUrl() (EventN, error) {
 	serverName := "sesha3"
 	var results []EventN
-	cred := credentials.NewSharedCredentials("/root/.aws/credentials", n.Cred)
-	db := dynamo.New(as.New(), &aws.Config{Region: aws.String(n.Region),
+	cred := credentials.NewSharedCredentials("/root/.aws/credentials", n.credprof)
+	db := dynamo.New(as.New(), &aws.Config{
+		Region:      aws.String(n.region),
 		Credentials: cred,
 	})
+
 	table := db.Table("SESHA3")
 	err := table.Get("server_name", serverName).All(&results)
 	url := results[0]
 	return url, err
 }
 
-func (w *Notificate) WebhookNotification(v interface{}) error {
-	if w.Valid != true {
-		return errors.New("invalid")
+func (n *HttpNotifier) Notify(v interface{}) error {
+	if !n.valid != true {
+		return errors.New("not properly initialized")
 	}
 
 	type payload_t struct {
 		Text string `json:"text"`
-	}
-
-	var urls []string
-	if w.Slack {
-		NotificateURL := w.URLs
-		urls = append(urls, NotificateURL.Slack)
 	}
 
 	var err_string string
@@ -79,20 +105,17 @@ func (w *Notificate) WebhookNotification(v interface{}) error {
 		return errors.Wrap(err, "payload marshal failed")
 	}
 
-	client := &http.Client{}
-	for _, ep := range urls {
-		req, err := http.NewRequest(http.MethodPost, ep, bytes.NewBuffer(b))
-		req.Header.Add("Content-Type", "application/json")
-		_, err = client.Do(req)
+	for i, sender := range n.notifiers {
+		err := sender.Notify(b)
 		if err != nil {
-			return errors.Wrap(err, "notification client do failed")
+			return errors.Wrap(err, fmt.Sprintf("sender#%d failed", i))
 		}
 	}
 
-	return err
+	return nil
 }
 
-var Notifier Notificate
+var Notifier HttpNotifier
 
 func HookPost(v interface{}) {
 	var err error
@@ -101,14 +124,14 @@ func HookPost(v interface{}) {
 		str := v.(string)
 		if str != "" {
 			go func() {
-				err = Notifier.WebhookNotification(str)
+				err = Notifier.Notify(str)
 			}()
 		}
 	case error:
 		terr := v.(error)
 		if terr != nil {
 			go func() {
-				err = Notifier.WebhookNotification(terr.Error())
+				err = Notifier.Notify(terr.Error())
 			}()
 		}
 	default:
