@@ -10,8 +10,8 @@
 [[projects]]
   name = "github.com/aws/aws-sdk-go"
   packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/shareddefaults","private/protocol","private/protocol/ec2query","private/protocol/json/jsonutil","private/protocol/jsonrpc","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/restxml","private/protocol/xml/xmlutil","service/dynamodb","service/dynamodb/dynamodbattribute","service/dynamodb/dynamodbiface","service/ec2","service/s3","service/s3/s3iface","service/s3/s3manager","service/sts"]
-  revision = "8b344ddb7a49daf794928d1db484ad9a81499858"
-  version = "v1.12.3"
+  revision = "0bac5578f9a18b467487ee2dda67fedb328e9452"
+  version = "v1.12.4"
 
 [[projects]]
   name = "github.com/cenkalti/backoff"
@@ -91,10 +91,10 @@
   version = "v0.0.3"
 
 [[projects]]
-  branch = "metrics"
   name = "github.com/mobingilabs/mobingi-sdk-go"
   packages = ["client","mobingi/alm","mobingi/credentials","mobingi/sesha3","mobingi/session","pkg/cmdline","pkg/debug","pkg/jwt","pkg/private"]
-  revision = "7ecf782d55e0ceac529a2c7d079fd2655f34eb12"
+  revision = "4d2ff01b76b2d595d23d9223cb7df23a9662e925"
+  version = "v0.1.2"
 
 [[projects]]
   name = "github.com/moul/gotty-client"
@@ -147,6 +147,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "fe64973581a40a46419c953479ae6fdd15d7ae374bc9269066c3021e513e460f"
+  inputs-digest = "c367a25a605f3ca647537a6f3112ee9d229f779f924cd098f247b112e84b17fd"
   solver-name = "gps-cdcl"
   solver-version = 1
