@@ -99,19 +99,10 @@ func errcheck(v interface{}) {
 	switch v.(type) {
 	case string:
 		str := v.(string)
-		if str != "" {
-			err = Notifier.WebhookNotification(str)
-		}
+		err = Notifier.WebhookNotification(str)
 	case error:
 		terr := v.(error)
-		if terr != nil {
-			err = Notifier.WebhookNotification(terr.Error())
-		}
-	default:
-		str := fmt.Sprintf("%v", v)
-		if str != "" {
-			err = Notifier.WebhookNotification(str)
-		}
+		err = Notifier.WebhookNotification(terr.Error())
 	}
 
 	if err != nil {
@@ -123,12 +114,15 @@ func HookPost(v interface{}) {
 	switch v.(type) {
 	case string:
 		err := v.(string)
-		go errcheck(err)
+		if err != "" {
+			go errcheck(err)
+		}
 	case error:
 		err := v.(error)
-		go errcheck(err)
+		if err != nil {
+			go errcheck(err)
+		}
 	default:
-		err := fmt.Sprintf("%v", v)
-		go errcheck(err)
+		// don't bother
 	}
 }
