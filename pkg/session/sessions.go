@@ -93,9 +93,11 @@ func (s *sessions) TerminateAll() []error {
 		err = sess.Cmd.Process.Signal(syscall.SIGTERM)
 		if err != nil {
 			err := errors.Wrap(err, "sigterm failed")
-			notify.HookPost(err)
+			if err != nil {
+				d.Error(err)
+			}
+
 			ret = append(ret, err)
-			d.Error(err)
 			// when all else fail
 			sess.Cmd.Process.Signal(syscall.SIGKILL)
 		}

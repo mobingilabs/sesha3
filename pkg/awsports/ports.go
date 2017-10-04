@@ -176,7 +176,7 @@ func Download(env string, awsRegion string, profilename string) error {
 			return errors.Wrap(err, "s3 download failed")
 		}
 
-		d.Info("file:", i, "|", "bytes:", n)
+		d.Info("download file:", i, "|", "bytes:", n)
 	}
 
 	return nil
