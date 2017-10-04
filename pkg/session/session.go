@@ -64,8 +64,8 @@ func (s *Session) Start() (string, error) {
 	}
 
 	go func() {
-		metrics.MetricsConnect.Add(1)
-		defer metrics.MetricsConnect.Add(-1)
+		metrics.MetricsCurrentConnection.Add(1)
+		defer metrics.MetricsCurrentConnection.Add(-1)
 
 		err := ec2req.OpenPort()
 		if err != nil {
