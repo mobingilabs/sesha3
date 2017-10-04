@@ -11,10 +11,10 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/cmdline"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/awsports"
+	"github.com/mobingilabs/sesha3/metrics"
 	"github.com/pkg/errors"
 	uuid "github.com/satori/go.uuid"
 )
@@ -62,8 +62,8 @@ func (s *session) Start() (string, error) {
 	}
 
 	go func() {
-		sesha3.MetricsConnect.Add(1)
-		defer sesha3.MetricsConnect.Add(-1)
+		metrics.MetricsConnect.Add(1)
+		defer metrics.MetricsConnect.Add(-1)
 
 		err := ec2req.OpenPort()
 		if err != nil {
