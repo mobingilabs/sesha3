@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
@@ -113,6 +114,7 @@ func serve(cmd *cobra.Command, args []string) {
 
 func generateToken(w http.ResponseWriter, r *http.Request) {
 	//metrics
+	start := time.Now()
 	metrics.MetricsCurrentConnection.Add(1)
 	defer metrics.MetricsCurrentConnection.Add(-1)
 	metrics.MetricsTokenRequest.Add(1)
@@ -156,10 +158,13 @@ func generateToken(w http.ResponseWriter, r *http.Request) {
 	d.Info("generated token:", stoken)
 	payload := `{"key":"` + stoken + `"}`
 	w.Write([]byte(payload))
+	end := time.Now()
+	metrics.MetricsTokenResponseTime.Set(end.Sub(start).String())
 }
 
 func ttyurl(w http.ResponseWriter, r *http.Request) {
 	//metrics
+	start := time.Now()
 	metrics.MetricsCurrentConnection.Add(1)
 	defer metrics.MetricsCurrentConnection.Add(-1)
 	metrics.MetricsConnectionCount.Add(1)
@@ -292,6 +297,8 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 
 	payload := `{"tty_url":"` + fullurl + `"}`
 	w.Write([]byte(payload))
+	end := time.Now()
+	metrics.MetricsTTYResponseTime.Set(end.Sub(start).String())
 }
 
 func describeSessions(w http.ResponseWriter, req *http.Request) {
