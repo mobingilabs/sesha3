@@ -268,7 +268,7 @@ func describeSessions(w http.ResponseWriter, req *http.Request) {
 func version(w http.ResponseWriter, req *http.Request) {
 	metrics.MetricsConnect.Add(1)
 	defer metrics.MetricsConnect.Add(-1)
-	w.Write([]byte(`{"version":"v0.0.13-beta"}`))
+	w.Write([]byte(`{"version":"v0.0.14-dev"}`))
 }
 
 func redirect(w http.ResponseWriter, req *http.Request) {
