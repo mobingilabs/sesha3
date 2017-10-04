@@ -39,6 +39,8 @@ func ServeCmd() *cobra.Command {
 	}
 
 	cmd.Flags().SortFlags = false
+	cmd.Flags().StringVar(&params.Domain, "domain", "sesha3.labs.mobingi.com", "server domain")
+	cmd.Flags().String("port", "443", "server port")
 	return cmd
 }
 

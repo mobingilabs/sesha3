@@ -24,7 +24,6 @@ func init() {
 	rootCmd.Flags().SortFlags = false
 	rootCmd.PersistentFlags().StringVar(&params.Environment, "env", "dev", "values: dev, test, prod")
 	rootCmd.PersistentFlags().BoolVar(&params.UseSyslog, "syslog", false, "set log output to syslog")
-	rootCmd.PersistentFlags().StringVar(&params.Domain, "domain", "sesha3.labs.mobingi.com", "server domain")
 	rootCmd.PersistentFlags().String("port", "443", "server port")
 	rootCmd.PersistentFlags().StringArray("notify-endpoints", []string{"slack"}, "values: slack")
 	rootCmd.PersistentFlags().StringVar(&params.Region, "aws-region", "ap-northeast-1", "aws region")
