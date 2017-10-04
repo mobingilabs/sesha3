@@ -28,6 +28,7 @@ type HttpNotifier struct {
 }
 
 func (n *HttpNotifier) Init(eps []string) error {
+	debug.Info("start init")
 	n.region = params.Region
 	n.credprof = params.CredProfile
 	n.notifiers = make([]notification.Notifier, 0)
@@ -36,6 +37,7 @@ func (n *HttpNotifier) Init(eps []string) error {
 	for _, ep := range eps {
 		switch ep {
 		case "slack":
+			debug.Info("slack found")
 			su, err := n.getSlackUrl()
 			if err != nil {
 				debug.Error(err)
@@ -82,22 +84,22 @@ func (n *HttpNotifier) Notify(v interface{}) error {
 		Text string `json:"text"`
 	}
 
-	var err_string string
-	err_string = time.Now().Format(time.RFC1123) + "\n"
+	var str string
+	str = time.Now().Format(time.RFC1123) + "\n"
 
 	switch v.(type) {
 	case string:
 		err := v.(string)
-		err_string += "info: " + fmt.Sprintf("%v", err)
+		str += "info: " + fmt.Sprintf("%v", err)
 	case error:
-		err_string += "error: " + fmt.Sprintf("%+v", errors.WithStack(v.(error)))
+		str += "error: " + fmt.Sprintf("%+v", errors.WithStack(v.(error)))
 	default:
-		err_string += fmt.Sprintf("%s", v)
+		str += fmt.Sprintf("%s", v)
 	}
 
-	err_string = "```" + err_string + "```"
+	str = "```" + str + "```"
 	payload := payload_t{
-		Text: err_string,
+		Text: str,
 	}
 
 	b, err := json.Marshal(payload)
@@ -105,6 +107,7 @@ func (n *HttpNotifier) Notify(v interface{}) error {
 		return errors.Wrap(err, "payload marshal failed")
 	}
 
+	debug.Info("start send")
 	for _, sender := range n.notifiers {
 		go func() {
 			err := sender.Notify(b)
