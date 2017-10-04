@@ -29,7 +29,7 @@ var (
 	credprof   string // set by cli flag
 	syslogging bool   // set by cli flag
 	logger     *syslog.Writer
-	notifier   sesha3.Notificate
+	notifier   Notificate
 )
 
 func errcheck(v interface{}) {
