@@ -88,9 +88,9 @@ func (n *HttpNotifier) Notify(v interface{}) error {
 	switch v.(type) {
 	case string:
 		err := v.(string)
-		str += "info: " + fmt.Sprintf("%v", err)
+		str += fmt.Sprintf("%v", err)
 	case error:
-		str += "error: " + fmt.Sprintf("%+v", errors.WithStack(v.(error)))
+		str += fmt.Sprintf("%+v", errors.WithStack(v.(error)))
 	default:
 		str += fmt.Sprintf("%s", v)
 	}
