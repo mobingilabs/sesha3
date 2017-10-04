@@ -105,7 +105,7 @@ func (n *HttpNotifier) Notify(v interface{}) error {
 		return errors.Wrap(err, "payload marshal failed")
 	}
 
-	for i, sender := range n.notifiers {
+	for _, sender := range n.notifiers {
 		go func() {
 			err := sender.Notify(b)
 			if err != nil {
