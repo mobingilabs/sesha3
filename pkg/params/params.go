@@ -1,6 +1,7 @@
 package params
 
 var (
+	Environment string // dev or prod
 	Domain      string // this server's domain
 	UseSyslog   bool   // use syslog for log library
 	Region      string // aws region

@@ -18,6 +18,7 @@ import (
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/metrics"
+	"github.com/mobingilabs/sesha3/pkg/awsports"
 	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/mobingilabs/sesha3/pkg/session"
@@ -27,9 +28,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var (
-	logger *syslog.Writer
-)
+var logger *syslog.Writer
 
 func ServeCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -59,6 +58,15 @@ func serve(cmd *cobra.Command, args []string) {
 
 	notify.Notifier.Cred = params.CredProfile
 	notify.Notifier.Region = params.Region
+	obj, _ := notify.Notifier.Dynamoget()
+	notify.Notifier.URLs = obj
+	notify.Notifier.Valid = true
+
+	err := awsports.Download(params.Environment, params.Region, params.CredProfile)
+	if err != nil {
+		notify.HookPost(errors.Wrap(err, "server failed, fatal"))
+		d.ErrorTraceExit(err, 1)
+	}
 
 	// redirect every http request to https
 	// go http.ListenAndServe(":80", http.HandlerFunc(redirect))
@@ -80,7 +88,7 @@ func serve(cmd *cobra.Command, args []string) {
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
 	//https://sesha3.labs.mobingi.com/debug/vars : you can see metrics
 	router.Handle("/debug/vars", metrics.MetricsHandler)
-	err := http.ListenAndServeTLS(":"+util.GetCliStringFlag(cmd, "port"),
+	err = http.ListenAndServeTLS(":"+util.GetCliStringFlag(cmd, "port"),
 		certfolder+"/fullchain.pem",
 		certfolder+"/privkey.pem",
 		router)

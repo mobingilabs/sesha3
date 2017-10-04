@@ -13,8 +13,8 @@ import (
 
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/cmdline"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
-	"github.com/mobingilabs/sesha3/awsports"
 	"github.com/mobingilabs/sesha3/metrics"
+	"github.com/mobingilabs/sesha3/pkg/awsports"
 	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/pkg/errors"
