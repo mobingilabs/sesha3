@@ -28,7 +28,6 @@ type HttpNotifier struct {
 }
 
 func (n *HttpNotifier) Init(eps []string) error {
-	debug.Info("start init")
 	n.region = params.Region
 	n.credprof = params.CredProfile
 	n.notifiers = make([]notification.Notifier, 0)
@@ -37,7 +36,6 @@ func (n *HttpNotifier) Init(eps []string) error {
 	for _, ep := range eps {
 		switch ep {
 		case "slack":
-			debug.Info("slack found")
 			su, err := n.getSlackUrl()
 			if err != nil {
 				debug.Error(err)
@@ -107,7 +105,6 @@ func (n *HttpNotifier) Notify(v interface{}) error {
 		return errors.Wrap(err, "payload marshal failed")
 	}
 
-	debug.Info("start send")
 	for _, sender := range n.notifiers {
 		go func() {
 			err := sender.Notify(b)
