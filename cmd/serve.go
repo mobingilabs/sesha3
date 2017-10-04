@@ -56,7 +56,7 @@ func serve(cmd *cobra.Command, args []string) {
 	}
 
 	eps, _ := cmd.Flags().GetStringArray("notify-endpoints")
-	err = notify.Notifier.Init(eps)
+	err := notify.Notifier.Init(eps)
 	if err != nil {
 		d.Error(err)
 	}
@@ -74,7 +74,7 @@ func serve(cmd *cobra.Command, args []string) {
 		notify.HookPost(errors.Wrap(err, "create certs folder failed (fatal)"))
 	}
 
-	err := awsports.Download(params.Environment, params.Region, params.CredProfile)
+	err = awsports.Download(params.Environment, params.Region, params.CredProfile)
 	if err != nil {
 		notify.HookPost(errors.Wrap(err, "server failed, fatal"))
 		d.ErrorTraceExit(err, 1)
