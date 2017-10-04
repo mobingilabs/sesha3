@@ -94,35 +94,28 @@ func (w *Notificate) WebhookNotification(v interface{}) error {
 
 var Notifier Notificate
 
-func errcheck(v interface{}) {
+func HookPost(v interface{}) {
 	var err error
 	switch v.(type) {
 	case string:
 		str := v.(string)
-		err = Notifier.WebhookNotification(str)
+		if str != "" {
+			go func() {
+				err = Notifier.WebhookNotification(str)
+			}()
+		}
 	case error:
 		terr := v.(error)
-		err = Notifier.WebhookNotification(terr.Error())
+		if terr != nil {
+			go func() {
+				err = Notifier.WebhookNotification(terr.Error())
+			}()
+		}
+	default:
+		// don't bother
 	}
 
 	if err != nil {
 		debug.Error(errors.Wrap(err, "webhook notify failed"))
-	}
-}
-
-func HookPost(v interface{}) {
-	switch v.(type) {
-	case string:
-		err := v.(string)
-		if err != "" {
-			go errcheck(err)
-		}
-	case error:
-		err := v.(error)
-		if err != nil {
-			go errcheck(err)
-		}
-	default:
-		// don't bother
 	}
 }
