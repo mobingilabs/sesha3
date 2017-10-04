@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"time"
 
@@ -43,23 +42,20 @@ func (n *Notificate) Dynamoget() (EventN, error) {
 }
 
 func (w *Notificate) WebhookNotification(v interface{}) error {
-	log.Println("start webhook")
 	if w.Valid != true {
 		return errors.New("invalid")
 	}
+
 	type payload_t struct {
 		Text string `json:"text"`
 	}
 
 	var urls []string
-	//webhook URLs
-	log.Println("start get slack url")
 	if w.Slack {
 		NotificateURL := w.URLs
 		urls = append(urls, NotificateURL.Slack)
 	}
 
-	log.Println("finish get slack url")
 	var err_string string
 	err_string = time.Now().Format(time.RFC1123) + "\n"
 

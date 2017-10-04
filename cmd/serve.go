@@ -43,14 +43,14 @@ func ServeCmd() *cobra.Command {
 }
 
 func serve(cmd *cobra.Command, args []string) {
+	notify.Notifier.Cred = params.CredProfile
+	notify.Notifier.Region = params.Region
 	obj, err := notify.Notifier.Dynamoget()
 	if err != nil {
 		d.ErrorD(err)
 	}
 
 	notify.Notifier.URLs = obj
-	notify.Notifier.Cred = params.CredProfile
-	notify.Notifier.Region = params.Region
 	notify.Notifier.Valid = true
 
 	if params.UseSyslog {
