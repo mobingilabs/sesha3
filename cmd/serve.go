@@ -1,10 +1,11 @@
-package main
+package cmd
 
 import (
 	"crypto/md5"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"log/syslog"
 	"net/http"
 	"os"
@@ -17,58 +18,79 @@ import (
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/metrics"
+	"github.com/mobingilabs/sesha3/pkg/notify"
+	"github.com/mobingilabs/sesha3/pkg/params"
+	"github.com/mobingilabs/sesha3/pkg/session"
+	"github.com/mobingilabs/sesha3/pkg/token"
+	"github.com/mobingilabs/sesha3/pkg/util"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
 
 var (
-	domain     string // set by cli flag
-	port       string // set by cli flag
-	region     string // set by cli flag
-	ec2id      string // set by cli flag
-	credprof   string // set by cli flag
-	syslogging bool   // set by cli flag
-	logger     *syslog.Writer
-	notifier   Notificate
+	logger *syslog.Writer
 )
 
-func errcheck(v interface{}) {
-	var err error
-	switch v.(type) {
-	case string:
-		str := v.(string)
-		if str != "" {
-			err = notifier.WebhookNotification(str)
-		}
-	case error:
-		terr := v.(error)
-		if terr != nil {
-			err = notifier.WebhookNotification(terr.Error())
-		}
-	default:
-		str := fmt.Sprintf("%v", v)
-		if str != "" {
-			err = notifier.WebhookNotification(str)
-		}
+func ServeCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "serve",
+		Short: "run as server",
+		Long:  `Run as server.`,
+		Run:   serve,
 	}
 
-	if err != nil {
-		d.Error(errors.Wrap(err, "webhook notify failed"))
-	}
+	cmd.Flags().SortFlags = false
+	return cmd
 }
 
-func hookpost(v interface{}) {
-	switch v.(type) {
-	case string:
-		err := v.(string)
-		go errcheck(err)
-	case error:
-		err := v.(error)
-		go errcheck(err)
-	default:
-		err := fmt.Sprintf("%v", v)
-		go errcheck(err)
+func serve(cmd *cobra.Command, args []string) {
+	if params.UseSyslog {
+		logger, err := syslog.New(syslog.LOG_NOTICE|syslog.LOG_USER, "sesha3")
+		d.ErrorExit(err, 1)
+		log.SetOutput(logger)
 	}
+
+	srcdir := cmdline.Dir()
+	d.Info("srcdir:", srcdir)
+	if !private.Exists(srcdir + "/certs") {
+		err := os.MkdirAll(srcdir+"/certs", os.ModePerm)
+		notify.HookPost(errors.Wrap(err, "create certs folder failed (fatal)"))
+	}
+
+	notify.Notifier.Cred = params.CredProfile
+	notify.Notifier.Region = params.Region
+
+	// redirect every http request to https
+	// go http.ListenAndServe(":80", http.HandlerFunc(redirect))
+	// everything else will be https
+
+	// check notification flags
+	eps, _ := cmd.Flags().GetStringArray("notify-endpoints")
+	for _, i := range eps {
+		if i == "slack" {
+			notify.Notifier.Slack = true
+		}
+	}
+
+	certfolder := cmdline.Dir() + "/certs"
+	router := mux.NewRouter()
+	router.HandleFunc("/token", generateToken).Methods(http.MethodGet)
+	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
+	// router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
+	router.HandleFunc("/version", version).Methods(http.MethodGet)
+	//https://sesha3.labs.mobingi.com/debug/vars : you can see metrics
+	router.Handle("/debug/vars", metrics.MetricsHandler)
+	err := http.ListenAndServeTLS(":"+util.GetCliStringFlag(cmd, "port"),
+		certfolder+"/fullchain.pem",
+		certfolder+"/privkey.pem",
+		router)
+
+	if err != nil {
+		notify.HookPost(errors.Wrap(err, "server failed, fatal"))
+		d.ErrorTraceExit(err, 1)
+	}
+
+	notify.HookPost("sesha3 server is started")
 }
 
 func generateToken(w http.ResponseWriter, r *http.Request) {
@@ -88,7 +110,7 @@ func generateToken(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
-		hookpost(err)
+		notify.HookPost(err)
 		return
 	}
 
@@ -125,7 +147,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	metrics.MetricsTTYRequest.Add(1)
 	defer metrics.MetricsTTYRequest.Add(-1)
 
-	var sess session
+	var sess session.Session
 	var m map[string]interface{}
 
 	auth := strings.Split(r.Header.Get("Authorization"), " ")
@@ -153,7 +175,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	d.Info("user:", u)
 
 	md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
-	ok, err := checkToken(credprof, region, fmt.Sprintf("%s", u), md5p)
+	ok, err := token.CheckToken(params.CredProfile, params.Region, fmt.Sprintf("%s", u), md5p)
 	if !ok {
 		w.WriteHeader(401)
 		return
@@ -168,7 +190,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
-		hookpost(err)
+		notify.HookPost(err)
 		return
 	}
 
@@ -177,7 +199,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	err = json.Unmarshal(body, &m)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
-		hookpost(err)
+		notify.HookPost(err)
 		return
 	}
 
@@ -186,7 +208,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	resp, err := http.Get(fmt.Sprintf("%v", pemurl))
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
-		hookpost(err)
+		notify.HookPost(err)
 		return
 	}
 
@@ -194,7 +216,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	body, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
-		hookpost(err)
+		notify.HookPost(err)
 		return
 	}
 
@@ -208,7 +230,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 		err = os.MkdirAll(pemdir, 0700)
 		if err != nil {
 			w.Write(sesha3.NewSimpleError(err).Marshal())
-			hookpost(err)
+			notify.HookPost(err)
 			return
 		}
 	}
@@ -217,23 +239,23 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	err = ioutil.WriteFile(pemfile, body, 0600)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
-		hookpost(err)
+		notify.HookPost(err)
 		return
 	}
 
 	randomurl, err := sess.Start()
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
-		hookpost(err)
+		notify.HookPost(err)
 		return
 	}
 
 	// add this session to our list of running sessions
-	ttys.Add(sess)
+	session.Sessions.Add(sess)
 	if randomurl == "" {
 		err := fmt.Errorf("%s", "cannot initialize secure tty access")
 		w.Write(sesha3.NewSimpleError(err).Marshal())
-		hookpost(err)
+		notify.HookPost(err)
 		return
 	} else {
 		sess.Online = true
@@ -245,7 +267,7 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	if fullurl == "" {
 		err := fmt.Errorf("%s", "cannot initialize secure tty access")
 		w.Write(sesha3.NewSimpleError(err).Marshal())
-		hookpost(err)
+		notify.HookPost(err)
 		return
 	}
 
@@ -254,11 +276,11 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 }
 
 func describeSessions(w http.ResponseWriter, req *http.Request) {
-	ds := ttys.Describe()
+	ds := session.Sessions.Describe()
 	b, err := json.Marshal(ds)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
-		hookpost(err)
+		notify.HookPost(err)
 		return
 	}
 
@@ -279,34 +301,4 @@ func redirect(w http.ResponseWriter, req *http.Request) {
 
 	d.Info("redirect to:", target)
 	http.Redirect(w, req, target, http.StatusMovedPermanently)
-}
-
-func serve(cmd *cobra.Command) {
-	// redirect every http request to https
-	// go http.ListenAndServe(":80", http.HandlerFunc(redirect))
-	// everything else will be https
-
-	//check notification flags
-	notificateArray, err := cmd.Flags().GetStringArray("notification")
-	d.Info("serve:get notification flags", err)
-	for _, i := range notificateArray {
-		if i == "slack" {
-			notifier.Slack = true
-		}
-	}
-
-	hookpost("sesha3 server is started")
-
-	certfolder := cmdline.Dir() + "/certs"
-	port := GetCliStringFlag(cmd, "port")
-
-	router := mux.NewRouter()
-	router.HandleFunc("/token", generateToken).Methods(http.MethodGet)
-	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
-	// router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
-	router.HandleFunc("/version", version).Methods(http.MethodGet)
-	//https://sesha3.labs.mobingi.com/debug/vars : you can see metrics
-	router.Handle("/debug/vars", metrics.MetricsHandler)
-	err = http.ListenAndServeTLS(":"+port, certfolder+"/fullchain.pem", certfolder+"/privkey.pem", router)
-	d.ErrorExit(err, 1)
 }

@@ -1,21 +1,22 @@
-package main
+package session
 
 import (
 	"sync"
 	"syscall"
 
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
+	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/pkg/errors"
 )
 
-var ttys sessions
+var Sessions sessions
 
 type sessions struct {
 	sync.Mutex
-	ss []session
+	ss []Session
 }
 
-func (s *sessions) Add(item session) {
+func (s *sessions) Add(item Session) {
 	s.Lock()
 	defer s.Unlock()
 	s.ss = append(s.ss, item)
@@ -83,7 +84,7 @@ func (s *sessions) TerminateAll() []error {
 		d.Info("attempt close port:", sess.HttpsPort)
 		err := sess.portReq.ClosePort()
 		if err != nil {
-			hookpost(err)
+			notify.HookPost(err)
 			d.Error(err)
 		}
 
@@ -92,7 +93,7 @@ func (s *sessions) TerminateAll() []error {
 		err = sess.Cmd.Process.Signal(syscall.SIGTERM)
 		if err != nil {
 			err := errors.Wrap(err, "sigterm failed")
-			hookpost(err)
+			notify.HookPost(err)
 			ret = append(ret, err)
 			d.Error(err)
 			// when all else fail

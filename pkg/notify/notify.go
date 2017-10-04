@@ -1,4 +1,4 @@
-package main
+package notify
 
 import (
 	"bytes"
@@ -12,8 +12,14 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	as "github.com/aws/aws-sdk-go/aws/session"
 	"github.com/guregu/dynamo"
+	"github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/pkg/errors"
 )
+
+type EventN struct {
+	Server_name string `dynamo:"server_name"`
+	Slack       string `dynamo:"slack"`
+}
 
 type Notificate struct {
 	Slack  bool
@@ -21,11 +27,6 @@ type Notificate struct {
 	Region string
 	URLs   EventN
 	Valid  bool
-}
-
-type EventN struct {
-	Server_name string `dynamo:"server_name"`
-	Slack       string `dynamo:"slack"`
 }
 
 func (n *Notificate) Dynamoget() (EventN, error) {
@@ -93,4 +94,45 @@ func (w *Notificate) WebhookNotification(v interface{}) error {
 	}
 
 	return err
+}
+
+var Notifier Notificate
+
+func errcheck(v interface{}) {
+	var err error
+	switch v.(type) {
+	case string:
+		str := v.(string)
+		if str != "" {
+			err = Notifier.WebhookNotification(str)
+		}
+	case error:
+		terr := v.(error)
+		if terr != nil {
+			err = Notifier.WebhookNotification(terr.Error())
+		}
+	default:
+		str := fmt.Sprintf("%v", v)
+		if str != "" {
+			err = Notifier.WebhookNotification(str)
+		}
+	}
+
+	if err != nil {
+		debug.Error(errors.Wrap(err, "webhook notify failed"))
+	}
+}
+
+func HookPost(v interface{}) {
+	switch v.(type) {
+	case string:
+		err := v.(string)
+		go errcheck(err)
+	case error:
+		err := v.(error)
+		go errcheck(err)
+	default:
+		err := fmt.Sprintf("%v", v)
+		go errcheck(err)
+	}
 }

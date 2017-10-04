@@ -1,4 +1,4 @@
-package main
+package token
 
 import (
 	"github.com/aws/aws-sdk-go/aws"
@@ -14,7 +14,7 @@ type event struct {
 	Status   string `dynamo:"status"`
 }
 
-func checkToken(credential string, region string, token_user string, token_pass string) (bool, error) {
+func CheckToken(credential string, region string, token_user string, token_pass string) (bool, error) {
 	cred := credentials.NewSharedCredentials("/root/.aws/credentials", credential)
 	db := dynamo.New(as.New(), &aws.Config{Region: aws.String(region),
 		Credentials: cred,

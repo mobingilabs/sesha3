@@ -1,4 +1,4 @@
-package main
+package session
 
 import (
 	"bufio"
@@ -15,11 +15,13 @@ import (
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/awsports"
 	"github.com/mobingilabs/sesha3/metrics"
+	"github.com/mobingilabs/sesha3/pkg/notify"
+	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/pkg/errors"
 	uuid "github.com/satori/go.uuid"
 )
 
-type session struct {
+type Session struct {
 	id        string
 	Online    bool
 	TtyURL    string
@@ -32,7 +34,7 @@ type session struct {
 	portReq   *awsports.SecurityGroupRequest
 }
 
-func (s *session) Id() string {
+func (s *Session) Id() string {
 	if s.id == "" {
 		u1 := uuid.NewV4()
 		s.id = fmt.Sprintf("%s", u1)
@@ -42,12 +44,12 @@ func (s *session) Id() string {
 }
 
 // Start initializes an instance of gotty and return the url.
-func (s *session) Start() (string, error) {
+func (s *Session) Start() (string, error) {
 	// set member 'id'
 	s.info("starting session: ", s.Id())
 
 	// try to open port for gotty
-	ec2req := awsports.Make(credprof, region, ec2id)
+	ec2req := awsports.Make(params.CredProfile, params.Region, params.Ec2Id)
 	s.portReq = &ec2req
 	s.HttpsPort = fmt.Sprint(ec2req.RequestPort)
 	ttyurl := make(chan string)
@@ -56,7 +58,7 @@ func (s *session) Start() (string, error) {
 	fnClosePort := func() {
 		err := ec2req.ClosePort()
 		if err != nil {
-			hookpost(err)
+			notify.HookPost(err)
 			s.error(errors.Wrap(err, "close port failed"))
 		}
 	}
@@ -67,7 +69,7 @@ func (s *session) Start() (string, error) {
 
 		err := ec2req.OpenPort()
 		if err != nil {
-			hookpost(err)
+			notify.HookPost(err)
 			s.error(errors.Wrap(err, "open port failed"))
 		}
 
@@ -77,7 +79,7 @@ func (s *session) Start() (string, error) {
 		shell := "grep " + s.User + " /etc/passwd | cut -d: -f7"
 		dshellb, err := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
 		if err != nil {
-			hookpost(err)
+			notify.HookPost(err)
 			s.error(errors.Wrap(err, "ssh shell exec failed"))
 		}
 
@@ -108,7 +110,7 @@ func (s *session) Start() (string, error) {
 		s.info("svrtool args: ", s.Cmd.Args)
 		errpipe, err := s.Cmd.StderrPipe()
 		if err != nil {
-			hookpost(err)
+			notify.HookPost(err)
 			s.error(errors.Wrap(err, "stderr pipe connect failed"))
 			fnClosePort()
 		}
@@ -124,7 +126,7 @@ func (s *session) Start() (string, error) {
 				if !chk {
 					if errscan.Err() != nil {
 						err := errors.Wrap(err, "stderr scan failed")
-						hookpost(err)
+						notify.HookPost(err)
 						s.error(err)
 					}
 
@@ -152,18 +154,18 @@ func (s *session) Start() (string, error) {
 
 		err = s.Cmd.Wait()
 		if err != nil {
-			hookpost(err)
+			notify.HookPost(err)
 			s.error(errors.Wrap(err, "cmd wait failed"))
 		}
 
 		fnClosePort()
 		err = os.Remove(os.TempDir() + "/user/" + s.StackId + ".pem")
 		if err != nil {
-			hookpost(err)
+			notify.HookPost(err)
 			s.error(errors.Wrap(err, "delete pem failed"))
 		}
 
-		ttys.Remove(s.Id())
+		Sessions.Remove(s.Id())
 		wsclose <- "__closed__"
 		s.info("gotty done")
 	}()
@@ -185,7 +187,7 @@ func (s *session) Start() (string, error) {
 				if s.portReq != nil {
 					err := s.portReq.ClosePort()
 					if err != nil {
-						hookpost(err)
+						notify.HookPost(err)
 						s.error(errors.Wrap(err, "close port failed"))
 					}
 				}
@@ -194,12 +196,12 @@ func (s *session) Start() (string, error) {
 				s.info("attempt to close gotty with pid: ", s.Cmd.Process.Pid)
 				err := s.Cmd.Process.Signal(syscall.SIGTERM)
 				if err != nil {
-					hookpost(err)
+					notify.HookPost(err)
 					s.error(errors.Wrap(err, "sigterm failed"))
 					// when all else fail
 					err = s.Cmd.Process.Signal(syscall.SIGKILL)
 					if err != nil {
-						hookpost(err)
+						notify.HookPost(err)
 						s.error(errors.Wrap(err, "sigkill failed"))
 					}
 				}
@@ -210,7 +212,7 @@ func (s *session) Start() (string, error) {
 	return ret, nil
 }
 
-func (s *session) GetFullURL() string {
+func (s *Session) GetFullURL() string {
 	var furl string
 	if !s.Online {
 		return furl
@@ -218,20 +220,20 @@ func (s *session) GetFullURL() string {
 
 	rurl, err := url.Parse(s.TtyURL)
 	if err != nil {
-		hookpost(err)
+		notify.HookPost(err)
 		return furl
 	}
 
-	furl += "https://" + domain + ":" + s.HttpsPort + rurl.EscapedPath()
+	furl += "https://" + params.Domain + ":" + s.HttpsPort + rurl.EscapedPath()
 	return furl
 }
 
-func (s *session) info(v ...interface{}) {
+func (s *Session) info(v ...interface{}) {
 	m := fmt.Sprint(v...)
 	d.Info("["+s.Id()+"]", m)
 }
 
-func (s *session) error(v ...interface{}) {
+func (s *Session) error(v ...interface{}) {
 	m := fmt.Sprint(v...)
 	d.Error("["+s.Id()+"]", m)
 }
