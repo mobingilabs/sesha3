@@ -89,13 +89,14 @@ func serve(cmd *cobra.Command, args []string) {
 		}
 	}
 
+	notify.HookPost("sesha3 server is started")
 	certfolder := cmdline.Dir() + "/certs"
 	router := mux.NewRouter()
 	router.HandleFunc("/token", generateToken).Methods(http.MethodGet)
 	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
 	// router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
-	//https://sesha3.labs.mobingi.com/debug/vars : you can see metrics
+	// https://sesha3.labs.mobingi.com/debug/vars
 	router.Handle("/debug/vars", metrics.MetricsHandler)
 	err = http.ListenAndServeTLS(":"+util.GetCliStringFlag(cmd, "port"),
 		certfolder+"/fullchain.pem",
@@ -106,8 +107,6 @@ func serve(cmd *cobra.Command, args []string) {
 		notify.HookPost(errors.Wrap(err, "server failed, fatal"))
 		d.ErrorTraceExit(err, 1)
 	}
-
-	notify.HookPost("sesha3 server is started")
 }
 
 func generateToken(w http.ResponseWriter, r *http.Request) {
