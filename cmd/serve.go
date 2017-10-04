@@ -45,7 +45,12 @@ func ServeCmd() *cobra.Command {
 func serve(cmd *cobra.Command, args []string) {
 	if params.UseSyslog {
 		logger, err := syslog.New(syslog.LOG_NOTICE|syslog.LOG_USER, "sesha3")
-		d.ErrorExit(err, 1)
+		if err != nil {
+			notify.HookPost(errors.Wrap(err, "syslog setup failed, fatal"))
+			d.ErrorTraceExit(err, 1)
+		}
+
+		log.SetFlags(0)
 		log.SetOutput(logger)
 	}
 
