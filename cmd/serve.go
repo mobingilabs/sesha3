@@ -44,13 +44,6 @@ func ServeCmd() *cobra.Command {
 }
 
 func serve(cmd *cobra.Command, args []string) {
-	d.Info("--- server start ---")
-	d.Info("url:", params.Domain+":"+params.Port)
-	d.Info("syslog:", params.UseSyslog)
-	d.Info("region:", params.Region)
-	d.Info("server ec2:", params.Ec2Id)
-	d.Info("credprof:", params.CredProfile)
-
 	if params.UseSyslog {
 		logger, err := syslog.New(syslog.LOG_NOTICE|syslog.LOG_USER, "sesha3")
 		if err != nil {
@@ -62,6 +55,12 @@ func serve(cmd *cobra.Command, args []string) {
 		log.SetOutput(logger)
 	}
 
+	d.Info("--- server start ---")
+	d.Info("url:", params.Domain+":"+params.Port)
+	d.Info("syslog:", params.UseSyslog)
+	d.Info("region:", params.Region)
+	d.Info("server ec2:", params.Ec2Id)
+	d.Info("credprof:", params.CredProfile)
 	srcdir := cmdline.Dir()
 	d.Info("srcdir:", srcdir)
 	if !private.Exists(srcdir + "/certs") {
