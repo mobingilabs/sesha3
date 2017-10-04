@@ -92,7 +92,7 @@
 
 [[projects]]
   name = "github.com/mobingilabs/mobingi-sdk-go"
-  packages = ["client","mobingi/alm","mobingi/credentials","mobingi/sesha3","mobingi/session","pkg/cmdline","pkg/debug","pkg/jwt","pkg/private"]
+  packages = ["client","mobingi/alm","mobingi/credentials","mobingi/sesha3","mobingi/session","pkg/cmdline","pkg/debug","pkg/jwt","pkg/notification","pkg/private"]
   revision = "085f56ef76b53c08d315030cf98a8864330565e1"
   version = "v0.1.4"
 
@@ -136,7 +136,7 @@
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context"]
-  revision = "0a9397675ba34b2845f758fe3cd68828369c6517"
+  revision = "a04bdaca5b32abe1c069418fb7088ae607de5bd0"
 
 [[projects]]
   branch = "master"
@@ -147,6 +147,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "c367a25a605f3ca647537a6f3112ee9d229f779f924cd098f247b112e84b17fd"
+  inputs-digest = "e995f78ea378ed07c3981ac151bd5c4df8c1a30c7da4e8a2374a748a11592d84"
   solver-name = "gps-cdcl"
   solver-version = 1
