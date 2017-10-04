@@ -106,10 +106,12 @@ func (n *HttpNotifier) Notify(v interface{}) error {
 	}
 
 	for i, sender := range n.notifiers {
-		err := sender.Notify(b)
-		if err != nil {
-			return errors.Wrap(err, fmt.Sprintf("sender#%d failed", i))
-		}
+		go func() {
+			err := sender.Notify(b)
+			if err != nil {
+				debug.Error(errors.Wrap(err, "notify failed"))
+			}
+		}()
 	}
 
 	return nil
