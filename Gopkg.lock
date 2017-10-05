@@ -10,8 +10,8 @@
 [[projects]]
   name = "github.com/aws/aws-sdk-go"
   packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/shareddefaults","private/protocol","private/protocol/ec2query","private/protocol/json/jsonutil","private/protocol/jsonrpc","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/restxml","private/protocol/xml/xmlutil","service/dynamodb","service/dynamodb/dynamodbattribute","service/dynamodb/dynamodbiface","service/ec2","service/s3","service/s3/s3iface","service/s3/s3manager","service/sts"]
-  revision = "0bac5578f9a18b467487ee2dda67fedb328e9452"
-  version = "v1.12.4"
+  revision = "b489cce1dd1ada60f519fe0dc70c096379a42214"
+  version = "v1.12.5"
 
 [[projects]]
   name = "github.com/cenkalti/backoff"
@@ -118,7 +118,7 @@
   branch = "master"
   name = "github.com/spf13/cobra"
   packages = ["."]
-  revision = "0dacccfbaabc71b872087c1719c5380d3e185173"
+  revision = "d5bde60e022436203e377c47806e001418c16af3"
 
 [[projects]]
   name = "github.com/spf13/pflag"
