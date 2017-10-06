@@ -1,6 +1,10 @@
 package util
 
-import "github.com/spf13/cobra"
+import (
+	"github.com/spf13/cobra"
+	"io/ioutil"
+	"net/http"
+)
 
 func flag(cmd *cobra.Command, f string) string {
 	s := cmd.Flag(f).DefValue
@@ -9,6 +13,14 @@ func flag(cmd *cobra.Command, f string) string {
 	}
 
 	return s
+}
+
+func GetEc2Id() string {
+	url := "http://169.254.169.254/latest/meta-data/instance-id"
+	resp, _ := http.Get(url)
+	defer resp.Body.Close()
+	byteArray, _ := ioutil.ReadAll(resp.Body)
+	return string(byteArray)
 }
 
 func GetCliStringFlag(cmd *cobra.Command, f string) string {
