@@ -32,14 +32,9 @@ func init() {
 func StoreData() {
 	go func() {
 		for {
-			time.Sleep(3 * time.Second)
+			time.Sleep(5 * time.Second)
 			sesha3Metrics := expvar.Get("sesha3").(*expvar.Map)
-			log.Println("c:", sesha3Metrics.Get("connection_count"))
-			//			expvar.Do(func(variable expvar.KeyValue) {
-			//				if fmt.Sprint(variable.Key) == "sesha3" {
-			//					log.Println(variable.Value.(*expvar.Map))
-			//				}
-			//			})
+			_ = sesha3Metrics
 		}
 	}()
 }
