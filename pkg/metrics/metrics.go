@@ -3,6 +3,7 @@ package metrics
 import (
 	"expvar"
 	"log"
+	"time"
 )
 
 var (
@@ -30,6 +31,8 @@ func init() {
 
 func StoreData() {
 	for {
+		time.Sleep(time.Second)
 		log.Println(expvar.Get("connection_count"))
+		log.Println(expvar.Get("MetricsConnectionCount"))
 	}
 }
