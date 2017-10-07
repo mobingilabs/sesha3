@@ -94,6 +94,7 @@ func serve(cmd *cobra.Command, args []string) {
 	notify.HookPost(startm)
 
 	certfolder := cmdline.Dir() + "/certs"
+	metrics.StoreData()
 	router := mux.NewRouter()
 	router.HandleFunc("/token", generateToken).Methods(http.MethodGet)
 	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)

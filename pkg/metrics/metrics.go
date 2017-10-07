@@ -2,6 +2,7 @@ package metrics
 
 import (
 	"expvar"
+	"log"
 )
 
 var (
@@ -25,4 +26,10 @@ func init() {
 	MetricsMap.Set("token_responce", MetricsTokenResponseTime)
 	MetricsMap.Set("tty_req", MetricsTTYRequest)
 	MetricsMap.Set("tty_responce", MetricsTTYResponseTime)
+}
+
+func StoreData() {
+	for {
+		log.Println(expvar.Get("connection_count"))
+	}
 }
