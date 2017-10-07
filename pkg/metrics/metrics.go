@@ -33,9 +33,10 @@ func StoreData() {
 	go func() {
 		for {
 			time.Sleep(3 * time.Second)
-			expvar.Do(func(variable expvar.KeyValue) {
-				log.Printf("expvar.Key: %s expvar.Value: %s", variable.Key, variable.Value)
-			})
+			log.Println(expvar.Get("sesha3"))
+			//			expvar.Do(func(variable expvar.KeyValue) {
+			//				log.Printf("expvar.Key: %s expvar.Value: %s", variable.Key, variable.Value)
+			//			})
 		}
 	}()
 }
