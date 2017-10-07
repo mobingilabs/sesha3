@@ -30,9 +30,11 @@ func init() {
 }
 
 func StoreData() {
-	for {
-		time.Sleep(time.Second)
-		log.Println(expvar.Get("connection_count"))
-		log.Println(expvar.Get("MetricsConnectionCount"))
-	}
+	go func() {
+		for {
+			time.Sleep(time.Second)
+			log.Println(expvar.Get("connection_count"))
+			log.Println(expvar.Get("MetricsConnectionCount"))
+		}
+	}()
 }
