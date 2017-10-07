@@ -33,8 +33,9 @@ func StoreData() {
 	go func() {
 		for {
 			time.Sleep(3 * time.Second)
-			log.Println("connection:", expvar.Get("connection_count"))
-			log.Println("connectioncount:", expvar.Get("MetricsConnectionCount"))
+			expvar.Do(func(variable expvar.KeyValue) {
+				log.Printf("expvar.Key: %s expvar.Value: %s", variable.Key, variable.Value)
+			})
 		}
 	}()
 }
