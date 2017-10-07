@@ -32,9 +32,9 @@ func init() {
 func StoreData() {
 	go func() {
 		for {
-			time.Sleep(time.Second)
-			log.Println(expvar.Get("connection_count"))
-			log.Println(expvar.Get("MetricsConnectionCount"))
+			time.Sleep(3 * time.Second)
+			log.Println("connection:", expvar.Get("connection_count"))
+			log.Println("connectioncount:", expvar.Get("MetricsConnectionCount"))
 		}
 	}()
 }
