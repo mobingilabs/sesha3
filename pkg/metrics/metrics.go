@@ -2,7 +2,6 @@ package metrics
 
 import (
 	"expvar"
-	"fmt"
 	"log"
 	"time"
 )
@@ -34,11 +33,13 @@ func StoreData() {
 	go func() {
 		for {
 			time.Sleep(3 * time.Second)
-			expvar.Do(func(variable expvar.KeyValue) {
-				if fmt.Sprint(variable.Key) == "sesha3" {
-					log.Println(variable.Value)
-				}
-			})
+			sesha3Metrics := expvar.Get("sesha3").(*expvar.Map)
+			log.Println("c:", sesha3Metrics.Get("connection_count"))
+			//			expvar.Do(func(variable expvar.KeyValue) {
+			//				if fmt.Sprint(variable.Key) == "sesha3" {
+			//					log.Println(variable.Value.(*expvar.Map))
+			//				}
+			//			})
 		}
 	}()
 }
