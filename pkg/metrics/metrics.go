@@ -2,7 +2,6 @@ package metrics
 
 import (
 	"expvar"
-	"log"
 	"time"
 )
 
