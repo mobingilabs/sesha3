@@ -25,9 +25,14 @@ var (
 )
 
 type Event struct {
-	ServerName string `dynamo:"server-name"`
+	ServerName string `dynamo:"server_name"`
 	C_Count    string `dynamo:"connection_count"`
-	//	C_C        string `dynamo:"current_connection"`
+	C_C        string `dynamo:"current_connection"`
+	T_Req      string `dynamo:"token_req"`
+	T_ReqCount string `dynamo:"token_req_count"`
+	T_Res      string `dynamo:"token_responce"`
+	Tty_Req    string `dynamo:"tty_req"`
+	Tty_Res    string `dynamo:"tty_responce"`
 }
 
 type HttpMetrics struct {
@@ -68,10 +73,16 @@ func (n *HttpMetrics) postMetrics() {
 	go func() {
 		for {
 			time.Sleep(30 * time.Second)
-			sesha3Metrics := expvar.Get("sesha3").(*expvar.Map)
+			sesha3Metrics := expvar.Get(servername).(*expvar.Map)
 			evt := Event{
 				ServerName: servername,
 				C_Count:    sesha3Metrics.Get("connection_count").String(),
+				C_C:        sesha3Metrics.Get("current_connection").String(),
+				T_Req:      sesha3Metrics.Get("token_req").String(),
+				T_ReqCount: sesha3Metrics.Get("token_req_count").String(),
+				T_Res:      sesha3Metrics.Get("token_responce").String(),
+				Tty_Req:    sesha3Metrics.Get("tty_req").String(),
+				Tty_Res:    sesha3Metrics.Get("tty_responce").String(),
 			}
 			err := table.Put(evt).Run()
 			if err != nil {
