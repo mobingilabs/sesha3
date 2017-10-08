@@ -52,6 +52,7 @@ func (n *HttpMetrics) MetricsInit() {
 	n.region = params.Region
 	n.credprof = params.CredProfile
 	n.valid = true
+	n.postMetrics()
 }
 
 func (n *HttpMetrics) postMetrics() {
