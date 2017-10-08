@@ -66,7 +66,7 @@ func (n *HttpMetrics) postMetrics() {
 
 	go func() {
 		for {
-			time.Sleep(10 * time.Second)
+			time.Sleep(30 * time.Second)
 			sesha3Metrics := expvar.Get("sesha3").(*expvar.Map)
 			evt := Event{
 				ServerName: servername,
