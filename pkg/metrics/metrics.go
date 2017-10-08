@@ -25,7 +25,7 @@ var (
 )
 
 type Event struct {
-	ServerName string `dynamo:"server_name"`
+	ServerName string `dynamo:"server-name"`
 	C_Count    string `dynamo:"connection_count"`
 	//	C_C        string `dynamo:"current_connection"`
 }
