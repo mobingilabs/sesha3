@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/pkg/params"
+	"reflect"
 	"strconv"
 	"time"
 )
@@ -64,40 +65,19 @@ func (n *HttpMetrics) MetricsInit() {
 }
 
 func (n *HttpMetrics) postMetrics() {
-	servername := "sesha3"
 	cred := credentials.NewSharedCredentials("/root/.aws/credentials", n.credprof)
 	cli := cloudwatch.New(as.New(), &aws.Config{
 		Region:      aws.String(n.region),
 		Credentials: cred,
 	})
-	dimensionParam := &cloudwatch.Dimension{
-		Name:  aws.String("InstanceId"),
-		Value: aws.String(n.instanceID),
-	}
 
 	go func() {
 		for {
 			time.Sleep(30 * time.Second)
-			sesha3Metrics := expvar.Get(servername).(*expvar.Map)
-			test, _ := strconv.ParseFloat(sesha3Metrics.Get("connection_count").String(), 64)
-			//			evt := Event{
-			//				C_Count:    sesha3Metrics.Get("connection_count").String(),
-			//				C_C:        sesha3Metrics.Get("current_connection").String(),
-			//				T_Req:      sesha3Metrics.Get("token_req").String(),
-			//				T_ReqCount: sesha3Metrics.Get("token_req_count").String(),
-			//				T_Res:      sesha3Metrics.Get("token_responce").String(),
-			//				Tty_Req:    sesha3Metrics.Get("tty_req").String(),
-			//				Tty_Res:    sesha3Metrics.Get("tty_responce").String(),
-			//			}
-			metricDataParam := &cloudwatch.MetricDatum{
-				Dimensions: []*cloudwatch.Dimension{dimensionParam},
-				MetricName: aws.String("connection_count"),
-				Unit:       aws.String(cloudwatch.StandardUnitCount),
-				Value:      aws.Float64(test),
-			}
+			datums := n.GetCloudwatchPostData()
 			req := &cloudwatch.PutMetricDataInput{
 				Namespace:  aws.String("seaha3"),
-				MetricData: []*cloudwatch.MetricDatum{metricDataParam},
+				MetricData: datums,
 			}
 			_, err := cli.PutMetricData(req)
 			if err != nil {
@@ -105,4 +85,33 @@ func (n *HttpMetrics) postMetrics() {
 			}
 		}
 	}()
+}
+
+func (n *HttpMetrics) GetCloudwatchPostData() []*cloudwatch.MetricDatum {
+	servername := "sesha3"
+	data := []*cloudwatch.MetricDatum{}
+	timestamp := aws.Time(time.Now())
+	dimensionParam := &cloudwatch.Dimension{
+		Name:  aws.String("Sesha3"),
+		Value: aws.String(n.instanceID),
+	}
+	getDatumf := func(name string) *cloudwatch.MetricDatum {
+		sesha3Metrics := expvar.Get(servername).(*expvar.Map)
+		d.Info(reflect.TypeOf(sesha3Metrics.Get(name)))
+		val, _ := strconv.ParseFloat(sesha3Metrics.Get(name).String(), 64)
+		return &cloudwatch.MetricDatum{
+			MetricName: aws.String(name),
+			Timestamp:  timestamp,
+			Dimensions: []*cloudwatch.Dimension{dimensionParam},
+			Value:      aws.Float64(val),
+			Unit:       aws.String(cloudwatch.StandardUnitCount),
+		}
+	}
+
+	data = append(data, getDatumf("connection_count"))
+	data = append(data, getDatumf("current_connection"))
+	data = append(data, getDatumf("token_req"))
+	data = append(data, getDatumf("token_req_count"))
+	data = append(data, getDatumf("tty_req"))
+	return data
 }
