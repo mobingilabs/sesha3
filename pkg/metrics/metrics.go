@@ -80,6 +80,7 @@ func (n *HttpMetrics) postMetrics() {
 			time.Sleep(30 * time.Second)
 			sesha3Metrics := expvar.Get(servername).(*expvar.Map)
 			test, _ := strconv.ParseFloat(sesha3Metrics.Get("connection_count").String(), 64)
+			d.Info(test)
 			//			evt := Event{
 			//				C_Count:    sesha3Metrics.Get("connection_count").String(),
 			//				C_C:        sesha3Metrics.Get("current_connection").String(),
