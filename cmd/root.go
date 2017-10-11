@@ -26,7 +26,7 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&params.Environment, "env", "dev", "values: dev, test, prod")
 	rootCmd.PersistentFlags().BoolVar(&params.UseSyslog, "syslog", false, "set log output to syslog")
 	rootCmd.PersistentFlags().StringArray("notify-endpoints", []string{"slack"}, "values: slack")
-	rootCmd.PersistentFlags().StringVar(&params.Region, "aws-region", "ap-northeast-1", "aws region")
+	params.Region = util.GetRegion()
 	params.Ec2Id = util.GetEc2Id()
 	rootCmd.PersistentFlags().StringVar(&params.CredProfile, "cred-profile", "sesha3", "aws credenfile profile name")
 	rootCmd.SetHelpCommand(&cobra.Command{
