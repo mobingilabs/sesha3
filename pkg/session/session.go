@@ -196,12 +196,10 @@ func (s *Session) Start() (string, error) {
 				s.info("attempt to close gotty with pid: ", s.Cmd.Process.Pid)
 				err := s.Cmd.Process.Signal(syscall.SIGTERM)
 				if err != nil {
-					notify.HookPost(err)
 					s.error(errors.Wrap(err, "sigterm failed"))
 					// when all else fail
 					err = s.Cmd.Process.Signal(syscall.SIGKILL)
 					if err != nil {
-						notify.HookPost(err)
 						s.error(errors.Wrap(err, "sigkill failed"))
 					}
 				}
