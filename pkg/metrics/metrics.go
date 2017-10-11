@@ -5,9 +5,10 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	as "github.com/aws/aws-sdk-go/aws/session"
-	"github.com/guregu/dynamo"
+	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/pkg/params"
+	"strconv"
 	"time"
 )
 
@@ -36,9 +37,10 @@ type Event struct {
 }
 
 type HttpMetrics struct {
-	region   string
-	credprof string
-	valid    bool
+	region     string
+	credprof   string
+	valid      bool
+	instanceID string
 }
 
 var MetricsType HttpMetrics
@@ -57,34 +59,47 @@ func (n *HttpMetrics) MetricsInit() {
 	n.region = params.Region
 	n.credprof = params.CredProfile
 	n.valid = true
+	n.instanceID = params.Ec2Id
 	n.postMetrics()
 }
 
 func (n *HttpMetrics) postMetrics() {
 	servername := "sesha3"
 	cred := credentials.NewSharedCredentials("/root/.aws/credentials", n.credprof)
-	db := dynamo.New(as.New(), &aws.Config{
+	cli := cloudwatch.New(as.New(), &aws.Config{
 		Region:      aws.String(n.region),
 		Credentials: cred,
 	})
-
-	table := db.Table("SESHA3_M")
+	dimensionParam := &cloudwatch.Dimension{
+		Name:  aws.String("InstanceId"),
+		Value: aws.String(n.instanceID),
+	}
 
 	go func() {
 		for {
 			time.Sleep(30 * time.Second)
 			sesha3Metrics := expvar.Get(servername).(*expvar.Map)
-			evt := Event{
-				ServerName: servername,
-				C_Count:    sesha3Metrics.Get("connection_count").String(),
-				C_C:        sesha3Metrics.Get("current_connection").String(),
-				T_Req:      sesha3Metrics.Get("token_req").String(),
-				T_ReqCount: sesha3Metrics.Get("token_req_count").String(),
-				T_Res:      sesha3Metrics.Get("token_responce").String(),
-				Tty_Req:    sesha3Metrics.Get("tty_req").String(),
-				Tty_Res:    sesha3Metrics.Get("tty_responce").String(),
+			test, _ := strconv.ParseFloat(sesha3Metrics.Get("connection_count").String(), 64)
+			//			evt := Event{
+			//				C_Count:    sesha3Metrics.Get("connection_count").String(),
+			//				C_C:        sesha3Metrics.Get("current_connection").String(),
+			//				T_Req:      sesha3Metrics.Get("token_req").String(),
+			//				T_ReqCount: sesha3Metrics.Get("token_req_count").String(),
+			//				T_Res:      sesha3Metrics.Get("token_responce").String(),
+			//				Tty_Req:    sesha3Metrics.Get("tty_req").String(),
+			//				Tty_Res:    sesha3Metrics.Get("tty_responce").String(),
+			//			}
+			metricDataParam := &cloudwatch.MetricDatum{
+				Dimensions: []*cloudwatch.Dimension{dimensionParam},
+				MetricName: aws.String("connection_count"),
+				Unit:       aws.String(cloudwatch.StandardUnitCount),
+				Value:      aws.Float64(test),
 			}
-			err := table.Put(evt).Run()
+			req := &cloudwatch.PutMetricDataInput{
+				Namespace:  aws.String("seaha3"),
+				MetricData: []*cloudwatch.MetricDatum{metricDataParam},
+			}
+			_, err := cli.PutMetricData(req)
 			if err != nil {
 				d.Error(err)
 			}
