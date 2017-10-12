@@ -8,7 +8,6 @@ import (
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/pkg/params"
-	"reflect"
 	"time"
 )
 
@@ -85,29 +84,42 @@ func (n *HttpMetrics) GetCloudwatchPostData() []*cloudwatch.MetricDatum {
 		Name:  aws.String("Sesha3"),
 		Value: aws.String(n.instanceID),
 	}
-	getDatumf := func(name string) *cloudwatch.MetricDatum {
+	getDatumf := func(name string) (postdata *cloudwatch.MetricDatum) {
 		timestamp := aws.Time(time.Now())
 		sesha3Metrics := expvar.Get(servername).(*expvar.Map)
-		val_int := *sesha3Metrics.Get(name).(*expvar.Int)
-		val := float64(val_int.Value())
-		return &cloudwatch.MetricDatum{
-			MetricName: aws.String(name),
-			Timestamp:  timestamp,
-			Dimensions: []*cloudwatch.Dimension{dimensionParam},
-			Value:      aws.Float64(val),
-			Unit:       aws.String(cloudwatch.StandardUnitCount),
+		switch v := sesha3Metrics.Get(name).(type) {
+		case *expvar.Int:
+			d.Info(name)
+			val := float64(v.Value())
+			postdata = &cloudwatch.MetricDatum{
+				MetricName: aws.String(name),
+				Timestamp:  timestamp,
+				Dimensions: []*cloudwatch.Dimension{dimensionParam},
+				Value:      aws.Float64(val),
+				Unit:       aws.String(cloudwatch.StandardUnitCount),
+			}
+		case *expvar.String:
+			d.Info(name)
+			resString := v.String()
+			val_tmp, _ := time.ParseDuration(resString)
+			val := val_tmp.Seconds()
+			postdata = &cloudwatch.MetricDatum{
+				MetricName: aws.String(name),
+				Timestamp:  timestamp,
+				Dimensions: []*cloudwatch.Dimension{dimensionParam},
+				Value:      aws.Float64(val),
+				Unit:       aws.String(cloudwatch.StandardUnitCountSecond),
+			}
 		}
+		return
 	}
-
-	testm := expvar.Get(servername).(*expvar.Map)
-	test, _ := time.ParseDuration(testm.Get("token_responce").String())
-	d.Info(reflect.TypeOf(test))
-	d.Info(test)
 
 	data = append(data, getDatumf("connection_count"))
 	data = append(data, getDatumf("current_connection"))
 	data = append(data, getDatumf("token_req"))
 	data = append(data, getDatumf("token_req_count"))
 	data = append(data, getDatumf("tty_req"))
+	data = append(data, getDatumf("tty_responce"))
+	data = append(data, getDatumf("token_responce"))
 	return data
 }
