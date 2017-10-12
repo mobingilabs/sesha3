@@ -96,8 +96,8 @@ func (n *HttpMetrics) GetCloudwatchPostData() []*cloudwatch.MetricDatum {
 	getDatumf := func(name string) *cloudwatch.MetricDatum {
 		timestamp := aws.Time(time.Now())
 		sesha3Metrics := expvar.Get(servername).(*expvar.Map)
-		val := float64(*sesha3Metrics.Get(name).(*expvar.Int).Value())
-		d.Info(reflect.TypeOf(val))
+		val_int := *sesha3Metrics.Get(name).(*expvar.Int)
+		val := float64(val_int.Value())
 		return &cloudwatch.MetricDatum{
 			MetricName: aws.String(name),
 			Timestamp:  timestamp,
@@ -106,6 +106,10 @@ func (n *HttpMetrics) GetCloudwatchPostData() []*cloudwatch.MetricDatum {
 			Unit:       aws.String(cloudwatch.StandardUnitCount),
 		}
 	}
+
+	testm := expvar.Get(servername).(*expvar.Map)
+	test := testm.Get("token_responce")
+	d.Info(reflect.TypeOf(test))
 
 	data = append(data, getDatumf("connection_count"))
 	data = append(data, getDatumf("current_connection"))
