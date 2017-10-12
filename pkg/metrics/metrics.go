@@ -108,7 +108,7 @@ func (n *HttpMetrics) GetCloudwatchPostData() []*cloudwatch.MetricDatum {
 				Timestamp:  timestamp,
 				Dimensions: []*cloudwatch.Dimension{dimensionParam},
 				Value:      aws.Float64(val),
-				Unit:       aws.String(cloudwatch.StandardUnitCountSecond),
+				Unit:       aws.String(cloudwatch.StandardUnitMilliseconds),
 			}
 		}
 		return
