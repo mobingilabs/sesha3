@@ -66,7 +66,7 @@ func (n *HttpMetrics) postMetrics() {
 			time.Sleep(10 * time.Second)
 			datums := n.GetCloudwatchPostData()
 			req := &cloudwatch.PutMetricDataInput{
-				Namespace:  aws.String("seaha3"),
+				Namespace:  aws.String("sesha3"),
 				MetricData: datums,
 			}
 			_, err := cli.PutMetricData(req)
