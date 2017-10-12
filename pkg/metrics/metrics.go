@@ -25,17 +25,6 @@ var (
 	MetricsHandler           = expvar.Handler()
 )
 
-type Event struct {
-	ServerName string `dynamo:"server_name"`
-	C_Count    string `dynamo:"connection_count"`
-	C_C        string `dynamo:"current_connection"`
-	T_Req      string `dynamo:"token_req"`
-	T_ReqCount string `dynamo:"token_req_count"`
-	T_Res      string `dynamo:"token_responce"`
-	Tty_Req    string `dynamo:"tty_req"`
-	Tty_Res    string `dynamo:"tty_responce"`
-}
-
 type HttpMetrics struct {
 	region     string
 	credprof   string
@@ -113,6 +102,7 @@ func (n *HttpMetrics) GetCloudwatchPostData() []*cloudwatch.MetricDatum {
 	testm := expvar.Get(servername).(*expvar.Map)
 	test, _ := time.ParseDuration(testm.Get("token_responce").String())
 	d.Info(reflect.TypeOf(test))
+	d.Info(test)
 
 	data = append(data, getDatumf("connection_count"))
 	data = append(data, getDatumf("current_connection"))
