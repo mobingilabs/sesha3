@@ -61,6 +61,9 @@ func (n *HttpMetrics) MetricsInit() {
 	n.valid = true
 	n.instanceID = params.Ec2Id
 	n.postMetrics()
+	initTime, _ := time.ParseDuration("0ms")
+	MetricsTTYResponseTime.Set(initTime.String())
+	MetricsTokenResponseTime.Set(initTime.String())
 }
 
 func (n *HttpMetrics) postMetrics() {
@@ -108,7 +111,7 @@ func (n *HttpMetrics) GetCloudwatchPostData() []*cloudwatch.MetricDatum {
 	}
 
 	testm := expvar.Get(servername).(*expvar.Map)
-	test := testm.Get("token_responce")
+	test, _ := time.ParseDuration(testm.Get("token_responce").String())
 	d.Info(reflect.TypeOf(test))
 
 	data = append(data, getDatumf("connection_count"))
