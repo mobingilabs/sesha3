@@ -9,7 +9,6 @@ import (
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/pkg/params"
 	"reflect"
-	"strconv"
 	"time"
 )
 
@@ -90,16 +89,15 @@ func (n *HttpMetrics) postMetrics() {
 func (n *HttpMetrics) GetCloudwatchPostData() []*cloudwatch.MetricDatum {
 	servername := "sesha3"
 	data := []*cloudwatch.MetricDatum{}
-	timestamp := aws.Time(time.Now())
 	dimensionParam := &cloudwatch.Dimension{
 		Name:  aws.String("Sesha3"),
 		Value: aws.String(n.instanceID),
 	}
 	getDatumf := func(name string) *cloudwatch.MetricDatum {
+		timestamp := aws.Time(time.Now())
 		sesha3Metrics := expvar.Get(servername).(*expvar.Map)
-		test := *sesha3Metrics.Get(name).(*expvar.Int)
-		d.Info(reflect.TypeOf(test.Value()))
-		val, _ := strconv.ParseFloat(sesha3Metrics.Get(name).String(), 64)
+		val := float64(*sesha3Metrics.Get(name).(*expvar.Int).Value())
+		d.Info(reflect.TypeOf(val))
 		return &cloudwatch.MetricDatum{
 			MetricName: aws.String(name),
 			Timestamp:  timestamp,
