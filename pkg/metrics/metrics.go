@@ -73,7 +73,7 @@ func (n *HttpMetrics) postMetrics() {
 
 	go func() {
 		for {
-			time.Sleep(30 * time.Second)
+			time.Sleep(10 * time.Second)
 			datums := n.GetCloudwatchPostData()
 			req := &cloudwatch.PutMetricDataInput{
 				Namespace:  aws.String("seaha3"),
@@ -97,7 +97,8 @@ func (n *HttpMetrics) GetCloudwatchPostData() []*cloudwatch.MetricDatum {
 	}
 	getDatumf := func(name string) *cloudwatch.MetricDatum {
 		sesha3Metrics := expvar.Get(servername).(*expvar.Map)
-		d.Info(reflect.TypeOf(sesha3Metrics.Get(name)))
+		test := *sesha3Metrics.Get(name).(*expvar.Int)
+		d.Info(reflect.TypeOf(test.Value()))
 		val, _ := strconv.ParseFloat(sesha3Metrics.Get(name).String(), 64)
 		return &cloudwatch.MetricDatum{
 			MetricName: aws.String(name),
