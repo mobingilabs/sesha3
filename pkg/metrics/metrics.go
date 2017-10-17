@@ -62,6 +62,8 @@ func (n *HttpMetrics) postMetrics() {
 	})
 
 	go func() {
+		// log only every 10th log
+		infoCnt := 0
 		for {
 			time.Sleep(10 * time.Second)
 			datums := n.GetCloudwatchPostData()
@@ -73,6 +75,12 @@ func (n *HttpMetrics) postMetrics() {
 			_, err := cli.PutMetricData(req)
 			if err != nil {
 				d.Error(err)
+			}
+
+			infoCnt += 1
+			if infoCnt >= 9 {
+				d.Info("[10th] metrics sent to cloudwatch")
+				infoCnt = 0
 			}
 		}
 	}()
@@ -91,7 +99,6 @@ func (n *HttpMetrics) GetCloudwatchPostData() []*cloudwatch.MetricDatum {
 		sesha3Metrics := expvar.Get(servername).(*expvar.Map)
 		switch v := sesha3Metrics.Get(name).(type) {
 		case *expvar.Int:
-			d.Info(name)
 			val := float64(v.Value())
 			postdata = &cloudwatch.MetricDatum{
 				MetricName: aws.String(name),
@@ -101,7 +108,6 @@ func (n *HttpMetrics) GetCloudwatchPostData() []*cloudwatch.MetricDatum {
 				Unit:       aws.String(cloudwatch.StandardUnitCount),
 			}
 		case *expvar.String:
-			d.Info(name)
 			resString := v.String()
 			val_tmp, _ := time.ParseDuration(resString)
 			val := val_tmp.Seconds()
