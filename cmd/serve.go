@@ -114,7 +114,6 @@ func serve(cmd *cobra.Command, args []string) {
 }
 
 func generateToken(w http.ResponseWriter, r *http.Request) {
-	//metrics
 	start := time.Now()
 	metrics.MetricsTokenRequestCount.Add(1)
 	metrics.MetricsCurrentConnection.Add(1)

@@ -2,18 +2,18 @@ package metrics
 
 import (
 	"expvar"
+	"time"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	as "github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/pkg/params"
-	"time"
 )
 
 var (
-	MetricsMap = expvar.NewMap("sesha3")
-
+	MetricsMap               = expvar.NewMap("sesha3")
 	MetricsConnectionCount   = new(expvar.Int)
 	MetricsCurrentConnection = new(expvar.Int)
 	MetricsTokenRequest      = new(expvar.Int)
@@ -69,6 +69,7 @@ func (n *HttpMetrics) postMetrics() {
 				Namespace:  aws.String("sesha3"),
 				MetricData: datums,
 			}
+
 			_, err := cli.PutMetricData(req)
 			if err != nil {
 				d.Error(err)
@@ -84,6 +85,7 @@ func (n *HttpMetrics) GetCloudwatchPostData() []*cloudwatch.MetricDatum {
 		Name:  aws.String("Sesha3"),
 		Value: aws.String(n.instanceID),
 	}
+
 	getDatumf := func(name string) (postdata *cloudwatch.MetricDatum) {
 		timestamp := aws.Time(time.Now())
 		sesha3Metrics := expvar.Get(servername).(*expvar.Map)
@@ -111,6 +113,7 @@ func (n *HttpMetrics) GetCloudwatchPostData() []*cloudwatch.MetricDatum {
 				Unit:       aws.String(cloudwatch.StandardUnitMilliseconds),
 			}
 		}
+
 		return
 	}
 
