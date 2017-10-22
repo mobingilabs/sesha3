@@ -26,4 +26,18 @@ func Run(w http.ResponseWriter, r *http.Request) {
 		notify.HookPost(err)
 		return
 	}
+	type payload_t struct {
+		Out string `json:"out"`
+	}
+	payload := payload_t{
+		Out: "hello",
+	}
+	b, err := json.Marshal(payload)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		notify.HookPost(err)
+		return
+	}
+
+	w.Write(b)
 }
