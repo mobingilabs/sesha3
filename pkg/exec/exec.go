@@ -29,7 +29,7 @@ func Run(w http.ResponseWriter, r *http.Request) {
 		notify.HookPost(err)
 		return
 	}
-	scriptDir := os.TempDir() + "/scripts/" + getdata["stackid"].(string)
+	scriptDir := os.TempDir() + "/sesha3/scripts/" + getdata["stackid"].(string)
 	if !private.Exists(scriptDir) {
 		err := os.MkdirAll(scriptDir, os.ModePerm)
 		notify.HookPost(errors.Wrap(err, "create scripts folder failed (fatal)"))
