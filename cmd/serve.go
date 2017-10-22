@@ -101,7 +101,7 @@ func serve(cmd *cobra.Command, args []string) {
 	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
 	// router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
-	router.HandleFunc("/exec", exec.Run).Methods(http.MethodPost)
+	router.HandleFunc("/exec", exec.Run).Methods(http.MethodGet)
 	// https://sesha3.labs.mobingi.com/debug/vars
 	router.Handle("/debug/vars", metrics.MetricsHandler)
 	err = http.ListenAndServeTLS(":"+params.Port,
