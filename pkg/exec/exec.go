@@ -4,9 +4,12 @@ import (
 	"encoding/json"
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
+	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/pkg/notify"
+	"github.com/pkg/errors"
 	"io/ioutil"
 	"net/http"
+	"os"
 )
 
 func Run(w http.ResponseWriter, r *http.Request) {
@@ -26,18 +29,40 @@ func Run(w http.ResponseWriter, r *http.Request) {
 		notify.HookPost(err)
 		return
 	}
-	type payload_t struct {
-		Out string `json:"out"`
+	scriptDir := os.TempDir() + "/scripts/" + getdata["stackid"].(string)
+	if !private.Exists(scriptDir) {
+		err := os.MkdirAll(scriptDir, os.ModePerm)
+		notify.HookPost(errors.Wrap(err, "create scripts folder failed (fatal)"))
 	}
-	payload := payload_t{
-		Out: "hello",
-	}
-	b, err := json.Marshal(payload)
+
+	//create script file on sesha3 server
+	wfile, err := os.Create(scriptDir + "/" + getdata["script_name"].(string))
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		notify.HookPost(err)
 		return
 	}
+	wfile.Write([]byte(getdata["script"].(string)))
+	wfile.Close()
+	//
 
+	//scp
+	// ...
+	//
+
+	//post response
+	s := "stdout & stderr"
+	type payload_t struct {
+		Out string `json:"out"`
+	}
+	payload := payload_t{
+		Out: s,
+	}
+	b, err := json.Marshal(payload)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		notify.HookPost(err)
+	}
 	w.Write(b)
+	//
 }
