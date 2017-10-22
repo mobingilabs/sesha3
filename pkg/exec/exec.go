@@ -51,12 +51,15 @@ func Run(w http.ResponseWriter, r *http.Request) {
 	//
 
 	//post response
-	s := "stdout & stderr"
+	stdout := "stdout"
+	stderr := "stderr"
 	type payload_t struct {
-		Out string `json:"out"`
+		Out string `json:"stdout"`
+		Err string `json:"stderr"`
 	}
 	payload := payload_t{
-		Out: s,
+		Out: stdout,
+		Err: stderr,
 	}
 	b, err := json.Marshal(payload)
 	if err != nil {
