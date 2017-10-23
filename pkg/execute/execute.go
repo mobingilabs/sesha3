@@ -1,6 +1,7 @@
-package exec
+package execute
 
 import (
+	"bytes"
 	"encoding/json"
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
@@ -10,15 +11,73 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"os/exec"
 	"strings"
+	"sync"
 )
 
-func sshcmd(data map[string]interface{}) {
-	Ips := strings.Split(data["target"].(string), ",")
-	for _, ip := range Ips {
-		ssh := "/usr/bin/ssh -tt -oStrictHostKeyChecking=no -i " + os.TempDir() + "/user/" + data["stackid"].(string) + ".pem " + data["user"].(string) + "@" + ip
-		d.Info(ssh)
+func execmd(cmd *exec.Cmd) (string, string, error) {
+	var outb, errb bytes.Buffer
+	var stdout, stderr string
+	cmd.Stdout = &outb
+	cmd.Stderr = &errb
+	err := cmd.Run()
+	if err != nil {
+		d.Error(err)
 	}
+	stdout = outb.String()
+	stderr = errb.String()
+	return stdout, stderr, err
+}
+
+type result struct {
+	stdout string
+	stderr string
+	ip     string
+}
+
+func sshcmd(data map[string]interface{}) []result {
+	Ips := strings.Split(data["target"].(string), ",")
+	pemfile := os.TempDir() + "/user/" + data["stackid"].(string) + ".pem "
+	ret := []result{}
+
+	var wg sync.WaitGroup
+	for _, ip := range Ips {
+		wg.Add(1)
+		go func() {
+			//scp sesha3 to user instance
+			var out result
+			out.ip = ip
+			scp := exec.Command(
+				"/usr/bin/scp",
+				"-i", pemfile,
+				os.TempDir()+"/sesha3/scripts/"+data["script_name"].(string),
+				data["user"].(string)+"@"+ip+":/tmp/",
+			)
+			_, scpe, err := execmd(scp)
+			if err != nil {
+				out.stderr = scpe + "\n"
+			}
+			//
+
+			execScript := exec.Command(
+				"/usr/bin/ssh",
+				"-tt",
+				"-o",
+				"StrictHostKeyChecking=no",
+				"-i", pemfile,
+				data["user"].(string)+"@"+ip,
+				"/tmp/"+data["script_name"].(string),
+			)
+			scriptout, scripterr, err := execmd(execScript)
+			out.stdout = out.stdout + scriptout + "\n"
+			out.stderr = out.stderr + scripterr + "\n"
+			ret = append(ret, out)
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+	return ret
 }
 
 func Run(w http.ResponseWriter, r *http.Request) {
@@ -56,7 +115,8 @@ func Run(w http.ResponseWriter, r *http.Request) {
 	//
 
 	//ssh cmd
-	sshcmd(getdata)
+	results := sshcmd(getdata)
+	d.Info(results[0])
 	// ...
 	//
 
