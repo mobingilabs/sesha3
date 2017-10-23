@@ -121,8 +121,8 @@ func Run(w http.ResponseWriter, r *http.Request) {
 	//
 
 	//post response
-	stdout := "stdout"
-	stderr := "stderr"
+	stdout := results[0].stdout
+	stderr := results[0].stderr
 	type payload_t struct {
 		Out string `json:"stdout"`
 		Err string `json:"stderr"`
