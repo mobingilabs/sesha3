@@ -49,7 +49,7 @@ func Sshcmd(data map[string]interface{}) []result {
 			)
 			_, scpe, err := execmd(scp)
 			if err != nil {
-				out.Stderr = scpe + "\n"
+				out.Stderr = scpe
 				ret = append(ret, out)
 				wg.Done()
 			} else {

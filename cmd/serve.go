@@ -425,8 +425,12 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	//
 
 	//post response
-	stdout := results[0].Stdout
-	stderr := results[0].Stderr
+	stdout := ""
+	stderr := ""
+	for _, o := range results {
+		stdout = stdout + "#" + o.Ip + "\n" + o.Stdout
+		stderr = stderr + "#" + o.Ip + "\n" + o.Stderr
+	}
 	type payload_t struct {
 		Out string `json:"stdout"`
 		Err string `json:"stderr"`
