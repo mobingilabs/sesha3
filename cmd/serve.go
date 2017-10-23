@@ -330,6 +330,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	//create script file on sesha3 server
 	scriptfile := scriptDir + "/" + getdata["script_name"].(string)
 	err = ioutil.WriteFile(scriptfile, []byte(getdata["script"].(string)), 0755)
+	err = os.Chmod(scriptfile, 0755)
 
 	d.Info(scriptfile)
 	if err != nil {
