@@ -50,23 +50,27 @@ func Sshcmd(data map[string]interface{}) []result {
 			_, scpe, err := execmd(scp)
 			if err != nil {
 				out.Stderr = scpe + "\n"
+				ret = append(ret, out)
+				wg.Done()
+			} else {
+				execScript := exec.Command(
+					"/usr/bin/ssh",
+					"-tt",
+					"-o",
+					"StrictHostKeyChecking=no",
+					"-i", pemfile,
+					data["user"].(string)+"@"+ip,
+					"/tmp/"+data["script_name"].(string),
+				)
+				scriptout, scripterr, err := execmd(execScript)
+				if err != nil {
+					d.Error("script:", err)
+				}
+				out.Stdout = scriptout
+				out.Stderr = scripterr
+				ret = append(ret, out)
+				wg.Done()
 			}
-			//
-
-			execScript := exec.Command(
-				"/usr/bin/ssh",
-				"-tt",
-				"-o",
-				"StrictHostKeyChecking=no",
-				"-i", pemfile,
-				data["user"].(string)+"@"+ip,
-				"/tmp/"+data["script_name"].(string),
-			)
-			scriptout, scripterr, err := execmd(execScript)
-			out.Stdout = scriptout
-			out.Stderr = out.Stderr + scripterr
-			ret = append(ret, out)
-			wg.Done()
 		}()
 	}
 	wg.Wait()
