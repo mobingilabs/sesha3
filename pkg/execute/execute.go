@@ -58,7 +58,6 @@ func Sshcmd(data map[string]interface{}) []result {
 			} else {
 				execScript := exec.Command(
 					"/usr/bin/ssh",
-					"-tt",
 					"-o",
 					"StrictHostKeyChecking=no",
 					"-i", pemfile,
