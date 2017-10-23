@@ -415,7 +415,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	d.Info("pem file created")
 	//ssh cmd
 	results := execute.Sshcmd(getdata)
-	d.Info(results[0])
+	d.Info("cmdout:", results[0])
 	// ...
 	//
 
