@@ -101,7 +101,7 @@ func serve(cmd *cobra.Command, args []string) {
 	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
 	// router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
-	router.HandleFunc("/exec", execute.Run).Methods(http.MethodGet)
+	router.HandleFunc("/exec", execScript).Methods(http.MethodGet)
 	// https://sesha3.labs.mobingi.com/debug/vars
 	router.Handle("/debug/vars", metrics.MetricsHandler)
 	err = http.ListenAndServeTLS(":"+params.Port,
@@ -304,6 +304,138 @@ func ttyurl(w http.ResponseWriter, r *http.Request) {
 	metrics.MetricsTTYResponseTime.Set(end.Sub(start).String())
 }
 
+func execScript(w http.ResponseWriter, r *http.Request) {
+	var getdata map[string]interface{}
+
+	defer r.Body.Close()
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		notify.HookPost(err)
+		return
+	}
+	d.Info("body:", string(body))
+	err = json.Unmarshal(body, &getdata)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		notify.HookPost(err)
+		return
+	}
+	scriptDir := os.TempDir() + "/sesha3/scripts/" + getdata["stackid"].(string)
+	if !private.Exists(scriptDir) {
+		err := os.MkdirAll(scriptDir, os.ModePerm)
+		notify.HookPost(errors.Wrap(err, "create scripts folder failed (fatal)"))
+	}
+
+	//create script file on sesha3 server
+	wfile, err := os.Create(scriptDir + "/" + getdata["script_name"].(string))
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		notify.HookPost(err)
+		return
+	}
+	wfile.Write([]byte(getdata["script"].(string)))
+	wfile.Close()
+
+	//token
+	auth := strings.Split(r.Header.Get("Authorization"), " ")
+	if len(auth) != 2 {
+		w.WriteHeader(401)
+		return
+	}
+
+	ctx, err := jwt.NewCtx()
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+
+	btoken := auth[1]
+	pt, err := ctx.ParseToken(btoken)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+
+	nc := pt.Claims.(*jwt.WrapperClaims)
+	u, _ := nc.Data["username"]
+	p, _ := nc.Data["password"]
+	d.Info("user:", u)
+
+	md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
+	ok, err := token.CheckToken(params.CredProfile, params.Region, fmt.Sprintf("%s", u), md5p)
+	if !ok {
+		w.WriteHeader(401)
+		return
+	}
+
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+
+	d.Info("token:", btoken)
+	pemurl := getdata["pem"].(string)
+	d.Info("rawurl:", pemurl)
+	resp, err := http.Get(fmt.Sprintf("%v", pemurl))
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		notify.HookPost(err)
+		return
+	}
+
+	defer resp.Body.Close()
+	body, err = ioutil.ReadAll(resp.Body)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		notify.HookPost(err)
+		return
+	}
+
+	pemdir := os.TempDir() + "/user/"
+	if !private.Exists(pemdir) {
+		d.Info("create", pemdir)
+		err = os.MkdirAll(pemdir, 0700)
+		if err != nil {
+			w.Write(sesha3.NewSimpleError(err).Marshal())
+			notify.HookPost(err)
+			return
+		}
+	}
+
+	pemfile := os.TempDir() + "/user/" + getdata["stackid"].(string) + ".pem"
+	err = ioutil.WriteFile(pemfile, body, 0600)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		notify.HookPost(err)
+		return
+	}
+
+	//ssh cmd
+	results := execute.Sshcmd(getdata)
+	d.Info(results[0])
+	// ...
+	//
+
+	//post response
+	stdout := results[0].Stdout
+	stderr := results[0].Stderr
+	type payload_t struct {
+		Out string `json:"stdout"`
+		Err string `json:"stderr"`
+	}
+	payload := payload_t{
+		Out: stdout,
+		Err: stderr,
+	}
+	b, err := json.Marshal(payload)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		notify.HookPost(err)
+	}
+	w.Write(b)
+	//
+}
 func describeSessions(w http.ResponseWriter, req *http.Request) {
 	ds := session.Sessions.Describe()
 	b, err := json.Marshal(ds)

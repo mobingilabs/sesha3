@@ -2,14 +2,7 @@ package execute
 
 import (
 	"bytes"
-	"encoding/json"
-	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
-	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
-	"github.com/mobingilabs/sesha3/pkg/notify"
-	"github.com/pkg/errors"
-	"io/ioutil"
-	"net/http"
 	"os"
 	"os/exec"
 	"strings"
@@ -31,12 +24,12 @@ func execmd(cmd *exec.Cmd) (string, string, error) {
 }
 
 type result struct {
-	stdout string
-	stderr string
-	ip     string
+	Stdout string
+	Stderr string
+	Ip     string
 }
 
-func sshcmd(data map[string]interface{}) []result {
+func Sshcmd(data map[string]interface{}) []result {
 	Ips := strings.Split(data["target"].(string), ",")
 	pemfile := os.TempDir() + "/user/" + data["stackid"].(string) + ".pem "
 	ret := []result{}
@@ -47,7 +40,7 @@ func sshcmd(data map[string]interface{}) []result {
 		go func() {
 			//scp sesha3 to user instance
 			var out result
-			out.ip = ip
+			out.Ip = ip
 			scp := exec.Command(
 				"/usr/bin/scp",
 				"-i", pemfile,
@@ -56,7 +49,7 @@ func sshcmd(data map[string]interface{}) []result {
 			)
 			_, scpe, err := execmd(scp)
 			if err != nil {
-				out.stderr = scpe + "\n"
+				out.Stderr = scpe + "\n"
 			}
 			//
 
@@ -70,72 +63,12 @@ func sshcmd(data map[string]interface{}) []result {
 				"/tmp/"+data["script_name"].(string),
 			)
 			scriptout, scripterr, err := execmd(execScript)
-			out.stdout = out.stdout + scriptout + "\n"
-			out.stderr = out.stderr + scripterr + "\n"
+			out.Stdout = out.Stdout + scriptout + "\n"
+			out.Stderr = out.Stderr + scripterr + "\n"
 			ret = append(ret, out)
 			wg.Done()
 		}()
 	}
 	wg.Wait()
 	return ret
-}
-
-func Run(w http.ResponseWriter, r *http.Request) {
-	var getdata map[string]interface{}
-
-	defer r.Body.Close()
-	body, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		w.Write(sesha3.NewSimpleError(err).Marshal())
-		notify.HookPost(err)
-		return
-	}
-	d.Info("body:", string(body))
-	err = json.Unmarshal(body, &getdata)
-	if err != nil {
-		w.Write(sesha3.NewSimpleError(err).Marshal())
-		notify.HookPost(err)
-		return
-	}
-	scriptDir := os.TempDir() + "/sesha3/scripts/" + getdata["stackid"].(string)
-	if !private.Exists(scriptDir) {
-		err := os.MkdirAll(scriptDir, os.ModePerm)
-		notify.HookPost(errors.Wrap(err, "create scripts folder failed (fatal)"))
-	}
-
-	//create script file on sesha3 server
-	wfile, err := os.Create(scriptDir + "/" + getdata["script_name"].(string))
-	if err != nil {
-		w.Write(sesha3.NewSimpleError(err).Marshal())
-		notify.HookPost(err)
-		return
-	}
-	wfile.Write([]byte(getdata["script"].(string)))
-	wfile.Close()
-	//
-
-	//ssh cmd
-	results := sshcmd(getdata)
-	d.Info(results[0])
-	// ...
-	//
-
-	//post response
-	stdout := results[0].stdout
-	stderr := results[0].stderr
-	type payload_t struct {
-		Out string `json:"stdout"`
-		Err string `json:"stderr"`
-	}
-	payload := payload_t{
-		Out: stdout,
-		Err: stderr,
-	}
-	b, err := json.Marshal(payload)
-	if err != nil {
-		w.Write(sesha3.NewSimpleError(err).Marshal())
-		notify.HookPost(err)
-	}
-	w.Write(b)
-	//
 }
