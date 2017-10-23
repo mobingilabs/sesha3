@@ -4,6 +4,7 @@ import (
 	"bytes"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"os/exec"
+	"regexp"
 	"strings"
 	"sync"
 )
@@ -34,6 +35,7 @@ func Sshcmd(data map[string]interface{}) []result {
 	ret := []result{}
 
 	var wg sync.WaitGroup
+	rep := regexp.MustCompile(`^\n`)
 	for _, ip := range Ips {
 		wg.Add(1)
 		go func() {
@@ -49,7 +51,7 @@ func Sshcmd(data map[string]interface{}) []result {
 			)
 			_, scpe, err := execmd(scp)
 			if err != nil {
-				out.Stderr = scpe
+				out.Stderr = rep.ReplaceAllString(scpe, "")
 				ret = append(ret, out)
 				wg.Done()
 			} else {
@@ -66,8 +68,8 @@ func Sshcmd(data map[string]interface{}) []result {
 				if err != nil {
 					d.Error("script:", err)
 				}
-				out.Stdout = scriptout
-				out.Stderr = scripterr
+				out.Stdout = rep.ReplaceAllString(scriptout, "")
+				out.Stderr = rep.ReplaceAllString(scripterr, "")
 				ret = append(ret, out)
 				wg.Done()
 			}
