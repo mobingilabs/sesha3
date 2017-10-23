@@ -328,14 +328,8 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//create script file on sesha3 server
-	wfile, err := os.Create(scriptDir + "/" + getdata["script_name"].(string))
-	if err != nil {
-		w.Write(sesha3.NewSimpleError(err).Marshal())
-		notify.HookPost(err)
-		return
-	}
-	_, err = wfile.Write([]byte(getdata["script"].(string)))
-	wfile.Close()
+	scriptfile := scriptDir + "/" + getdata["script_name"].(string)
+	err = ioutil.WriteFile(scriptfile, []byte(getdata["script"].(string)), 0700)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		notify.HookPost(err)
