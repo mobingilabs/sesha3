@@ -431,6 +431,8 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		stdout = stdout + "#" + o.Ip + "\n" + o.Stdout
 		ste := strings.Split(o.Stderr, "\n")
 		stderr = stderr + "#" + o.Ip + "\n" + strings.Join(ste[0:len(ste)-1], "\n")
+		stderr = strings.Trim(stderr, "\n")
+		stderr = strings.Trim(stderr, "\r")
 	}
 	type payload_t struct {
 		Out string `json:"stdout"`
