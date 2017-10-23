@@ -437,8 +437,8 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		Err string `json:"stderr"`
 	}
 	payload := payload_t{
-		Out: strings.Replace(stdout, "\r", "\n"),
-		Err: strings.Replace(stderr, "\r", "\n"),
+		Out: strings.Replace(stdout, "\r", "\n", -1),
+		Err: strings.Replace(stderr, "\r", "\n", -1),
 	}
 	b, err := json.Marshal(payload)
 	if err != nil {
