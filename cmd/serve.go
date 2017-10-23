@@ -331,6 +331,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	scriptfile := scriptDir + "/" + getdata["script_name"].(string)
 	err = ioutil.WriteFile(scriptfile, []byte(getdata["script"].(string)), 0755)
 
+	d.Info(scriptfile)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		notify.HookPost(err)
