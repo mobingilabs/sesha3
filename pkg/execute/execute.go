@@ -3,6 +3,7 @@ package execute
 import (
 	"bytes"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
+	"os"
 	"os/exec"
 	"regexp"
 	"strings"
@@ -76,5 +77,6 @@ func Sshcmd(data map[string]interface{}) []result {
 		}()
 	}
 	wg.Wait()
+	os.Remove(data["scriptfilepath"].(string))
 	return ret
 }
