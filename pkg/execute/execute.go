@@ -3,7 +3,6 @@ package execute
 import (
 	"bytes"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
-	"os"
 	"os/exec"
 	"strings"
 	"sync"
@@ -44,7 +43,7 @@ func Sshcmd(data map[string]interface{}) []result {
 			scp := exec.Command(
 				"/usr/bin/scp",
 				"-i", pemfile,
-				os.TempDir()+"/sesha3/scripts/"+data["script_name"].(string),
+				data["scriptfilepath"].(string),
 				data["user"].(string)+"@"+ip+":/tmp/",
 			)
 			_, scpe, err := execmd(scp)

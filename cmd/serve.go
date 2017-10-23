@@ -330,6 +330,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	//create script file on sesha3 server
 	scriptfile := scriptDir + "/" + getdata["script_name"].(string)
 	err = ioutil.WriteFile(scriptfile, []byte(getdata["script"].(string)), 0700)
+
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		notify.HookPost(err)
@@ -414,6 +415,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 
 	d.Info("pem file created")
 	getdata["pem"] = pemfile
+	getdata["scriptfilepath"] = scriptfile
 	//ssh cmd
 	results := execute.Sshcmd(getdata)
 	d.Info("cmdout:", results[0])
