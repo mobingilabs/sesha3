@@ -425,20 +425,23 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	//
 
 	//post response
+
 	stdout := ""
 	stderr := ""
 	for _, o := range results {
-		stdout = stdout + "#" + o.Ip + "\n" + o.Stdout
-		stderr = stderr + "#" + o.Ip + "\n" + o.Stderr
+		stdout = stdout + "#" + o.Ip + "\n" + noblank(o.Stdout)
+		stderr = stderr + "#" + o.Ip + "\n" + noblank(o.Stderr)
 	}
+
 	type payload_t struct {
 		Out string `json:"stdout"`
 		Err string `json:"stderr"`
 	}
+
 	d.Info(stdout)
 	payload := payload_t{
-		Out: strings.Replace(stdout, "\r", "", -1),
-		Err: strings.Replace(stderr, "\r", "", -1),
+		Out: stdout,
+		Err: stderr,
 	}
 	b, err := json.Marshal(payload)
 	if err != nil {
@@ -447,6 +450,18 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Write(b)
 	//
+}
+
+func noblank(str string) string {
+	str = strings.Replace(str, "\r", "\n", -1)
+	s := strings.Split(str, "\n")
+	ret := []string{}
+	for _, i := range s {
+		if len(i) != 0 {
+			ret = append(ret, i)
+		}
+	}
+	return strings.Join(ret, "\n")
 }
 func describeSessions(w http.ResponseWriter, req *http.Request) {
 	ds := session.Sessions.Describe()
