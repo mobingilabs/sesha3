@@ -63,8 +63,8 @@ func Sshcmd(data map[string]interface{}) []result {
 				"/tmp/"+data["script_name"].(string),
 			)
 			scriptout, scripterr, err := execmd(execScript)
-			out.Stdout = out.Stdout + scriptout + "\n"
-			out.Stderr = out.Stderr + scripterr + "\n"
+			out.Stdout = scriptout
+			out.Stderr = out.Stderr + scripterr
 			ret = append(ret, out)
 			wg.Done()
 		}()
