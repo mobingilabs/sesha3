@@ -334,8 +334,13 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		notify.HookPost(err)
 		return
 	}
-	wfile.Write([]byte(getdata["script"].(string)))
+	_, err = wfile.Write([]byte(getdata["script"].(string)))
 	wfile.Close()
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		notify.HookPost(err)
+		return
+	}
 
 	//token
 	auth := strings.Split(r.Header.Get("Authorization"), " ")
