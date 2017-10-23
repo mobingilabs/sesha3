@@ -32,7 +32,6 @@ type result struct {
 func Sshcmd(data map[string]interface{}) []result {
 	Ips := strings.Split(data["target"].(string), ",")
 	pemfile := data["pem"].(string)
-	d.Info("pem:", pemfile)
 	ret := []result{}
 
 	var wg sync.WaitGroup

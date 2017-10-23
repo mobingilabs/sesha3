@@ -335,6 +335,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		notify.HookPost(err)
 		return
 	}
+	d.Info("script created", scriptfile)
 
 	//token
 	auth := strings.Split(r.Header.Get("Authorization"), " ")
