@@ -391,6 +391,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		notify.HookPost(err)
 		return
 	}
+	d.Info("pemfile:", string(body))
 
 	pemdir := os.TempDir() + "/user/"
 	if !private.Exists(pemdir) {
@@ -411,6 +412,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	d.Info("pem file created")
 	//ssh cmd
 	results := execute.Sshcmd(getdata)
 	d.Info(results[0])
