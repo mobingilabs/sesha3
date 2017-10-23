@@ -36,7 +36,7 @@ func Sshcmd(data map[string]interface{}) []result {
 	ret := []result{}
 
 	var wg sync.WaitGroup
-	rep := regexp.MustCompile(`^\n|^\15|^\r`)
+	rep := regexp.MustCompile(`^\n|^\15|^\r|\n$`)
 	for _, ip := range Ips {
 		wg.Add(1)
 		go func() {
