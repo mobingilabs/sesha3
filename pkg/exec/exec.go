@@ -10,7 +10,16 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"strings"
 )
+
+func sshcmd(data map[string]interface{}) {
+	Ips := strings.Split(data["target"].(string), ",")
+	for _, ip := range Ips {
+		ssh := "/usr/bin/ssh -tt -oStrictHostKeyChecking=no -i " + os.TempDir() + "/user/" + data["stackid"].(string) + ".pem " + data["user"].(string) + "@" + ip
+		d.Info(ssh)
+	}
+}
 
 func Run(w http.ResponseWriter, r *http.Request) {
 	var getdata map[string]interface{}
@@ -46,7 +55,8 @@ func Run(w http.ResponseWriter, r *http.Request) {
 	wfile.Close()
 	//
 
-	//scp
+	//ssh cmd
+	sshcmd(getdata)
 	// ...
 	//
 
