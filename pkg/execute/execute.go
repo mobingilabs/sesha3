@@ -42,6 +42,7 @@ func Sshcmd(data map[string]interface{}) []result {
 			out.Ip = ip
 			scp := exec.Command(
 				"/usr/bin/scp",
+				"-p",
 				"-i", pemfile,
 				data["scriptfilepath"].(string),
 				data["user"].(string)+"@"+ip+":/tmp/",
