@@ -69,8 +69,9 @@ func Sshcmd(data map[string]interface{}) []result {
 				if err != nil {
 					d.Error("script:", err)
 				}
-				out.Stdout = rep.ReplaceAllString(scriptout, "")
-				out.Stderr = rep.ReplaceAllString(scripterr, "")
+				out.Stdout = rep.ReplaceAllString(strings.Replace(scriptout, "\r", "\n", -1), "")
+				ste := strings.Split(strings.Replace(scripterr, "\r", "\n", -1), "\n")
+				out.Stderr = rep.ReplaceAllString(strings.Join(ste[0:len(ste)-1], "\n"), "")
 				ret = append(ret, out)
 				wg.Done()
 			}
