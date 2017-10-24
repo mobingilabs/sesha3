@@ -314,6 +314,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		notify.HookPost(err)
 		return
 	}
+
 	d.Info("body:", string(body))
 	err = json.Unmarshal(body, &getdata)
 	if err != nil {
@@ -321,6 +322,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		notify.HookPost(err)
 		return
 	}
+
 	scriptDir := os.TempDir() + "/sesha3/scripts/" + getdata["stackid"].(string)
 	if !private.Exists(scriptDir) {
 		err := os.MkdirAll(scriptDir, os.ModePerm)
@@ -338,9 +340,8 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		notify.HookPost(err)
 		return
 	}
-	d.Info("script created", scriptfile)
 
-	//token
+	d.Info("script created", scriptfile)
 	auth := strings.Split(r.Header.Get("Authorization"), " ")
 	if len(auth) != 2 {
 		w.WriteHeader(401)
@@ -394,8 +395,8 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		notify.HookPost(err)
 		return
 	}
-	d.Info("pemfile:", string(body))
 
+	d.Info("pemfile:", string(body))
 	pemdir := os.TempDir() + "/user/"
 	if !private.Exists(pemdir) {
 		d.Info("create", pemdir)
@@ -418,14 +419,8 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	d.Info("pem file created")
 	getdata["pem"] = pemfile
 	getdata["scriptfilepath"] = scriptfile
-	//ssh cmd
 	results := execute.Sshcmd(getdata)
 	d.Info("cmdout:", results[0])
-	// ...
-	//
-
-	//post response
-
 	stdout := ""
 	stderr := ""
 	for _, o := range results {
@@ -443,13 +438,14 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		Out: stdout,
 		Err: stderr,
 	}
+
 	b, err := json.Marshal(payload)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		notify.HookPost(err)
 	}
+
 	w.Write(b)
-	//
 }
 
 func noblank(str string) string {
