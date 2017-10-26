@@ -322,8 +322,11 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		notify.HookPost(err)
 		return
 	}
-	targets := getdata["target"].(map[string]string)
-	d.Info(targets)
+	targets := getdata["target"].(map[string]interface{})
+	for stackid := range targets {
+		d.Info(stackid)
+		d.Info(targets[stackid].(string))
+	}
 
 	//	scriptDir := os.TempDir() + "/sesha3/scripts/" + getdata["stackid"].(string)
 	//	if !private.Exists(scriptDir) {
