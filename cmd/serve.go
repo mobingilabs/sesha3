@@ -363,6 +363,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	// pemfile download for ssh
 	pemurls := getdata["pem"].([]sesha3.StackPem)
 	d.Info(pemurls)
+	_ = targets
 	//	for _, pemurl := range pemurls {
 	//		d.Info("rawurl:", pemurl)
 	//		resp, err := http.Get(fmt.Sprintf("%v", pemurl))
