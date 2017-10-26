@@ -323,105 +323,106 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	targets := getdata["target"].(map[string]interface{})
-	for stackid := range targets {
-		d.Info(stackid)
-		d.Info(targets[stackid].(string))
+	//token check
+	auth := strings.Split(r.Header.Get("Authorization"), " ")
+	if len(auth) != 2 {
+		w.WriteHeader(401)
+		return
+	}
+	ctx, err := jwt.NewCtx()
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+	btoken := auth[1]
+	pt, err := ctx.ParseToken(btoken)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+	nc := pt.Claims.(*jwt.WrapperClaims)
+	u, _ := nc.Data["username"]
+	p, _ := nc.Data["password"]
+	d.Info("user:", u)
+	md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
+	ok, err := token.CheckToken(params.CredProfile, params.Region, fmt.Sprintf("%s", u), md5p)
+	if !ok {
+		w.WriteHeader(401)
+		return
 	}
 
-	//	scriptDir := os.TempDir() + "/sesha3/scripts/" + getdata["stackid"].(string)
-	//	if !private.Exists(scriptDir) {
-	//		err := os.MkdirAll(scriptDir, os.ModePerm)
-	//		notify.HookPost(errors.Wrap(err, "create scripts folder failed (fatal)"))
-	//	}
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		return
+	}
+
+	d.Info("token:", btoken)
+
 	//
-	//	//create script file on sesha3 server
-	//	scriptfile := scriptDir + "/" + getdata["script_name"].(string)
-	//	err = ioutil.WriteFile(scriptfile, []byte(getdata["script"].(string)), 0755)
-	//	err = os.Chmod(scriptfile, 0755)
-	//
-	//	d.Info(scriptfile)
-	//	if err != nil {
-	//		w.Write(sesha3.NewSimpleError(err).Marshal())
-	//		notify.HookPost(err)
-	//		return
-	//	}
-	//
-	//	d.Info("script created", scriptfile)
-	//	auth := strings.Split(r.Header.Get("Authorization"), " ")
-	//	if len(auth) != 2 {
-	//		w.WriteHeader(401)
-	//		return
-	//	}
-	//
-	//	ctx, err := jwt.NewCtx()
-	//	if err != nil {
-	//		w.Write(sesha3.NewSimpleError(err).Marshal())
-	//		return
-	//	}
-	//
-	//	btoken := auth[1]
-	//	pt, err := ctx.ParseToken(btoken)
-	//	if err != nil {
-	//		w.Write(sesha3.NewSimpleError(err).Marshal())
-	//		return
-	//	}
-	//
-	//	nc := pt.Claims.(*jwt.WrapperClaims)
-	//	u, _ := nc.Data["username"]
-	//	p, _ := nc.Data["password"]
-	//	d.Info("user:", u)
-	//
-	//	md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
-	//	ok, err := token.CheckToken(params.CredProfile, params.Region, fmt.Sprintf("%s", u), md5p)
-	//	if !ok {
-	//		w.WriteHeader(401)
-	//		return
-	//	}
-	//
-	//	if err != nil {
-	//		w.Write(sesha3.NewSimpleError(err).Marshal())
-	//		return
-	//	}
-	//
-	//	d.Info("token:", btoken)
-	//	pemurl := getdata["pem"].(string)
-	//	d.Info("rawurl:", pemurl)
-	//	resp, err := http.Get(fmt.Sprintf("%v", pemurl))
-	//	if err != nil {
-	//		w.Write(sesha3.NewSimpleError(err).Marshal())
-	//		notify.HookPost(err)
-	//		return
-	//	}
-	//
-	//	defer resp.Body.Close()
-	//	body, err = ioutil.ReadAll(resp.Body)
-	//	if err != nil {
-	//		w.Write(sesha3.NewSimpleError(err).Marshal())
-	//		notify.HookPost(err)
-	//		return
-	//	}
-	//
-	//	d.Info("pemfile:", string(body))
-	//	pemdir := os.TempDir() + "/user/"
-	//	if !private.Exists(pemdir) {
-	//		d.Info("create", pemdir)
-	//		err = os.MkdirAll(pemdir, 0700)
+
+	// pemfile download for ssh
+	pemurls := getdata["pem"].([]sesha3.StackPem)
+	d.Info(pemurls)
+	//	for _, pemurl := range pemurls {
+	//		d.Info("rawurl:", pemurl)
+	//		resp, err := http.Get(fmt.Sprintf("%v", pemurl))
 	//		if err != nil {
 	//			w.Write(sesha3.NewSimpleError(err).Marshal())
 	//			notify.HookPost(err)
 	//			return
 	//		}
-	//	}
+	//		defer resp.Body.Close()
+	//		body, err = ioutil.ReadAll(resp.Body)
+	//		if err != nil {
+	//			w.Write(sesha3.NewSimpleError(err).Marshal())
+	//			notify.HookPost(err)
+	//			return
+	//		}
+	//		d.Info("pemfile:", string(body))
+	//		pemdir := os.TempDir() + "/user/"
+	//		if !private.Exists(pemdir) {
+	//			d.Info("create", pemdir)
+	//			err = os.MkdirAll(pemdir, 0700)
+	//			if err != nil {
+	//				w.Write(sesha3.NewSimpleError(err).Marshal())
+	//				notify.HookPost(err)
+	//				return
+	//			}
+	//		}
 	//
-	//	pemfile := os.TempDir() + "/user/" + getdata["stackid"].(string) + ".pem"
-	//	err = ioutil.WriteFile(pemfile, body, 0600)
-	//	if err != nil {
-	//		w.Write(sesha3.NewSimpleError(err).Marshal())
-	//		notify.HookPost(err)
-	//		return
-	//	}
+	//		pemfile := os.TempDir() + "/user/" + getdata["stackid"].(string) + ".pem"
+	//		err = ioutil.WriteFile(pemfile, body, 0600)
+	//		if err != nil {
+	//			w.Write(sesha3.NewSimpleError(err).Marshal())
+	//			notify.HookPost(err)
+	//			return
+	//		}
 	//
-	//	d.Info("pem file created")
+	//		d.Info("pem file created")
+	//	}
+	//	//execute cmd
+	//	for stackid := range targets {
+	//		iplist := strings.Split(targets[stackid].(string), ",")
+	//		scriptDir := os.TempDir() + "/sesha3/scripts/" + stackid
+	//		if !private.Exists(scriptDir) {
+	//			err := os.MkdirAll(scriptDir, os.ModePerm)
+	//			notify.HookPost(errors.Wrap(err, "create scripts folder failed (fatal)"))
+	//		}
+	//		//create script file on sesha3 server
+	//		scriptfile := scriptDir + "/" + getdata["script_name"].(string)
+	//		err = ioutil.WriteFile(scriptfile, []byte(getdata["script"].(string)), 0755)
+	//		err = os.Chmod(scriptfile, 0755)
+	//		d.Info(scriptfile)
+	//		if err != nil {
+	//			w.Write(sesha3.NewSimpleError(err).Marshal())
+	//			notify.HookPost(err)
+	//			return
+	//		}
+	//		d.Info("script created", scriptfile)
+	//
+	//	}
+
+	//
 	//	getdata["pem"] = pemfile
 	//	getdata["scriptfilepath"] = scriptfile
 	//	results := execute.Sshcmd(getdata)

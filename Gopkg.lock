@@ -10,8 +10,8 @@
 [[projects]]
   name = "github.com/aws/aws-sdk-go"
   packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/shareddefaults","private/protocol","private/protocol/ec2query","private/protocol/json/jsonutil","private/protocol/jsonrpc","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/restxml","private/protocol/xml/xmlutil","service/cloudwatch","service/dynamodb","service/dynamodb/dynamodbattribute","service/dynamodb/dynamodbiface","service/ec2","service/s3","service/s3/s3iface","service/s3/s3manager","service/sts"]
-  revision = "209e63d002840d9ed94159e6639216a53b7cc28b"
-  version = "v1.12.16"
+  revision = "ee1f179877b2daf2aaabf71fa900773bf8842253"
+  version = "v1.12.19"
 
 [[projects]]
   name = "github.com/cenkalti/backoff"
@@ -40,8 +40,8 @@
 [[projects]]
   name = "github.com/go-ini/ini"
   packages = ["."]
-  revision = "5b3e00af70a9484542169a976dcab8d03e601a17"
-  version = "v1.30.0"
+  revision = "f280b3ba517bf5fc98922624f21fb0e7a92adaec"
+  version = "v1.30.3"
 
 [[projects]]
   name = "github.com/gorilla/context"
@@ -91,10 +91,10 @@
   version = "v0.0.3"
 
 [[projects]]
+  branch = "targetfmt"
   name = "github.com/mobingilabs/mobingi-sdk-go"
   packages = ["client","mobingi/alm","mobingi/credentials","mobingi/sesha3","mobingi/session","pkg/cmdline","pkg/debug","pkg/jwt","pkg/notification","pkg/private"]
-  revision = "c4bcb9c1c8a74f12a0e98d5ce383902246846965"
-  version = "v0.1.12"
+  revision = "08788164f583e93a4115ece840724e6b2e08282e"
 
 [[projects]]
   name = "github.com/moul/gotty-client"
@@ -115,10 +115,10 @@
   version = "v1.1.0"
 
 [[projects]]
-  branch = "master"
   name = "github.com/spf13/cobra"
   packages = ["."]
   revision = "7b2c5ac9fc04fc5efafb60700713d4fa609b777b"
+  version = "v0.0.1"
 
 [[projects]]
   name = "github.com/spf13/pflag"
@@ -136,17 +136,17 @@
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context"]
-  revision = "92447d55896d6f92b4a0d4fd83bd078b0374e8fa"
+  revision = "4b14673ba32bee7f5ac0f990a48f033919fd418b"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix","windows"]
-  revision = "a1a1f1746d156bbc9954f29134b20ed4ce2752f1"
+  revision = "164713f0dfcec4e80be8b53e1f0811f5f0d84578"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "afe5ffe704db3b5fdd0af782e49160a4c0fe090fd90facb5e2b2bdd20e2e1a22"
+  inputs-digest = "8141cc631ac7863e9bdd71f089ea3f864e03ca55cbc85399ab04293013dcadfc"
   solver-name = "gps-cdcl"
   solver-version = 1
