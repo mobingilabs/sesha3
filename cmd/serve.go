@@ -382,7 +382,6 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 			notify.HookPost(err)
 			return
 		}
-		d.Info("pemfile:", string(body))
 		pemdir := os.TempDir() + "/user/"
 		if !private.Exists(pemdir) {
 			d.Info("create", pemdir)
@@ -402,27 +401,28 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		}
 		d.Info("pem file created")
 	}
-	//	//execute cmd
-	//	for stackid := range targets {
-	//		iplist := strings.Split(targets[stackid].(string), ",")
-	//		scriptDir := os.TempDir() + "/sesha3/scripts/" + stackid
-	//		if !private.Exists(scriptDir) {
-	//			err := os.MkdirAll(scriptDir, os.ModePerm)
-	//			notify.HookPost(errors.Wrap(err, "create scripts folder failed (fatal)"))
-	//		}
-	//		//create script file on sesha3 server
-	//		scriptfile := scriptDir + "/" + getdata["script_name"].(string)
-	//		err = ioutil.WriteFile(scriptfile, []byte(getdata["script"].(string)), 0755)
-	//		err = os.Chmod(scriptfile, 0755)
-	//		d.Info(scriptfile)
-	//		if err != nil {
-	//			w.Write(sesha3.NewSimpleError(err).Marshal())
-	//			notify.HookPost(err)
-	//			return
-	//		}
-	//		d.Info("script created", scriptfile)
-	//
-	//	}
+	//execute cmd
+	for stackid := range targets {
+		iplist := strings.Split(targets[stackid].(string), ",")
+		d.Info("target_stackid:", stackid)
+		d.Info("ip:", iplist)
+		scriptDir := os.TempDir() + "/sesha3/scripts/" + stackid
+		if !private.Exists(scriptDir) {
+			err := os.MkdirAll(scriptDir, os.ModePerm)
+			notify.HookPost(errors.Wrap(err, "create scripts folder failed (fatal)"))
+		}
+		//create script file on sesha3 server
+		scriptfile := scriptDir + "/" + getdata["script_name"].(string)
+		err = ioutil.WriteFile(scriptfile, []byte(getdata["script"].(string)), 0755)
+		err = os.Chmod(scriptfile, 0755)
+		d.Info(scriptfile)
+		if err != nil {
+			w.Write(sesha3.NewSimpleError(err).Marshal())
+			notify.HookPost(err)
+			return
+		}
+		d.Info("script created", scriptfile)
+	}
 
 	//
 	//	getdata["pem"] = pemfile
