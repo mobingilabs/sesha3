@@ -367,43 +367,41 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	_ = targets
 	for stackid := range pemurls {
 		d.Info(stackid)
-		d.Info("rawurl:", pemurls[stackid])
+		pemurl := pemurls[stackid].(string)
+		d.Info("rawurl:", pemurl)
+		resp, err := http.Get(fmt.Sprintf("%v", pemurl))
+		if err != nil {
+			w.Write(sesha3.NewSimpleError(err).Marshal())
+			notify.HookPost(err)
+			return
+		}
+		defer resp.Body.Close()
+		body, err = ioutil.ReadAll(resp.Body)
+		if err != nil {
+			w.Write(sesha3.NewSimpleError(err).Marshal())
+			notify.HookPost(err)
+			return
+		}
+		d.Info("pemfile:", string(body))
+		pemdir := os.TempDir() + "/user/"
+		if !private.Exists(pemdir) {
+			d.Info("create", pemdir)
+			err = os.MkdirAll(pemdir, 0700)
+			if err != nil {
+				w.Write(sesha3.NewSimpleError(err).Marshal())
+				notify.HookPost(err)
+				return
+			}
+		}
+		pemfile := os.TempDir() + "/user/" + stackid + ".pem"
+		err = ioutil.WriteFile(pemfile, body, 0600)
+		if err != nil {
+			w.Write(sesha3.NewSimpleError(err).Marshal())
+			notify.HookPost(err)
+			return
+		}
+		d.Info("pem file created")
 	}
-	//		resp, err := http.Get(fmt.Sprintf("%v", pemurl))
-	//		if err != nil {
-	//			w.Write(sesha3.NewSimpleError(err).Marshal())
-	//			notify.HookPost(err)
-	//			return
-	//		}
-	//		defer resp.Body.Close()
-	//		body, err = ioutil.ReadAll(resp.Body)
-	//		if err != nil {
-	//			w.Write(sesha3.NewSimpleError(err).Marshal())
-	//			notify.HookPost(err)
-	//			return
-	//		}
-	//		d.Info("pemfile:", string(body))
-	//		pemdir := os.TempDir() + "/user/"
-	//		if !private.Exists(pemdir) {
-	//			d.Info("create", pemdir)
-	//			err = os.MkdirAll(pemdir, 0700)
-	//			if err != nil {
-	//				w.Write(sesha3.NewSimpleError(err).Marshal())
-	//				notify.HookPost(err)
-	//				return
-	//			}
-	//		}
-	//
-	//		pemfile := os.TempDir() + "/user/" + getdata["stackid"].(string) + ".pem"
-	//		err = ioutil.WriteFile(pemfile, body, 0600)
-	//		if err != nil {
-	//			w.Write(sesha3.NewSimpleError(err).Marshal())
-	//			notify.HookPost(err)
-	//			return
-	//		}
-	//
-	//		d.Info("pem file created")
-	//	}
 	//	//execute cmd
 	//	for stackid := range targets {
 	//		iplist := strings.Split(targets[stackid].(string), ",")
