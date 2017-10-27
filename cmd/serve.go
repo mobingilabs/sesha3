@@ -316,54 +316,55 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	}
 
 	d.Info("body:", string(body))
-	err = json.Unmarshal(body, &getdata)
-	if err != nil {
-		w.Write(sesha3.NewSimpleError(err).Marshal())
-		notify.HookPost(err)
-		return
-	}
-	targets := getdata["target"].(map[string]interface{})
-	//token check
-	auth := strings.Split(r.Header.Get("Authorization"), " ")
-	if len(auth) != 2 {
-		w.WriteHeader(401)
-		return
-	}
-	ctx, err := jwt.NewCtx()
-	if err != nil {
-		w.Write(sesha3.NewSimpleError(err).Marshal())
-		return
-	}
-	btoken := auth[1]
-	pt, err := ctx.ParseToken(btoken)
-	if err != nil {
-		w.Write(sesha3.NewSimpleError(err).Marshal())
-		return
-	}
-	nc := pt.Claims.(*jwt.WrapperClaims)
-	u, _ := nc.Data["username"]
-	p, _ := nc.Data["password"]
-	d.Info("user:", u)
-	md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
-	ok, err := token.CheckToken(params.CredProfile, params.Region, fmt.Sprintf("%s", u), md5p)
-	if !ok {
-		w.WriteHeader(401)
-		return
-	}
-
-	if err != nil {
-		w.Write(sesha3.NewSimpleError(err).Marshal())
-		return
-	}
-
-	d.Info("token:", btoken)
-
+	_ = getdata
+	//	err = json.Unmarshal(body, &getdata)
+	//	if err != nil {
+	//		w.Write(sesha3.NewSimpleError(err).Marshal())
+	//		notify.HookPost(err)
+	//		return
+	//	}
+	//	targets := getdata["target"].(map[string]interface{})
+	//	//token check
+	//	auth := strings.Split(r.Header.Get("Authorization"), " ")
+	//	if len(auth) != 2 {
+	//		w.WriteHeader(401)
+	//		return
+	//	}
+	//	ctx, err := jwt.NewCtx()
+	//	if err != nil {
+	//		w.Write(sesha3.NewSimpleError(err).Marshal())
+	//		return
+	//	}
+	//	btoken := auth[1]
+	//	pt, err := ctx.ParseToken(btoken)
+	//	if err != nil {
+	//		w.Write(sesha3.NewSimpleError(err).Marshal())
+	//		return
+	//	}
+	//	nc := pt.Claims.(*jwt.WrapperClaims)
+	//	u, _ := nc.Data["username"]
+	//	p, _ := nc.Data["password"]
+	//	d.Info("user:", u)
+	//	md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
+	//	ok, err := token.CheckToken(params.CredProfile, params.Region, fmt.Sprintf("%s", u), md5p)
+	//	if !ok {
+	//		w.WriteHeader(401)
+	//		return
+	//	}
 	//
-
-	// pemfile download for ssh
-	pemurls := getdata["pem"].(map[string]interface{})
-	d.Info(pemurls)
-	_ = targets
+	//	if err != nil {
+	//		w.Write(sesha3.NewSimpleError(err).Marshal())
+	//		return
+	//	}
+	//
+	//	d.Info("token:", btoken)
+	//
+	//	//
+	//
+	//	// pemfile download for ssh
+	//	pemurls := getdata["pem"].(map[string]interface{})
+	//	d.Info(pemurls)
+	//	_ = targets
 	//	for _, pemurl := range pemurls {
 	//		d.Info("rawurl:", pemurl.(map[string]string))
 	//	}
