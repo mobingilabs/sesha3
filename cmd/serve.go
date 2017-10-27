@@ -365,9 +365,9 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	pemurls := getdata["stack_pem"].(map[string]interface{})
 	d.Info(pemurls)
 	_ = targets
-	//	for _, pemurl := range pemurls {
-	//		d.Info("rawurl:", pemurl.(map[string]string))
-	//	}
+	for stackid := range pemurls {
+		d.Info("rawurl:", pemurls[stackid])
+	}
 	//		resp, err := http.Get(fmt.Sprintf("%v", pemurl))
 	//		if err != nil {
 	//			w.Write(sesha3.NewSimpleError(err).Marshal())
