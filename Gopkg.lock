@@ -94,7 +94,7 @@
   branch = "targetfmt"
   name = "github.com/mobingilabs/mobingi-sdk-go"
   packages = ["client","mobingi/alm","mobingi/credentials","mobingi/sesha3","mobingi/session","pkg/cmdline","pkg/debug","pkg/jwt","pkg/notification","pkg/private"]
-  revision = "fee502151749c2a60f3db91065b573790ad009d5"
+  revision = "2c12510395fc901521590d619a250b92b1cb2ff5"
 
 [[projects]]
   name = "github.com/moul/gotty-client"
@@ -136,13 +136,13 @@
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context"]
-  revision = "7b572d500b0702f1ea30a47083ce2e1e5c61edba"
+  revision = "c73622c77280266305273cb545f54516ced95b93"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix","windows"]
-  revision = "164713f0dfcec4e80be8b53e1f0811f5f0d84578"
+  revision = "b98136db334ff9cb24f28a68e3be3cb6608f7630"
 
 [solve-meta]
   analyzer-name = "dep"

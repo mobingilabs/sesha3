@@ -361,7 +361,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	//
 
 	// pemfile download for ssh
-	pemurls := getdata["pem"]
+	pemurls := getdata["pem"].(map[string]interface{})
 	d.Info(pemurls)
 	_ = targets
 	//	for _, pemurl := range pemurls {
