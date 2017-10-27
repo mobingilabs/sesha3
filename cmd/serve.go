@@ -366,6 +366,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	d.Info(pemurls)
 	_ = targets
 	for stackid := range pemurls {
+		d.Info(stackid)
 		d.Info("rawurl:", pemurls[stackid])
 	}
 	//		resp, err := http.Get(fmt.Sprintf("%v", pemurl))
