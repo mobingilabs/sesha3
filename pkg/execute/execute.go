@@ -25,12 +25,13 @@ func execmd(cmd *exec.Cmd) (string, string, error) {
 }
 
 type Result struct {
-	Stdout string
-	Stderr string
-	Ip     string
+	Stdout  string
+	Stderr  string
+	Ip      string
+	Stackid string
 }
 
-func Sshcmd(data map[string]interface{}) []Result {
+func Sshcmd(stackid string, data map[string]interface{}) []Result {
 	Ips := data["target"].([]string)
 	pemfile := data["pem"].(string)
 	ret := []Result{}
@@ -44,6 +45,7 @@ func Sshcmd(data map[string]interface{}) []Result {
 			//scp sesha3 to user instance
 			var out Result
 			out.Ip = ip
+			out.Stackid = stackid
 			scp := exec.Command(
 				"/usr/bin/scp",
 				"-p",

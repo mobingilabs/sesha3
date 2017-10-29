@@ -433,7 +433,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		cmdData["target"] = iplist
 		cmdData["script_name"] = getdata["script_name"]
 		d.Info(cmdData)
-		out := execute.Sshcmd(cmdData)
+		out := execute.Sshcmd(stackid, cmdData)
 		d.Info("cmdout:", out[0])
 		results = append(results, out)
 	}
@@ -442,8 +442,8 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	stderr := ""
 	for _, out := range results {
 		for _, o := range out {
-			stdout = stdout + "#stdout:" + o.Ip + "\n" + noblank(o.Stdout)
-			stderr = stderr + "#stderr:" + o.Ip + "\n" + noblank(o.Stderr)
+			stdout = stdout + "#stdout:" + o.Stackid + ":" + o.Ip + "\n" + noblank(o.Stdout)
+			stderr = stderr + "#stderr:" + o.Stackid + ":" + o.Ip + "\n" + noblank(o.Stderr)
 		}
 	}
 
