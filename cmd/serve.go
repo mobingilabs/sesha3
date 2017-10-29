@@ -370,6 +370,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	for stackid := range pemurls {
 		wg.Add(1)
 		go func() {
+			stackid := stackid
 			d.Info(stackid)
 			pemurl := pemurls[stackid].(string)
 			d.Info("rawurl:", pemurl)
