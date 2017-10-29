@@ -455,7 +455,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	d.Info(stdout)
 	payload := payload_t{
 		Out: noblank(stdout),
-		Err: noblank(stderr),
+		Err: noblank(stderr) + "\n",
 	}
 
 	b, err := json.Marshal(payload)

@@ -50,6 +50,7 @@ func Sshcmd(stackid string, data map[string]interface{}) []Result {
 				"/usr/bin/scp",
 				"-p",
 				"-i", pemfile,
+				"-o", "StrictHostKeyChecking=no",
 				data["scriptfilepath"].(string),
 				data["user"].(string)+"@"+ip+":/tmp/",
 			)
