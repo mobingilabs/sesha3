@@ -425,7 +425,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		d.Info(stackid)
 		pemfile := os.TempDir() + "/user/" + stackid + ".pem"
 		d.Info(pemfile)
-		var cmdData map[string]interface{}
+		cmdData := make(map[string]interface{})
 		cmdData["pem"] = pemfile
 		cmdData["scriptfilepath"] = scriptfile
 		cmdData["user"] = getdata["user"]
