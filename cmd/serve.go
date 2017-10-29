@@ -19,7 +19,7 @@ import (
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/pkg/awsports"
-	//"github.com/mobingilabs/sesha3/pkg/execute"
+	"github.com/mobingilabs/sesha3/pkg/execute"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/mobingilabs/sesha3/pkg/params"
@@ -422,13 +422,17 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		d.Info("script created", scriptfile)
+		pemfile := os.TempDir() + "/user/" + stackid + ".pem"
+		var cmdData map[string]interface{}
+		cmdData["pem"] = pemfile
+		cmdData["scriptfilepath"] = scriptfile
+		cmdData["user"] = getdata["user"]
+		cmdData["target"] = iplist
+		cmdData["script_name"] = getdata["script_name"]
+		results := execute.Sshcmd(cmdData)
+		d.Info("cmdout:", results[0])
 	}
 
-	//
-	//	getdata["pem"] = pemfile
-	//	getdata["scriptfilepath"] = scriptfile
-	//	results := execute.Sshcmd(getdata)
-	//	d.Info("cmdout:", results[0])
 	//	stdout := ""
 	//	stderr := ""
 	//	for _, o := range results {

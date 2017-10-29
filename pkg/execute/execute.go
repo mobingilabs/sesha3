@@ -31,7 +31,7 @@ type result struct {
 }
 
 func Sshcmd(data map[string]interface{}) []result {
-	Ips := strings.Split(data["target"].(string), ",")
+	Ips := data["target"].([]string)
 	pemfile := data["pem"].(string)
 	ret := []result{}
 
