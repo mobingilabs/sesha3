@@ -34,6 +34,7 @@ func Sshcmd(data map[string]interface{}) []result {
 	Ips := data["target"].([]string)
 	pemfile := data["pem"].(string)
 	ret := []result{}
+	d.Info("exec:", Ips)
 
 	var wg sync.WaitGroup
 	rep := regexp.MustCompile(`^\n|^\r|\n$|\r$`)
