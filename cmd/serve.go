@@ -422,6 +422,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		d.Info("script created", scriptfile)
+		d.Info(stackid)
 		pemfile := os.TempDir() + "/user/" + stackid + ".pem"
 		d.Info(pemfile)
 		var cmdData map[string]interface{}
