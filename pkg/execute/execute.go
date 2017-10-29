@@ -24,16 +24,16 @@ func execmd(cmd *exec.Cmd) (string, string, error) {
 	return stdout, stderr, err
 }
 
-type result struct {
+type Result struct {
 	Stdout string
 	Stderr string
 	Ip     string
 }
 
-func Sshcmd(data map[string]interface{}) []result {
+func Sshcmd(data map[string]interface{}) []Result {
 	Ips := data["target"].([]string)
 	pemfile := data["pem"].(string)
-	ret := []result{}
+	ret := []Result{}
 	d.Info("exec:", Ips)
 
 	var wg sync.WaitGroup
@@ -42,7 +42,7 @@ func Sshcmd(data map[string]interface{}) []result {
 		wg.Add(1)
 		go func() {
 			//scp sesha3 to user instance
-			var out result
+			var out Result
 			out.Ip = ip
 			scp := exec.Command(
 				"/usr/bin/scp",

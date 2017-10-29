@@ -402,6 +402,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		d.Info("pem file created")
 	}
 	//execute cmd
+	results := [][]execute.Result{}
 	for stackid := range targets {
 		iplist := strings.Split(targets[stackid].(string), ",")
 		d.Info("target_stackid:", stackid)
@@ -432,15 +433,18 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		cmdData["target"] = iplist
 		cmdData["script_name"] = getdata["script_name"]
 		d.Info(cmdData)
-		results := execute.Sshcmd(cmdData)
-		d.Info("cmdout:", results[0])
+		out := execute.Sshcmd(cmdData)
+		d.Info("cmdout:", out[0])
+		results = append(results, out)
 	}
 
 	stdout := ""
 	stderr := ""
-	for _, o := range results {
-		stdout = stdout + "#" + o.Ip + "\n" + noblank(o.Stdout)
-		stderr = stderr + "#" + o.Ip + "\n" + noblank(o.Stderr)
+	for _, out := range results {
+		for _, o := range out {
+			stdout = stdout + "#" + o.Ip + "\n" + noblank(o.Stdout)
+			stderr = stderr + "#" + o.Ip + "\n" + noblank(o.Stderr)
+		}
 	}
 
 	type payload_t struct {
