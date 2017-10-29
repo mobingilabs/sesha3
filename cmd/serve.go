@@ -423,12 +423,14 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		}
 		d.Info("script created", scriptfile)
 		pemfile := os.TempDir() + "/user/" + stackid + ".pem"
+		d.Info(pemfile)
 		var cmdData map[string]interface{}
 		cmdData["pem"] = pemfile
 		cmdData["scriptfilepath"] = scriptfile
 		cmdData["user"] = getdata["user"]
 		cmdData["target"] = iplist
 		cmdData["script_name"] = getdata["script_name"]
+		d.Info(cmdData)
 		results := execute.Sshcmd(cmdData)
 		d.Info("cmdout:", results[0])
 	}
