@@ -436,31 +436,31 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		d.Info("cmdout:", results[0])
 	}
 
-	//	stdout := ""
-	//	stderr := ""
-	//	for _, o := range results {
-	//		stdout = stdout + "#" + o.Ip + "\n" + noblank(o.Stdout)
-	//		stderr = stderr + "#" + o.Ip + "\n" + noblank(o.Stderr)
-	//	}
-	//
-	//	type payload_t struct {
-	//		Out string `json:"stdout"`
-	//		Err string `json:"stderr"`
-	//	}
-	//
-	//	d.Info(stdout)
-	//	payload := payload_t{
-	//		Out: stdout,
-	//		Err: stderr,
-	//	}
-	//
-	//	b, err := json.Marshal(payload)
-	//	if err != nil {
-	//		w.Write(sesha3.NewSimpleError(err).Marshal())
-	//		notify.HookPost(err)
-	//	}
-	//
-	//	w.Write(b)
+	stdout := ""
+	stderr := ""
+	for _, o := range results {
+		stdout = stdout + "#" + o.Ip + "\n" + noblank(o.Stdout)
+		stderr = stderr + "#" + o.Ip + "\n" + noblank(o.Stderr)
+	}
+
+	type payload_t struct {
+		Out string `json:"stdout"`
+		Err string `json:"stderr"`
+	}
+
+	d.Info(stdout)
+	payload := payload_t{
+		Out: stdout,
+		Err: stderr,
+	}
+
+	b, err := json.Marshal(payload)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		notify.HookPost(err)
+	}
+
+	w.Write(b)
 }
 
 func noblank(str string) string {
