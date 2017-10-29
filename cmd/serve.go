@@ -442,8 +442,8 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	stderr := ""
 	for _, out := range results {
 		for _, o := range out {
-			stdout = stdout + "#" + o.Ip + "\n" + noblank(o.Stdout)
-			stderr = stderr + "#" + o.Ip + "\n" + noblank(o.Stderr)
+			stdout = stdout + "#stdout:" + o.Ip + "\n" + noblank(o.Stdout)
+			stderr = stderr + "#stderr:" + o.Ip + "\n" + noblank(o.Stderr)
 		}
 	}
 
@@ -454,8 +454,8 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 
 	d.Info(stdout)
 	payload := payload_t{
-		Out: stdout,
-		Err: stderr,
+		Out: noblank(stdout),
+		Err: noblank(stderr),
 	}
 
 	b, err := json.Marshal(payload)
