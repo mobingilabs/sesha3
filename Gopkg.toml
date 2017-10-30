@@ -33,13 +33,10 @@
   branch = "master"
   name = "github.com/guregu/dynamo"
 
-#[[constraint]]
-#  name = "github.com/mobingilabs/mobingi-sdk-go"
-#  version = "0.1.12"
-
 [[constraint]]
   name = "github.com/mobingilabs/mobingi-sdk-go"
-  branch = "targetfmt"
+  version = "0.1.13"
+
 
 [[constraint]]
   name = "github.com/pkg/errors"

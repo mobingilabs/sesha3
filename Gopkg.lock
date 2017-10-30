@@ -91,10 +91,10 @@
   version = "v0.0.3"
 
 [[projects]]
-  branch = "targetfmt"
   name = "github.com/mobingilabs/mobingi-sdk-go"
   packages = ["client","mobingi/alm","mobingi/credentials","mobingi/sesha3","mobingi/session","pkg/cmdline","pkg/debug","pkg/jwt","pkg/notification","pkg/private"]
-  revision = "f08b72e4e23a55b005c56979034c7760e8bb1246"
+  revision = "d60f8f24b943b7f60faa39d27b90a980d36fcaf8"
+  version = "v0.1.13"
 
 [[projects]]
   name = "github.com/moul/gotty-client"
@@ -115,10 +115,10 @@
   version = "v1.1.0"
 
 [[projects]]
+  branch = "master"
   name = "github.com/spf13/cobra"
   packages = ["."]
-  revision = "7b2c5ac9fc04fc5efafb60700713d4fa609b777b"
-  version = "v0.0.1"
+  revision = "b3426bbac13d7110c4d8fce456ea0012f79f3b8b"
 
 [[projects]]
   name = "github.com/spf13/pflag"
@@ -142,11 +142,11 @@
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix","windows"]
-  revision = "b98136db334ff9cb24f28a68e3be3cb6608f7630"
+  revision = "661970f62f5897bc0cd5fdca7e087ba8a98a8fa1"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "8141cc631ac7863e9bdd71f089ea3f864e03ca55cbc85399ab04293013dcadfc"
+  inputs-digest = "e81464fd0cf78b692575f9bd1cb49e5353c685654d0a2f0175e4f9236c221f31"
   solver-name = "gps-cdcl"
   solver-version = 1
