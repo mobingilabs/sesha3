@@ -324,6 +324,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		notify.HookPost(err)
 		return
 	}
+
 	targets := getdata["target"].(map[string]interface{})
 	//token check
 	auth := strings.Split(r.Header.Get("Authorization"), " ")
@@ -331,17 +332,20 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(401)
 		return
 	}
+
 	ctx, err := jwt.NewCtx()
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
+
 	btoken := auth[1]
 	pt, err := ctx.ParseToken(btoken)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
+
 	nc := pt.Claims.(*jwt.WrapperClaims)
 	u, _ := nc.Data["username"]
 	p, _ := nc.Data["password"]
@@ -380,6 +384,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 				notify.HookPost(err)
 				return
 			}
+
 			defer resp.Body.Close()
 			body, err = ioutil.ReadAll(resp.Body)
 			if err != nil {
@@ -387,6 +392,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 				notify.HookPost(err)
 				return
 			}
+
 			pemdir := os.TempDir() + "/user/"
 			if !private.Exists(pemdir) {
 				d.Info("create", pemdir)
@@ -397,6 +403,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 					return
 				}
 			}
+
 			pemfile := os.TempDir() + "/user/" + id + ".pem"
 			err = ioutil.WriteFile(pemfile, body, 0600)
 			if err != nil {
@@ -404,12 +411,15 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 				notify.HookPost(err)
 				return
 			}
+
 			d.Info("pem file created")
 			wg.Done()
 		}()
 	}
+
 	wg.Wait()
-	//execute cmd
+
+	// execute cmd
 	results := [][]execute.Result{}
 	for stackid := range targets {
 		wg.Add(1)
@@ -423,7 +433,8 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 				err := os.MkdirAll(scriptDir, os.ModePerm)
 				notify.HookPost(errors.Wrap(err, "create scripts folder failed (fatal)"))
 			}
-			//create script file on sesha3 server
+
+			// create script file on sesha3 server
 			scriptfile := scriptDir + "/" + getdata["script_name"].(string)
 			err = ioutil.WriteFile(scriptfile, []byte(getdata["script"].(string)), 0755)
 			err = os.Chmod(scriptfile, 0755)
@@ -433,6 +444,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 				notify.HookPost(err)
 				return
 			}
+
 			d.Info("script created", scriptfile)
 			d.Info(id)
 			pemfile := os.TempDir() + "/user/" + id + ".pem"
@@ -450,6 +462,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 			wg.Done()
 		}()
 	}
+
 	wg.Wait()
 
 	stdout := ""
@@ -492,6 +505,7 @@ func noblank(str string) string {
 	}
 	return strings.Join(ret, "\n")
 }
+
 func describeSessions(w http.ResponseWriter, req *http.Request) {
 	ds := session.Sessions.Describe()
 	b, err := json.Marshal(ds)
