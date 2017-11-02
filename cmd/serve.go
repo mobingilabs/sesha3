@@ -417,7 +417,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	wg.Wait()
 
 	// execute cmd
-	results := [][]execute.Result{}
+	results := [][]sesha3.ExecScriptInstanceResponse{}
 	d.Info("targets:", targets, "len:", len(targets))
 	for stackid := range targets {
 		id := stackid
@@ -453,33 +453,22 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		cmdData["script_name"] = getdata["script_name"]
 		d.Info("cmddata:", cmdData)
 		// actual script execution
-		out := execute.Sshcmd(id, cmdData)
+		out, err := execute.SshCmd(id, cmdData)
+		if err != nil {
+			w.Write(sesha3.NewSimpleError(err).Marshal())
+			notify.HookPost(err)
+			return
+		}
+
 		results = append(results, out)
 	}
 
-	/*
-		stdout := ""
-		for _, out := range results {
-			for _, o := range out {
-				stdout = stdout + "out:" + o.Stackid + ":" + o.Ip + "\n" + noblank(o.Out) + "\n"
-			}
-		}
-	*/
-
-	type payload_t struct {
-		Outputs []execute.Result `json:"outputs"`
-	}
-
-	/*
-		payload := payload_t{
-			// Out: noblank(stdout),
-			Outputs: results,
-		}
-	*/
-
-	payload := []payload_t{}
+	payload := []sesha3.ExecScriptResponse{}
 	for _, outs := range results {
-		plitem := payload_t{Outputs: outs}
+		plitem := sesha3.ExecScriptResponse{
+			Outputs: outs,
+		}
+
 		payload = append(payload, plitem)
 	}
 

@@ -4,26 +4,21 @@ import (
 	"os"
 	"os/exec"
 
+	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
+	"github.com/pkg/errors"
 )
 
-type Result struct {
-	Stackid string `json:"stack_id"`
-	Ip      string `json:"ip"`
-	Out     []byte `json:"out"`
-}
-
-func Sshcmd(stackid string, data map[string]interface{}) []Result {
+func SshCmd(stackid string, data map[string]interface{}) ([]sesha3.ExecScriptInstanceResponse, error) {
 	ips := data["target"].([]string)
 	pemfile := data["pem"].(string)
-	ret := []Result{}
+	ret := []sesha3.ExecScriptInstanceResponse{}
 	d.Info("exec:", ips)
 
-	// rep := regexp.MustCompile(`^\n|^\r|\n$|\r$`)
 	for _, ip := range ips {
-		var out Result
+		var out sesha3.ExecScriptInstanceResponse
 		out.Ip = ip
-		out.Stackid = stackid
+		out.StackId = stackid
 		cmdscp := exec.Command(
 			"/usr/bin/scp",
 			"-p",
@@ -36,8 +31,8 @@ func Sshcmd(stackid string, data map[string]interface{}) []Result {
 		d.Info("run-scp:", cmdscp.Args)
 		scpb, err := cmdscp.CombinedOutput()
 		if err != nil {
-			// out.Out = rep.ReplaceAllString(string(scpb), "")
-			out.Out = scpb
+			// TODO: should we return err here?
+			out.CmdOut = scpb
 			ret = append(ret, out)
 		} else {
 			cmdscript := exec.Command(
@@ -52,18 +47,14 @@ func Sshcmd(stackid string, data map[string]interface{}) []Result {
 			d.Info("run-ssh:", cmdscript.Args)
 			scriptout, err := cmdscript.CombinedOutput()
 			if err != nil {
-				d.Error("script:", err)
+				return nil, errors.Wrap(err, "ssh run script failed")
 			}
 
-			// out.Out = rep.ReplaceAllString(strings.Replace(string(scriptout), "\r", "\n", -1), "")
-			out.Out = scriptout
-			// ste := strings.Split(strings.Replace(scripterr, "\r", "\n", -1), "\n")
-			// out.Stderr = rep.ReplaceAllString(strings.Join(ste[0:len(ste)-1], "\n"), "")
-			// d.Info("out:", out.Out)
+			out.CmdOut = scriptout
 			ret = append(ret, out)
 		}
 	}
 
 	os.Remove(data["scriptfilepath"].(string))
-	return ret
+	return ret, nil
 }
