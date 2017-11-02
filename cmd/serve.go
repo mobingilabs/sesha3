@@ -317,7 +317,6 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	}
 
 	d.Info("body:", string(body))
-	_ = getdata
 	err = json.Unmarshal(body, &getdata)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
@@ -326,7 +325,8 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	}
 
 	targets := getdata["target"].(map[string]interface{})
-	//token check
+
+	// token check
 	auth := strings.Split(r.Header.Get("Authorization"), " ")
 	if len(auth) != 2 {
 		w.WriteHeader(401)
@@ -464,7 +464,6 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	}
 
 	wg.Wait()
-
 	stdout := ""
 	stderr := ""
 	for _, out := range results {
