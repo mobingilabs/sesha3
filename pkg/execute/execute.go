@@ -34,17 +34,17 @@ type Result struct {
 }
 
 func Sshcmd(stackid string, data map[string]interface{}) []Result {
-	Ips := data["target"].([]string)
+	ips := data["target"].([]string)
 	pemfile := data["pem"].(string)
 	ret := []Result{}
-	d.Info("exec:", Ips)
+	d.Info("exec:", ips)
 
 	var wg sync.WaitGroup
 	rep := regexp.MustCompile(`^\n|^\r|\n$|\r$`)
-	for _, ip := range Ips {
+	for _, ip := range ips {
 		wg.Add(1)
 		go func() {
-			//scp sesha3 to user instance
+			// scp sesha3 to user instance
 			var out Result
 			out.Ip = ip
 			out.Stackid = stackid
@@ -57,6 +57,7 @@ func Sshcmd(stackid string, data map[string]interface{}) []Result {
 				data["user"].(string)+"@"+ip+":/tmp/",
 			)
 
+			d.Info("run-scp:", scp.Args)
 			_, scpe, err := execmd(scp)
 			if err != nil {
 				out.Stderr = rep.ReplaceAllString(scpe, "")
@@ -72,6 +73,7 @@ func Sshcmd(stackid string, data map[string]interface{}) []Result {
 					"/tmp/"+data["script_name"].(string),
 				)
 
+				d.Info("run-ssh:", execScript.Args)
 				scriptout, scripterr, err := execmd(execScript)
 				if err != nil {
 					d.Error("script:", err)
