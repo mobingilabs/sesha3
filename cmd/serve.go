@@ -364,17 +364,15 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 
 	d.Info("token:", btoken)
 
-	//
-
 	// pemfile download for ssh
 	pemurls := getdata["stack_pem"].(map[string]interface{})
-	d.Info(pemurls)
+	d.Info("pemurls:", pemurls)
 	var wg sync.WaitGroup
 	for stackid := range pemurls {
 		wg.Add(1)
 		id := stackid
 		go func() {
-			d.Info(id)
+			d.Info("stackid:", id)
 			pemurl := pemurls[id].(string)
 			d.Info("rawurl:", pemurl)
 			resp, err := http.Get(fmt.Sprintf("%v", pemurl))
