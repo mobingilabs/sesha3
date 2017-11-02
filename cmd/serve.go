@@ -369,7 +369,6 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	// pemfile download for ssh
 	pemurls := getdata["stack_pem"].(map[string]interface{})
 	d.Info(pemurls)
-	_ = targets
 	var wg sync.WaitGroup
 	for stackid := range pemurls {
 		wg.Add(1)
