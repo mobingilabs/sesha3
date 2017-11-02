@@ -79,7 +79,7 @@ func (n *HttpMetrics) postMetrics() {
 
 			infoCnt += 1
 			if infoCnt >= 9 {
-				d.Info("[10th] metrics sent to cloudwatch")
+				// d.Info("[10th] metrics sent to cloudwatch")
 				infoCnt = 0
 			}
 		}

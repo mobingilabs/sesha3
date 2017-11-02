@@ -2,12 +2,13 @@ package execute
 
 import (
 	"bytes"
-	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"os"
 	"os/exec"
 	"regexp"
 	"strings"
 	"sync"
+
+	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 )
 
 func execmd(cmd *exec.Cmd) (string, string, error) {
@@ -19,6 +20,7 @@ func execmd(cmd *exec.Cmd) (string, string, error) {
 	if err != nil {
 		d.Error(err)
 	}
+
 	stdout = outb.String()
 	stderr = errb.String()
 	return stdout, stderr, err
@@ -54,6 +56,7 @@ func Sshcmd(stackid string, data map[string]interface{}) []Result {
 				data["scriptfilepath"].(string),
 				data["user"].(string)+"@"+ip+":/tmp/",
 			)
+
 			_, scpe, err := execmd(scp)
 			if err != nil {
 				out.Stderr = rep.ReplaceAllString(scpe, "")
@@ -68,10 +71,12 @@ func Sshcmd(stackid string, data map[string]interface{}) []Result {
 					data["user"].(string)+"@"+ip,
 					"/tmp/"+data["script_name"].(string),
 				)
+
 				scriptout, scripterr, err := execmd(execScript)
 				if err != nil {
 					d.Error("script:", err)
 				}
+
 				out.Stdout = rep.ReplaceAllString(strings.Replace(scriptout, "\r", "\n", -1), "")
 				ste := strings.Split(strings.Replace(scripterr, "\r", "\n", -1), "\n")
 				out.Stderr = rep.ReplaceAllString(strings.Join(ste[0:len(ste)-1], "\n"), "")
@@ -81,6 +86,7 @@ func Sshcmd(stackid string, data map[string]interface{}) []Result {
 			}
 		}()
 	}
+
 	wg.Wait()
 	os.Remove(data["scriptfilepath"].(string))
 	return ret
