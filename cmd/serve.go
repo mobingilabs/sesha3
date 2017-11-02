@@ -420,9 +420,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	results := [][]execute.Result{}
 	d.Info("targets:", targets, "len:", len(targets))
 	for stackid := range targets {
-		// wg.Add(1)
 		id := stackid
-		// go func() {
 		iplist := strings.Split(targets[id].(string), ",")
 		d.Info("target_stackid:", id)
 		d.Info("ip:", iplist)
@@ -454,28 +452,35 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		cmdData["target"] = iplist
 		cmdData["script_name"] = getdata["script_name"]
 		d.Info("cmddata:", cmdData)
+		// actual script execution
 		out := execute.Sshcmd(id, cmdData)
-		d.Info("cmdout:", out[0])
 		results = append(results, out)
-		// wg.Done()
-		// }()
 	}
 
-	// wg.Wait()
-	stdout := ""
-	for _, out := range results {
-		for _, o := range out {
-			stdout = stdout + "out:" + o.Stackid + ":" + o.Ip + "\n" + noblank(o.Out) + "\n"
+	/*
+		stdout := ""
+		for _, out := range results {
+			for _, o := range out {
+				stdout = stdout + "out:" + o.Stackid + ":" + o.Ip + "\n" + noblank(o.Out) + "\n"
+			}
 		}
-	}
+	*/
 
 	type payload_t struct {
-		Out string `json:"out"`
+		Outputs []execute.Result `json:"outputs"`
 	}
 
-	d.Info("stdout:", stdout)
-	payload := payload_t{
-		Out: noblank(stdout),
+	/*
+		payload := payload_t{
+			// Out: noblank(stdout),
+			Outputs: results,
+		}
+	*/
+
+	payload := []payload_t{}
+	for _, outs := range results {
+		plitem := payload_t{Outputs: outs}
+		payload = append(payload, plitem)
 	}
 
 	b, err := json.Marshal(payload)
