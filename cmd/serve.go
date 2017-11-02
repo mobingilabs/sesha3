@@ -417,7 +417,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	wg.Wait()
 
 	// execute cmd
-	results := [][]sesha3.ExecScriptInstanceResponse{}
+	results := []sesha3.ExecScriptStackResponse{}
 	d.Info("targets:", targets, "len:", len(targets))
 	for stackid := range targets {
 		id := stackid
@@ -453,32 +453,22 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		cmdData["script_name"] = getdata["script_name"]
 		d.Info("cmddata:", cmdData)
 		// actual script execution
-		out, err := execute.SshCmd(id, cmdData)
-		if err != nil {
-			w.Write(sesha3.NewSimpleError(err).Marshal())
-			notify.HookPost(err)
-			return
+		out := execute.SshCmd(cmdData)
+		resitem := sesha3.ExecScriptStackResponse{
+			StackId: id,
+			Outputs: out,
 		}
 
-		results = append(results, out)
+		results = append(results, resitem)
 	}
 
-	payload := []sesha3.ExecScriptResponse{}
-	for _, outs := range results {
-		plitem := sesha3.ExecScriptResponse{
-			Outputs: outs,
-		}
-
-		payload = append(payload, plitem)
-	}
-
-	b, err := json.Marshal(payload)
+	payload, err := json.Marshal(results)
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		notify.HookPost(err)
 	}
 
-	w.Write(b)
+	w.Write(payload)
 }
 
 func noblank(str string) string {

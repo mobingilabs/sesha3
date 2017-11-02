@@ -6,19 +6,16 @@ import (
 
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
-	"github.com/pkg/errors"
 )
 
-func SshCmd(stackid string, data map[string]interface{}) ([]sesha3.ExecScriptInstanceResponse, error) {
+func SshCmd(data map[string]interface{}) []sesha3.ExecScriptInstanceResponse {
 	ips := data["target"].([]string)
 	pemfile := data["pem"].(string)
 	ret := []sesha3.ExecScriptInstanceResponse{}
 	d.Info("exec:", ips)
-
 	for _, ip := range ips {
 		var out sesha3.ExecScriptInstanceResponse
 		out.Ip = ip
-		out.StackId = stackid
 		cmdscp := exec.Command(
 			"/usr/bin/scp",
 			"-p",
@@ -33,6 +30,7 @@ func SshCmd(stackid string, data map[string]interface{}) ([]sesha3.ExecScriptIns
 		if err != nil {
 			// TODO: should we return err here?
 			out.CmdOut = scpb
+			out.Err = err
 			ret = append(ret, out)
 		} else {
 			cmdscript := exec.Command(
@@ -46,15 +44,12 @@ func SshCmd(stackid string, data map[string]interface{}) ([]sesha3.ExecScriptIns
 
 			d.Info("run-ssh:", cmdscript.Args)
 			scriptout, err := cmdscript.CombinedOutput()
-			if err != nil {
-				return nil, errors.Wrap(err, "ssh run script failed")
-			}
-
 			out.CmdOut = scriptout
+			out.Err = err
 			ret = append(ret, out)
 		}
 	}
 
 	os.Remove(data["scriptfilepath"].(string))
-	return ret, nil
+	return ret
 }
