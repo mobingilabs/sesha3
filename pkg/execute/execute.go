@@ -3,8 +3,6 @@ package execute
 import (
 	"os"
 	"os/exec"
-	"regexp"
-	"strings"
 
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 )
@@ -12,7 +10,7 @@ import (
 type Result struct {
 	Stackid string `json:"stack_id"`
 	Ip      string `json:"ip"`
-	Out     string `json:"out"`
+	Out     []byte `json:"out"`
 }
 
 func Sshcmd(stackid string, data map[string]interface{}) []Result {
@@ -21,7 +19,7 @@ func Sshcmd(stackid string, data map[string]interface{}) []Result {
 	ret := []Result{}
 	d.Info("exec:", ips)
 
-	rep := regexp.MustCompile(`^\n|^\r|\n$|\r$`)
+	// rep := regexp.MustCompile(`^\n|^\r|\n$|\r$`)
 	for _, ip := range ips {
 		var out Result
 		out.Ip = ip
@@ -38,7 +36,8 @@ func Sshcmd(stackid string, data map[string]interface{}) []Result {
 		d.Info("run-scp:", cmdscp.Args)
 		scpb, err := cmdscp.CombinedOutput()
 		if err != nil {
-			out.Out = rep.ReplaceAllString(string(scpb), "")
+			// out.Out = rep.ReplaceAllString(string(scpb), "")
+			out.Out = scpb
 			ret = append(ret, out)
 		} else {
 			cmdscript := exec.Command(
@@ -56,10 +55,11 @@ func Sshcmd(stackid string, data map[string]interface{}) []Result {
 				d.Error("script:", err)
 			}
 
-			out.Out = rep.ReplaceAllString(strings.Replace(string(scriptout), "\r", "\n", -1), "")
+			// out.Out = rep.ReplaceAllString(strings.Replace(string(scriptout), "\r", "\n", -1), "")
+			out.Out = scriptout
 			// ste := strings.Split(strings.Replace(scripterr, "\r", "\n", -1), "\n")
 			// out.Stderr = rep.ReplaceAllString(strings.Join(ste[0:len(ste)-1], "\n"), "")
-			d.Info("out:", out.Out)
+			// d.Info("out:", out.Out)
 			ret = append(ret, out)
 		}
 	}
