@@ -1,7 +1,6 @@
 package execute
 
 import (
-	"bytes"
 	"os"
 	"os/exec"
 	"regexp"
@@ -11,24 +10,26 @@ import (
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 )
 
-func execmd(cmd *exec.Cmd) (string, string, error) {
-	var outb, errb bytes.Buffer
-	var stdout, stderr string
-	cmd.Stdout = &outb
-	cmd.Stderr = &errb
-	err := cmd.Run()
-	if err != nil {
-		d.Error(err)
-	}
+func execmd(cmd *exec.Cmd) ([]byte, error) {
+	return cmd.CombinedOutput()
+	/*
+		var outb, errb bytes.Buffer
+		var stdout, stderr string
+		cmd.Stdout = &outb
+		cmd.Stderr = &errb
+		err := cmd.Run()
+		if err != nil {
+			d.Error(err)
+		}
 
-	stdout = outb.String()
-	stderr = errb.String()
-	return stdout, stderr, err
+		stdout = outb.String()
+		stderr = errb.String()
+		return stdout, stderr, err
+	*/
 }
 
 type Result struct {
-	Stdout  string
-	Stderr  string
+	Out     string
 	Ip      string
 	Stackid string
 }
@@ -58,9 +59,9 @@ func Sshcmd(stackid string, data map[string]interface{}) []Result {
 			)
 
 			d.Info("run-scp:", scp.Args)
-			_, scpe, err := execmd(scp)
+			scpb, err := execmd(scp)
 			if err != nil {
-				out.Stderr = rep.ReplaceAllString(scpe, "")
+				out.Out = rep.ReplaceAllString(string(scpb), "")
 				ret = append(ret, out)
 				wg.Done()
 			} else {
@@ -74,15 +75,15 @@ func Sshcmd(stackid string, data map[string]interface{}) []Result {
 				)
 
 				d.Info("run-ssh:", execScript.Args)
-				scriptout, scripterr, err := execmd(execScript)
+				scriptout, err := execmd(execScript)
 				if err != nil {
 					d.Error("script:", err)
 				}
 
-				out.Stdout = rep.ReplaceAllString(strings.Replace(scriptout, "\r", "\n", -1), "")
-				ste := strings.Split(strings.Replace(scripterr, "\r", "\n", -1), "\n")
-				out.Stderr = rep.ReplaceAllString(strings.Join(ste[0:len(ste)-1], "\n"), "")
-				d.Info(out.Stdout)
+				out.Out = rep.ReplaceAllString(strings.Replace(string(scriptout), "\r", "\n", -1), "")
+				// ste := strings.Split(strings.Replace(scripterr, "\r", "\n", -1), "\n")
+				// out.Stderr = rep.ReplaceAllString(strings.Join(ste[0:len(ste)-1], "\n"), "")
+				d.Info("out:", out.Out)
 				ret = append(ret, out)
 				wg.Done()
 			}

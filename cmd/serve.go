@@ -420,6 +420,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 
 	// execute cmd
 	results := [][]execute.Result{}
+	d.Info("targets:", targets, "len:", len(targets))
 	for stackid := range targets {
 		wg.Add(1)
 		id := stackid
@@ -464,24 +465,19 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 
 	wg.Wait()
 	stdout := ""
-	stderr := ""
 	for _, out := range results {
 		for _, o := range out {
-			stdout = stdout + "#stdout:" + o.Stackid + ":" + o.Ip + "\n" + noblank(o.Stdout) + "\n"
-			stderr = stderr + "#stderr:" + o.Stackid + ":" + o.Ip + "\n" + noblank(o.Stderr) + "\n"
+			stdout = stdout + "out:" + o.Stackid + ":" + o.Ip + "\n" + noblank(o.Out) + "\n"
 		}
 	}
 
 	type payload_t struct {
-		Out string `json:"stdout"`
-		Err string `json:"stderr"`
+		Out string `json:"out"`
 	}
 
 	d.Info("stdout:", stdout)
-	d.Info("stderr:", stderr)
 	payload := payload_t{
 		Out: noblank(stdout),
-		Err: noblank(stderr),
 	}
 
 	b, err := json.Marshal(payload)
