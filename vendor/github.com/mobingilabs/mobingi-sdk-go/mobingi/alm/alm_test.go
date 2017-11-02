@@ -534,10 +534,28 @@ func TestWalkerDevAcct(t *testing.T) {
 			BaseApiUrl: "https://apidev.mobingi.com",
 		})
 
+		type data_t struct {
+			Data string
+		}
+
+		data := &data_t{
+			Data: "hello",
+		}
+
 		alm := New(sess)
 		in := WalkerCtx{
-			InstanceCallback: func(ls *ListStack, inst *Instance, err error) error {
-				debug.Info(ls.StackId, inst.PublicDnsName)
+			Data: data,
+			StackCallback: func(i int, data interface{}, body []byte, ls *ListStack) error {
+				_data := data.(*data_t)
+				if _data.Data != "hello" {
+					t.Error("should be hello")
+				}
+
+				debug.Info("stack-callback:", ls.StackId)
+				return nil
+			},
+			InstanceCallback: func(i int, data interface{}, body []byte, ls *ListStack, flag string, inst *Instance, err error) error {
+				debug.Info("instance-callback:", ls.StackId, inst.PublicDnsName)
 				return nil
 			},
 		}
