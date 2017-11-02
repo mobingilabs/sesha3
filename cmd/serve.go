@@ -422,48 +422,48 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	results := [][]execute.Result{}
 	d.Info("targets:", targets, "len:", len(targets))
 	for stackid := range targets {
-		wg.Add(1)
+		// wg.Add(1)
 		id := stackid
-		go func() {
-			iplist := strings.Split(targets[id].(string), ",")
-			d.Info("target_stackid:", id)
-			d.Info("ip:", iplist)
-			scriptDir := os.TempDir() + "/sesha3/scripts/" + id
-			if !private.Exists(scriptDir) {
-				err := os.MkdirAll(scriptDir, os.ModePerm)
-				notify.HookPost(errors.Wrap(err, "create scripts folder failed (fatal)"))
-			}
+		// go func() {
+		iplist := strings.Split(targets[id].(string), ",")
+		d.Info("target_stackid:", id)
+		d.Info("ip:", iplist)
+		scriptDir := os.TempDir() + "/sesha3/scripts/" + id
+		if !private.Exists(scriptDir) {
+			err := os.MkdirAll(scriptDir, os.ModePerm)
+			notify.HookPost(errors.Wrap(err, "create scripts folder failed (fatal)"))
+		}
 
-			// create script file on sesha3 server
-			scriptfile := scriptDir + "/" + getdata["script_name"].(string)
-			err = ioutil.WriteFile(scriptfile, []byte(getdata["script"].(string)), 0755)
-			err = os.Chmod(scriptfile, 0755)
-			d.Info("scriptfile:", scriptfile)
-			if err != nil {
-				w.Write(sesha3.NewSimpleError(err).Marshal())
-				notify.HookPost(err)
-				return
-			}
+		// create script file on sesha3 server
+		scriptfile := scriptDir + "/" + getdata["script_name"].(string)
+		err = ioutil.WriteFile(scriptfile, []byte(getdata["script"].(string)), 0755)
+		err = os.Chmod(scriptfile, 0755)
+		d.Info("scriptfile:", scriptfile)
+		if err != nil {
+			w.Write(sesha3.NewSimpleError(err).Marshal())
+			notify.HookPost(err)
+			return
+		}
 
-			d.Info("script created:", scriptfile)
-			d.Info("id:", id)
-			pemfile := os.TempDir() + "/user/" + id + ".pem"
-			d.Info("pemfile:", pemfile)
-			cmdData := make(map[string]interface{})
-			cmdData["pem"] = pemfile
-			cmdData["scriptfilepath"] = scriptfile
-			cmdData["user"] = getdata["user"]
-			cmdData["target"] = iplist
-			cmdData["script_name"] = getdata["script_name"]
-			d.Info("cmddata:", cmdData)
-			out := execute.Sshcmd(id, cmdData)
-			d.Info("cmdout:", out[0])
-			results = append(results, out)
-			wg.Done()
-		}()
+		d.Info("script created:", scriptfile)
+		d.Info("id:", id)
+		pemfile := os.TempDir() + "/user/" + id + ".pem"
+		d.Info("pemfile:", pemfile)
+		cmdData := make(map[string]interface{})
+		cmdData["pem"] = pemfile
+		cmdData["scriptfilepath"] = scriptfile
+		cmdData["user"] = getdata["user"]
+		cmdData["target"] = iplist
+		cmdData["script_name"] = getdata["script_name"]
+		d.Info("cmddata:", cmdData)
+		out := execute.Sshcmd(id, cmdData)
+		d.Info("cmdout:", out[0])
+		results = append(results, out)
+		// wg.Done()
+		// }()
 	}
 
-	wg.Wait()
+	// wg.Wait()
 	stdout := ""
 	for _, out := range results {
 		for _, o := range out {
