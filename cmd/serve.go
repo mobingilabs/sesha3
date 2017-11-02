@@ -437,24 +437,24 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 			scriptfile := scriptDir + "/" + getdata["script_name"].(string)
 			err = ioutil.WriteFile(scriptfile, []byte(getdata["script"].(string)), 0755)
 			err = os.Chmod(scriptfile, 0755)
-			d.Info(scriptfile)
+			d.Info("scriptfile:", scriptfile)
 			if err != nil {
 				w.Write(sesha3.NewSimpleError(err).Marshal())
 				notify.HookPost(err)
 				return
 			}
 
-			d.Info("script created", scriptfile)
-			d.Info(id)
+			d.Info("script created:", scriptfile)
+			d.Info("id:", id)
 			pemfile := os.TempDir() + "/user/" + id + ".pem"
-			d.Info(pemfile)
+			d.Info("pemfile:", pemfile)
 			cmdData := make(map[string]interface{})
 			cmdData["pem"] = pemfile
 			cmdData["scriptfilepath"] = scriptfile
 			cmdData["user"] = getdata["user"]
 			cmdData["target"] = iplist
 			cmdData["script_name"] = getdata["script_name"]
-			d.Info(cmdData)
+			d.Info("cmddata:", cmdData)
 			out := execute.Sshcmd(id, cmdData)
 			d.Info("cmdout:", out[0])
 			results = append(results, out)
@@ -477,7 +477,8 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		Err string `json:"stderr"`
 	}
 
-	d.Info(stdout)
+	d.Info("stdout:", stdout)
+	d.Info("stderr:", stderr)
 	payload := payload_t{
 		Out: noblank(stdout),
 		Err: noblank(stderr),
