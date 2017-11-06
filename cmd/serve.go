@@ -324,6 +324,9 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.WriteHeader(200)
+	return
+
 	d.Info("getdata:", fmt.Sprintf("%+v", getdata))
 	targets := getdata["target"].(map[string]interface{})
 
