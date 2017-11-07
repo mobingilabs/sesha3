@@ -19,6 +19,7 @@ import (
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/pkg/awsports"
+	"github.com/mobingilabs/sesha3/pkg/execute"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/mobingilabs/sesha3/pkg/params"
@@ -421,6 +422,16 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 	}
 
 	d.Info("script created:", script)
+
+	// actual script execution
+	out := execute.SshCmd(execute.SshCmdInput{
+		Ip:     in.Target.Ip,
+		Pem:    pemfile,
+		Script: script,
+		VmUser: in.Target.VmUser,
+	})
+
+	d.Info("out:", out)
 
 	/*
 		// execute cmd
