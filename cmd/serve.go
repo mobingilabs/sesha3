@@ -362,7 +362,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 
 	// pemfile download for ssh
 	d.Info("pemurl:", in.Target.PemUrl)
-	resp, err := http.Get(fmt.Sprintf("%v", pemurl))
+	resp, err := http.Get(fmt.Sprintf("%v", in.Target.PemUrl))
 	if err != nil {
 		w.Write(sesha3.NewSimpleError(err).Marshal())
 		notify.HookPost(err)
