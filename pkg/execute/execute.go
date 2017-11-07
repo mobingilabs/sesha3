@@ -2,6 +2,7 @@ package execute
 
 import (
 	"os/exec"
+	"path/filepath"
 
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
@@ -25,7 +26,7 @@ func SshCmd(in SshCmdInput) sesha3.ExecScriptInstanceResponse {
 		"-p",
 		"-i", in.Pem,
 		"-o", "StrictHostKeyChecking=no",
-		in.Script,
+		filepath.Base(in.Script),
 		in.VmUser+"@"+in.Ip+":/tmp/",
 	)
 
@@ -43,7 +44,7 @@ func SshCmd(in SshCmdInput) sesha3.ExecScriptInstanceResponse {
 			"StrictHostKeyChecking=no",
 			"-i", in.Pem,
 			in.VmUser+"@"+in.Ip,
-			"/tmp/"+in.Script,
+			"/tmp/"+filepath.Base(in.Script),
 		)
 
 		d.Info("run-ssh:", cmdscript.Args)

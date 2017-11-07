@@ -431,7 +431,7 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		VmUser: in.Target.VmUser,
 	})
 
-	d.Info("out:", out)
+	d.Info("out:", string(out.CmdOut))
 
 	/*
 		// execute cmd
