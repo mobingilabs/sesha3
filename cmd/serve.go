@@ -19,7 +19,6 @@ import (
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/pkg/awsports"
-	"github.com/mobingilabs/sesha3/pkg/execute"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/mobingilabs/sesha3/pkg/params"
@@ -423,59 +422,61 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 
 	d.Info("script created:", script)
 
-	// execute cmd
-	results := []sesha3.ExecScriptStackResponse{}
-	d.Info("targets:", targets, "len:", len(targets))
-	for stackid := range targets {
-		id := stackid
-		iplist := strings.Split(targets[id].(string), ",")
-		d.Info("target_stackid:", id)
-		d.Info("ip:", iplist)
-		scriptDir := os.TempDir() + "/sesha3/scripts/" + id
-		if !private.Exists(scriptDir) {
-			err := os.MkdirAll(scriptDir, os.ModePerm)
-			notify.HookPost(errors.Wrap(err, "create scripts folder failed (fatal)"))
+	/*
+		// execute cmd
+		results := []sesha3.ExecScriptStackResponse{}
+		d.Info("targets:", targets, "len:", len(targets))
+		for stackid := range targets {
+			id := stackid
+			iplist := strings.Split(targets[id].(string), ",")
+			d.Info("target_stackid:", id)
+			d.Info("ip:", iplist)
+			scriptDir := os.TempDir() + "/sesha3/scripts/" + id
+			if !private.Exists(scriptDir) {
+				err := os.MkdirAll(scriptDir, os.ModePerm)
+				notify.HookPost(errors.Wrap(err, "create scripts folder failed (fatal)"))
+			}
+
+			// create script file on sesha3 server
+			scriptfile := scriptDir + "/" + getdata["script_name"].(string)
+			err = ioutil.WriteFile(scriptfile, []byte(getdata["script"].(string)), 0755)
+			err = os.Chmod(scriptfile, 0755)
+			d.Info("scriptfile:", scriptfile)
+			if err != nil {
+				w.Write(sesha3.NewSimpleError(err).Marshal())
+				notify.HookPost(err)
+				return
+			}
+
+			d.Info("script created:", scriptfile)
+			d.Info("id:", id)
+			pemfile := os.TempDir() + "/user/" + id + ".pem"
+			d.Info("pemfile:", pemfile)
+			cmdData := make(map[string]interface{})
+			cmdData["pem"] = pemfile
+			cmdData["scriptfilepath"] = scriptfile
+			cmdData["user"] = getdata["user"]
+			cmdData["target"] = iplist
+			cmdData["script_name"] = getdata["script_name"]
+			d.Info("cmddata:", cmdData)
+			// actual script execution
+			out := execute.SshCmd(cmdData)
+			resitem := sesha3.ExecScriptStackResponse{
+				StackId: id,
+				Outputs: out,
+			}
+
+			results = append(results, resitem)
 		}
 
-		// create script file on sesha3 server
-		scriptfile := scriptDir + "/" + getdata["script_name"].(string)
-		err = ioutil.WriteFile(scriptfile, []byte(getdata["script"].(string)), 0755)
-		err = os.Chmod(scriptfile, 0755)
-		d.Info("scriptfile:", scriptfile)
+		payload, err := json.Marshal(results)
 		if err != nil {
 			w.Write(sesha3.NewSimpleError(err).Marshal())
 			notify.HookPost(err)
-			return
 		}
 
-		d.Info("script created:", scriptfile)
-		d.Info("id:", id)
-		pemfile := os.TempDir() + "/user/" + id + ".pem"
-		d.Info("pemfile:", pemfile)
-		cmdData := make(map[string]interface{})
-		cmdData["pem"] = pemfile
-		cmdData["scriptfilepath"] = scriptfile
-		cmdData["user"] = getdata["user"]
-		cmdData["target"] = iplist
-		cmdData["script_name"] = getdata["script_name"]
-		d.Info("cmddata:", cmdData)
-		// actual script execution
-		out := execute.SshCmd(cmdData)
-		resitem := sesha3.ExecScriptStackResponse{
-			StackId: id,
-			Outputs: out,
-		}
-
-		results = append(results, resitem)
-	}
-
-	payload, err := json.Marshal(results)
-	if err != nil {
-		w.Write(sesha3.NewSimpleError(err).Marshal())
-		notify.HookPost(err)
-	}
-
-	w.Write(payload)
+		w.Write(payload)
+	*/
 }
 
 func noblank(str string) string {
