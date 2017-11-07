@@ -4,16 +4,9 @@ os:
 language: go
 
 go:
-  - master
-
-before_install:
-  - go get github.com/golang/dep/...
-
-install:
-  - $GOPATH/bin/dep ensure
+  - 1.9.2
 
 script:
-  - go test -v $(go list ./... | grep -v /vendor/) -cover
   - go build -v
 
 before_deploy:
