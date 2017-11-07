@@ -431,7 +431,19 @@ func execScript(w http.ResponseWriter, r *http.Request) {
 		VmUser: in.Target.VmUser,
 	})
 
-	d.Info("out:", string(out.CmdOut))
+	sout := sesha3.ExecScriptStackResponse{
+		StackId: in.Target.StackId,
+		Outputs: []sesha3.ExecScriptInstanceResponse{out},
+	}
+
+	payload, err := json.Marshal(sout)
+	if err != nil {
+		w.Write(sesha3.NewSimpleError(err).Marshal())
+		notify.HookPost(err)
+	}
+
+	d.Info("reply:", string(payload))
+	w.Write(payload)
 
 	/*
 		// execute cmd
