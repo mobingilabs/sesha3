@@ -26,7 +26,7 @@ func SshCmd(in SshCmdInput) sesha3.ExecScriptInstanceResponse {
 		"-p",
 		"-i", in.Pem,
 		"-o", "StrictHostKeyChecking=no",
-		filepath.Base(in.Script),
+		in.Script,
 		in.VmUser+"@"+in.Ip+":/tmp/",
 	)
 
