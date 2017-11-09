@@ -1,3 +1,27 @@
+Release v1.12.25 (2017-11-08)
+===
+
+### Service Client Updates
+* `service/application-autoscaling`: Updates service API and documentation
+* `service/batch`: Updates service documentation
+  * Documentation updates for AWS Batch.
+* `service/ec2`: Updates service API and documentation
+  * AWS PrivateLink for Amazon Services - Customers can now privately access Amazon services from their Amazon Virtual Private Cloud (VPC), without using public IPs, and without requiring the traffic to traverse across the Internet.
+* `service/elasticache`: Updates service API and documentation
+  * This release adds online resharding for ElastiCache for Redis offering, providing the ability to add and remove shards from a running cluster. Developers can now dynamically scale-out or scale-in their Redis cluster workloads to adapt to changes in demand. ElastiCache will resize the cluster by adding or removing shards and redistribute hash slots uniformly across the new shard configuration, all while the cluster continues to stay online and serves requests.
+* `aws/endpoints`: Updated Regions and Endpoints metadata.
+
+Release v1.12.24 (2017-11-07)
+===
+
+### Service Client Updates
+* `service/elasticloadbalancingv2`: Updates service documentation
+* `aws/endpoints`: Updated Regions and Endpoints metadata.
+* `service/rds`: Updates service API and documentation
+  * DescribeOrderableDBInstanceOptions now returns the minimum and maximum allowed values for storage size, total provisioned IOPS, and provisioned IOPS per GiB for a DB instance.
+* `service/s3`: Updates service API, documentation, and examples
+  * This releases adds support for 4 features: 1. Default encryption for S3 Bucket, 2. Encryption status in inventory and Encryption support for inventory.  3. Cross region replication of KMS-encrypted objects, and 4. ownership overwrite for CRR.
+
 Release v1.12.23 (2017-11-07)
 ===
 
