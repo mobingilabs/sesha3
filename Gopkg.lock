@@ -40,8 +40,8 @@
 [[projects]]
   name = "github.com/go-ini/ini"
   packages = ["."]
-  revision = "f280b3ba517bf5fc98922624f21fb0e7a92adaec"
-  version = "v1.30.3"
+  revision = "7e7da451323b6766da368f8a1e8ec9a88a16b4a0"
+  version = "v1.31.1"
 
 [[projects]]
   name = "github.com/gorilla/context"
@@ -130,7 +130,7 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
-  revision = "6a293f2d4b14b8e6d3f0539e383f6d0d30fce3fd"
+  revision = "9f005a07e0d31d45e6656d241bb5c0f2efd4bc94"
 
 [[projects]]
   branch = "master"
@@ -142,7 +142,7 @@
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix","windows"]
-  revision = "1e2299c37cc91a509f1b12369872d27be0ce98a6"
+  revision = "665f6529cca930e27b831a0d1dafffbe1c172924"
 
 [solve-meta]
   analyzer-name = "dep"

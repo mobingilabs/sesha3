@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd /home/ubuntu/sesha3/
+cd /home/ec2-user/sesha3/
 ls -laF

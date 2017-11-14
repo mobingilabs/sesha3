@@ -1,5 +1,4 @@
 #!/bin/bash
 
-cd /home/ubuntu/
-export USER="test"
+cd /home/ec2-user/
 rm -rfv sesha3/
