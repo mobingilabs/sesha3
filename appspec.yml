@@ -8,6 +8,9 @@ permissions:
     pattern: "**"
     owner: ec2-user
     group: ec2-user
+  - object: /home/ec2-user/sesha3/scripts
+    pattern: "*.sh"
+    mode: 755
 hooks:
   ApplicationStop:
     - location: scripts/application_stop.sh
