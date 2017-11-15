@@ -24,13 +24,13 @@ deploy:
     on: &2
       repo: mobingilabs/sesha3
       branch: develop
-    bucket: sesha3-dev
+    bucket: sesha3
     upload_dir: latest
     region: ap-northeast-1
   - provider: codedeploy
     access_key_id: AKIAINLJDAMNCZZ5NRDA
     secret_access_key: *1
-    bucket: sesha3-dev
+    bucket: sesha3
     key: latest/app.tar.gz
     bundle_type: tgz
     application: sesha3

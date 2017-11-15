@@ -140,7 +140,7 @@ func Download(env string, awsRegion string, profilename string) error {
 	switch env {
 	case "prod":
 	case "dev":
-		myBucket = "sesha3-dev"
+		myBucket = "sesha3"
 	case "test":
 		myBucket = "testsetty"
 	default:
