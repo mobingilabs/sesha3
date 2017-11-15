@@ -114,7 +114,7 @@ func serve(cmd *cobra.Command, args []string) {
 			router)
 	*/
 
-	err = http.ListenAndServe(":8080", router)
+	err = http.ListenAndServe(":80", router)
 	if err != nil {
 		notify.HookPost(errors.Wrap(err, "server failed, fatal"))
 		d.ErrorTraceExit(err, 1)
