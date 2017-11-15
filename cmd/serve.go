@@ -96,8 +96,6 @@ func serve(cmd *cobra.Command, args []string) {
 	notify.HookPost(startm)
 
 	certfolder := cmdline.Dir() + "/certs"
-	_ = certfolder
-
 	router := mux.NewRouter()
 	router.HandleFunc("/", version).Methods(http.MethodGet)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
@@ -107,14 +105,12 @@ func serve(cmd *cobra.Command, args []string) {
 	router.HandleFunc("/exec", execScript).Methods(http.MethodGet)
 	// https://sesha3.labs.mobingi.com/debug/vars
 	router.Handle("/debug/vars", metrics.MetricsHandler)
-	/*
-		err = http.ListenAndServeTLS(":"+params.Port,
-			certfolder+"/fullchain.pem",
-			certfolder+"/privkey.pem",
-			router)
-	*/
+	err = http.ListenAndServeTLS(":"+params.Port,
+		certfolder+"/fullchain.pem",
+		certfolder+"/privkey.pem",
+		router)
 
-	err = http.ListenAndServe(":80", router)
+	// err = http.ListenAndServe(":80", router)
 	if err != nil {
 		notify.HookPost(errors.Wrap(err, "server failed, fatal"))
 		d.ErrorTraceExit(err, 1)
