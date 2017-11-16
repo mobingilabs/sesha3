@@ -32,6 +32,12 @@ func AddLocalUrlToRoute53(wait bool) (string, error) {
 	zoneid := util.ZoneId()
 	dns := util.GetPublicDns()
 
+	// check once first, in case it's already done
+	if validCname(domain, dns) {
+		d.Info("already cnamed:", domain, dns)
+		return domain, nil
+	}
+
 	sess := session.Must(session.NewSession())
 	cred := credentials.NewSharedCredentials("/root/.aws/credentials", params.CredProfile)
 	svc := route53.New(sess, &aws.Config{
