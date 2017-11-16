@@ -12,7 +12,7 @@ import (
 func ZoneId() string {
 	zoneid := "ZZDU2U8ZF5VZQ"
 	if params.IsDev {
-		zoneid = "Z23Y1M6Y77ZTL8"
+		zoneid = "Z1WHHSSMXMMSGW"
 	}
 
 	return zoneid
@@ -22,7 +22,7 @@ func Domain() string {
 	iid := strings.Replace(GetEc2Id(), "-", "", -1)
 	domain := "sesha3-" + iid + ".mobingi.com"
 	if params.IsDev {
-		domain = "sesha3-" + iid + ".labs.mobingi.com"
+		domain = "sesha3-" + iid + ".demo.labs.mobingi.com"
 	}
 
 	return domain
