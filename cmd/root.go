@@ -23,7 +23,7 @@ func Execute() {
 
 func init() {
 	rootCmd.Flags().SortFlags = false
-	rootCmd.PersistentFlags().StringVar(&params.Environment, "env", "dev", "values: dev, test, prod")
+	rootCmd.PersistentFlags().BoolVar(&params.IsDev, "rundev", params.IsDev, "run as dev, otherwise, prod")
 	rootCmd.PersistentFlags().BoolVar(&params.UseSyslog, "syslog", false, "set log output to syslog")
 	rootCmd.PersistentFlags().StringArray("notify-endpoints", []string{"slack"}, "values: slack")
 	params.Region = util.GetRegion()
@@ -42,5 +42,6 @@ Simply type '` + cmdline.Args0() + ` help [path to command]' for full details.`,
 	// add supported cmds
 	rootCmd.AddCommand(
 		ServeCmd(),
+		SetupHttpsCmd(),
 	)
 }

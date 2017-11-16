@@ -29,6 +29,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
+type ServeCtx struct {
+	localUrl string
+}
+
 var logger *syslog.Writer
 
 func ServeCmd() *cobra.Command {
@@ -77,7 +81,7 @@ func serve(cmd *cobra.Command, args []string) {
 		notify.HookPost(errors.Wrap(err, "create certs folder failed (fatal)"))
 	}
 
-	err = awsports.Download(params.Environment, params.Region, params.CredProfile)
+	err = awsports.Download(params.Region, params.CredProfile)
 	if err != nil {
 		notify.HookPost(errors.Wrap(err, "server failed, fatal"))
 		d.ErrorTraceExit(err, 1)

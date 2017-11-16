@@ -133,23 +133,9 @@ func contains(list []int64, obj int64) bool {
 
 //s3
 
-func Download(env string, awsRegion string, profilename string) error {
+func Download(awsRegion string, profilename string) error {
 	filename := []string{"fullchain.pem", "privkey.pem"}
-	var myBucket string
-
-	switch env {
-	case "prod":
-	case "dev":
-		myBucket = "sesha3"
-	case "test":
-		myBucket = "testsetty"
-	default:
-		return errors.New("invalid env value")
-	}
-
-	if myBucket == "" {
-		return errors.New("bucket name cannot be empty")
-	}
+	bucket := "sesha3"
 
 	sess := session.Must(session.NewSession())
 	cred := credentials.NewSharedCredentials("/root/.aws/credentials", profilename)
@@ -168,7 +154,7 @@ func Download(env string, awsRegion string, profilename string) error {
 
 		// Write the contents of S3 Object to the file
 		n, err := downloader.Download(f, &s3.GetObjectInput{
-			Bucket: aws.String(myBucket),
+			Bucket: aws.String(bucket),
 			Key:    aws.String(i),
 		})
 

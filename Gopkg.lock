@@ -10,8 +10,8 @@
 [[projects]]
   name = "github.com/aws/aws-sdk-go"
   packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/shareddefaults","private/protocol","private/protocol/ec2query","private/protocol/json/jsonutil","private/protocol/jsonrpc","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/restxml","private/protocol/xml/xmlutil","service/cloudwatch","service/dynamodb","service/dynamodb/dynamodbattribute","service/dynamodb/dynamodbiface","service/ec2","service/s3","service/s3/s3iface","service/s3/s3manager","service/sts"]
-  revision = "12a4975283c52e2fa88b0ae22882f83cf048eeb4"
-  version = "v1.12.27"
+  revision = "a532359524fb25c60b6c938ec321b571adc857de"
+  version = "v1.12.28"
 
 [[projects]]
   name = "github.com/cenkalti/backoff"
@@ -136,7 +136,7 @@
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context"]
-  revision = "a337091b0525af65de94df2eb7e98bd9962dcbe2"
+  revision = "9dfe39835686865bff950a07b394c12a98ddc811"
 
 [[projects]]
   branch = "master"
