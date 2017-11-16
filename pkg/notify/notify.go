@@ -133,7 +133,7 @@ func HookPost(v interface{}) {
 		terr := v.(error)
 		if terr != nil {
 			go func() {
-				err = Notifier.Notify(terr.Error())
+				err = Notifier.Notify(terr)
 			}()
 		}
 	default:
