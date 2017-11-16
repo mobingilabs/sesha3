@@ -25,6 +25,7 @@ import (
 	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/mobingilabs/sesha3/pkg/session"
 	"github.com/mobingilabs/sesha3/pkg/token"
+	"github.com/mobingilabs/sesha3/pkg/util"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
@@ -92,7 +93,7 @@ func serve(cmd *cobra.Command, args []string) {
 	// everything else will be https
 
 	startm := "--- server start ---\n"
-	startm += "url: " + params.Domain + "\n"
+	startm += "dns: " + util.GetPublicDns() + "\n"
 	startm += "syslog: " + fmt.Sprintf("%v", params.UseSyslog) + "\n"
 	startm += "region: " + params.Region + "\n"
 	startm += "server ec2: " + params.Ec2Id + "\n"

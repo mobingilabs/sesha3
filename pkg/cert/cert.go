@@ -16,11 +16,13 @@ import (
 )
 
 func validCname(domain, target string) bool {
+	d.Info("check if", domain, "points to", target)
 	out, err := exec.Command("dig", domain).CombinedOutput()
 	if err != nil {
 		return false
 	}
 
+	d.Info("dig:out:", string(out))
 	return strings.Contains(string(out), target)
 }
 
