@@ -17,6 +17,7 @@ import (
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/mobingilabs/sesha3/pkg/params"
+	"github.com/mobingilabs/sesha3/pkg/util"
 	"github.com/pkg/errors"
 	uuid "github.com/satori/go.uuid"
 )
@@ -222,7 +223,7 @@ func (s *Session) GetFullURL() string {
 		return furl
 	}
 
-	furl += "https://" + params.Domain + ":" + s.HttpsPort + rurl.EscapedPath()
+	furl += "https://" + util.Domain() + ":" + s.HttpsPort + rurl.EscapedPath()
 	return furl
 }
 

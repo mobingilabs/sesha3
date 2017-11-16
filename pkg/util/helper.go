@@ -3,17 +3,29 @@ package util
 import (
 	"io/ioutil"
 	"net/http"
+	"strings"
 
+	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/spf13/cobra"
 )
 
-func flag(cmd *cobra.Command, f string) string {
-	s := cmd.Flag(f).DefValue
-	if cmd.Flag(f).Changed {
-		s = cmd.Flag(f).Value.String()
+func ZoneId() string {
+	zoneid := "ZZDU2U8ZF5VZQ"
+	if params.IsDev {
+		zoneid = "Z23Y1M6Y77ZTL8"
 	}
 
-	return s
+	return zoneid
+}
+
+func Domain() string {
+	iid := strings.Replace(GetEc2Id(), "-", "", -1)
+	domain := "sesha3-" + iid + ".mobingi.com"
+	if params.IsDev {
+		domain = "sesha3-" + iid + ".labs.mobingi.com"
+	}
+
+	return domain
 }
 
 func GetEc2Id() string {
@@ -43,4 +55,13 @@ func GetPublicDns() string {
 
 func GetCliStringFlag(cmd *cobra.Command, f string) string {
 	return flag(cmd, f)
+}
+
+func flag(cmd *cobra.Command, f string) string {
+	s := cmd.Flag(f).DefValue
+	if cmd.Flag(f).Changed {
+		s = cmd.Flag(f).Value.String()
+	}
+
+	return s
 }

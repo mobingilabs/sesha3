@@ -19,6 +19,7 @@ import (
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/pkg/awsports"
+	"github.com/mobingilabs/sesha3/pkg/cert"
 	"github.com/mobingilabs/sesha3/pkg/execute"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
@@ -45,7 +46,6 @@ func ServeCmd() *cobra.Command {
 	}
 
 	cmd.Flags().SortFlags = false
-	cmd.Flags().StringVar(&params.Domain, "domain", "sesha3.labs.mobingi.com", "server domain")
 	cmd.Flags().StringVar(&params.Port, "port", "443", "server port")
 	return cmd
 }
@@ -70,11 +70,19 @@ func serve(cmd *cobra.Command, args []string) {
 	}
 
 	d.Info("--- server start ---")
-	d.Info("url:", params.Domain+":"+params.Port)
+	d.Info("dns:", util.GetPublicDns()+":"+params.Port)
+	d.Info("ec2:", params.Ec2Id)
 	d.Info("syslog:", params.UseSyslog)
 	d.Info("region:", params.Region)
-	d.Info("server ec2:", params.Ec2Id)
 	d.Info("credprof:", params.CredProfile)
+
+	// try setting up LetsEncrypt certificates locally
+	err = cert.SetupLetsEncryptCert(true)
+	if err != nil {
+		notify.HookPost(err)
+		d.Error(err)
+	}
+
 	srcdir := cmdline.Dir()
 	d.Info("srcdir:", srcdir)
 	if !private.Exists(srcdir + "/certs") {
@@ -93,10 +101,10 @@ func serve(cmd *cobra.Command, args []string) {
 	// everything else will be https
 
 	startm := "--- server start ---\n"
-	startm += "dns: " + util.GetPublicDns() + "\n"
+	startm += "dns: " + util.GetPublicDns() + ":" + params.Port + "\n"
+	startm += "ec2: " + params.Ec2Id + "\n"
 	startm += "syslog: " + fmt.Sprintf("%v", params.UseSyslog) + "\n"
 	startm += "region: " + params.Region + "\n"
-	startm += "server ec2: " + params.Ec2Id + "\n"
 	startm += "credprofile: " + params.CredProfile
 	notify.HookPost(startm)
 
@@ -106,20 +114,23 @@ func serve(cmd *cobra.Command, args []string) {
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
 	router.HandleFunc("/token", generateToken).Methods(http.MethodGet)
 	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
-	// router.HandleFunc("/sessions", describeSessions).Methods(http.MethodGet)
 	router.HandleFunc("/exec", execScript).Methods(http.MethodGet)
-	// https://sesha3.labs.mobingi.com/debug/vars
 	router.Handle("/debug/vars", metrics.MetricsHandler)
 	err = http.ListenAndServeTLS(":"+params.Port,
 		certfolder+"/fullchain.pem",
 		certfolder+"/privkey.pem",
 		router)
 
-	// err = http.ListenAndServe(":80", router)
 	if err != nil {
 		notify.HookPost(errors.Wrap(err, "server failed, fatal"))
 		d.ErrorTraceExit(err, 1)
 	}
+}
+
+func handleHttpRoot(c *ServeCtx) http.HandlerFunc {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Copyright (c) Mobingi. All rights reserved."))
+	})
 }
 
 func generateToken(w http.ResponseWriter, r *http.Request) {

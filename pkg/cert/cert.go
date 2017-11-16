@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/route53"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
+	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/mobingilabs/sesha3/pkg/util"
 	"github.com/pkg/errors"
@@ -27,21 +28,9 @@ func validCname(domain, target string) bool {
 }
 
 func AddLocalUrlToRoute53(wait bool) (string, error) {
-	iid := strings.Replace(util.GetEc2Id(), "-", "", -1)
-	domain := "sesha3-" + iid + ".mobingi.com"
-	if params.IsDev {
-		domain = "sesha3-" + iid + ".labs.mobingi.com"
-	}
-
-	zoneid := "ZZDU2U8ZF5VZQ"
-	if params.IsDev {
-		zoneid = "Z23Y1M6Y77ZTL8"
-	}
-
+	domain := util.Domain()
+	zoneid := util.ZoneId()
 	dns := util.GetPublicDns()
-	if dns == "" {
-		return domain, errors.New("error in reading publicdns record")
-	}
 
 	sess := session.Must(session.NewSession())
 	cred := credentials.NewSharedCredentials("/root/.aws/credentials", params.CredProfile)
@@ -77,6 +66,10 @@ func AddLocalUrlToRoute53(wait bool) (string, error) {
 		return domain, err
 	}
 
+	m := "route53 (add): " + domain + " [cname] " + dns
+	notify.HookPost(m)
+	d.Info(m)
+
 	if wait {
 		// one day? why not?
 		for i := 0; i < 720; i++ {
@@ -92,23 +85,20 @@ func AddLocalUrlToRoute53(wait bool) (string, error) {
 	return domain, nil
 }
 
-// SetupLetsEncryptCert attempts to install LetsEncrypt certificates locally using the instance id
-// and registers it to Route53. This function assumes that certbot is already installed, and we
-// are running under root account.
-func SetupLetsEncryptCert() error {
-	iid := strings.Replace(util.GetEc2Id(), "-", "", -1)
-	domain := "sesha3-" + iid + ".labs.mobingi.com"
-	if params.IsDev {
-		domain = "sesha3-" + iid + ".mobingi.com"
+// SetupLetsEncryptCert attempts to install LetsEncrypt certificates locally using the instance id.
+// This function assumes that certbot is already installed, and we are running under root account.
+func SetupLetsEncryptCert(wait bool) error {
+	_, err := AddLocalUrlToRoute53(wait)
+	if err != nil {
+		return errors.Wrap(err, "route53 add failed")
 	}
 
-	d.Info("domain:", domain)
 	cmd := exec.Command(
 		"/usr/local/bin/certbot",
 		"certonly",
 		"--standalone",
 		"-d",
-		domain,
+		util.Domain(),
 		"--debug",
 		"--quiet",
 		"--agree-tos",
@@ -121,6 +111,6 @@ func SetupLetsEncryptCert() error {
 		return errors.Wrap(err, "certbot failed")
 	}
 
-	d.Info("certbot:", string(out))
+	d.Info("certbot:out:", string(out))
 	return nil
 }

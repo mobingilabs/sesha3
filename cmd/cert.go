@@ -1,11 +1,10 @@
 package cmd
 
 import (
-	"strings"
+	"os"
 
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
-	"github.com/mobingilabs/sesha3/pkg/params"
-	"github.com/mobingilabs/sesha3/pkg/util"
+	"github.com/mobingilabs/sesha3/pkg/cert"
 	"github.com/spf13/cobra"
 )
 
@@ -17,13 +16,11 @@ func SetupHttpsCmd() *cobra.Command {
 		Short: "setup https",
 		Long:  `Setup https support.`,
 		Run: func(cmd *cobra.Command, args []string) {
-			iid := strings.Replace(util.GetEc2Id(), "-", "", -1)
-			domain := "sesha3-" + iid + ".labs.mobingi.com"
-			if params.IsDev {
-				domain = "sesha3-" + iid + ".mobingi.com"
+			err := cert.SetupLetsEncryptCert(true)
+			if err != nil {
+				debug.Error(err)
+				os.Exit(1)
 			}
-
-			debug.Info("domain:", domain)
 		},
 	}
 
