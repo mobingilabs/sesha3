@@ -103,7 +103,7 @@ func SetupLetsEncryptCert(wait bool) error {
 		"--quiet",
 		"--agree-tos",
 		"--email",
-		"--chew.esmero@mobingi.com")
+		"chew.esmero@mobingi.com")
 
 	d.Info("cmd:", cmd.Args)
 	out, err := cmd.CombinedOutput()
