@@ -57,6 +57,7 @@ func serve(cmd *cobra.Command, args []string) {
 		}
 
 		log.SetFlags(0)
+		log.SetPrefix("[" + util.GetEc2Id() + "]")
 		log.SetOutput(logger)
 	}
 
@@ -80,21 +81,6 @@ func serve(cmd *cobra.Command, args []string) {
 		notify.HookPost(err)
 		d.Error(err)
 	}
-
-	/*
-		srcdir := cmdline.Dir()
-		d.Info("srcdir:", srcdir)
-		if !private.Exists(srcdir + "/certs") {
-			err := os.MkdirAll(srcdir+"/certs", os.ModePerm)
-			notify.HookPost(errors.Wrap(err, "create certs folder failed (fatal)"))
-		}
-
-		err = awsports.Download(params.Region, params.CredProfile)
-		if err != nil {
-			notify.HookPost(errors.Wrap(err, "server failed, fatal"))
-			d.ErrorTraceExit(err, 1)
-		}
-	*/
 
 	// redirect every http request to https
 	// go http.ListenAndServe(":80", http.HandlerFunc(redirect))
