@@ -4,7 +4,7 @@
 grep -q -F '[program:sesha3]' /etc/supervisord.conf || \
     echo '' >> /etc/supervisord.conf && \
     echo '[program:sesha3]' >> /etc/supervisord.conf && \
-    echo 'command=/home/ec2-user/sesha3/sesha3 serve --syslog' >> /etc/supervisord.conf && \
+    echo 'command=/home/ec2-user/sesha3/sesha3 serve --syslog --rundev' >> /etc/supervisord.conf && \
     echo 'directory=/home/ec2-user/sesha3' >> /etc/supervisord.conf && \
     echo 'autostart=true' >> /etc/supervisord.conf && \
     echo 'autorestart=true' >> /etc/supervisord.conf && \
