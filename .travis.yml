@@ -10,7 +10,7 @@ script:
   - go build -v
 
 before_deploy:
-  - tar cvzf app.tar.gz sesha3 appspec.yml supervisor.conf scripts/ tools/
+  - tar cvzf app.tar.gz sesha3 appspec.yml scripts/ tools/
   - mkdir -p dpl_cd_upload
   - cp app.tar.gz dpl_cd_upload/
 

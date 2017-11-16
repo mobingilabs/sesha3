@@ -42,6 +42,7 @@ Simply type '` + cmdline.Args0() + ` help [path to command]' for full details.`,
 	// add supported cmds
 	rootCmd.AddCommand(
 		ServeCmd(),
+		SetupRoute53Cmd(),
 		SetupHttpsCmd(),
 	)
 }
