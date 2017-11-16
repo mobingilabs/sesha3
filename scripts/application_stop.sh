@@ -1,3 +1,3 @@
 #!/bin/bash
 
-/usr/local/bin/supervisorctl stop sesha3 > /dev/null 2> /dev/null < /dev/null
+/usr/local/bin/supervisorctl stop sesha3 &>> /home/ec2-user/codedeploy.log
