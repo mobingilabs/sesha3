@@ -14,7 +14,7 @@ func SetupRoute53Cmd() *cobra.Command {
 		Short: "setup route53",
 		Long:  `Add local url to route53.`,
 		Run: func(cmd *cobra.Command, args []string) {
-			d, err := cert.AddLocalUrlToRoute53()
+			d, err := cert.AddLocalUrlToRoute53(true)
 			if err != nil {
 				debug.Error(err)
 				os.Exit(1)

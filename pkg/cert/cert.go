@@ -3,6 +3,7 @@ package cert
 import (
 	"os/exec"
 	"strings"
+	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
@@ -14,7 +15,16 @@ import (
 	"github.com/pkg/errors"
 )
 
-func AddLocalUrlToRoute53() (string, error) {
+func validCname(domain, target string) bool {
+	out, err := exec.Command("dig", domain).CombinedOutput()
+	if err != nil {
+		return false
+	}
+
+	return strings.Contains(string(out), target)
+}
+
+func AddLocalUrlToRoute53(wait bool) (string, error) {
 	iid := strings.Replace(util.GetEc2Id(), "-", "", -1)
 	domain := "sesha3-" + iid + ".mobingi.com"
 	if params.IsDev {
@@ -63,6 +73,16 @@ func AddLocalUrlToRoute53() (string, error) {
 	if err != nil {
 		d.Error(err)
 		return domain, err
+	}
+
+	if wait {
+		for i := 0; i < 3600; i++ {
+			if validCname(domain, dns) {
+				break
+			} else {
+				time.Sleep(time.Second * 1)
+			}
+		}
 	}
 
 	d.Info(resp)
