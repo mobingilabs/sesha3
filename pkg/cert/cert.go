@@ -78,11 +78,12 @@ func AddLocalUrlToRoute53(wait bool) (string, error) {
 	}
 
 	if wait {
-		for i := 0; i < 3600; i++ {
+		// one day? why not?
+		for i := 0; i < 720; i++ {
 			if validCname(domain, dns) {
 				break
 			} else {
-				time.Sleep(time.Second * 1)
+				time.Sleep(time.Second * 5)
 			}
 		}
 	}
