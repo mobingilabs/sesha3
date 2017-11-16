@@ -97,20 +97,17 @@ func SetupLetsEncryptCert(wait bool) error {
 		"/usr/local/bin/certbot",
 		"certonly",
 		"--standalone",
-		"-d",
-		util.Domain(),
+		"-d", util.Domain(),
 		"--debug",
 		"--quiet",
 		"--agree-tos",
-		"--email",
-		"chew.esmero@mobingi.com")
+		"--email", "chew.esmero@mobingi.com")
 
 	d.Info("cmd:", cmd.Args)
-	out, err := cmd.CombinedOutput()
+	_, err = cmd.CombinedOutput()
 	if err != nil {
 		return errors.Wrap(err, "certbot failed")
 	}
 
-	d.Info("certbot:out:", string(out))
 	return nil
 }

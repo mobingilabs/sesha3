@@ -14,11 +14,9 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
-	"github.com/mobingilabs/mobingi-sdk-go/pkg/cmdline"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
-	"github.com/mobingilabs/sesha3/pkg/awsports"
 	"github.com/mobingilabs/sesha3/pkg/cert"
 	"github.com/mobingilabs/sesha3/pkg/execute"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
@@ -83,32 +81,32 @@ func serve(cmd *cobra.Command, args []string) {
 		d.Error(err)
 	}
 
-	srcdir := cmdline.Dir()
-	d.Info("srcdir:", srcdir)
-	if !private.Exists(srcdir + "/certs") {
-		err := os.MkdirAll(srcdir+"/certs", os.ModePerm)
-		notify.HookPost(errors.Wrap(err, "create certs folder failed (fatal)"))
-	}
+	/*
+		srcdir := cmdline.Dir()
+		d.Info("srcdir:", srcdir)
+		if !private.Exists(srcdir + "/certs") {
+			err := os.MkdirAll(srcdir+"/certs", os.ModePerm)
+			notify.HookPost(errors.Wrap(err, "create certs folder failed (fatal)"))
+		}
 
-	err = awsports.Download(params.Region, params.CredProfile)
-	if err != nil {
-		notify.HookPost(errors.Wrap(err, "server failed, fatal"))
-		d.ErrorTraceExit(err, 1)
-	}
+		err = awsports.Download(params.Region, params.CredProfile)
+		if err != nil {
+			notify.HookPost(errors.Wrap(err, "server failed, fatal"))
+			d.ErrorTraceExit(err, 1)
+		}
+	*/
 
 	// redirect every http request to https
 	// go http.ListenAndServe(":80", http.HandlerFunc(redirect))
 	// everything else will be https
 
 	startm := "--- server start ---\n"
-	startm += "dns: " + util.GetPublicDns() + ":" + params.Port + "\n"
+	startm += "dns: " + util.GetPublicDns() + "\n"
 	startm += "ec2: " + params.Ec2Id + "\n"
-	startm += "syslog: " + fmt.Sprintf("%v", params.UseSyslog) + "\n"
-	startm += "region: " + params.Region + "\n"
-	startm += "credprofile: " + params.CredProfile
+	startm += "syslog: " + fmt.Sprintf("%v", params.UseSyslog)
 	notify.HookPost(startm)
 
-	certfolder := cmdline.Dir() + "/certs"
+	certfolder := "/etc/letsencrypt/live/" + util.Domain()
 	router := mux.NewRouter()
 	router.HandleFunc("/", version).Methods(http.MethodGet)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
