@@ -100,10 +100,15 @@ func serve(cmd *cobra.Command, args []string) {
 	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
 	router.HandleFunc("/exec", execScript).Methods(http.MethodGet)
 	router.Handle("/debug/vars", metrics.MetricsHandler)
-	err = http.ListenAndServeTLS(":"+params.Port,
-		certfolder+"/fullchain.pem",
-		certfolder+"/privkey.pem",
-		router)
+	/*
+		err = http.ListenAndServeTLS(":"+params.Port,
+			certfolder+"/fullchain.pem",
+			certfolder+"/privkey.pem",
+			router)
+	*/
+
+	_ = certfolder
+	err = http.ListenAndServe(":80", router)
 
 	if err != nil {
 		notify.HookPost(errors.Wrap(err, "server failed, fatal"))
