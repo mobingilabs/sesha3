@@ -75,7 +75,7 @@ func (s *Session) Start() (string, error) {
 		}
 
 		svrtool := cmdline.Dir() + "/tools/" + runtime.GOOS + "/gotty"
-		certpath := cmdline.Dir() + "/certs/"
+		certpath := "/etc/letsencrypt/live/" + util.Domain()
 		ssh := "/usr/bin/ssh -oStrictHostKeyChecking=no -i " + os.TempDir() + "/user/" + s.StackId + ".pem " + s.User + "@" + s.Ip
 		shell := "grep " + s.User + " /etc/passwd | cut -d: -f7"
 		dshellb, err := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
@@ -99,9 +99,9 @@ func (s *Session) Start() (string, error) {
 			"-once",
 			"--tls",
 			"--tls-crt",
-			certpath+"fullchain.pem",
+			certpath+"/fullchain.pem",
 			"--tls-key",
-			certpath+"privkey.pem",
+			certpath+"/privkey.pem",
 			"--title-format", "Mobingi - {{ .Command }}",
 			"bash",
 			"-c",

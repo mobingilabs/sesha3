@@ -182,7 +182,6 @@ func generateToken(w http.ResponseWriter, r *http.Request) {
 }
 
 func ttyurl(w http.ResponseWriter, r *http.Request) {
-	//metrics
 	start := time.Now()
 	metrics.MetricsCurrentConnection.Add(1)
 	defer metrics.MetricsCurrentConnection.Add(-1)

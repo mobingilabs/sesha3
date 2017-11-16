@@ -66,7 +66,7 @@ func AddLocalUrlToRoute53(wait bool) (string, error) {
 		return domain, err
 	}
 
-	m := "route53 (add): " + domain + " [cname] " + dns
+	m := "route53 (add/update): " + domain + " [cname] " + dns
 	notify.HookPost(m)
 	d.Info(m)
 
