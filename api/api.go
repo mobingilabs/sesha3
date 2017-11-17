@@ -29,7 +29,7 @@ func (c *ApiController) Prepare() {
 		c.sessionId = fmt.Sprintf("%s", uuid.NewV4())
 	}
 
-	debug.Info("session:", c.sessionId)
+	debug.Info("session:prepare:", c.sessionId)
 }
 
 func (c *ApiController) DispatchScratch() {
@@ -38,6 +38,7 @@ func (c *ApiController) DispatchScratch() {
 		Value string `json:"value"`
 	}
 
+	debug.Info("session:scratch:", c.sessionId)
 	c.Data["json"] = x{Name: "foo", Value: "bar"}
 	c.ServeJSON()
 }
