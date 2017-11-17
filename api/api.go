@@ -2,7 +2,6 @@ package api
 
 import (
 	"encoding/json"
-	"net/http"
 
 	"github.com/astaxie/beego"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
@@ -23,6 +22,7 @@ func (c *ApiController) decodeRequestBody(i interface{}) error {
 	return decoder.Decode(i)
 }
 
+/*
 func (c *ApiController) json(i interface{}) {
 	payload, err := json.Marshal(i)
 	if err != nil {
@@ -34,6 +34,7 @@ func (c *ApiController) json(i interface{}) {
 	c.Ctx.Output.Header("Content-Type", "application/json")
 	c.Ctx.ResponseWriter.Write([]byte(payload))
 }
+*/
 
 func (c *ApiController) DispatchScratch() {
 	c.Ctx.ResponseWriter.WriteHeader(500)
@@ -42,7 +43,9 @@ func (c *ApiController) DispatchScratch() {
 		Value string `json:"value"`
 	}
 
-	c.json(x{Name: "foo", Value: "bar"})
+	p := x{Name: "foo", Value: "bar"}
+	c.Data["json"] = &p
+	c.ServeJSON()
 }
 
 func (c *ApiController) DispatchRoot() {
