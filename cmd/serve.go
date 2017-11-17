@@ -88,23 +88,6 @@ func ServeCmd() *cobra.Command {
 			beego.Router("/exec", &api.ApiController{}, "post:DispatchExec")
 			beego.Handler("/debug/vars", metrics.MetricsHandler)
 			beego.Run(":" + params.Port)
-
-			/*
-				router := mux.NewRouter()
-				router.HandleFunc("/", handleHttpRoot(c)).Methods(http.MethodGet)
-				router.HandleFunc("/version", handleHttpVersion(c)).Methods(http.MethodGet)
-				router.HandleFunc("/token", handleHttpToken(c)).Methods(http.MethodGet)
-				router.HandleFunc("/ttyurl", handleHttpPtyUrl(c)).Methods(http.MethodGet)
-				router.HandleFunc("/exec", handleHttpExecScript(c)).Methods(http.MethodGet)
-				router.Handle("/debug/vars", metrics.MetricsHandler)
-
-				// start our http server
-				err = http.ListenAndServe(":"+params.Port, router)
-				if err != nil {
-					notify.HookPost(errors.Wrap(err, "server failed, fatal"))
-					d.ErrorTraceExit(err, 1)
-				}
-			*/
 		},
 	}
 

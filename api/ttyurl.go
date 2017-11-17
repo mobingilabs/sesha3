@@ -77,8 +77,14 @@ func handleHttpTtyUrl(c *ApiController) {
 		return
 	}
 
+	sess.User = fmt.Sprintf("%v", m["user"])
+	sess.Ip = fmt.Sprintf("%v", m["ip"])
+	sess.StackId = fmt.Sprintf("%v", m["stackid"])
+	sess.Timeout = fmt.Sprintf("%v", m["timeout"])
+
 	pemdir := os.TempDir() + "/sesha3/pem/"
 	pemfile := pemdir + sess.StackId + ".pem"
+	sess.PemFile = pemfile
 
 	// create the pem file only if not existent
 	if !private.Exists(pemfile) {
@@ -118,12 +124,6 @@ func handleHttpTtyUrl(c *ApiController) {
 	} else {
 		d.Info("reuse:", pemfile)
 	}
-
-	sess.User = fmt.Sprintf("%v", m["user"])
-	sess.Ip = fmt.Sprintf("%v", m["ip"])
-	sess.StackId = fmt.Sprintf("%v", m["stackid"])
-	sess.Timeout = fmt.Sprintf("%v", m["timeout"])
-	sess.PemFile = pemfile
 
 	// start the ssh session
 	randomurl, err := sess.Start()
