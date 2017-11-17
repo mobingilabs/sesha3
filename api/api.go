@@ -37,14 +37,12 @@ func (c *ApiController) json(i interface{}) {
 */
 
 func (c *ApiController) DispatchScratch() {
-	c.Ctx.ResponseWriter.WriteHeader(500)
 	type x struct {
 		Name  string `json:"name"`
 		Value string `json:"value"`
 	}
 
-	p := x{Name: "foo", Value: "bar"}
-	c.Data["json"] = &p
+	c.Data["json"] = x{Name: "foo", Value: "bar"}
 	c.ServeJSON()
 }
 

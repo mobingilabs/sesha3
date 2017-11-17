@@ -84,6 +84,11 @@ func ServeCmd() *cobra.Command {
 			notify.HookPost(startm)
 
 			beego.BConfig.ServerName = "sesha3:1.0.0"
+			beego.BConfig.RunMode = beego.PROD
+			if params.IsDev {
+				beego.BConfig.RunMode = beego.DEV
+			}
+
 			beego.Router("/", &api.ApiController{}, "get:DispatchRoot")
 			beego.Router("/scratch", &api.ApiController{}, "get:DispatchScratch")
 			beego.Router("/ttyurl", &api.ApiController{}, "get:DispatchTtyUrl")
