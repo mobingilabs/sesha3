@@ -35,10 +35,6 @@ func (c *ApiController) json(i interface{}) {
 	c.Ctx.ResponseWriter.Write([]byte(payload))
 }
 
-func (c *ApiController) DispatchRoot() {
-	c.Ctx.ResponseWriter.Write([]byte("Copyright (c) Mobingi. All rights reserved."))
-}
-
 func (c *ApiController) DispatchScratch() {
 	c.Ctx.ResponseWriter.WriteHeader(500)
 	type x struct {
@@ -47,6 +43,10 @@ func (c *ApiController) DispatchScratch() {
 	}
 
 	c.json(x{Name: "foo", Value: "bar"})
+}
+
+func (c *ApiController) DispatchRoot() {
+	c.Ctx.ResponseWriter.Write([]byte("Copyright (c) Mobingi. All rights reserved."))
 }
 
 func (c *ApiController) DispatchTtyUrl() {
