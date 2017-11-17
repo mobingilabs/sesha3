@@ -164,9 +164,12 @@ func handleHttpTtyUrl(c *ApiController) {
 		return
 	}
 
-	payload := `{"tty_url":"` + fullurl + `"}`
-	c.Ctx.ResponseWriter.Write([]byte(payload))
+	type _url_payload struct {
+		Url string `json:"tty_url"`
+	}
 
 	end := time.Now()
 	metrics.MetricsTTYResponseTime.Set(end.Sub(start).String())
+	c.Data["json"] = _url_payload{Url: fullurl}
+	c.ServeJSON()
 }

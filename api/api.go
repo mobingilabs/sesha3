@@ -30,3 +30,7 @@ func (c *ApiController) DispatchRoot() {
 func (c *ApiController) DispatchTtyUrl() {
 	handleHttpTtyUrl(c)
 }
+
+func (c *ApiController) DispatchToken() {
+	handleHttpToken(c)
+}
