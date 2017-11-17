@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
+	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 )
@@ -32,6 +33,8 @@ func handleHttpToken(c *ApiController) {
 			return
 		}
 	*/
+
+	d.Info("body:", string(c.Ctx.Input.RequestBody))
 
 	type creds_t struct {
 		Username string `json:"username"`

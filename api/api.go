@@ -7,9 +7,20 @@ import (
 
 type ApiController struct {
 	beego.Controller
+	skipPrepare bool
+	noAuth      bool
 }
 
 func (c *ApiController) Prepare() {
+	if c.skipPrepare {
+		return
+	}
+
+	// do auth by default
+	if !c.noAuth {
+		debug.Info("base auth:")
+	}
+
 	debug.Info("base prepare:")
 }
 
@@ -27,10 +38,10 @@ func (c *ApiController) DispatchRoot() {
 	c.Ctx.ResponseWriter.Write([]byte("Copyright (c) Mobingi. All rights reserved."))
 }
 
-func (c *ApiController) DispatchTtyUrl() {
-	handleHttpTtyUrl(c)
-}
-
 func (c *ApiController) DispatchToken() {
 	handleHttpToken(c)
+}
+
+func (c *ApiController) DispatchTtyUrl() {
+	handleHttpTtyUrl(c)
 }
