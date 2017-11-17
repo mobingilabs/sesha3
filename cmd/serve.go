@@ -23,7 +23,6 @@ import (
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/mobingilabs/sesha3/pkg/params"
-	"github.com/mobingilabs/sesha3/pkg/session"
 	"github.com/mobingilabs/sesha3/pkg/token"
 	"github.com/mobingilabs/sesha3/pkg/util"
 	"github.com/pkg/errors"
@@ -84,7 +83,9 @@ func ServeCmd() *cobra.Command {
 			startm += "syslog: " + fmt.Sprintf("%v", params.UseSyslog)
 			notify.HookPost(startm)
 
-			beego.Router("/", &api.ApiController{}, "get:Root")
+			beego.Router("/", &api.ApiController{}, "get:DispatchRoot")
+			beego.Router("/scratch", &api.ApiController{}, "get:DispatchScratch")
+			beego.Router("/ttyurl", &api.ApiController{}, "get:DispatchTtyUrl")
 			beego.Run(":" + params.Port)
 
 			/*
@@ -169,6 +170,7 @@ func handleHttpToken(c *ServeCtx) http.HandlerFunc {
 	})
 }
 
+/*
 func handleHttpPtyUrl(c *ServeCtx) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
@@ -315,6 +317,7 @@ func handleHttpPtyUrl(c *ServeCtx) http.HandlerFunc {
 		metrics.MetricsTTYResponseTime.Set(end.Sub(start).String())
 	})
 }
+*/
 
 func handleHttpExecScript(c *ServeCtx) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
