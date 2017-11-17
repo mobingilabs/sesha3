@@ -86,6 +86,7 @@ func ServeCmd() *cobra.Command {
 			beego.Router("/token", &api.ApiController{}, "post:DispatchToken")
 			beego.Router("/ttyurl", &api.ApiController{}, "post:DispatchTtyUrl")
 			beego.Router("/exec", &api.ApiController{}, "post:DispatchExec")
+			beego.Handler("/debug/vars", metrics.MetricsHandler)
 			beego.Run(":" + params.Port)
 
 			/*
