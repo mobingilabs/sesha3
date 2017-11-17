@@ -1,29 +1,23 @@
 package cmd
 
 import (
-	"crypto/md5"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"log/syslog"
 	"net/http"
-	"os"
-	"strings"
 	"time"
 
 	"github.com/astaxie/beego"
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
-	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/api"
 	"github.com/mobingilabs/sesha3/pkg/cert"
-	"github.com/mobingilabs/sesha3/pkg/execute"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/mobingilabs/sesha3/pkg/params"
-	"github.com/mobingilabs/sesha3/pkg/token"
 	"github.com/mobingilabs/sesha3/pkg/util"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
@@ -89,11 +83,14 @@ func ServeCmd() *cobra.Command {
 				beego.BConfig.RunMode = beego.DEV
 			}
 
+			// needed for http input body in request to be available for non-get and head reqs
 			beego.BConfig.CopyRequestBody = true
+
 			beego.Router("/", &api.ApiController{}, "get:DispatchRoot")
 			beego.Router("/scratch", &api.ApiController{}, "get:DispatchScratch")
-			beego.Router("/token", &api.ApiController{}, "get:DispatchToken")
-			beego.Router("/ttyurl", &api.ApiController{}, "get:DispatchTtyUrl")
+			beego.Router("/token", &api.ApiController{}, "post:DispatchToken")
+			beego.Router("/ttyurl", &api.ApiController{}, "post:DispatchTtyUrl")
+			beego.Router("/exec", &api.ApiController{}, "post:DispatchExec")
 			beego.Run(":" + params.Port)
 
 			/*
@@ -325,7 +322,6 @@ func handleHttpPtyUrl(c *ServeCtx) http.HandlerFunc {
 		metrics.MetricsTTYResponseTime.Set(end.Sub(start).String())
 	})
 }
-*/
 
 func handleHttpExecScript(c *ServeCtx) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -470,6 +466,7 @@ func handleHttpExecScript(c *ServeCtx) http.HandlerFunc {
 		w.Write(payload)
 	})
 }
+*/
 
 /*
 func describeSessions(w http.ResponseWriter, req *http.Request) {

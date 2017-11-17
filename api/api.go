@@ -45,3 +45,7 @@ func (c *ApiController) DispatchToken() {
 func (c *ApiController) DispatchTtyUrl() {
 	handleHttpTtyUrl(c)
 }
+
+func (c *ApiController) DispatchExec() {
+	handleHttpExec(c)
+}
