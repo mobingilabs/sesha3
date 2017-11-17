@@ -61,7 +61,6 @@ func ServeCmd() *cobra.Command {
 				d.Error(err)
 			}
 
-			c := &ServeCtx{}
 			d.Info("--- server start ---")
 			d.Info("dns:", util.GetPublicDns()+":"+params.Port)
 			d.Info("ec2:", params.Ec2Id)
