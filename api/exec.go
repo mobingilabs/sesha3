@@ -22,16 +22,6 @@ import (
 func handleHttpExec(c *ApiController) {
 	var in sesha3.ExecScriptPayload
 
-	/*
-		defer r.Body.Close()
-		body, err := ioutil.ReadAll(r.Body)
-		if err != nil {
-			w.Write(sesha3.NewSimpleError(err).Marshal())
-			notify.HookPost(err)
-			return
-		}
-	*/
-
 	d.Info("body:", string(c.Ctx.Input.RequestBody))
 	err := json.Unmarshal(c.Ctx.Input.RequestBody, &in)
 	if err != nil {
@@ -152,17 +142,6 @@ func handleHttpExec(c *ApiController) {
 		StackId: in.Target.StackId,
 		Outputs: []sesha3.ExecScriptInstanceResponse{out},
 	}
-
-	/*
-		payload, err := json.Marshal(sout)
-		if err != nil {
-			c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
-			notify.HookPost(err)
-		}
-
-		d.Info("reply:", string(payload))
-		w.Write(payload)
-	*/
 
 	c.Data["json"] = sout
 	c.ServeJSON()
