@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"net/url"
-	"os"
 	"os/exec"
 	"runtime"
 	"strings"
@@ -27,6 +26,7 @@ type Session struct {
 	Online    bool
 	TtyURL    string
 	Cmd       *exec.Cmd
+	PemFile   string
 	HttpsPort string
 	User      string
 	Ip        string
@@ -56,6 +56,7 @@ func (s *Session) Start() (string, error) {
 	ttyurl := make(chan string)
 	wsclose := make(chan string)
 
+	// port closer function
 	fnClosePort := func() {
 		err := ec2req.ClosePort()
 		if err != nil {
@@ -76,7 +77,7 @@ func (s *Session) Start() (string, error) {
 
 		svrtool := cmdline.Dir() + "/tools/" + runtime.GOOS + "/gotty"
 		certpath := "/etc/letsencrypt/live/" + util.Domain()
-		ssh := "/usr/bin/ssh -oStrictHostKeyChecking=no -i " + os.TempDir() + "/user/" + s.StackId + ".pem " + s.User + "@" + s.Ip
+		ssh := "/usr/bin/ssh -oStrictHostKeyChecking=no -i " + s.PemFile + " " + s.User + "@" + s.Ip
 		shell := "grep " + s.User + " /etc/passwd | cut -d: -f7"
 		dshellb, err := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
 		if err != nil {
@@ -160,12 +161,6 @@ func (s *Session) Start() (string, error) {
 		}
 
 		fnClosePort()
-		err = os.Remove(os.TempDir() + "/user/" + s.StackId + ".pem")
-		if err != nil {
-			notify.HookPost(err)
-			s.error(errors.Wrap(err, "delete pem failed"))
-		}
-
 		Sessions.Remove(s.Id())
 		wsclose <- "__closed__"
 		s.info("gotty done")
