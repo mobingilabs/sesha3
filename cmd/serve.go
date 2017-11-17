@@ -44,7 +44,7 @@ func ServeCmd() *cobra.Command {
 	}
 
 	cmd.Flags().SortFlags = false
-	cmd.Flags().StringVar(&params.Port, "port", "443", "server port")
+	cmd.Flags().StringVar(&params.Port, "port", "8080", "server port")
 	return cmd
 }
 
@@ -108,7 +108,7 @@ func serve(cmd *cobra.Command, args []string) {
 	*/
 
 	_ = certfolder
-	err = http.ListenAndServe(":80", router)
+	err = http.ListenAndServe(":8080", router)
 
 	if err != nil {
 		notify.HookPost(errors.Wrap(err, "server failed, fatal"))
