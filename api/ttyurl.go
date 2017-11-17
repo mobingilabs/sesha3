@@ -68,18 +68,6 @@ func handleHttpTtyUrl(c *ApiController) {
 		return
 	}
 
-	// json.Unmarshal(c.Ctx.Input.RequestBody)
-
-	/*
-		defer r.Body.Close()
-		body, err := ioutil.ReadAll(r.Body)
-		if err != nil {
-			c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
-			notify.HookPost(err)
-			return
-		}
-	*/
-
 	d.Info("token:", btoken)
 	d.Info("body:", string(c.Ctx.Input.RequestBody))
 	err = json.Unmarshal(c.Ctx.Input.RequestBody, &m)
@@ -91,8 +79,9 @@ func handleHttpTtyUrl(c *ApiController) {
 
 	pemdir := os.TempDir() + "/sesha3/pem/"
 	pemfile := pemdir + sess.StackId + ".pem"
+
+	// create the pem file only if not existent
 	if !private.Exists(pemfile) {
-		// create the pem directory if not exists
 		if !private.Exists(pemdir) {
 			d.Info("create", pemdir)
 			err = os.MkdirAll(pemdir, 0700)
@@ -134,8 +123,9 @@ func handleHttpTtyUrl(c *ApiController) {
 	sess.Ip = fmt.Sprintf("%v", m["ip"])
 	sess.StackId = fmt.Sprintf("%v", m["stackid"])
 	sess.Timeout = fmt.Sprintf("%v", m["timeout"])
-
 	sess.PemFile = pemfile
+
+	// start the ssh session
 	randomurl, err := sess.Start()
 	if err != nil {
 		c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
@@ -170,6 +160,9 @@ func handleHttpTtyUrl(c *ApiController) {
 
 	end := time.Now()
 	metrics.MetricsTTYResponseTime.Set(end.Sub(start).String())
-	c.Data["json"] = _url_payload{Url: fullurl}
+
+	reply := make(map[string]string)
+	reply["tty_url"] = fullurl
+	c.Data["json"] = reply
 	c.ServeJSON()
 }

@@ -47,16 +47,11 @@ func handleHttpToken(c *ApiController) {
 		return
 	}
 
-	type _token_payload struct {
-		Key string `json:"key"`
-	}
-
 	end := time.Now()
 	metrics.MetricsTokenResponseTime.Set(end.Sub(start).String())
 
 	reply := make(map[string]string)
 	reply["key"] = stoken
-	// c.Data["json"] = _token_payload{Key: stoken}
 	c.Data["json"] = reply
 	c.ServeJSON()
 }
