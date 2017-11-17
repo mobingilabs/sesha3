@@ -10,6 +10,11 @@ import (
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 )
 
+type credentials struct {
+	Username string `json:"username"`
+	Password string `json:"passwd"`
+}
+
 func handleHttpToken(c *ApiController) {
 	start := time.Now()
 	metrics.MetricsTokenRequestCount.Add(1)
@@ -24,33 +29,18 @@ func handleHttpToken(c *ApiController) {
 		return
 	}
 
-	/*
-		defer r.Body.Close()
-		body, err := ioutil.ReadAll(r.Body)
-		if err != nil {
-			w.Write(sesha3.NewSimpleError(err).Marshal())
-			notify.HookPost(err)
-			return
-		}
-	*/
+	var creds credentials
 
 	d.Info("body:", string(c.Ctx.Input.RequestBody))
-
-	type creds_t struct {
-		Username string `json:"username"`
-		Password string `json:"passwd"`
-	}
-
-	var up creds_t
-	err = json.Unmarshal(c.Ctx.Input.RequestBody, &up)
+	err = json.Unmarshal(c.Ctx.Input.RequestBody, &creds)
 	if err != nil {
 		c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
 		return
 	}
 
 	m := make(map[string]interface{})
-	m["username"] = up.Username
-	m["password"] = up.Password
+	m["username"] = creds.Username
+	m["password"] = creds.Password
 	_, stoken, err := ctx.GenerateToken(m)
 	if err != nil {
 		c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
@@ -63,6 +53,10 @@ func handleHttpToken(c *ApiController) {
 
 	end := time.Now()
 	metrics.MetricsTokenResponseTime.Set(end.Sub(start).String())
-	c.Data["json"] = _token_payload{Key: stoken}
+
+	reply := make(map[string]string)
+	reply["key"] = stoken
+	// c.Data["json"] = _token_payload{Key: stoken}
+	c.Data["json"] = reply
 	c.ServeJSON()
 }
