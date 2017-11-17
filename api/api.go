@@ -2,6 +2,7 @@ package api
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/astaxie/beego"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
@@ -26,10 +27,20 @@ func (c *ApiController) Prepare() {
 	}
 
 	if c.sessionId == "" {
-		c.sessionId = fmt.Sprintf("%s", uuid.NewV4())
+		c.sessionId = fmt.Sprintf("{%s}", uuid.NewV4())
 	}
+}
 
-	debug.Info("session:prepare:", c.sessionId)
+// info is our local info logger with session id as prefix.
+func (c *ApiController) info(v ...interface{}) {
+	m := fmt.Sprintln(v...)
+	log.Print(fmt.Sprintf("s-%s:info: %s", c.sessionId, m))
+}
+
+// info is our local error logger with session id as prefix.
+func (c *ApiController) err(v ...interface{}) {
+	m := fmt.Sprintln(v...)
+	log.Print(fmt.Sprintf("s-%s:error: %s", c.sessionId, m))
 }
 
 func (c *ApiController) DispatchScratch() {
@@ -38,7 +49,8 @@ func (c *ApiController) DispatchScratch() {
 		Value string `json:"value"`
 	}
 
-	debug.Info("session:scratch:", c.sessionId)
+	c.info("hello info")
+	c.err("hello error")
 	c.Data["json"] = x{Name: "foo", Value: "bar"}
 	c.ServeJSON()
 }
