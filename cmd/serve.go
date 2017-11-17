@@ -12,11 +12,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gorilla/mux"
+	"github.com/astaxie/beego"
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
+	"github.com/mobingilabs/sesha3/api"
 	"github.com/mobingilabs/sesha3/pkg/cert"
 	"github.com/mobingilabs/sesha3/pkg/execute"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
@@ -84,20 +85,25 @@ func ServeCmd() *cobra.Command {
 			startm += "syslog: " + fmt.Sprintf("%v", params.UseSyslog)
 			notify.HookPost(startm)
 
-			router := mux.NewRouter()
-			router.HandleFunc("/", handleHttpRoot(c)).Methods(http.MethodGet)
-			router.HandleFunc("/version", handleHttpVersion(c)).Methods(http.MethodGet)
-			router.HandleFunc("/token", handleHttpToken(c)).Methods(http.MethodGet)
-			router.HandleFunc("/ttyurl", handleHttpPtyUrl(c)).Methods(http.MethodGet)
-			router.HandleFunc("/exec", handleHttpExecScript(c)).Methods(http.MethodGet)
-			router.Handle("/debug/vars", metrics.MetricsHandler)
+			beego.Router("/", &api.ApiController{}, "get:Root")
+			beego.Run(":" + params.Port)
 
-			// start our http server
-			err = http.ListenAndServe(":"+params.Port, router)
-			if err != nil {
-				notify.HookPost(errors.Wrap(err, "server failed, fatal"))
-				d.ErrorTraceExit(err, 1)
-			}
+			/*
+				router := mux.NewRouter()
+				router.HandleFunc("/", handleHttpRoot(c)).Methods(http.MethodGet)
+				router.HandleFunc("/version", handleHttpVersion(c)).Methods(http.MethodGet)
+				router.HandleFunc("/token", handleHttpToken(c)).Methods(http.MethodGet)
+				router.HandleFunc("/ttyurl", handleHttpPtyUrl(c)).Methods(http.MethodGet)
+				router.HandleFunc("/exec", handleHttpExecScript(c)).Methods(http.MethodGet)
+				router.Handle("/debug/vars", metrics.MetricsHandler)
+
+				// start our http server
+				err = http.ListenAndServe(":"+params.Port, router)
+				if err != nil {
+					notify.HookPost(errors.Wrap(err, "server failed, fatal"))
+					d.ErrorTraceExit(err, 1)
+				}
+			*/
 		},
 	}
 

@@ -8,10 +8,16 @@
   version = "v1.0.3"
 
 [[projects]]
+  name = "github.com/astaxie/beego"
+  packages = [".","config","context","context/param","grace","logs","session","toolbox","utils"]
+  revision = "d96289a81bf67728cff7a19b067aaecc65a62ec6"
+  version = "v1.9.0"
+
+[[projects]]
   name = "github.com/aws/aws-sdk-go"
   packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/shareddefaults","private/protocol","private/protocol/ec2query","private/protocol/json/jsonutil","private/protocol/jsonrpc","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/restxml","private/protocol/xml/xmlutil","service/cloudwatch","service/dynamodb","service/dynamodb/dynamodbattribute","service/dynamodb/dynamodbiface","service/ec2","service/route53","service/s3","service/s3/s3iface","service/s3/s3manager","service/sts"]
-  revision = "a532359524fb25c60b6c938ec321b571adc857de"
-  version = "v1.12.28"
+  revision = "32f50a06b82225ea99d3c400c20cba02874f0db7"
+  version = "v1.12.29"
 
 [[projects]]
   name = "github.com/cenkalti/backoff"
@@ -147,6 +153,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "b61d37ffb508e6538d1070d816a6e1f9b6c6a598d97dc3e3c51069d5a750efb6"
+  inputs-digest = "13e72a7b5329b2af53370e656e2051cbdfd680710e1233d0053107a3d34c0bab"
   solver-name = "gps-cdcl"
   solver-version = 1
