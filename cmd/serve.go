@@ -89,6 +89,7 @@ func ServeCmd() *cobra.Command {
 				beego.BConfig.RunMode = beego.DEV
 			}
 
+			beego.BConfig.CopyRequestBody = true
 			beego.Router("/", &api.ApiController{}, "get:DispatchRoot")
 			beego.Router("/scratch", &api.ApiController{}, "get:DispatchScratch")
 			beego.Router("/token", &api.ApiController{}, "get:DispatchToken")
