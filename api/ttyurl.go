@@ -77,13 +77,14 @@ func handleHttpTtyUrl(c *ApiController) {
 		return
 	}
 
+	sess.StackId = fmt.Sprintf("%v", m["stackid"])
 	sess.User = fmt.Sprintf("%v", m["user"])
 	sess.Ip = fmt.Sprintf("%v", m["ip"])
-	sess.StackId = fmt.Sprintf("%v", m["stackid"])
 	sess.Timeout = fmt.Sprintf("%v", m["timeout"])
 
+	flag := fmt.Sprintf("%v", m["flag"])
 	pemdir := os.TempDir() + "/sesha3/pem/"
-	pemfile := pemdir + sess.StackId + ".pem"
+	pemfile := pemdir + sess.StackId + "-" + flag + ".pem"
 	sess.PemFile = pemfile
 
 	// create the pem file only if not existent
