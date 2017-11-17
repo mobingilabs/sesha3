@@ -5,29 +5,23 @@ import (
 	"log"
 
 	"github.com/astaxie/beego"
-	"github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	uuid "github.com/satori/go.uuid"
 )
 
 type ApiController struct {
 	beego.Controller
-	skipPrepare bool
-	noAuth      bool
-	sessionId   string
+	noAuth    bool
+	sessionId string
 }
 
 func (c *ApiController) Prepare() {
-	if c.skipPrepare {
-		return
+	if c.sessionId == "" {
+		c.sessionId = fmt.Sprintf("{%s}", uuid.NewV4())
 	}
 
 	// do auth by default
 	if !c.noAuth {
-		debug.Info("base auth:")
-	}
-
-	if c.sessionId == "" {
-		c.sessionId = fmt.Sprintf("{%s}", uuid.NewV4())
+		c.info("base auth:")
 	}
 }
 

@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
-	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 )
@@ -26,15 +25,17 @@ func handleHttpToken(c *ApiController) {
 	ctx, err := jwt.NewCtx()
 	if err != nil {
 		c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
+		c.err(err)
 		return
 	}
 
 	var creds credentials
 
-	d.Info("body:", string(c.Ctx.Input.RequestBody))
+	c.info("body:", string(c.Ctx.Input.RequestBody))
 	err = json.Unmarshal(c.Ctx.Input.RequestBody, &creds)
 	if err != nil {
 		c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
+		c.err(err)
 		return
 	}
 
@@ -44,6 +45,7 @@ func handleHttpToken(c *ApiController) {
 	_, stoken, err := ctx.GenerateToken(m)
 	if err != nil {
 		c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
+		c.err(err)
 		return
 	}
 
