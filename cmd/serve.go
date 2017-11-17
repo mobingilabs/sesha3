@@ -82,17 +82,15 @@ func serve(cmd *cobra.Command, args []string) {
 		d.Error(err)
 	}
 
-	// redirect every http request to https
-	// go http.ListenAndServe(":80", http.HandlerFunc(redirect))
-	// everything else will be https
-
+	certfolder := "/etc/letsencrypt/live/" + util.Domain()
+	d.Info("certificate folder:", certfolder)
 	startm := "--- server start ---\n"
 	startm += "dns: " + util.GetPublicDns() + "\n"
 	startm += "ec2: " + params.Ec2Id + "\n"
 	startm += "syslog: " + fmt.Sprintf("%v", params.UseSyslog)
 	notify.HookPost(startm)
+	d.Info(startm)
 
-	certfolder := "/etc/letsencrypt/live/" + util.Domain()
 	router := mux.NewRouter()
 	router.HandleFunc("/", version).Methods(http.MethodGet)
 	router.HandleFunc("/version", version).Methods(http.MethodGet)
@@ -100,16 +98,9 @@ func serve(cmd *cobra.Command, args []string) {
 	router.HandleFunc("/ttyurl", ttyurl).Methods(http.MethodGet)
 	router.HandleFunc("/exec", execScript).Methods(http.MethodGet)
 	router.Handle("/debug/vars", metrics.MetricsHandler)
-	/*
-		err = http.ListenAndServeTLS(":"+params.Port,
-			certfolder+"/fullchain.pem",
-			certfolder+"/privkey.pem",
-			router)
-	*/
 
-	_ = certfolder
-	err = http.ListenAndServe(":8080", router)
-
+	// start our http server
+	err = http.ListenAndServe(":"+params.Port, router)
 	if err != nil {
 		notify.HookPost(errors.Wrap(err, "server failed, fatal"))
 		d.ErrorTraceExit(err, 1)
@@ -480,14 +471,4 @@ func version(w http.ResponseWriter, req *http.Request) {
 	metrics.MetricsCurrentConnection.Add(1)
 	defer metrics.MetricsCurrentConnection.Add(-1)
 	w.Write([]byte(`{"version":"v0.0.15-dev"}`))
-}
-
-func redirect(w http.ResponseWriter, req *http.Request) {
-	target := "https://" + req.Host + req.URL.Path
-	if len(req.URL.RawQuery) > 0 {
-		target += "?" + req.URL.RawQuery
-	}
-
-	d.Info("redirect to:", target)
-	http.Redirect(w, req, target, http.StatusMovedPermanently)
 }
