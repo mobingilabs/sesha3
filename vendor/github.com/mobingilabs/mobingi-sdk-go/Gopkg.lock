@@ -2,14 +2,38 @@
 
 
 [[projects]]
+  name = "github.com/Sirupsen/logrus"
+  packages = ["."]
+  revision = "f006c2ac4710855cf0f916dd6b77acf6b048dc6e"
+  version = "v1.0.3"
+
+[[projects]]
+  name = "github.com/aws/aws-sdk-go"
+  packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/shareddefaults","private/protocol","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/xml/xmlutil","service/sns","service/sqs","service/sts"]
+  revision = "a532359524fb25c60b6c938ec321b571adc857de"
+  version = "v1.12.28"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/creack/goselect"
+  packages = ["."]
+  revision = "1bd5ca702c6154bccc56ecd598932ee8b295cab2"
+
+[[projects]]
   name = "github.com/danieljoos/wincred"
   packages = ["."]
   revision = "412b574fb496839b312a75fba146bd32a89001cf"
   version = "v1.0.1"
 
 [[projects]]
+  name = "github.com/dgrijalva/jwt-go"
+  packages = ["."]
+  revision = "dbeaa9332f19a944acb5736b4456cfcc02140e29"
+  version = "v3.1.0"
+
+[[projects]]
   name = "github.com/docker/docker-credential-helpers"
-  packages = ["credentials","osxkeychain","secretservice","wincred"]
+  packages = ["credentials","osxkeychain","pass","wincred"]
   revision = "d68f9aeca33f5fd3f08eeae5e9d175edf4e731d1"
   version = "v0.6.0"
 
@@ -20,6 +44,23 @@
   version = "v1.5.0"
 
 [[projects]]
+  name = "github.com/go-ini/ini"
+  packages = ["."]
+  revision = "7e7da451323b6766da368f8a1e8ec9a88a16b4a0"
+  version = "v1.31.1"
+
+[[projects]]
+  name = "github.com/gorilla/websocket"
+  packages = ["."]
+  revision = "ea4d1f681babbce9545c9c5f3d5194a789c89f5b"
+  version = "v1.2.0"
+
+[[projects]]
+  name = "github.com/jmespath/go-jmespath"
+  packages = ["."]
+  revision = "0b12d6b5"
+
+[[projects]]
   name = "github.com/mattn/go-colorable"
   packages = ["."]
   revision = "167de6bfdfba052fa6b2d3664c8f5272e23c9072"
@@ -28,8 +69,14 @@
 [[projects]]
   name = "github.com/mattn/go-isatty"
   packages = ["."]
-  revision = "fc9e8d8ef48496124e79ae0df75490096eccf6fe"
-  version = "v0.0.2"
+  revision = "0360b2af4f38e8d38c7fce2a9f4e702702d73a39"
+  version = "v0.0.3"
+
+[[projects]]
+  name = "github.com/moul/gotty-client"
+  packages = ["."]
+  revision = "ab578adf867d36f760c949e8d54e31ce2a7f7464"
+  version = "v1.6.1"
 
 [[projects]]
   name = "github.com/pkg/errors"
@@ -41,13 +88,13 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
-  revision = "81e90905daefcd6fd217b62423c0908922eadb30"
+  revision = "9f005a07e0d31d45e6656d241bb5c0f2efd4bc94"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix","windows"]
-  revision = "a45f55524b7ec57890cfa6c6bc06b47f877be0d1"
+  revision = "bf42f188b9bc6f2cf5b8ee5a912ef1aedd0eba4c"
 
 [[projects]]
   branch = "v2"
@@ -58,6 +105,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "df9ab68939d712052c79864a5118a5ca37d6a42023bf4c143a95849f623a3ade"
+  inputs-digest = "aaa98a54f11cf55adc3086d18f098ad300f9e225fce37726401d67112efbf97f"
   solver-name = "gps-cdcl"
   solver-version = 1

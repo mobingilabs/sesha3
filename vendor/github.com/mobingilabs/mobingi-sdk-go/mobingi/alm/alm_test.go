@@ -12,6 +12,7 @@ import (
 	"testing"
 
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/session"
+	"github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 )
 
 func TestNew(t *testing.T) {
@@ -492,18 +493,76 @@ func TestCompareTemplateDevAcct(t *testing.T) {
 func TestGetPemDevAcct(t *testing.T) {
 	return
 	if os.Getenv("MOBINGI_CLIENT_ID") != "" && os.Getenv("MOBINGI_CLIENT_SECRET") != "" {
+		/*
+			sess, _ := session.New(&session.Config{
+				BaseApiUrl: "https://apidev.mobingi.com",
+				ApiVersion: 2,
+			})
+
+			alm := New(sess)
+			in := &GetPemInput{StackId: "mo-58c2297d25645-Sd2aHRDq0-tk"}
+			resp, body, pem, err := alm.GetPem(in)
+			if err != nil {
+				t.Errorf("Expecting nil error, received %v", err)
+			}
+		*/
+
 		sess, _ := session.New(&session.Config{
 			BaseApiUrl: "https://apidev.mobingi.com",
-			ApiVersion: 2,
 		})
 
 		alm := New(sess)
-		in := &GetPemInput{StackId: "mo-58c2297d25645-Sd2aHRDq0-tk"}
+		in := &GetPemInput{
+			StackId: "mo-58c2297d25645-HVhUlcmM-tk",
+			Flag:    "fweb",
+		}
+
 		resp, body, pem, err := alm.GetPem(in)
 		if err != nil {
 			t.Errorf("Expecting nil error, received %v", err)
 		}
 
+		// log.Println(resp, string(body), string(pem))
 		_, _, _ = resp, body, pem
+	}
+}
+
+func TestWalkerDevAcct(t *testing.T) {
+	return
+	if os.Getenv("MOBINGI_CLIENT_ID") != "" && os.Getenv("MOBINGI_CLIENT_SECRET") != "" {
+		sess, _ := session.New(&session.Config{
+			BaseApiUrl: "https://apidev.mobingi.com",
+		})
+
+		type data_t struct {
+			Data string
+		}
+
+		data := &data_t{
+			Data: "hello",
+		}
+
+		alm := New(sess)
+		in := WalkerCtx{
+			Data: data,
+			StackCallback: func(i int, data interface{}, body []byte, ls *ListStack) error {
+				_data := data.(*data_t)
+				if _data.Data != "hello" {
+					t.Error("should be hello")
+				}
+
+				debug.Info("stack-callback:", ls.StackId)
+				return nil
+			},
+			InstanceCallback: func(i int, data interface{}, body []byte, ls *ListStack, flag string, inst *Instance, err error) error {
+				debug.Info("instance-callback:", ls.StackId, inst.PublicDnsName)
+				return nil
+			},
+		}
+
+		err := alm.Walker(&in)
+		if err != nil {
+			t.Error(err)
+		}
 	}
 }

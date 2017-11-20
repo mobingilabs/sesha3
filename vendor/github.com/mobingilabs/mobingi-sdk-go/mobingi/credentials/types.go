@@ -10,6 +10,12 @@ import (
 	"golang.org/x/crypto/ssh/terminal"
 )
 
+type UserDetails struct {
+	UserId   string `json:"user_id,omitempty"`
+	Email    string `json:"email,omitempty"`
+	ApiToken string `json:"api_token,omitempty"`
+}
+
 type VendorCredentials struct {
 	Id           string `json:"id,omitempty"`
 	Account      string `json:"account,omitempty"`
@@ -20,6 +26,12 @@ type AWSCredentials struct {
 	Name   string `json:"AWSAccountName,omitempty"`
 	KeyId  string `json:"AWSSecretKey,omitempty"`
 	Secret string `json:"AWSSecretKeyId,omitempty"`
+}
+
+type AliCloudCredentials struct {
+	Name   string `json:"AliCloudAccountName,omitempty"`
+	KeyId  string `json:"AliCloudAccessKeyId,omitempty"`
+	Secret string `json:"AliCloudSecretKey,omitempty"`
 }
 
 type AddVendorCredentials struct {

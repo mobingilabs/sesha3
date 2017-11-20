@@ -4,14 +4,13 @@ os:
 language: go
 
 go:
-  - master
+  - 1.9.2
 
 script:
-  - go test -v $(go list ./... | grep -v /vendor/) -cover
   - go build -v
 
 before_deploy:
-  - tar cvzf app.tar.gz sesha3 appspec.yml supervisor.conf scripts/ tools/
+  - tar cvzf app.tar.gz sesha3 appspec.yml scripts/ tools/
   - mkdir -p dpl_cd_upload
   - cp app.tar.gz dpl_cd_upload/
 
@@ -25,17 +24,17 @@ deploy:
     on: &2
       repo: mobingilabs/sesha3
       branch: develop
-    bucket: sesha3-dev
+    bucket: sesha3
     upload_dir: latest
     region: ap-northeast-1
   - provider: codedeploy
     access_key_id: AKIAINLJDAMNCZZ5NRDA
     secret_access_key: *1
-    bucket: sesha3-dev
+    bucket: sesha3
     key: latest/app.tar.gz
     bundle_type: tgz
-    application: sesha3dev
-    deployment_group: sesha3dev-deploygroup
+    application: sesha3
+    deployment_group: sesha3dg
     region: ap-northeast-1
     on: *2
 

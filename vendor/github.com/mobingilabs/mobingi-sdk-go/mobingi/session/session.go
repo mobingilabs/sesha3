@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
 
@@ -14,12 +15,15 @@ import (
 const (
 	BASE_API_URL      = "https://api.mobingi.com"
 	BASE_REGISTRY_URL = "https://registry.mobingi.com"
+	SESHA3_URL        = "https://sesha3.demo.labs.mobingi.com"
 )
 
 type authPayload struct {
-	ClientId     string `json:"client_id,omitempty"`
-	ClientSecret string `json:"client_secret,omitempty"`
-	GrantType    string `json:"grant_type,omitempty"`
+	ClientId     string      `json:"client_id,omitempty"`
+	ClientSecret string      `json:"client_secret,omitempty"`
+	GrantType    string      `json:"grant_type,omitempty"`
+	Username     interface{} `json:"username,omitempty"`
+	Password     interface{} `json:"password,omitempty"`
 }
 
 type Config struct {
@@ -30,6 +34,14 @@ type Config struct {
 	// ClientSecret is your Mobingi client secret. If empty, it will look for
 	// MOBINGI_CLIENT_SECRET environment variable.
 	ClientSecret string
+
+	// Username is your Mobingi subuser name. If empty, it means the login grant
+	// type is 'client_credentials'.
+	Username string
+
+	// Password is your Mobingi subuser password. Cannot be empty when Username
+	// is not empty.
+	Password string
 
 	// AccessToken is your API access token. By default, session will get an
 	// access token based on ClientId and ClientSecret. If this is set however,
@@ -47,6 +59,9 @@ type Config struct {
 	// BaseRegistryUrl is the base URL for Mobingi Docker Registry. Default is the
 	// latest production endpoint.
 	BaseRegistryUrl string
+
+	// Sesha3Url is the base URL for sesha3. Default is the latest production endpoint.
+	Sesha3Url string
 
 	// HttpClientConfig will set the config for the session's http client. Do not
 	// set if you want to use http client defaults.
@@ -66,12 +81,42 @@ func (s *Session) RegistryEndpoint() string {
 	return fmt.Sprintf("%s/v2", s.Config.BaseRegistryUrl)
 }
 
+func (s *Session) Sesha3Endpoint() string {
+	return s.Config.Sesha3Url
+}
+
+func (s *Session) SimpleAuthRequest(m, u string, body io.Reader) *http.Request {
+	req, err := http.NewRequest(m, u, body)
+	if err != nil {
+		return nil
+	}
+
+	req.Header.Add("Authorization", "Bearer "+s.AccessToken)
+	return req
+}
+
 func (s *Session) getAccessToken() (string, error) {
 	var token string
-	p := authPayload{
-		ClientId:     s.Config.ClientId,
-		ClientSecret: s.Config.ClientSecret,
-		GrantType:    "client_credentials",
+	var p authPayload
+
+	if s.Config.Username != "" {
+		if s.Config.Password == "" {
+			return token, errors.New("password cannot be empty")
+		}
+
+		p = authPayload{
+			ClientId:     s.Config.ClientId,
+			ClientSecret: s.Config.ClientSecret,
+			GrantType:    "password",
+			Username:     s.Config.Username,
+			Password:     s.Config.Password,
+		}
+	} else {
+		p = authPayload{
+			ClientId:     s.Config.ClientId,
+			ClientSecret: s.Config.ClientSecret,
+			GrantType:    "client_credentials",
+		}
 	}
 
 	payload, err := json.Marshal(p)
@@ -84,7 +129,15 @@ func (s *Session) getAccessToken() (string, error) {
 	}
 
 	r.Header.Add("Content-Type", "application/json")
-	c := client.NewSimpleHttpClient()
+
+	var c client.HttpClient
+
+	if s.Config.HttpClientConfig != nil {
+		c = client.NewSimpleHttpClient(s.Config.HttpClientConfig)
+	} else {
+		c = client.NewSimpleHttpClient()
+	}
+
 	resp, body, err := c.Do(r)
 	if err != nil {
 		return token, errors.Wrap(err, "do failed")
@@ -112,9 +165,12 @@ func New(cnf ...*Config) (*Session, error) {
 	c := &Config{
 		ClientId:        os.Getenv("MOBINGI_CLIENT_ID"),
 		ClientSecret:    os.Getenv("MOBINGI_CLIENT_SECRET"),
+		Username:        os.Getenv("MOBINGI_USERNAME"),
+		Password:        os.Getenv("MOBINGI_PASSWORD"),
 		ApiVersion:      3,
 		BaseApiUrl:      BASE_API_URL,
 		BaseRegistryUrl: BASE_REGISTRY_URL,
+		Sesha3Url:       SESHA3_URL,
 	}
 
 	if len(cnf) > 0 {
@@ -131,6 +187,14 @@ func New(cnf ...*Config) (*Session, error) {
 				c.AccessToken = cnf[0].AccessToken
 			}
 
+			if cnf[0].Username != "" {
+				c.Username = cnf[0].Username
+			}
+
+			if cnf[0].Password != "" {
+				c.Password = cnf[0].Password
+			}
+
 			if cnf[0].ApiVersion > 0 {
 				c.ApiVersion = cnf[0].ApiVersion
 			}
@@ -141,6 +205,10 @@ func New(cnf ...*Config) (*Session, error) {
 
 			if cnf[0].BaseRegistryUrl != "" {
 				c.BaseRegistryUrl = cnf[0].BaseRegistryUrl
+			}
+
+			if cnf[0].Sesha3Url != "" {
+				c.Sesha3Url = cnf[0].Sesha3Url
 			}
 
 			if cnf[0].HttpClientConfig != nil {

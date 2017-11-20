@@ -2,12 +2,12 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/sesha3/
+    destination: /home/ec2-user/sesha3/
 permissions:
   - object: /
     pattern: "**"
-    owner: ubuntu
-    group: ubuntu
+    owner: ec2-user
+    group: ec2-user
 hooks:
   ApplicationStop:
     - location: scripts/application_stop.sh
@@ -15,7 +15,7 @@ hooks:
       runas: root
   BeforeInstall:
     - location: scripts/before_install.sh
-      timeout: 600
+      timeout: 300
       runas: root
   AfterInstall:
     - location: scripts/after_install.sh
@@ -27,5 +27,5 @@ hooks:
       runas: root
   ValidateService:
     - location: scripts/validate_service.sh
-      timeout: 10
+      timeout: 300
       runas: root

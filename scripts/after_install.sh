@@ -1,5 +1,3 @@
 #!/bin/bash
 
-cd /home/ubuntu/sesha3/
-# tar xvzf app.tar.gz
-ls -laF
+chmod 755 /home/ec2-user/sesha3/scripts/*

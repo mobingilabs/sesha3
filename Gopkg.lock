@@ -2,16 +2,40 @@
 
 
 [[projects]]
+  name = "github.com/Sirupsen/logrus"
+  packages = ["."]
+  revision = "f006c2ac4710855cf0f916dd6b77acf6b048dc6e"
+  version = "v1.0.3"
+
+[[projects]]
+  name = "github.com/astaxie/beego"
+  packages = [".","config","context","context/param","grace","logs","session","toolbox","utils"]
+  revision = "d96289a81bf67728cff7a19b067aaecc65a62ec6"
+  version = "v1.9.0"
+
+[[projects]]
   name = "github.com/aws/aws-sdk-go"
-  packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/shareddefaults","private/protocol","private/protocol/ec2query","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/restxml","private/protocol/xml/xmlutil","service/ec2","service/s3","service/s3/s3iface","service/s3/s3manager","service/sts"]
-  revision = "fa78289ae88a6b6a59e326885edc00612ed265f3"
-  version = "v1.10.40"
+  packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/shareddefaults","private/protocol","private/protocol/ec2query","private/protocol/json/jsonutil","private/protocol/jsonrpc","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/restxml","private/protocol/xml/xmlutil","service/cloudwatch","service/dynamodb","service/dynamodb/dynamodbattribute","service/dynamodb/dynamodbiface","service/ec2","service/route53","service/s3","service/s3/s3iface","service/s3/s3manager","service/sts"]
+  revision = "32f50a06b82225ea99d3c400c20cba02874f0db7"
+  version = "v1.12.29"
+
+[[projects]]
+  name = "github.com/cenkalti/backoff"
+  packages = ["."]
+  revision = "61153c768f31ee5f130071d08fc82b85208528de"
+  version = "v1.1.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/creack/goselect"
+  packages = ["."]
+  revision = "1bd5ca702c6154bccc56ecd598932ee8b295cab2"
 
 [[projects]]
   name = "github.com/dgrijalva/jwt-go"
   packages = ["."]
-  revision = "d2709f9f1f31ebcda9651b03077758c1f3a0018c"
-  version = "v3.0.0"
+  revision = "dbeaa9332f19a944acb5736b4456cfcc02140e29"
+  version = "v3.1.0"
 
 [[projects]]
   name = "github.com/fatih/color"
@@ -22,20 +46,20 @@
 [[projects]]
   name = "github.com/go-ini/ini"
   packages = ["."]
-  revision = "20b96f641a5ea98f2f8619ff4f3e061cff4833bd"
-  version = "v1.28.2"
+  revision = "7e7da451323b6766da368f8a1e8ec9a88a16b4a0"
+  version = "v1.31.1"
 
 [[projects]]
-  name = "github.com/gorilla/context"
+  name = "github.com/gorilla/websocket"
   packages = ["."]
-  revision = "1ea25387ff6f684839d82767c1733ff4d4d15d0a"
-  version = "v1.1"
+  revision = "ea4d1f681babbce9545c9c5f3d5194a789c89f5b"
+  version = "v1.2.0"
 
 [[projects]]
-  name = "github.com/gorilla/mux"
-  packages = ["."]
-  revision = "bcd8bc72b08df0f70df986b97f95590779502d31"
-  version = "v1.4.0"
+  branch = "master"
+  name = "github.com/guregu/dynamo"
+  packages = [".","internal/exprs"]
+  revision = "5ce9d5f89a6fc08b0f00d97722fe7bc56861ed68"
 
 [[projects]]
   name = "github.com/inconshreveable/mousetrap"
@@ -46,8 +70,7 @@
 [[projects]]
   name = "github.com/jmespath/go-jmespath"
   packages = ["."]
-  revision = "3433f3ea46d9f8019119e7dd41274e112a2359a9"
-  version = "0.2.2"
+  revision = "0b12d6b5"
 
 [[projects]]
   name = "github.com/mattn/go-colorable"
@@ -58,14 +81,20 @@
 [[projects]]
   name = "github.com/mattn/go-isatty"
   packages = ["."]
-  revision = "fc9e8d8ef48496124e79ae0df75490096eccf6fe"
-  version = "v0.0.2"
+  revision = "0360b2af4f38e8d38c7fce2a9f4e702702d73a39"
+  version = "v0.0.3"
 
 [[projects]]
-  branch = "master"
   name = "github.com/mobingilabs/mobingi-sdk-go"
-  packages = ["mobingi/sesha3","pkg/cmdline","pkg/debug","pkg/private"]
-  revision = "7d9f9511a063554da3d8f342ec4926b33be500e8"
+  packages = ["client","mobingi/alm","mobingi/credentials","mobingi/sesha3","mobingi/session","pkg/cmdline","pkg/debug","pkg/jwt","pkg/notification","pkg/private"]
+  revision = "a76f28bf6d41283b2ba5ea07affff9c2d74aed93"
+  version = "v0.1.27"
+
+[[projects]]
+  name = "github.com/moul/gotty-client"
+  packages = ["."]
+  revision = "ab578adf867d36f760c949e8d54e31ce2a7f7464"
+  version = "v1.6.1"
 
 [[projects]]
   name = "github.com/pkg/errors"
@@ -74,10 +103,16 @@
   version = "v0.8.0"
 
 [[projects]]
+  name = "github.com/satori/go.uuid"
+  packages = ["."]
+  revision = "879c5887cd475cd7864858769793b2ceb0d44feb"
+  version = "v1.1.0"
+
+[[projects]]
   branch = "master"
   name = "github.com/spf13/cobra"
   packages = ["."]
-  revision = "b78744579491c1ceeaaa3b40205e56b0591b93a3"
+  revision = "d6948b782c9f4799ea3cd225f6de4131c29c243a"
 
 [[projects]]
   name = "github.com/spf13/pflag"
@@ -87,13 +122,25 @@
 
 [[projects]]
   branch = "master"
+  name = "golang.org/x/crypto"
+  packages = ["ssh/terminal"]
+  revision = "9f005a07e0d31d45e6656d241bb5c0f2efd4bc94"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/net"
+  packages = ["context"]
+  revision = "9dfe39835686865bff950a07b394c12a98ddc811"
+
+[[projects]]
+  branch = "master"
   name = "golang.org/x/sys"
-  packages = ["unix"]
-  revision = "a45f55524b7ec57890cfa6c6bc06b47f877be0d1"
+  packages = ["unix","windows"]
+  revision = "0dd5e194bbf5eb84a39666eb4c98a4d007e4203a"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "15554eda479385a5aadcc320edc56badfdb7b3ce89545172420a34ea2e4a1430"
+  inputs-digest = "81be1194cfd5f52c7782d70cbecea2988d03d2fa17f71cdab3a812941842afe3"
   solver-name = "gps-cdcl"
   solver-version = 1
