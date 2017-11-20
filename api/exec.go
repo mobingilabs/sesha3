@@ -144,5 +144,6 @@ func handleHttpExec(c *ApiController) {
 	}
 
 	c.Data["json"] = sout
+	c.Ctx.Output.Header("Access-Control-Allow-Origin", "*")
 	c.ServeJSON()
 }

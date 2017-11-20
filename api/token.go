@@ -55,5 +55,6 @@ func handleHttpToken(c *ApiController) {
 	reply := make(map[string]string)
 	reply["key"] = stoken
 	c.Data["json"] = reply
+	c.Ctx.Output.Header("Access-Control-Allow-Origin", "*")
 	c.ServeJSON()
 }
