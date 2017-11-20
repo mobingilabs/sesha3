@@ -82,20 +82,22 @@ func ServeCmd() *cobra.Command {
 			// needed for http input body in request to be available for non-get and head reqs
 			beego.BConfig.CopyRequestBody = true
 
-			// try enable cors
-			beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
-				AllowAllOrigins: true,
-				AllowMethods:    []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-				AllowHeaders:    []string{"Origin", "Authorization", "Access-Control-Allow-Origin"},
-				ExposeHeaders:   []string{"Content-Length", "Access-Control-Allow-Origin"},
-			}))
-
 			beego.Router("/", &api.ApiController{}, "get:DispatchRoot")
 			beego.Router("/scratch", &api.ApiController{}, "get:DispatchScratch")
 			beego.Router("/token", &api.ApiController{}, "post:DispatchToken")
 			beego.Router("/ttyurl", &api.ApiController{}, "post:DispatchTtyUrl")
 			beego.Router("/exec", &api.ApiController{}, "post:DispatchExec")
 			beego.Handler("/debug/vars", metrics.MetricsHandler)
+
+			// try enable cors
+			beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
+				AllowAllOrigins:  true,
+				AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+				AllowHeaders:     []string{"Origin", "Authorization", "Access-Control-Allow-Origin"},
+				ExposeHeaders:    []string{"Content-Length", "Access-Control-Allow-Origin"},
+				AllowCredentials: true,
+			}))
+
 			beego.Run(":" + params.Port)
 		},
 	}

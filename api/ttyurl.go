@@ -165,6 +165,5 @@ func handleHttpTtyUrl(c *ApiController) {
 	reply := make(map[string]string)
 	reply["tty_url"] = fullurl
 	c.Data["json"] = reply
-	c.Ctx.Output.Header("Access-Control-Allow-Origin", "*")
 	c.ServeJSON()
 }
