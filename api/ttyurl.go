@@ -81,6 +81,7 @@ func handleHttpTtyUrl(c *ApiController) {
 	sess.User = fmt.Sprintf("%v", m["user"])
 	sess.Ip = fmt.Sprintf("%v", m["ip"])
 	sess.Timeout = fmt.Sprintf("%v", m["timeout"])
+	sess.Timeout = "120"
 
 	flag := fmt.Sprintf("%v", m["flag"])
 	pemdir := os.TempDir() + "/sesha3/pem/"
