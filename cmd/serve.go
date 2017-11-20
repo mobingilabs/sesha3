@@ -93,7 +93,7 @@ func ServeCmd() *cobra.Command {
 			beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
 				AllowAllOrigins:  true,
 				AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-				AllowHeaders:     []string{"Origin", "Authorization", "Access-Control-Allow-Origin"},
+				AllowHeaders:     []string{"Origin", "Authorization", "Access-Control-Allow-Origin", "Content-Type"},
 				ExposeHeaders:    []string{"Content-Length", "Access-Control-Allow-Origin"},
 				AllowCredentials: true,
 			}))
