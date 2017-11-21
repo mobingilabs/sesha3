@@ -91,14 +91,17 @@ func (s *SecurityGroupRequest) ClosePort() error {
 
 func Make(profilename string, awsRegion string, instanceID string) SecurityGroupRequest {
 	req := SecurityGroupRequest{
-		Sess:       session.Must(session.NewSession()),
-		Cred:       credentials.NewSharedCredentials("/root/.aws/credentials", profilename),
+		// Sess:       session.Must(session.NewSession()),
+		Sess: session.Must(session.NewSessionWithOptions(session.Options{
+			SharedConfigState: session.SharedConfigDisable,
+		})),
+		// Cred:       credentials.NewSharedCredentials("/root/.aws/credentials", profilename),
 		InstanceID: instanceID,
 	}
 
 	req.Ec2client = ec2.New(req.Sess, &aws.Config{
-		Credentials: req.Cred,
-		Region:      aws.String(awsRegion),
+		// Credentials: req.Cred,
+		Region: aws.String(awsRegion),
 	})
 
 	req.SecurityInfoSet()
@@ -137,11 +140,14 @@ func Download(awsRegion string, profilename string) error {
 	filename := []string{"fullchain.pem", "privkey.pem"}
 	bucket := "sesha3"
 
-	sess := session.Must(session.NewSession())
-	cred := credentials.NewSharedCredentials("/root/.aws/credentials", profilename)
+	sess := session.Must(session.NewSessionWithOptions(session.Options{
+		SharedConfigState: session.SharedConfigDisable,
+	}))
+
+	// cred := credentials.NewSharedCredentials("/root/.aws/credentials", profilename)
 	svc := s3.New(sess, &aws.Config{
-		Credentials: cred,
-		Region:      aws.String(awsRegion),
+		// Credentials: cred,
+		Region: aws.String(awsRegion),
 	})
 
 	downloader := s3manager.NewDownloaderWithClient(svc)

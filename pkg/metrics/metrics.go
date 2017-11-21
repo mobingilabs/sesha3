@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"
 	as "github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
@@ -55,10 +54,14 @@ func (n *HttpMetrics) MetricsInit() {
 }
 
 func (n *HttpMetrics) postMetrics() {
-	cred := credentials.NewSharedCredentials("/root/.aws/credentials", n.credprof)
-	cli := cloudwatch.New(as.New(), &aws.Config{
-		Region:      aws.String(n.region),
-		Credentials: cred,
+	// cred := credentials.NewSharedCredentials("/root/.aws/credentials", n.credprof)
+	sess := as.Must(as.NewSessionWithOptions(as.Options{
+		SharedConfigState: as.SharedConfigDisable,
+	}))
+
+	cli := cloudwatch.New(sess, &aws.Config{
+		Region: aws.String(n.region),
+		// Credentials: cred,
 	})
 
 	go func() {

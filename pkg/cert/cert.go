@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/route53"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
@@ -38,11 +37,14 @@ func AddLocalUrlToRoute53(wait bool) (string, error) {
 		return domain, nil
 	}
 
-	sess := session.Must(session.NewSession())
-	cred := credentials.NewSharedCredentials("/root/.aws/credentials", params.CredProfile)
+	sess := session.Must(session.NewSessionWithOptions(session.Options{
+		SharedConfigState: session.SharedConfigDisable,
+	}))
+
+	// cred := credentials.NewSharedCredentials("/root/.aws/credentials", params.CredProfile)
 	svc := route53.New(sess, &aws.Config{
-		Credentials: cred,
-		Region:      aws.String(params.Region),
+		// Credentials: cred,
+		Region: aws.String(params.Region),
 	})
 
 	r53p := &route53.ChangeResourceRecordSetsInput{
