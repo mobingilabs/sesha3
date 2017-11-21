@@ -72,14 +72,12 @@ func (s *Session) Start() (string, error) {
 		metrics.MetricsCurrentConnection.Add(1)
 		defer metrics.MetricsCurrentConnection.Add(-1)
 
-		d.Info("simulate port open")
-		/*
-			err := ec2req.OpenPort()
-			if err != nil {
-				notify.HookPost(err)
-				s.error(errors.Wrap(err, "open port failed"))
-			}
-		*/
+		// make sure to open port first
+		err := ec2req.OpenPort()
+		if err != nil {
+			notify.HookPost(err)
+			s.error(errors.Wrap(err, "open port failed"))
+		}
 
 		svrtool := cmdline.Dir() + "/tools/" + runtime.GOOS + "/gotty"
 		certpath := "/etc/letsencrypt/live/" + util.Domain()
