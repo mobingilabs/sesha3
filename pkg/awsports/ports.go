@@ -66,6 +66,8 @@ func (s *SecurityGroupRequest) OpenedList() {
 	for _, i := range secinfo.SecurityGroups[0].IpPermissions {
 		s.OpenPortList = append(s.OpenPortList, *i.FromPort)
 	}
+
+	d.Info("openlist:", s.OpenPortList)
 }
 
 func (s *SecurityGroupRequest) OpenPort() error {
