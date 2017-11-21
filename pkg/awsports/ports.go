@@ -31,7 +31,6 @@ type SecurityGroupRequest struct {
 }
 
 func (s *SecurityGroupRequest) CreateRequest() {
-	//goroupid
 	s.DescribeSecurityGroupsInput = &ec2.DescribeSecurityGroupsInput{GroupIds: []*string{aws.String(s.SecurityID)}}
 	s.AuthorizeSecurityGroupIngressInput = &ec2.AuthorizeSecurityGroupIngressInput{GroupId: aws.String(s.SecurityID)}
 	s.RevokeSecurityGroupIngressInput = &ec2.RevokeSecurityGroupIngressInput{GroupId: aws.String(s.SecurityID)}
@@ -44,6 +43,7 @@ func (s *SecurityGroupRequest) CreatePortRequest() {
 		IpRanges:   iprange,
 		ToPort:     aws.Int64(s.RequestPort),
 	}
+
 	s.AuthorizeSecurityGroupIngressInput.IpPermissions = []*ec2.IpPermission{permission}
 	s.RevokeSecurityGroupIngressInput.IpPermissions = []*ec2.IpPermission{permission}
 }
@@ -54,6 +54,7 @@ func (s *SecurityGroupRequest) SecurityInfoSet() {
 		Attribute:  aws.String("groupSet"),
 		InstanceId: aws.String(s.InstanceID),
 	}
+
 	group, _ := svc.DescribeInstanceAttribute(input)
 	s.SecurityID = *group.Groups[0].GroupId
 	s.CreateRequest()

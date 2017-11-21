@@ -58,11 +58,14 @@ func (s *Session) Start() (string, error) {
 
 	// port closer function
 	fnClosePort := func() {
-		err := ec2req.ClosePort()
-		if err != nil {
-			notify.HookPost(err)
-			s.error(errors.Wrap(err, "close port failed"))
-		}
+		d.Info("simulate port close")
+		/*
+			err := ec2req.ClosePort()
+			if err != nil {
+				notify.HookPost(err)
+				s.error(errors.Wrap(err, "close port failed"))
+			}
+		*/
 	}
 
 	go func() {
