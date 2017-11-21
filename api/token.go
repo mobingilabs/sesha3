@@ -52,6 +52,7 @@ func handleHttpToken(c *ApiController) {
 	end := time.Now()
 	metrics.MetricsTokenResponseTime.Set(end.Sub(start).String())
 
+	c.info("token:", stoken)
 	reply := make(map[string]string)
 	reply["key"] = stoken
 	c.Data["json"] = reply

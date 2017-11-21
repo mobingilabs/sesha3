@@ -33,6 +33,7 @@ func handleHttpTtyUrl(c *ApiController) {
 	var m map[string]interface{}
 
 	auth := strings.Split(c.Ctx.Request.Header.Get("Authorization"), " ")
+	c.info("auth-hdr:", auth)
 	if len(auth) != 2 {
 		c.Ctx.ResponseWriter.WriteHeader(401)
 		return
