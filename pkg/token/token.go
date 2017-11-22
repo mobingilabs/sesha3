@@ -13,7 +13,7 @@ type event struct {
 	Status   string `dynamo:"status"`
 }
 
-func CheckToken(credential string, region string, token_user string, token_pass string) (bool, error) {
+func CheckToken(region string, token_user string, token_pass string) (bool, error) {
 	sess := as.Must(as.NewSessionWithOptions(as.Options{
 		SharedConfigState: as.SharedConfigDisable,
 	}))

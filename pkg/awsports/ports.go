@@ -92,7 +92,7 @@ func (s *SecurityGroupRequest) ClosePort() error {
 	return nil
 }
 
-func Make(profilename string, awsRegion string, instanceID string) SecurityGroupRequest {
+func Make(awsRegion string, instanceID string) SecurityGroupRequest {
 	req := SecurityGroupRequest{
 		Sess: session.Must(session.NewSessionWithOptions(session.Options{
 			SharedConfigState: session.SharedConfigDisable,

@@ -10,7 +10,7 @@ import (
 	"github.com/guregu/dynamo"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/notification"
-	"github.com/mobingilabs/sesha3/pkg/params"
+	"github.com/mobingilabs/sesha3/pkg/util"
 	"github.com/pkg/errors"
 )
 
@@ -20,15 +20,13 @@ type EventN struct {
 }
 
 type HttpNotifier struct {
-	region    string
-	credprof  string
 	notifiers []notification.Notifier
+	region    string
 	valid     bool
 }
 
 func (n *HttpNotifier) Init(eps []string) error {
-	n.region = params.Region
-	n.credprof = params.CredProfile
+	n.region = util.GetRegion()
 	n.notifiers = make([]notification.Notifier, 0)
 
 	// iterate endpoints

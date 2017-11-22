@@ -16,9 +16,9 @@ import (
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
-	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/mobingilabs/sesha3/pkg/session"
 	"github.com/mobingilabs/sesha3/pkg/token"
+	"github.com/mobingilabs/sesha3/pkg/util"
 	"github.com/pkg/errors"
 )
 
@@ -62,7 +62,7 @@ func handleHttpTtyUrl(c *ApiController) {
 	d.Info("user:", u)
 
 	md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
-	ok, err := token.CheckToken(params.CredProfile, params.Region, fmt.Sprintf("%s", u), md5p)
+	ok, err := token.CheckToken(util.GetRegion(), fmt.Sprintf("%s", u), md5p)
 	if !ok {
 		c.Ctx.ResponseWriter.WriteHeader(401)
 		d.Error(errors.Wrap(err, "check token not ok"))

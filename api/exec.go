@@ -15,8 +15,8 @@ import (
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/pkg/execute"
 	"github.com/mobingilabs/sesha3/pkg/notify"
-	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/mobingilabs/sesha3/pkg/token"
+	"github.com/mobingilabs/sesha3/pkg/util"
 )
 
 func handleHttpExec(c *ApiController) {
@@ -55,7 +55,7 @@ func handleHttpExec(c *ApiController) {
 	p, _ := nc.Data["password"]
 	d.Info("user:", u)
 	md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
-	ok, err := token.CheckToken(params.CredProfile, params.Region, fmt.Sprintf("%s", u), md5p)
+	ok, err := token.CheckToken(util.GetRegion(), fmt.Sprintf("%s", u), md5p)
 	if !ok {
 		c.Ctx.ResponseWriter.WriteHeader(401)
 		return

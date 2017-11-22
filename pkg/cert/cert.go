@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go/service/route53"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/pkg/notify"
-	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/mobingilabs/sesha3/pkg/util"
 	"github.com/pkg/errors"
 )
@@ -42,7 +41,7 @@ func AddLocalUrlToRoute53(wait bool) (string, error) {
 	}))
 
 	svc := route53.New(sess, &aws.Config{
-		Region: aws.String(params.Region),
+		Region: aws.String(util.GetRegion()),
 	})
 
 	r53p := &route53.ChangeResourceRecordSetsInput{
