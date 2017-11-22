@@ -41,9 +41,7 @@ func AddLocalUrlToRoute53(wait bool) (string, error) {
 		SharedConfigState: session.SharedConfigDisable,
 	}))
 
-	// cred := credentials.NewSharedCredentials("/root/.aws/credentials", params.CredProfile)
 	svc := route53.New(sess, &aws.Config{
-		// Credentials: cred,
 		Region: aws.String(params.Region),
 	})
 

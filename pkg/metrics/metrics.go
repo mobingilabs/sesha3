@@ -54,14 +54,12 @@ func (n *HttpMetrics) MetricsInit() {
 }
 
 func (n *HttpMetrics) postMetrics() {
-	// cred := credentials.NewSharedCredentials("/root/.aws/credentials", n.credprof)
 	sess := as.Must(as.NewSessionWithOptions(as.Options{
 		SharedConfigState: as.SharedConfigDisable,
 	}))
 
 	cli := cloudwatch.New(sess, &aws.Config{
 		Region: aws.String(n.region),
-		// Credentials: cred,
 	})
 
 	go func() {

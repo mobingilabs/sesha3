@@ -73,7 +73,7 @@ func ServeCmd() *cobra.Command {
 			startm += "syslog: " + fmt.Sprintf("%v", params.UseSyslog)
 			notify.HookPost(startm)
 
-			beego.BConfig.ServerName = "sesha3:1.0.0"
+			beego.BConfig.ServerName = "mobingi:sesha3:1.0.0"
 			beego.BConfig.RunMode = beego.PROD
 			if params.IsDev {
 				beego.BConfig.RunMode = beego.DEV

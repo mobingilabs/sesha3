@@ -94,23 +94,19 @@ func (s *SecurityGroupRequest) ClosePort() error {
 
 func Make(profilename string, awsRegion string, instanceID string) SecurityGroupRequest {
 	req := SecurityGroupRequest{
-		// Sess:       session.Must(session.NewSession()),
 		Sess: session.Must(session.NewSessionWithOptions(session.Options{
 			SharedConfigState: session.SharedConfigDisable,
 		})),
-		// Cred:       credentials.NewSharedCredentials("/root/.aws/credentials", profilename),
 		InstanceID: instanceID,
 	}
 
 	req.Ec2client = ec2.New(req.Sess, &aws.Config{
-		// Credentials: req.Cred,
 		Region: aws.String(awsRegion),
 	})
 
 	req.SecurityInfoSet()
 	req.OpenedList()
 	port, _ := private.GetFreePort()
-	// req.RequestPort = req.random(1024, 65535)
 	req.RequestPort = int64(port)
 	req.CreatePortRequest()
 	return req
@@ -125,6 +121,7 @@ func (s *SecurityGroupRequest) random(min int64, max int64) int64 {
 	} else if contains(current, ret) {
 		ret = s.random(min, max)
 	}
+
 	return ret
 }
 
@@ -134,10 +131,9 @@ func contains(list []int64, obj int64) bool {
 			return true
 		}
 	}
+
 	return false
 }
-
-//s3
 
 func Download(awsRegion string, profilename string) error {
 	filename := []string{"fullchain.pem", "privkey.pem"}
@@ -147,9 +143,7 @@ func Download(awsRegion string, profilename string) error {
 		SharedConfigState: session.SharedConfigDisable,
 	}))
 
-	// cred := credentials.NewSharedCredentials("/root/.aws/credentials", profilename)
 	svc := s3.New(sess, &aws.Config{
-		// Credentials: cred,
 		Region: aws.String(awsRegion),
 	})
 
@@ -176,22 +170,3 @@ func Download(awsRegion string, profilename string) error {
 
 	return nil
 }
-
-//example code
-//func main() {
-//
-//	const (
-//		profilename  = "mobingi-yuto"
-//		awsRegion    = "ap-northeast-1"
-//		testinstance = "i-09094885155fee296"
-//	)
-//	req := Make(profilename, awsRegion, testinstance)
-//	req.OpenedList()
-//	fmt.Println(req.OpenPortList)
-//	req.Openport()
-//	req.OpenedList()
-//	fmt.Println(req.OpenPortList)
-//	req.Closeport()
-//	req.OpenedList()
-//	fmt.Println(req.OpenPortList)
-//}

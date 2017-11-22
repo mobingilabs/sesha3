@@ -60,14 +60,12 @@ func (n *HttpNotifier) Init(eps []string) error {
 func (n *HttpNotifier) getSlackUrl() (EventN, error) {
 	serverName := "sesha3"
 	var results []EventN
-	// cred := credentials.NewSharedCredentials("/root/.aws/credentials", n.credprof)
 	sess := as.Must(as.NewSessionWithOptions(as.Options{
 		SharedConfigState: as.SharedConfigDisable,
 	}))
 
 	db := dynamo.New(sess, &aws.Config{
 		Region: aws.String(n.region),
-		// Credentials: cred,
 	})
 
 	table := db.Table("SESHA3")
