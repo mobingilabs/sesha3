@@ -43,6 +43,7 @@ func AddLocalUrlToRoute53(wait bool) (string, error) {
 	var svc *route53.Route53
 
 	if params.IsDev {
+		// use ec2 role for credentials
 		sess = session.Must(session.NewSessionWithOptions(session.Options{
 			SharedConfigState: session.SharedConfigDisable,
 		}))
@@ -51,14 +52,13 @@ func AddLocalUrlToRoute53(wait bool) (string, error) {
 			Region: aws.String(util.GetRegion()),
 		})
 	} else {
+		// use the root credential file which is a different aws acct
 		sess = session.Must(session.NewSession())
-		cred := credentials.NewSharedCredentials(
-			"/root/.aws/credentials",
-			constants.SESHA3_ROUTE53_IAMPROFILE)
-
 		svc = route53.New(sess, &aws.Config{
-			Credentials: cred,
-			Region:      aws.String(util.GetRegion()),
+			Credentials: credentials.NewSharedCredentials(
+				constants.ROOT_AWS_CRED_FILE,
+				constants.SESHA3_ROUTE53_IAMPROFILE),
+			Region: aws.String(util.GetRegion()),
 		})
 	}
 
