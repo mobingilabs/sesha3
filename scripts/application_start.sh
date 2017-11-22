@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # append our [program] to supervisor if not present
-grep -q -F '[program:sesha3]' /etc/supervisord.conf || \
+grep -q -F 'sesha3' /etc/supervisord.conf || \
     echo '' >> /etc/supervisord.conf && \
     echo '[program:sesha3]' >> /etc/supervisord.conf && \
     echo 'command=/home/ec2-user/sesha3/sesha3 serve --syslog --rundev' >> /etc/supervisord.conf && \
