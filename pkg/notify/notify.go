@@ -85,12 +85,12 @@ func (n *HttpNotifier) Notify(v interface{}) error {
 	}
 
 	var str string
-	str = time.Now().Format(time.RFC1123) + "\n"
+	str = time.Now().Format(time.RFC1123)
 
 	if params.IsDev {
-		str += "[" + n.instanceId + "]" + "[dev]\n"
+		str += " [" + n.instanceId + "]" + " [dev]\n"
 	} else {
-		str += "[" + n.instanceId + "]" + "[prod]\n"
+		str += " [" + n.instanceId + "]" + " [prod]\n"
 	}
 
 	switch v.(type) {
