@@ -20,6 +20,7 @@ before_deploy:
   - cp app.tar.gz dpl_cd_upload/
 
 deploy:
+  # development
   - provider: s3
     access_key_id: AKIAJCZ3WU4AKS6RPDRQ
     secret_access_key: &1
@@ -42,6 +43,29 @@ deploy:
     deployment_group: sesha3dg
     region: ap-northeast-1
     on: *2
+  # production
+  - provider: s3
+    access_key_id: AKIAIUUY23XMIZV4THCA
+    secret_access_key: &3
+      secure: cfCSAHhVPA8kwfCDZNquujAe+zMJ2sTiWSIMY6YnmoNnaAx7+KI3wZcLeNmn9Mmmtwb7I+96xXfNDizgb/PDS9bN0zfOUTqNpvtuyYQNc7/718DYQPeBXpsGr16NTFXX/iTx3ABW5BMM0FUhAN4j1i5Mg2/GfD/tYxzcNfinMmkNLI7ISzM1CyXLME+wFiqRHEb1q4C8B07Pl5FRB7BlQevmVeugWA6qthpTVndUvRuHEf0Dm0e9oRovyOPl3O0KGWPG2FW0SFnRkN8VAdZ8cL7FoxN7OS0z/Hbn7C3rmCV0AKUHyOR3iCrxCO5DGWNdg/PYrdnlwJh1b0+UB8VNaK02qMGTOJvAnIj+381hU9fgwHpjPmpmOkI4PfsqBuA7sZW4h/yRxsC8vfu8hEH6BdDFiwF8f5H/I7ThG2JywFD8xkqVPaYZlvIQjjPm4xqWdMUYceRnm4ZFr3m00o2BvLS4nzdo4CTJTfB20c+JL/xQYvHoWJ/Ef0XUBPFAlsu01xxvlf+oeq/0MOmm6isg2o5Q8420rP9aCfYqm4vduVfb8vNoBS7IzKytjL3NO/DcQum/+JmeQfI8jliPq/qYuN1KkVWD3kHQnfhfx8xLXLXOhmWRGMw0HUwhhsu42jsLO4fMvARrt6adhbxsy4GfZE3sjaiMIQB22HahVbMLU+M=
+    local_dir: dpl_cd_upload
+    skip_cleanup: true
+    on: &4
+      repo: mobingilabs/sesha3
+      branch: production
+    bucket: sesha3-prod
+    upload_dir: latest
+    region: ap-northeast-1
+  - provider: codedeploy
+    access_key_id: AKIAIUUY23XMIZV4THCA
+    secret_access_key: *3
+    bucket: sesha3-prod
+    key: latest/app.tar.gz
+    bundle_type: tgz
+    application: sesha3
+    deployment_group: sesha3dg
+    region: ap-northeast-1
+    on: *4
 
 notifications:
   slack:
