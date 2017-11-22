@@ -8,17 +8,22 @@ go:
 
 script:
   - go build -v
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+      echo 'command=/home/ec2-user/sesha3/sesha3 serve --syslog' > cmdline;
+    else
+      echo 'command=/home/ec2-user/sesha3/sesha3 serve --syslog --rundev' > cmdline;
+    fi
 
 before_deploy:
-  - tar cvzf app.tar.gz sesha3 appspec.yml scripts/ tools/
+  - tar cvzf app.tar.gz sesha3 cmdline appspec.yml scripts/ tools/
   - mkdir -p dpl_cd_upload
   - cp app.tar.gz dpl_cd_upload/
 
 deploy:
   - provider: s3
-    access_key_id: AKIAINLJDAMNCZZ5NRDA
+    access_key_id: AKIAJCZ3WU4AKS6RPDRQ
     secret_access_key: &1
-      secure: rHgRElkx4z1Ne4KvrHvsx8nWK/jiF/xfvYfwtXm3pWgxQLpt6ansHcjM93JDr1AxywmtgkMmjzxN4w1T85dHASZFt06llbdwNUDcAn1ZsmAg0U+vDrF/OrISAdLyeunM7WLMFAqlwyU+Iu0jVdtFv7dDbn85ZGQs5R03XDO5dD3rrOmdr6PfRQZlPXeCttPf0VsNwqO75lIb0shxzdCcJUUwIkA2IICpBWWHbqBqcmH5eqDF4kGGPFR4/4uuw5SW9VyXTUOEaQeKxOv6wJcBDTEc8CD9gyYnbaku6JCUJE3L8PgatjJzslefjdPvDjVDVMdgByJy+1ijAnzCeZ6E7eGltDbTPIl9c+cir/dNG0y0z0Bsl6oJV8al40dyDOfU0J23zT+/gmK+SP5sXMl8Wnhq6EO9z9wvcwnNnDdNf2Vpcl834PWJTCtYmhrWBxPoBykKiZQEJTGDVqrdEZpNtui7Yy08Wk+q/o7ueVht3wQuXQDNPYHrUttQDDAyNYo/4hY47atUasnWKs/PRA9C1cuq5wOeu1Ns/dA7sZVLqJzeBnf1Y/QkSHC7psMEqxLgCiIpGnis4Ywt9fH8U4xhQ8H1NJ262T8PbjXjJQkHOGezbKHLXE2rogGYVXGL7IRXY7O3k8CHGaZoWGJAV+MyMxzRciIT1aHvXH2s35ud/Fk=
+      secure: iLtp/o0lBwHSwpbFXHB7CAmlKzFH5RvO93h7csTlbx2qy+1wDTXyDgbwoZ3igP23S3TZNNVA9gbv4oPZT+7eCK5ofRjZc6j78oZ38tUA+w41oIb2UaSw7/n0IXKQBYOz/5GlYfqweKG9xeNlhYtnsKjLq/cJE/vD35Mz1ffjxL7cymx4shx0apBYZsUWDMMhIyNhdj4xR4r6jjV0b3Ta6Na7K2k3CgtITsoqYxN3jPHPd0oJz28ePkKi0yDlHXaUge6aDzgM7lQf1L2tfFkzKrxuKSz66vyFrIHXNvsfno6Kr2AqqXaoYbykv9osnsRk30VdXT/zQj3UZMEqqnXASTkqcB34PBWJzmJKmcYIqophe3ZVnwW5dPRTRS4mwqQy+oYRj9hy5tjCf8/FLorAXZKHKyc8fElvig/FwQYU9JNqQgt3RVH4XxkDal1vmjoZ6AFUPNbYodPujkqWOSvtI7QmET95tFWxNyv1xJOvi8SDlhWnGKxp3LRTb7TeCQzJHFObl/Lr/FHjwQ4TKE63FhkRXVQKNVyvbWAV+rB5K9BSaA6wq7iEbrHpOF3mg6upQMSbKOe1xWHZAcUJzSuA5Ex9igOy4R3OnTHNlwlyTPDaUL2J8iaXpOnv1VidkRHaeZYHoDkWfuWy5dMAqTQunxCAM4p4XrtfiUKGP5uxuzA=
     local_dir: dpl_cd_upload
     skip_cleanup: true
     on: &2
@@ -28,7 +33,7 @@ deploy:
     upload_dir: latest
     region: ap-northeast-1
   - provider: codedeploy
-    access_key_id: AKIAINLJDAMNCZZ5NRDA
+    access_key_id: AKIAJCZ3WU4AKS6RPDRQ
     secret_access_key: *1
     bucket: sesha3
     key: latest/app.tar.gz

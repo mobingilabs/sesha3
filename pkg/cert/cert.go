@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/route53"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
+	"github.com/mobingilabs/sesha3/pkg/constants"
 	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/mobingilabs/sesha3/pkg/util"
@@ -38,12 +39,28 @@ func AddLocalUrlToRoute53(wait bool) (string, error) {
 		return domain, nil
 	}
 
-	sess := session.Must(session.NewSession())
-	cred := credentials.NewSharedCredentials("/root/.aws/credentials", params.CredProfile)
-	svc := route53.New(sess, &aws.Config{
-		Credentials: cred,
-		Region:      aws.String(params.Region),
-	})
+	var sess *session.Session
+	var svc *route53.Route53
+
+	if params.IsDev {
+		// use ec2 role for credentials
+		sess = session.Must(session.NewSessionWithOptions(session.Options{
+			SharedConfigState: session.SharedConfigDisable,
+		}))
+
+		svc = route53.New(sess, &aws.Config{
+			Region: aws.String(util.GetRegion()),
+		})
+	} else {
+		// use the root credential file which is a different aws acct
+		sess = session.Must(session.NewSession())
+		svc = route53.New(sess, &aws.Config{
+			Credentials: credentials.NewSharedCredentials(
+				constants.ROOT_AWS_CRED_FILE,
+				constants.SESHA3_ROUTE53_IAMPROFILE),
+			Region: aws.String(util.GetRegion()),
+		})
+	}
 
 	r53p := &route53.ChangeResourceRecordSetsInput{
 		ChangeBatch: &route53.ChangeBatch{

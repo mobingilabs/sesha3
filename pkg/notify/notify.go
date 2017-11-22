@@ -6,12 +6,11 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"
 	as "github.com/aws/aws-sdk-go/aws/session"
 	"github.com/guregu/dynamo"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/notification"
-	"github.com/mobingilabs/sesha3/pkg/params"
+	"github.com/mobingilabs/sesha3/pkg/util"
 	"github.com/pkg/errors"
 )
 
@@ -21,15 +20,13 @@ type EventN struct {
 }
 
 type HttpNotifier struct {
-	region    string
-	credprof  string
 	notifiers []notification.Notifier
+	region    string
 	valid     bool
 }
 
 func (n *HttpNotifier) Init(eps []string) error {
-	n.region = params.Region
-	n.credprof = params.CredProfile
+	n.region = util.GetRegion()
 	n.notifiers = make([]notification.Notifier, 0)
 
 	// iterate endpoints
@@ -61,10 +58,12 @@ func (n *HttpNotifier) Init(eps []string) error {
 func (n *HttpNotifier) getSlackUrl() (EventN, error) {
 	serverName := "sesha3"
 	var results []EventN
-	cred := credentials.NewSharedCredentials("/root/.aws/credentials", n.credprof)
-	db := dynamo.New(as.New(), &aws.Config{
-		Region:      aws.String(n.region),
-		Credentials: cred,
+	sess := as.Must(as.NewSessionWithOptions(as.Options{
+		SharedConfigState: as.SharedConfigDisable,
+	}))
+
+	db := dynamo.New(sess, &aws.Config{
+		Region: aws.String(n.region),
 	})
 
 	table := db.Table("SESHA3")

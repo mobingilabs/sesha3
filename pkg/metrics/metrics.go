@@ -5,11 +5,10 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"
 	as "github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
-	"github.com/mobingilabs/sesha3/pkg/params"
+	"github.com/mobingilabs/sesha3/pkg/util"
 )
 
 var (
@@ -26,9 +25,8 @@ var (
 
 type HttpMetrics struct {
 	region     string
-	credprof   string
 	valid      bool
-	instanceID string
+	instanceId string
 }
 
 var MetricsType HttpMetrics
@@ -44,10 +42,9 @@ func init() {
 }
 
 func (n *HttpMetrics) MetricsInit() {
-	n.region = params.Region
-	n.credprof = params.CredProfile
+	n.region = util.GetRegion()
 	n.valid = true
-	n.instanceID = params.Ec2Id
+	n.instanceId = util.GetEc2Id()
 	n.postMetrics()
 	initTime, _ := time.ParseDuration("0ms")
 	MetricsTTYResponseTime.Set(initTime.String())
@@ -55,10 +52,12 @@ func (n *HttpMetrics) MetricsInit() {
 }
 
 func (n *HttpMetrics) postMetrics() {
-	cred := credentials.NewSharedCredentials("/root/.aws/credentials", n.credprof)
-	cli := cloudwatch.New(as.New(), &aws.Config{
-		Region:      aws.String(n.region),
-		Credentials: cred,
+	sess := as.Must(as.NewSessionWithOptions(as.Options{
+		SharedConfigState: as.SharedConfigDisable,
+	}))
+
+	cli := cloudwatch.New(sess, &aws.Config{
+		Region: aws.String(n.region),
 	})
 
 	go func() {
@@ -90,8 +89,8 @@ func (n *HttpMetrics) GetCloudwatchPostData() []*cloudwatch.MetricDatum {
 	servername := "sesha3"
 	data := []*cloudwatch.MetricDatum{}
 	dimensionParam := &cloudwatch.Dimension{
-		Name:  aws.String("Sesha3"),
-		Value: aws.String(n.instanceID),
+		Name:  aws.String("PerInstance"),
+		Value: aws.String(n.instanceId),
 	}
 
 	getDatumf := func(name string) (postdata *cloudwatch.MetricDatum) {

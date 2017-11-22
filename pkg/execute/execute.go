@@ -17,10 +17,7 @@ type SshCmdInput struct {
 }
 
 func SshCmd(in SshCmdInput) sesha3.ExecScriptInstanceResponse {
-	out := sesha3.ExecScriptInstanceResponse{
-		Ip: in.Ip,
-	}
-
+	out := sesha3.ExecScriptInstanceResponse{Ip: in.Ip}
 	cmdscp := exec.Command(
 		"/usr/bin/scp",
 		"-p",

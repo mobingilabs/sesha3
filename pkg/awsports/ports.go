@@ -31,7 +31,6 @@ type SecurityGroupRequest struct {
 }
 
 func (s *SecurityGroupRequest) CreateRequest() {
-	//goroupid
 	s.DescribeSecurityGroupsInput = &ec2.DescribeSecurityGroupsInput{GroupIds: []*string{aws.String(s.SecurityID)}}
 	s.AuthorizeSecurityGroupIngressInput = &ec2.AuthorizeSecurityGroupIngressInput{GroupId: aws.String(s.SecurityID)}
 	s.RevokeSecurityGroupIngressInput = &ec2.RevokeSecurityGroupIngressInput{GroupId: aws.String(s.SecurityID)}
@@ -44,6 +43,7 @@ func (s *SecurityGroupRequest) CreatePortRequest() {
 		IpRanges:   iprange,
 		ToPort:     aws.Int64(s.RequestPort),
 	}
+
 	s.AuthorizeSecurityGroupIngressInput.IpPermissions = []*ec2.IpPermission{permission}
 	s.RevokeSecurityGroupIngressInput.IpPermissions = []*ec2.IpPermission{permission}
 }
@@ -54,6 +54,7 @@ func (s *SecurityGroupRequest) SecurityInfoSet() {
 		Attribute:  aws.String("groupSet"),
 		InstanceId: aws.String(s.InstanceID),
 	}
+
 	group, _ := svc.DescribeInstanceAttribute(input)
 	s.SecurityID = *group.Groups[0].GroupId
 	s.CreateRequest()
@@ -65,6 +66,8 @@ func (s *SecurityGroupRequest) OpenedList() {
 	for _, i := range secinfo.SecurityGroups[0].IpPermissions {
 		s.OpenPortList = append(s.OpenPortList, *i.FromPort)
 	}
+
+	d.Info("openlist:", s.OpenPortList)
 }
 
 func (s *SecurityGroupRequest) OpenPort() error {
@@ -89,22 +92,21 @@ func (s *SecurityGroupRequest) ClosePort() error {
 	return nil
 }
 
-func Make(profilename string, awsRegion string, instanceID string) SecurityGroupRequest {
+func Make(awsRegion string, instanceID string) SecurityGroupRequest {
 	req := SecurityGroupRequest{
-		Sess:       session.Must(session.NewSession()),
-		Cred:       credentials.NewSharedCredentials("/root/.aws/credentials", profilename),
+		Sess: session.Must(session.NewSessionWithOptions(session.Options{
+			SharedConfigState: session.SharedConfigDisable,
+		})),
 		InstanceID: instanceID,
 	}
 
 	req.Ec2client = ec2.New(req.Sess, &aws.Config{
-		Credentials: req.Cred,
-		Region:      aws.String(awsRegion),
+		Region: aws.String(awsRegion),
 	})
 
 	req.SecurityInfoSet()
 	req.OpenedList()
 	port, _ := private.GetFreePort()
-	// req.RequestPort = req.random(1024, 65535)
 	req.RequestPort = int64(port)
 	req.CreatePortRequest()
 	return req
@@ -119,6 +121,7 @@ func (s *SecurityGroupRequest) random(min int64, max int64) int64 {
 	} else if contains(current, ret) {
 		ret = s.random(min, max)
 	}
+
 	return ret
 }
 
@@ -128,20 +131,20 @@ func contains(list []int64, obj int64) bool {
 			return true
 		}
 	}
+
 	return false
 }
-
-//s3
 
 func Download(awsRegion string, profilename string) error {
 	filename := []string{"fullchain.pem", "privkey.pem"}
 	bucket := "sesha3"
 
-	sess := session.Must(session.NewSession())
-	cred := credentials.NewSharedCredentials("/root/.aws/credentials", profilename)
+	sess := session.Must(session.NewSessionWithOptions(session.Options{
+		SharedConfigState: session.SharedConfigDisable,
+	}))
+
 	svc := s3.New(sess, &aws.Config{
-		Credentials: cred,
-		Region:      aws.String(awsRegion),
+		Region: aws.String(awsRegion),
 	})
 
 	downloader := s3manager.NewDownloaderWithClient(svc)
@@ -167,22 +170,3 @@ func Download(awsRegion string, profilename string) error {
 
 	return nil
 }
-
-//example code
-//func main() {
-//
-//	const (
-//		profilename  = "mobingi-yuto"
-//		awsRegion    = "ap-northeast-1"
-//		testinstance = "i-09094885155fee296"
-//	)
-//	req := Make(profilename, awsRegion, testinstance)
-//	req.OpenedList()
-//	fmt.Println(req.OpenPortList)
-//	req.Openport()
-//	req.OpenedList()
-//	fmt.Println(req.OpenPortList)
-//	req.Closeport()
-//	req.OpenedList()
-//	fmt.Println(req.OpenPortList)
-//}

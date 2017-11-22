@@ -4,12 +4,13 @@ import (
 	"fmt"
 	"log"
 	"log/syslog"
-	"net/http"
 
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/plugins/cors"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/api"
 	"github.com/mobingilabs/sesha3/pkg/cert"
+	"github.com/mobingilabs/sesha3/pkg/constants"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/mobingilabs/sesha3/pkg/params"
@@ -17,10 +18,6 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
-
-type ServeCtx struct {
-	localUrl string
-}
 
 var logger *syslog.Writer
 
@@ -51,10 +48,9 @@ func ServeCmd() *cobra.Command {
 
 			d.Info("--- server start ---")
 			d.Info("dns:", util.GetPublicDns()+":"+params.Port)
-			d.Info("ec2:", params.Ec2Id)
+			d.Info("ec2:", util.GetEc2Id())
 			d.Info("syslog:", params.UseSyslog)
-			d.Info("region:", params.Region)
-			d.Info("credprof:", params.CredProfile)
+			d.Info("region:", util.GetRegion())
 
 			// try setting up LetsEncrypt certificates locally
 			err = cert.SetupLetsEncryptCert(true)
@@ -68,11 +64,12 @@ func ServeCmd() *cobra.Command {
 
 			startm := "--- server start ---\n"
 			startm += "dns: " + util.GetPublicDns() + "\n"
-			startm += "ec2: " + params.Ec2Id + "\n"
+			startm += "region: " + util.GetRegion() + "\n"
+			startm += "ec2: " + util.GetEc2Id() + "\n"
 			startm += "syslog: " + fmt.Sprintf("%v", params.UseSyslog)
 			notify.HookPost(startm)
 
-			beego.BConfig.ServerName = "sesha3:1.0.0"
+			beego.BConfig.ServerName = constants.SERVER_NAME + ":1.0.0"
 			beego.BConfig.RunMode = beego.PROD
 			if params.IsDev {
 				beego.BConfig.RunMode = beego.DEV
@@ -87,6 +84,16 @@ func ServeCmd() *cobra.Command {
 			beego.Router("/ttyurl", &api.ApiController{}, "post:DispatchTtyUrl")
 			beego.Router("/exec", &api.ApiController{}, "post:DispatchExec")
 			beego.Handler("/debug/vars", metrics.MetricsHandler)
+
+			// try enable cors
+			beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
+				AllowAllOrigins:  true,
+				AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+				AllowHeaders:     []string{"Origin", "Authorization", "Access-Control-Allow-Origin", "Content-Type"},
+				ExposeHeaders:    []string{"Content-Length", "Access-Control-Allow-Origin"},
+				AllowCredentials: true,
+			}))
+
 			beego.Run(":" + params.Port)
 		},
 	}
@@ -94,27 +101,4 @@ func ServeCmd() *cobra.Command {
 	cmd.Flags().SortFlags = false
 	cmd.Flags().StringVar(&params.Port, "port", "8080", "server port")
 	return cmd
-}
-
-/*
-func describeSessions(w http.ResponseWriter, req *http.Request) {
-	ds := session.Sessions.Describe()
-	b, err := json.Marshal(ds)
-	if err != nil {
-		w.Write(sesha3.NewSimpleError(err).Marshal())
-		notify.HookPost(err)
-		return
-	}
-
-	w.Write(b)
-}
-*/
-
-// TODO: use go generate to automate version
-func handleHttpVersion(c *ServeCtx) http.HandlerFunc {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		metrics.MetricsCurrentConnection.Add(1)
-		defer metrics.MetricsCurrentConnection.Add(-1)
-		w.Write([]byte(`{"version":"v0.0.15-dev"}`))
-	})
 }

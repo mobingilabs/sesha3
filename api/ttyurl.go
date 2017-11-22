@@ -16,9 +16,10 @@ import (
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
-	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/mobingilabs/sesha3/pkg/session"
 	"github.com/mobingilabs/sesha3/pkg/token"
+	"github.com/mobingilabs/sesha3/pkg/util"
+	"github.com/pkg/errors"
 )
 
 func handleHttpTtyUrl(c *ApiController) {
@@ -33,14 +34,17 @@ func handleHttpTtyUrl(c *ApiController) {
 	var m map[string]interface{}
 
 	auth := strings.Split(c.Ctx.Request.Header.Get("Authorization"), " ")
+	c.info("auth-hdr:", auth)
 	if len(auth) != 2 {
 		c.Ctx.ResponseWriter.WriteHeader(401)
+		d.Error("auth header failed")
 		return
 	}
 
 	ctx, err := jwt.NewCtx()
 	if err != nil {
 		c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
+		d.Error(errors.Wrap(err, "jwt ctx failed"))
 		return
 	}
 
@@ -48,6 +52,7 @@ func handleHttpTtyUrl(c *ApiController) {
 	pt, err := ctx.ParseToken(btoken)
 	if err != nil {
 		c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
+		d.Error(errors.Wrap(err, "parse token failed"))
 		return
 	}
 
@@ -57,14 +62,16 @@ func handleHttpTtyUrl(c *ApiController) {
 	d.Info("user:", u)
 
 	md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
-	ok, err := token.CheckToken(params.CredProfile, params.Region, fmt.Sprintf("%s", u), md5p)
+	ok, err := token.CheckToken(util.GetRegion(), fmt.Sprintf("%s", u), md5p)
 	if !ok {
 		c.Ctx.ResponseWriter.WriteHeader(401)
+		d.Error(errors.Wrap(err, "check token not ok"))
 		return
 	}
 
 	if err != nil {
 		c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
+		d.Error(errors.Wrap(err, "check token failed"))
 		return
 	}
 
@@ -73,6 +80,7 @@ func handleHttpTtyUrl(c *ApiController) {
 	err = json.Unmarshal(c.Ctx.Input.RequestBody, &m)
 	if err != nil {
 		c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
+		d.Error(errors.Wrap(err, "unmarshal body failed"))
 		notify.HookPost(err)
 		return
 	}
@@ -81,6 +89,7 @@ func handleHttpTtyUrl(c *ApiController) {
 	sess.User = fmt.Sprintf("%v", m["user"])
 	sess.Ip = fmt.Sprintf("%v", m["ip"])
 	sess.Timeout = fmt.Sprintf("%v", m["timeout"])
+	sess.Timeout = "120"
 
 	flag := fmt.Sprintf("%v", m["flag"])
 	pemdir := os.TempDir() + "/sesha3/pem/"
@@ -112,6 +121,7 @@ func handleHttpTtyUrl(c *ApiController) {
 		body, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
 			c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
+			d.Error(errors.Wrap(err, "read body failed"))
 			notify.HookPost(err)
 			return
 		}
@@ -119,6 +129,7 @@ func handleHttpTtyUrl(c *ApiController) {
 		err = ioutil.WriteFile(pemfile, body, 0600)
 		if err != nil {
 			c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
+			d.Error(errors.Wrap(err, "write pem failed"))
 			notify.HookPost(err)
 			return
 		}
@@ -130,6 +141,7 @@ func handleHttpTtyUrl(c *ApiController) {
 	randomurl, err := sess.Start()
 	if err != nil {
 		c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
+		d.Error(errors.Wrap(err, "session start failed"))
 		notify.HookPost(err)
 		return
 	}
@@ -139,6 +151,7 @@ func handleHttpTtyUrl(c *ApiController) {
 	if randomurl == "" {
 		err := fmt.Errorf("%s", "cannot initialize secure tty access")
 		c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
+		d.Error(errors.Wrap(err, "session add failed"))
 		notify.HookPost(err)
 		return
 	} else {
@@ -151,6 +164,7 @@ func handleHttpTtyUrl(c *ApiController) {
 	if fullurl == "" {
 		err := fmt.Errorf("%s", "cannot initialize secure tty access")
 		c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
+		d.Error(errors.Wrap(err, "get full url failed"))
 		notify.HookPost(err)
 		return
 	}

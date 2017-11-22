@@ -2,7 +2,6 @@ package token
 
 import (
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"
 	as "github.com/aws/aws-sdk-go/aws/session"
 	"github.com/guregu/dynamo"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
@@ -14,10 +13,13 @@ type event struct {
 	Status   string `dynamo:"status"`
 }
 
-func CheckToken(credential string, region string, token_user string, token_pass string) (bool, error) {
-	cred := credentials.NewSharedCredentials("/root/.aws/credentials", credential)
-	db := dynamo.New(as.New(), &aws.Config{Region: aws.String(region),
-		Credentials: cred,
+func CheckToken(region string, token_user string, token_pass string) (bool, error) {
+	sess := as.Must(as.NewSessionWithOptions(as.Options{
+		SharedConfigState: as.SharedConfigDisable,
+	}))
+
+	db := dynamo.New(sess, &aws.Config{
+		Region: aws.String(region),
 	})
 
 	table := db.Table("MC_IDENTITY")

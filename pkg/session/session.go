@@ -15,7 +15,6 @@ import (
 	"github.com/mobingilabs/sesha3/pkg/awsports"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
-	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/mobingilabs/sesha3/pkg/util"
 	"github.com/pkg/errors"
 	uuid "github.com/satori/go.uuid"
@@ -50,7 +49,7 @@ func (s *Session) Start() (string, error) {
 	s.info("starting session: ", s.Id())
 
 	// try to open port for gotty
-	ec2req := awsports.Make(params.CredProfile, params.Region, params.Ec2Id)
+	ec2req := awsports.Make(util.GetRegion(), util.GetEc2Id())
 	s.portReq = &ec2req
 	s.HttpsPort = fmt.Sprint(ec2req.RequestPort)
 	ttyurl := make(chan string)
@@ -69,6 +68,7 @@ func (s *Session) Start() (string, error) {
 		metrics.MetricsCurrentConnection.Add(1)
 		defer metrics.MetricsCurrentConnection.Add(-1)
 
+		// make sure to open port first
 		err := ec2req.OpenPort()
 		if err != nil {
 			notify.HookPost(err)

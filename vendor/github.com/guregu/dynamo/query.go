@@ -342,6 +342,11 @@ func (itr *queryIter) NextWithContext(ctx aws.Context, out interface{}) bool {
 	})
 
 	if itr.err != nil || len(itr.output.Items) == 0 {
+		if itr.output.LastEvaluatedKey != nil {
+			// we need to retry until we get some data
+			return itr.NextWithContext(ctx, out)
+		}
+		// we're done
 		return false
 	}
 
