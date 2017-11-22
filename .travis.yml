@@ -10,13 +10,12 @@ script:
   - go build -v
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
       echo 'command=/home/ec2-user/sesha3/sesha3 serve --syslog' > cmdline;
-    fi
-  - if [[ "$TRAVIS_BRANCH" == "develop" ]]; then
+    else
       echo 'command=/home/ec2-user/sesha3/sesha3 serve --syslog --rundev' > cmdline;
     fi
 
 before_deploy:
-  - tar cvzf app.tar.gz sesha3 appspec.yml scripts/ tools/
+  - tar cvzf app.tar.gz sesha3 cmdline appspec.yml scripts/ tools/
   - mkdir -p dpl_cd_upload
   - cp app.tar.gz dpl_cd_upload/
 
