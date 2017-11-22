@@ -89,7 +89,7 @@ func (n *HttpMetrics) GetCloudwatchPostData() []*cloudwatch.MetricDatum {
 	servername := "sesha3"
 	data := []*cloudwatch.MetricDatum{}
 	dimensionParam := &cloudwatch.Dimension{
-		Name:  aws.String("Sesha3"),
+		Name:  aws.String("PerInstance"),
 		Value: aws.String(n.instanceId),
 	}
 
