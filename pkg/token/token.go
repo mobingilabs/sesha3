@@ -84,6 +84,12 @@ func CheckToken(uname string, pwd string) (bool, error) {
 					{
 						S: aws.String(uname),
 					},
+					{
+						S: aws.String("password"),
+					},
+					{
+						S: aws.String("status"),
+					},
 				},
 			},
 		},
