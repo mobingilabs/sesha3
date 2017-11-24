@@ -25,7 +25,7 @@ func (c *ApiController) Prepare() {
 		c.info("base auth:")
 	}
 
-	c.info("url:", c.Ctx.Request.URL.String())
+	c.info("url:", c.Ctx.Request.URL.Hostname()+":"+c.Ctx.Request.URL.Port()+c.Ctx.Request.URL.Path)
 	c.info("ip:", c.getClientIp())
 }
 
