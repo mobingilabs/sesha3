@@ -4,10 +4,16 @@ import (
 	"fmt"
 	"log"
 	"log/syslog"
+	"os"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/plugins/cors"
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/s3"
+	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
+	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/api"
 	"github.com/mobingilabs/sesha3/pkg/cert"
 	"github.com/mobingilabs/sesha3/pkg/constants"
@@ -20,6 +26,60 @@ import (
 )
 
 var logger *syslog.Writer
+
+func downloadTokenFiles() error {
+	fnames := []string{"token.pem", "token.pem.pub"}
+	bucket := "sesha3-prod"
+	if params.IsDev {
+		bucket = "sesha3"
+	}
+
+	sess := session.Must(session.NewSessionWithOptions(session.Options{
+		SharedConfigState: session.SharedConfigDisable,
+	}))
+
+	svc := s3.New(sess, &aws.Config{
+		Region: aws.String(util.GetRegion()),
+	})
+
+	// create dir if necessary
+	tmpdir := os.TempDir() + "/jwt/rsa/"
+	if !private.Exists(tmpdir) {
+		err := os.MkdirAll(tmpdir, 0700)
+		if err != nil {
+			err := errors.Wrap(err, "mkdir failed")
+			d.Error(err)
+			return err
+		}
+	}
+
+	downloader := s3manager.NewDownloaderWithClient(svc)
+	for _, i := range fnames {
+		fl := tmpdir + i
+		f, err := os.Create(fl)
+		if err != nil {
+			err = errors.Wrap(err, "mkdir failed")
+			d.Error(err, fl)
+			return err
+		}
+
+		// write the contents of S3 Object to the file
+		n, err := downloader.Download(f, &s3.GetObjectInput{
+			Bucket: aws.String(bucket),
+			Key:    aws.String(i),
+		})
+
+		if err != nil {
+			err = errors.Wrap(err, "mkdir failed")
+			d.Error(err)
+			return err
+		}
+
+		d.Info("download file:", i, "|", "bytes:", n)
+	}
+
+	return nil
+}
 
 func ServeCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -39,9 +99,15 @@ func ServeCmd() *cobra.Command {
 				log.SetOutput(logger)
 			}
 
+			err := downloadTokenFiles()
+			if err != nil {
+				notify.HookPost(errors.Wrap(err, "download token files failed, fatal"))
+				d.ErrorTraceExit(err, 1)
+			}
+
 			metrics.MetricsType.MetricsInit()
 			eps, _ := cmd.Flags().GetStringArray("notify-endpoints")
-			err := notify.Notifier.Init(eps)
+			err = notify.Notifier.Init(eps)
 			if err != nil {
 				d.Error(err)
 			}
