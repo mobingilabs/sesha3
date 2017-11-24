@@ -156,8 +156,9 @@ func (s *Session) Start() (string, error) {
 
 		err = s.Cmd.Wait()
 		if err != nil {
+			err = errors.Wrap(err, "cmd wait failed")
 			notify.HookPost(err)
-			s.error(errors.Wrap(err, "cmd wait failed"))
+			s.error(err)
 		}
 
 		fnClosePort()
@@ -183,8 +184,9 @@ func (s *Session) Start() (string, error) {
 				if s.portReq != nil {
 					err := s.portReq.ClosePort()
 					if err != nil {
+						err = errors.Wrap(err, "close port failed")
 						notify.HookPost(err)
-						s.error(errors.Wrap(err, "close port failed"))
+						s.error(err)
 					}
 				}
 
