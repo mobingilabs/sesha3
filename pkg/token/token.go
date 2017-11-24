@@ -93,6 +93,27 @@ func CheckToken(uname string, pwd string) (bool, error) {
 		Region: aws.String(util.GetRegion()),
 	})
 
+	params := &dynamodb.GetItemInput{
+		TableName: aws.String("MC_USERS"),
+		Key: map[string]*dynamodb.AttributeValue{
+			"email": {
+				N: aws.String(uname),
+			},
+		},
+		AttributesToGet: []*string{
+			aws.String("email"),
+			aws.String("password"),
+			aws.String("status"),
+		},
+	}
+
+	r, e := dbsvc.GetItem(params)
+	if e != nil {
+		d.Error("Error fetching item", err)
+	} else {
+		d.Info("resp.item:", r.Item)
+	}
+
 	resp, err := dbsvc.Query(queryInput)
 	if err != nil {
 		d.Error(errors.Wrap(err, "query failed"))
