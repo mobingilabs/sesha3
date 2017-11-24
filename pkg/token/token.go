@@ -6,7 +6,6 @@ import (
 	"github.com/guregu/dynamo"
 	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/pkg/util"
-	"github.com/pkg/errors"
 )
 
 type event struct {
@@ -24,17 +23,37 @@ func CheckToken(uname string, pwd string) (bool, error) {
 		Region: aws.String(util.GetRegion()),
 	})
 
-	var results []event
-
 	// look in subusers first
+	/*
+		table := db.Table("MC_IDENTITY")
+		err := table.Get("username", uname).All(&results)
+		if err != nil {
+			for _, data := range results {
+				if pwd == data.Pass && data.Status != "deleted" {
+					d.Info("valid subuser:", uname)
+					return true, nil
+				}
+			}
+		}
+	*/
+
+	var results []event
+	ret := false
+
 	table := db.Table("MC_IDENTITY")
 	err := table.Get("username", uname).All(&results)
-	if err != nil {
-		for _, data := range results {
-			if pwd == data.Pass && data.Status != "deleted" {
-				d.Info("valid subuser:", uname)
-				return true, nil
-			}
+	for _, data := range results {
+		if data.Status == "deleted" {
+			ret = false
+			d.Info("token_ALMuser_check: status=deleted, username:", data.User)
+			break
+		} else {
+			d.Info("token_ALMuser_check: status=OK, username:", data.User)
+		}
+
+		if pwd == data.Pass {
+			d.Info("token_ALMuser_check: success")
+			ret = true
 		}
 	}
 
@@ -64,5 +83,6 @@ func CheckToken(uname string, pwd string) (bool, error) {
 		}
 	*/
 
-	return false, errors.New("user not found")
+	// return false, errors.New("user not found")
+	return ret, err
 }
