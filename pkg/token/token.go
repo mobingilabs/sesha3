@@ -50,29 +50,6 @@ func CheckToken(uname string, pwdmd5 string) (bool, error) {
 		d.Error("error in table get:", err)
 	}
 
-	/*
-		var results []event
-		ret := false
-
-		// look in subusers first
-		table := db.Table("MC_IDENTITY")
-		err := table.Get("username", uname).All(&results)
-		for _, data := range results {
-			if data.Status == "deleted" {
-				ret = false
-				d.Info("token_ALMuser_check: status=deleted, username:", data.User)
-				break
-			} else {
-				d.Info("token_ALMuser_check: status=OK, username:", data.User)
-			}
-
-			if pwdmd5 == data.Pass {
-				d.Info("token_ALMuser_check: success")
-				ret = true
-			}
-		}
-	*/
-
 	// try looking at the root users table
 	var queryInput = &dynamodb.QueryInput{
 		TableName:              aws.String("MC_USERS"),
