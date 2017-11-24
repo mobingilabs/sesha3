@@ -18,6 +18,7 @@ type event struct {
 }
 
 type root struct {
+	UserId string `dynamo:"user_id"`
 	Email  string `dynamo:"email"`
 	Pass   string `dynamo:"password"`
 	Status string `dynamo:"status"`
@@ -75,7 +76,7 @@ func CheckToken(uname string, pwd string) (bool, error) {
 	// try looking at the root users table
 	var queryInput = &dynamodb.QueryInput{
 		TableName: aws.String("MC_USERS"),
-		IndexName: aws.String("email"),
+		IndexName: aws.String("email-index"),
 		KeyConditions: map[string]*dynamodb.Condition{
 			"modifier": {
 				ComparisonOperator: aws.String("EQ"),
