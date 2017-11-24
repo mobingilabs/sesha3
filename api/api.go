@@ -25,8 +25,7 @@ func (c *ApiController) Prepare() {
 		c.info("base auth:")
 	}
 
-	c.info("url:", c.Ctx.Request.URL.Hostname()+":"+c.Ctx.Request.URL.Port()+c.Ctx.Request.URL.Path)
-	c.info("ip:", c.getClientIp())
+	c.info("url:", c.Ctx.Request.RemoteAddr+c.Ctx.Request.URL.Path)
 }
 
 // info is our local info logger with session id as prefix.
