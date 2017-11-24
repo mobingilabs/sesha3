@@ -18,13 +18,13 @@ type event struct {
 }
 
 type root struct {
-	UserId string `dynamo:"user_id"`
-	Email  string `dynamo:"email"`
-	Pass   string `dynamo:"password"`
-	Status string `dynamo:"status"`
+	ApiToken string `json:"api_token"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+	Status   string `json:"status"`
 }
 
-func CheckToken(uname string, pwd string) (bool, error) {
+func CheckToken(uname string, pwdmd5 string) (bool, error) {
 	sess := as.Must(as.NewSessionWithOptions(as.Options{
 		SharedConfigState: as.SharedConfigDisable,
 	}))
@@ -40,7 +40,7 @@ func CheckToken(uname string, pwd string) (bool, error) {
 	table := db.Table("MC_IDENTITY")
 	err := table.Get("username", uname).All(&results)
 	for _, data := range results {
-		if pwd == data.Pass && data.Status != "deleted" {
+		if pwdmd5 == data.Pass && data.Status != "deleted" {
 			d.Info("valid subuser:", uname)
 			return true, nil
 		}
@@ -66,7 +66,7 @@ func CheckToken(uname string, pwd string) (bool, error) {
 				d.Info("token_ALMuser_check: status=OK, username:", data.User)
 			}
 
-			if pwd == data.Pass {
+			if pwdmd5 == data.Pass {
 				d.Info("token_ALMuser_check: success")
 				ret = true
 			}
@@ -75,22 +75,12 @@ func CheckToken(uname string, pwd string) (bool, error) {
 
 	// try looking at the root users table
 	var queryInput = &dynamodb.QueryInput{
-		TableName: aws.String("MC_USERS"),
-		IndexName: aws.String("email-index"),
-		KeyConditions: map[string]*dynamodb.Condition{
-			"email": {
-				ComparisonOperator: aws.String("EQ"),
-				AttributeValueList: []*dynamodb.AttributeValue{
-					{
-						S: aws.String(uname),
-					},
-					{
-						S: aws.String("password"),
-					},
-					{
-						S: aws.String("status"),
-					},
-				},
+		TableName:              aws.String("MC_USERS"),
+		IndexName:              aws.String("email-index"),
+		KeyConditionExpression: aws.String("email = :e"),
+		ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
+			":e": {
+				S: aws.String(uname),
 			},
 		},
 	}
@@ -98,29 +88,6 @@ func CheckToken(uname string, pwd string) (bool, error) {
 	dbsvc := dynamodb.New(sess, &aws.Config{
 		Region: aws.String(util.GetRegion()),
 	})
-
-	/*
-		params := &dynamodb.GetItemInput{
-			TableName: aws.String("MC_USERS"),
-			Key: map[string]*dynamodb.AttributeValue{
-				"email": {
-					N: aws.String(uname),
-				},
-			},
-			AttributesToGet: []*string{
-				aws.String("email"),
-				aws.String("password"),
-				aws.String("status"),
-			},
-		}
-
-		r, e := dbsvc.GetItem(params)
-		if e != nil {
-			d.Error("Error fetching item", err)
-		} else {
-			d.Info("resp.item:", r.Item)
-		}
-	*/
 
 	resp, err := dbsvc.Query(queryInput)
 	if err != nil {
@@ -136,7 +103,7 @@ func CheckToken(uname string, pwd string) (bool, error) {
 
 		// should be a valid root user
 		for _, u := range ru {
-			if u.Email == uname && u.Pass == pwd {
+			if u.Email == uname && u.Password == pwdmd5 {
 				if u.Status == "" || u.Status == "trial" {
 					d.Info("valid root user:", uname)
 					ret = true
