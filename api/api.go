@@ -3,6 +3,7 @@ package api
 import (
 	"fmt"
 	"log"
+	"strings"
 
 	"github.com/astaxie/beego"
 	uuid "github.com/satori/go.uuid"
@@ -23,6 +24,9 @@ func (c *ApiController) Prepare() {
 	if !c.noAuth {
 		c.info("base auth:")
 	}
+
+	c.info("url:", c.Ctx.Request.URL.String())
+	c.info("ip:", c.getClientIp())
 }
 
 // info is our local info logger with session id as prefix.
@@ -35,6 +39,15 @@ func (c *ApiController) info(v ...interface{}) {
 func (c *ApiController) err(v ...interface{}) {
 	m := fmt.Sprintln(v...)
 	log.Print(fmt.Sprintf("s-%s:error: %s", c.sessionId, m))
+}
+
+func (c *ApiController) getClientIp() string {
+	s := strings.Split(c.Ctx.Request.RemoteAddr, ":")
+	if len(s) == 0 {
+		return "?"
+	}
+
+	return s[0]
 }
 
 func (c *ApiController) DispatchScratch() {
