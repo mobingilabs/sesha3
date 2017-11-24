@@ -82,6 +82,19 @@ func (s *SecurityGroupRequest) OpenPort() error {
 }
 
 func (s *SecurityGroupRequest) ClosePort() error {
+	var found bool
+	s.OpenedList()
+	for _, p := range s.OpenPortList {
+		if p == s.RequestPort {
+			found = true
+		}
+	}
+
+	if !found {
+		d.Info("cannot find port", s.RequestPort, "in open list, do nothing")
+		return nil
+	}
+
 	svc := s.Ec2client
 	p, err := svc.RevokeSecurityGroupIngress(s.RevokeSecurityGroupIngressInput)
 	if err != nil {
