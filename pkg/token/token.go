@@ -75,7 +75,7 @@ func CheckToken(uname string, pwd string) (bool, error) {
 	// try looking at the root users table
 	var queryInput = &dynamodb.QueryInput{
 		TableName: aws.String("MC_USERS"),
-		IndexName: aws.String("email-index"),
+		IndexName: aws.String("email"),
 		KeyConditions: map[string]*dynamodb.Condition{
 			"modifier": {
 				ComparisonOperator: aws.String("EQ"),
@@ -94,7 +94,7 @@ func CheckToken(uname string, pwd string) (bool, error) {
 
 	resp, err := dbsvc.Query(queryInput)
 	if err != nil {
-		d.Error(err)
+		d.Error(errors.Wrap(err, "query failed"))
 	} else {
 		ru := []root{}
 		err = dynamodbattribute.UnmarshalListOfMaps(resp.Items, &ru)
@@ -116,6 +116,5 @@ func CheckToken(uname string, pwd string) (bool, error) {
 		}
 	}
 
-	// return false, errors.New("user not found")
 	return ret, err
 }
