@@ -58,7 +58,7 @@ func downloadTokenFiles() error {
 		fl := tmpdir + i
 		f, err := os.Create(fl)
 		if err != nil {
-			err = errors.Wrap(err, "mkdir failed")
+			err = errors.Wrap(err, "create file failed: "+fl)
 			d.Error(err, fl)
 			return err
 		}
@@ -70,12 +70,12 @@ func downloadTokenFiles() error {
 		})
 
 		if err != nil {
-			err = errors.Wrap(err, "mkdir failed")
+			err = errors.Wrap(err, "s3 download failed: "+fl)
 			d.Error(err)
 			return err
 		}
 
-		d.Info("download file:", i, "|", "bytes:", n)
+		d.Info("download s3 file:", i, "|", "bytes:", n)
 	}
 
 	return nil
