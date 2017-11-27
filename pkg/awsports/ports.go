@@ -87,6 +87,7 @@ func (s *SecurityGroupRequest) ClosePort() error {
 	for _, p := range s.OpenPortList {
 		if p == s.RequestPort {
 			found = true
+			break
 		}
 	}
 
