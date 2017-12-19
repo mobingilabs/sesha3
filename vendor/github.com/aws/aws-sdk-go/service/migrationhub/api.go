@@ -36,7 +36,7 @@ const opAssociateCreatedArtifact = "AssociateCreatedArtifact"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifact
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifact
 func (c *MigrationHub) AssociateCreatedArtifactRequest(input *AssociateCreatedArtifactInput) (req *request.Request, output *AssociateCreatedArtifactOutput) {
 	op := &request.Operation{
 		Name:       opAssociateCreatedArtifact,
@@ -106,7 +106,7 @@ func (c *MigrationHub) AssociateCreatedArtifactRequest(input *AssociateCreatedAr
 //   update stream, migration task, etc.) that does not exist in ADS (Application
 //   Discovery Service) or in Migration Hub's repository.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifact
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifact
 func (c *MigrationHub) AssociateCreatedArtifact(input *AssociateCreatedArtifactInput) (*AssociateCreatedArtifactOutput, error) {
 	req, out := c.AssociateCreatedArtifactRequest(input)
 	return out, req.Send()
@@ -153,7 +153,7 @@ const opAssociateDiscoveredResource = "AssociateDiscoveredResource"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateDiscoveredResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateDiscoveredResource
 func (c *MigrationHub) AssociateDiscoveredResourceRequest(input *AssociateDiscoveredResourceInput) (req *request.Request, output *AssociateDiscoveredResourceOutput) {
 	op := &request.Operation{
 		Name:       opAssociateDiscoveredResource,
@@ -217,7 +217,7 @@ func (c *MigrationHub) AssociateDiscoveredResourceRequest(input *AssociateDiscov
 //   update stream, migration task, etc.) that does not exist in ADS (Application
 //   Discovery Service) or in Migration Hub's repository.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateDiscoveredResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateDiscoveredResource
 func (c *MigrationHub) AssociateDiscoveredResource(input *AssociateDiscoveredResourceInput) (*AssociateDiscoveredResourceOutput, error) {
 	req, out := c.AssociateDiscoveredResourceRequest(input)
 	return out, req.Send()
@@ -264,7 +264,7 @@ const opCreateProgressUpdateStream = "CreateProgressUpdateStream"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreateProgressUpdateStream
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreateProgressUpdateStream
 func (c *MigrationHub) CreateProgressUpdateStreamRequest(input *CreateProgressUpdateStreamInput) (req *request.Request, output *CreateProgressUpdateStreamOutput) {
 	op := &request.Operation{
 		Name:       opCreateProgressUpdateStream,
@@ -321,7 +321,7 @@ func (c *MigrationHub) CreateProgressUpdateStreamRequest(input *CreateProgressUp
 //   Exception raised when the provided input violates a policy constraint or
 //   is entered in the wrong format or data type.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreateProgressUpdateStream
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreateProgressUpdateStream
 func (c *MigrationHub) CreateProgressUpdateStream(input *CreateProgressUpdateStreamInput) (*CreateProgressUpdateStreamOutput, error) {
 	req, out := c.CreateProgressUpdateStreamRequest(input)
 	return out, req.Send()
@@ -368,7 +368,7 @@ const opDeleteProgressUpdateStream = "DeleteProgressUpdateStream"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DeleteProgressUpdateStream
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DeleteProgressUpdateStream
 func (c *MigrationHub) DeleteProgressUpdateStreamRequest(input *DeleteProgressUpdateStreamInput) (req *request.Request, output *DeleteProgressUpdateStreamOutput) {
 	op := &request.Operation{
 		Name:       opDeleteProgressUpdateStream,
@@ -448,7 +448,7 @@ func (c *MigrationHub) DeleteProgressUpdateStreamRequest(input *DeleteProgressUp
 //   update stream, migration task, etc.) that does not exist in ADS (Application
 //   Discovery Service) or in Migration Hub's repository.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DeleteProgressUpdateStream
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DeleteProgressUpdateStream
 func (c *MigrationHub) DeleteProgressUpdateStream(input *DeleteProgressUpdateStreamInput) (*DeleteProgressUpdateStreamOutput, error) {
 	req, out := c.DeleteProgressUpdateStreamRequest(input)
 	return out, req.Send()
@@ -495,7 +495,7 @@ const opDescribeApplicationState = "DescribeApplicationState"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeApplicationState
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeApplicationState
 func (c *MigrationHub) DescribeApplicationStateRequest(input *DescribeApplicationStateInput) (req *request.Request, output *DescribeApplicationStateOutput) {
 	op := &request.Operation{
 		Name:       opDescribeApplicationState,
@@ -550,7 +550,7 @@ func (c *MigrationHub) DescribeApplicationStateRequest(input *DescribeApplicatio
 //   update stream, migration task, etc.) that does not exist in ADS (Application
 //   Discovery Service) or in Migration Hub's repository.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeApplicationState
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeApplicationState
 func (c *MigrationHub) DescribeApplicationState(input *DescribeApplicationStateInput) (*DescribeApplicationStateOutput, error) {
 	req, out := c.DescribeApplicationStateRequest(input)
 	return out, req.Send()
@@ -597,7 +597,7 @@ const opDescribeMigrationTask = "DescribeMigrationTask"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTask
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTask
 func (c *MigrationHub) DescribeMigrationTaskRequest(input *DescribeMigrationTaskInput) (req *request.Request, output *DescribeMigrationTaskOutput) {
 	op := &request.Operation{
 		Name:       opDescribeMigrationTask,
@@ -647,7 +647,7 @@ func (c *MigrationHub) DescribeMigrationTaskRequest(input *DescribeMigrationTask
 //   update stream, migration task, etc.) that does not exist in ADS (Application
 //   Discovery Service) or in Migration Hub's repository.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTask
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTask
 func (c *MigrationHub) DescribeMigrationTask(input *DescribeMigrationTaskInput) (*DescribeMigrationTaskOutput, error) {
 	req, out := c.DescribeMigrationTaskRequest(input)
 	return out, req.Send()
@@ -694,7 +694,7 @@ const opDisassociateCreatedArtifact = "DisassociateCreatedArtifact"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateCreatedArtifact
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateCreatedArtifact
 func (c *MigrationHub) DisassociateCreatedArtifactRequest(input *DisassociateCreatedArtifactInput) (req *request.Request, output *DisassociateCreatedArtifactOutput) {
 	op := &request.Operation{
 		Name:       opDisassociateCreatedArtifact,
@@ -764,7 +764,7 @@ func (c *MigrationHub) DisassociateCreatedArtifactRequest(input *DisassociateCre
 //   update stream, migration task, etc.) that does not exist in ADS (Application
 //   Discovery Service) or in Migration Hub's repository.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateCreatedArtifact
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateCreatedArtifact
 func (c *MigrationHub) DisassociateCreatedArtifact(input *DisassociateCreatedArtifactInput) (*DisassociateCreatedArtifactOutput, error) {
 	req, out := c.DisassociateCreatedArtifactRequest(input)
 	return out, req.Send()
@@ -811,7 +811,7 @@ const opDisassociateDiscoveredResource = "DisassociateDiscoveredResource"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateDiscoveredResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateDiscoveredResource
 func (c *MigrationHub) DisassociateDiscoveredResourceRequest(input *DisassociateDiscoveredResourceInput) (req *request.Request, output *DisassociateDiscoveredResourceOutput) {
 	op := &request.Operation{
 		Name:       opDisassociateDiscoveredResource,
@@ -870,7 +870,7 @@ func (c *MigrationHub) DisassociateDiscoveredResourceRequest(input *Disassociate
 //   update stream, migration task, etc.) that does not exist in ADS (Application
 //   Discovery Service) or in Migration Hub's repository.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateDiscoveredResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateDiscoveredResource
 func (c *MigrationHub) DisassociateDiscoveredResource(input *DisassociateDiscoveredResourceInput) (*DisassociateDiscoveredResourceOutput, error) {
 	req, out := c.DisassociateDiscoveredResourceRequest(input)
 	return out, req.Send()
@@ -917,7 +917,7 @@ const opImportMigrationTask = "ImportMigrationTask"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ImportMigrationTask
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ImportMigrationTask
 func (c *MigrationHub) ImportMigrationTaskRequest(input *ImportMigrationTaskInput) (req *request.Request, output *ImportMigrationTaskOutput) {
 	op := &request.Operation{
 		Name:       opImportMigrationTask,
@@ -980,7 +980,7 @@ func (c *MigrationHub) ImportMigrationTaskRequest(input *ImportMigrationTaskInpu
 //   update stream, migration task, etc.) that does not exist in ADS (Application
 //   Discovery Service) or in Migration Hub's repository.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ImportMigrationTask
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ImportMigrationTask
 func (c *MigrationHub) ImportMigrationTask(input *ImportMigrationTaskInput) (*ImportMigrationTaskOutput, error) {
 	req, out := c.ImportMigrationTaskRequest(input)
 	return out, req.Send()
@@ -1027,7 +1027,7 @@ const opListCreatedArtifacts = "ListCreatedArtifacts"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListCreatedArtifacts
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListCreatedArtifacts
 func (c *MigrationHub) ListCreatedArtifactsRequest(input *ListCreatedArtifactsInput) (req *request.Request, output *ListCreatedArtifactsOutput) {
 	op := &request.Operation{
 		Name:       opListCreatedArtifacts,
@@ -1085,7 +1085,7 @@ func (c *MigrationHub) ListCreatedArtifactsRequest(input *ListCreatedArtifactsIn
 //   update stream, migration task, etc.) that does not exist in ADS (Application
 //   Discovery Service) or in Migration Hub's repository.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListCreatedArtifacts
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListCreatedArtifacts
 func (c *MigrationHub) ListCreatedArtifacts(input *ListCreatedArtifactsInput) (*ListCreatedArtifactsOutput, error) {
 	req, out := c.ListCreatedArtifactsRequest(input)
 	return out, req.Send()
@@ -1132,7 +1132,7 @@ const opListDiscoveredResources = "ListDiscoveredResources"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListDiscoveredResources
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListDiscoveredResources
 func (c *MigrationHub) ListDiscoveredResourcesRequest(input *ListDiscoveredResourcesInput) (req *request.Request, output *ListDiscoveredResourcesOutput) {
 	op := &request.Operation{
 		Name:       opListDiscoveredResources,
@@ -1182,7 +1182,7 @@ func (c *MigrationHub) ListDiscoveredResourcesRequest(input *ListDiscoveredResou
 //   update stream, migration task, etc.) that does not exist in ADS (Application
 //   Discovery Service) or in Migration Hub's repository.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListDiscoveredResources
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListDiscoveredResources
 func (c *MigrationHub) ListDiscoveredResources(input *ListDiscoveredResourcesInput) (*ListDiscoveredResourcesOutput, error) {
 	req, out := c.ListDiscoveredResourcesRequest(input)
 	return out, req.Send()
@@ -1229,7 +1229,7 @@ const opListMigrationTasks = "ListMigrationTasks"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListMigrationTasks
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListMigrationTasks
 func (c *MigrationHub) ListMigrationTasksRequest(input *ListMigrationTasksInput) (req *request.Request, output *ListMigrationTasksOutput) {
 	op := &request.Operation{
 		Name:       opListMigrationTasks,
@@ -1292,7 +1292,7 @@ func (c *MigrationHub) ListMigrationTasksRequest(input *ListMigrationTasksInput)
 //   update stream, migration task, etc.) that does not exist in ADS (Application
 //   Discovery Service) or in Migration Hub's repository.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListMigrationTasks
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListMigrationTasks
 func (c *MigrationHub) ListMigrationTasks(input *ListMigrationTasksInput) (*ListMigrationTasksOutput, error) {
 	req, out := c.ListMigrationTasksRequest(input)
 	return out, req.Send()
@@ -1339,7 +1339,7 @@ const opListProgressUpdateStreams = "ListProgressUpdateStreams"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListProgressUpdateStreams
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListProgressUpdateStreams
 func (c *MigrationHub) ListProgressUpdateStreamsRequest(input *ListProgressUpdateStreamsInput) (req *request.Request, output *ListProgressUpdateStreamsOutput) {
 	op := &request.Operation{
 		Name:       opListProgressUpdateStreams,
@@ -1385,7 +1385,7 @@ func (c *MigrationHub) ListProgressUpdateStreamsRequest(input *ListProgressUpdat
 //   Exception raised when the provided input violates a policy constraint or
 //   is entered in the wrong format or data type.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListProgressUpdateStreams
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListProgressUpdateStreams
 func (c *MigrationHub) ListProgressUpdateStreams(input *ListProgressUpdateStreamsInput) (*ListProgressUpdateStreamsOutput, error) {
 	req, out := c.ListProgressUpdateStreamsRequest(input)
 	return out, req.Send()
@@ -1432,7 +1432,7 @@ const opNotifyApplicationState = "NotifyApplicationState"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyApplicationState
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyApplicationState
 func (c *MigrationHub) NotifyApplicationStateRequest(input *NotifyApplicationStateInput) (req *request.Request, output *NotifyApplicationStateOutput) {
 	op := &request.Operation{
 		Name:       opNotifyApplicationState,
@@ -1497,7 +1497,7 @@ func (c *MigrationHub) NotifyApplicationStateRequest(input *NotifyApplicationSta
 //   update stream, migration task, etc.) that does not exist in ADS (Application
 //   Discovery Service) or in Migration Hub's repository.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyApplicationState
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyApplicationState
 func (c *MigrationHub) NotifyApplicationState(input *NotifyApplicationStateInput) (*NotifyApplicationStateOutput, error) {
 	req, out := c.NotifyApplicationStateRequest(input)
 	return out, req.Send()
@@ -1544,7 +1544,7 @@ const opNotifyMigrationTaskState = "NotifyMigrationTaskState"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyMigrationTaskState
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyMigrationTaskState
 func (c *MigrationHub) NotifyMigrationTaskStateRequest(input *NotifyMigrationTaskStateInput) (req *request.Request, output *NotifyMigrationTaskStateOutput) {
 	op := &request.Operation{
 		Name:       opNotifyMigrationTaskState,
@@ -1611,7 +1611,7 @@ func (c *MigrationHub) NotifyMigrationTaskStateRequest(input *NotifyMigrationTas
 //   update stream, migration task, etc.) that does not exist in ADS (Application
 //   Discovery Service) or in Migration Hub's repository.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyMigrationTaskState
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyMigrationTaskState
 func (c *MigrationHub) NotifyMigrationTaskState(input *NotifyMigrationTaskStateInput) (*NotifyMigrationTaskStateOutput, error) {
 	req, out := c.NotifyMigrationTaskStateRequest(input)
 	return out, req.Send()
@@ -1658,7 +1658,7 @@ const opPutResourceAttributes = "PutResourceAttributes"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PutResourceAttributes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PutResourceAttributes
 func (c *MigrationHub) PutResourceAttributesRequest(input *PutResourceAttributesInput) (req *request.Request, output *PutResourceAttributesOutput) {
 	op := &request.Operation{
 		Name:       opPutResourceAttributes,
@@ -1728,7 +1728,7 @@ func (c *MigrationHub) PutResourceAttributesRequest(input *PutResourceAttributes
 //   update stream, migration task, etc.) that does not exist in ADS (Application
 //   Discovery Service) or in Migration Hub's repository.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PutResourceAttributes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PutResourceAttributes
 func (c *MigrationHub) PutResourceAttributes(input *PutResourceAttributesInput) (*PutResourceAttributesOutput, error) {
 	req, out := c.PutResourceAttributesRequest(input)
 	return out, req.Send()
@@ -1750,7 +1750,7 @@ func (c *MigrationHub) PutResourceAttributesWithContext(ctx aws.Context, input *
 	return out, req.Send()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifactRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifactRequest
 type AssociateCreatedArtifactInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1839,7 +1839,7 @@ func (s *AssociateCreatedArtifactInput) SetProgressUpdateStream(v string) *Assoc
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifactResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifactResult
 type AssociateCreatedArtifactOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -1854,7 +1854,7 @@ func (s AssociateCreatedArtifactOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateDiscoveredResourceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateDiscoveredResourceRequest
 type AssociateDiscoveredResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1942,7 +1942,7 @@ func (s *AssociateDiscoveredResourceInput) SetProgressUpdateStream(v string) *As
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateDiscoveredResourceResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateDiscoveredResourceResult
 type AssociateDiscoveredResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -1957,7 +1957,7 @@ func (s AssociateDiscoveredResourceOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreateProgressUpdateStreamRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreateProgressUpdateStreamRequest
 type CreateProgressUpdateStreamInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2009,7 +2009,7 @@ func (s *CreateProgressUpdateStreamInput) SetProgressUpdateStreamName(v string) 
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreateProgressUpdateStreamResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreateProgressUpdateStreamResult
 type CreateProgressUpdateStreamOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -2026,7 +2026,7 @@ func (s CreateProgressUpdateStreamOutput) GoString() string {
 
 // An ARN of the AWS cloud resource target receiving the migration (e.g., AMI,
 // EC2 instance, RDS instance, etc.).
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreatedArtifact
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreatedArtifact
 type CreatedArtifact struct {
 	_ struct{} `type:"structure"`
 
@@ -2078,7 +2078,7 @@ func (s *CreatedArtifact) SetName(v string) *CreatedArtifact {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DeleteProgressUpdateStreamRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DeleteProgressUpdateStreamRequest
 type DeleteProgressUpdateStreamInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2130,7 +2130,7 @@ func (s *DeleteProgressUpdateStreamInput) SetProgressUpdateStreamName(v string) 
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DeleteProgressUpdateStreamResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DeleteProgressUpdateStreamResult
 type DeleteProgressUpdateStreamOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -2145,7 +2145,7 @@ func (s DeleteProgressUpdateStreamOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeApplicationStateRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeApplicationStateRequest
 type DescribeApplicationStateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2187,7 +2187,7 @@ func (s *DescribeApplicationStateInput) SetApplicationId(v string) *DescribeAppl
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeApplicationStateResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeApplicationStateResult
 type DescribeApplicationStateOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -2220,7 +2220,7 @@ func (s *DescribeApplicationStateOutput) SetLastUpdatedTime(v time.Time) *Descri
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTaskRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTaskRequest
 type DescribeMigrationTaskInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2279,7 +2279,7 @@ func (s *DescribeMigrationTaskInput) SetProgressUpdateStream(v string) *Describe
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTaskResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTaskResult
 type DescribeMigrationTaskOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -2303,7 +2303,7 @@ func (s *DescribeMigrationTaskOutput) SetMigrationTask(v *MigrationTask) *Descri
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateCreatedArtifactRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateCreatedArtifactRequest
 type DisassociateCreatedArtifactInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2391,7 +2391,7 @@ func (s *DisassociateCreatedArtifactInput) SetProgressUpdateStream(v string) *Di
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateCreatedArtifactResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateCreatedArtifactResult
 type DisassociateCreatedArtifactOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -2406,7 +2406,7 @@ func (s DisassociateCreatedArtifactOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateDiscoveredResourceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateDiscoveredResourceRequest
 type DisassociateDiscoveredResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2492,7 +2492,7 @@ func (s *DisassociateDiscoveredResourceInput) SetProgressUpdateStream(v string) 
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateDiscoveredResourceResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateDiscoveredResourceResult
 type DisassociateDiscoveredResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -2508,7 +2508,7 @@ func (s DisassociateDiscoveredResourceOutput) GoString() string {
 }
 
 // Object representing the on-premises resource being migrated.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DiscoveredResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DiscoveredResource
 type DiscoveredResource struct {
 	_ struct{} `type:"structure"`
 
@@ -2560,7 +2560,7 @@ func (s *DiscoveredResource) SetDescription(v string) *DiscoveredResource {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ImportMigrationTaskRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ImportMigrationTaskRequest
 type ImportMigrationTaskInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2629,7 +2629,7 @@ func (s *ImportMigrationTaskInput) SetProgressUpdateStream(v string) *ImportMigr
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ImportMigrationTaskResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ImportMigrationTaskResult
 type ImportMigrationTaskOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -2644,7 +2644,7 @@ func (s ImportMigrationTaskOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListCreatedArtifactsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListCreatedArtifactsRequest
 type ListCreatedArtifactsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2726,7 +2726,7 @@ func (s *ListCreatedArtifactsInput) SetProgressUpdateStream(v string) *ListCreat
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListCreatedArtifactsResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListCreatedArtifactsResult
 type ListCreatedArtifactsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -2761,7 +2761,7 @@ func (s *ListCreatedArtifactsOutput) SetNextToken(v string) *ListCreatedArtifact
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListDiscoveredResourcesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListDiscoveredResourcesRequest
 type ListDiscoveredResourcesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2843,7 +2843,7 @@ func (s *ListDiscoveredResourcesInput) SetProgressUpdateStream(v string) *ListDi
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListDiscoveredResourcesResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListDiscoveredResourcesResult
 type ListDiscoveredResourcesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -2877,7 +2877,7 @@ func (s *ListDiscoveredResourcesOutput) SetNextToken(v string) *ListDiscoveredRe
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListMigrationTasksRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListMigrationTasksRequest
 type ListMigrationTasksInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2937,7 +2937,7 @@ func (s *ListMigrationTasksInput) SetResourceName(v string) *ListMigrationTasksI
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListMigrationTasksResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListMigrationTasksResult
 type ListMigrationTasksOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -2972,7 +2972,7 @@ func (s *ListMigrationTasksOutput) SetNextToken(v string) *ListMigrationTasksOut
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListProgressUpdateStreamsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListProgressUpdateStreamsRequest
 type ListProgressUpdateStreamsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3020,7 +3020,7 @@ func (s *ListProgressUpdateStreamsInput) SetNextToken(v string) *ListProgressUpd
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListProgressUpdateStreamsResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListProgressUpdateStreamsResult
 type ListProgressUpdateStreamsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3056,7 +3056,7 @@ func (s *ListProgressUpdateStreamsOutput) SetProgressUpdateStreamSummaryList(v [
 }
 
 // Represents a migration task in a migration tool.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/MigrationTask
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/MigrationTask
 type MigrationTask struct {
 	_ struct{} `type:"structure"`
 
@@ -3117,7 +3117,7 @@ func (s *MigrationTask) SetUpdateDateTime(v time.Time) *MigrationTask {
 
 // MigrationTaskSummary includes MigrationTaskName, ProgressPercent, ProgressUpdateStream,
 // Status, and UpdateDateTime for each task.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/MigrationTaskSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/MigrationTaskSummary
 type MigrationTaskSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -3186,7 +3186,7 @@ func (s *MigrationTaskSummary) SetUpdateDateTime(v time.Time) *MigrationTaskSumm
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyApplicationStateRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyApplicationStateRequest
 type NotifyApplicationStateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3252,7 +3252,7 @@ func (s *NotifyApplicationStateInput) SetStatus(v string) *NotifyApplicationStat
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyApplicationStateResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyApplicationStateResult
 type NotifyApplicationStateOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -3267,7 +3267,7 @@ func (s NotifyApplicationStateOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyMigrationTaskStateRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyMigrationTaskStateRequest
 type NotifyMigrationTaskStateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3385,7 +3385,7 @@ func (s *NotifyMigrationTaskStateInput) SetUpdateDateTime(v time.Time) *NotifyMi
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyMigrationTaskStateResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyMigrationTaskStateResult
 type NotifyMigrationTaskStateOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -3402,7 +3402,7 @@ func (s NotifyMigrationTaskStateOutput) GoString() string {
 
 // Summary of the AWS resource used for access control that is implicitly linked
 // to your AWS account.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ProgressUpdateStreamSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ProgressUpdateStreamSummary
 type ProgressUpdateStreamSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -3426,7 +3426,7 @@ func (s *ProgressUpdateStreamSummary) SetProgressUpdateStreamName(v string) *Pro
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PutResourceAttributesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PutResourceAttributesRequest
 type PutResourceAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3524,7 +3524,7 @@ func (s *PutResourceAttributesInput) SetResourceAttributeList(v []*ResourceAttri
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PutResourceAttributesResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PutResourceAttributesResult
 type PutResourceAttributesOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -3540,7 +3540,7 @@ func (s PutResourceAttributesOutput) GoString() string {
 }
 
 // Attribute associated with a resource.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ResourceAttribute
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ResourceAttribute
 type ResourceAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -3597,7 +3597,7 @@ func (s *ResourceAttribute) SetValue(v string) *ResourceAttribute {
 }
 
 // Task object encapsulating task information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/Task
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/Task
 type Task struct {
 	_ struct{} `type:"structure"`
 

@@ -428,8 +428,7 @@
       "type":"structure",
       "required":[
         "ModelName",
-        "PrimaryContainer",
-        "ExecutionRoleArn"
+        "PrimaryContainer"
       ],
       "members":{
         "ModelName":{"shape":"ModelName"},

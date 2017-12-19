@@ -37,7 +37,7 @@ const opAcceptHandshake = "AcceptHandshake"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AcceptHandshake
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AcceptHandshake
 func (c *Organizations) AcceptHandshakeRequest(input *AcceptHandshakeInput) (req *request.Request, output *AcceptHandshakeOutput) {
 	op := &request.Operation{
 		Name:       opAcceptHandshake,
@@ -231,7 +231,7 @@ func (c *Organizations) AcceptHandshakeRequest(input *AcceptHandshakeInput) (req
 //   so that Organizations can create the required service-linked role. You do
 //   not have that permission.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AcceptHandshake
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AcceptHandshake
 func (c *Organizations) AcceptHandshake(input *AcceptHandshakeInput) (*AcceptHandshakeOutput, error) {
 	req, out := c.AcceptHandshakeRequest(input)
 	return out, req.Send()
@@ -278,7 +278,7 @@ const opAttachPolicy = "AttachPolicy"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AttachPolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AttachPolicy
 func (c *Organizations) AttachPolicyRequest(input *AttachPolicyInput) (req *request.Request, output *AttachPolicyOutput) {
 	op := &request.Operation{
 		Name:       opAttachPolicy,
@@ -527,7 +527,7 @@ func (c *Organizations) AttachPolicyRequest(input *AttachPolicyInput) (req *requ
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AttachPolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AttachPolicy
 func (c *Organizations) AttachPolicy(input *AttachPolicyInput) (*AttachPolicyOutput, error) {
 	req, out := c.AttachPolicyRequest(input)
 	return out, req.Send()
@@ -574,7 +574,7 @@ const opCancelHandshake = "CancelHandshake"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CancelHandshake
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CancelHandshake
 func (c *Organizations) CancelHandshakeRequest(input *CancelHandshakeInput) (req *request.Request, output *CancelHandshakeOutput) {
 	op := &request.Operation{
 		Name:       opCancelHandshake,
@@ -698,7 +698,7 @@ func (c *Organizations) CancelHandshakeRequest(input *CancelHandshakeInput) (req
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CancelHandshake
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CancelHandshake
 func (c *Organizations) CancelHandshake(input *CancelHandshakeInput) (*CancelHandshakeOutput, error) {
 	req, out := c.CancelHandshakeRequest(input)
 	return out, req.Send()
@@ -745,7 +745,7 @@ const opCreateAccount = "CreateAccount"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccount
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccount
 func (c *Organizations) CreateAccountRequest(input *CreateAccountInput) (req *request.Request, output *CreateAccountOutput) {
 	op := &request.Operation{
 		Name:       opCreateAccount,
@@ -990,7 +990,7 @@ func (c *Organizations) CreateAccountRequest(input *CreateAccountInput) (req *re
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccount
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccount
 func (c *Organizations) CreateAccount(input *CreateAccountInput) (*CreateAccountOutput, error) {
 	req, out := c.CreateAccountRequest(input)
 	return out, req.Send()
@@ -1037,7 +1037,7 @@ const opCreateOrganization = "CreateOrganization"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganization
 func (c *Organizations) CreateOrganizationRequest(input *CreateOrganizationInput) (req *request.Request, output *CreateOrganizationOutput) {
 	op := &request.Operation{
 		Name:       opCreateOrganization,
@@ -1248,7 +1248,7 @@ func (c *Organizations) CreateOrganizationRequest(input *CreateOrganizationInput
 //   so that Organizations can create the required service-linked role. You do
 //   not have that permission.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganization
 func (c *Organizations) CreateOrganization(input *CreateOrganizationInput) (*CreateOrganizationOutput, error) {
 	req, out := c.CreateOrganizationRequest(input)
 	return out, req.Send()
@@ -1295,7 +1295,7 @@ const opCreateOrganizationalUnit = "CreateOrganizationalUnit"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationalUnit
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationalUnit
 func (c *Organizations) CreateOrganizationalUnitRequest(input *CreateOrganizationalUnitInput) (req *request.Request, output *CreateOrganizationalUnitOutput) {
 	op := &request.Operation{
 		Name:       opCreateOrganizationalUnit,
@@ -1504,7 +1504,7 @@ func (c *Organizations) CreateOrganizationalUnitRequest(input *CreateOrganizatio
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationalUnit
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationalUnit
 func (c *Organizations) CreateOrganizationalUnit(input *CreateOrganizationalUnitInput) (*CreateOrganizationalUnitOutput, error) {
 	req, out := c.CreateOrganizationalUnitRequest(input)
 	return out, req.Send()
@@ -1551,7 +1551,7 @@ const opCreatePolicy = "CreatePolicy"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreatePolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreatePolicy
 func (c *Organizations) CreatePolicyRequest(input *CreatePolicyInput) (req *request.Request, output *CreatePolicyOutput) {
 	op := &request.Operation{
 		Name:       opCreatePolicy,
@@ -1766,7 +1766,7 @@ func (c *Organizations) CreatePolicyRequest(input *CreatePolicyInput) (req *requ
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreatePolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreatePolicy
 func (c *Organizations) CreatePolicy(input *CreatePolicyInput) (*CreatePolicyOutput, error) {
 	req, out := c.CreatePolicyRequest(input)
 	return out, req.Send()
@@ -1813,7 +1813,7 @@ const opDeclineHandshake = "DeclineHandshake"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeclineHandshake
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeclineHandshake
 func (c *Organizations) DeclineHandshakeRequest(input *DeclineHandshakeInput) (req *request.Request, output *DeclineHandshakeOutput) {
 	op := &request.Operation{
 		Name:       opDeclineHandshake,
@@ -1938,7 +1938,7 @@ func (c *Organizations) DeclineHandshakeRequest(input *DeclineHandshakeInput) (r
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeclineHandshake
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeclineHandshake
 func (c *Organizations) DeclineHandshake(input *DeclineHandshakeInput) (*DeclineHandshakeOutput, error) {
 	req, out := c.DeclineHandshakeRequest(input)
 	return out, req.Send()
@@ -1985,7 +1985,7 @@ const opDeleteOrganization = "DeleteOrganization"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganization
 func (c *Organizations) DeleteOrganizationRequest(input *DeleteOrganizationInput) (req *request.Request, output *DeleteOrganizationOutput) {
 	op := &request.Operation{
 		Name:       opDeleteOrganization,
@@ -2102,7 +2102,7 @@ func (c *Organizations) DeleteOrganizationRequest(input *DeleteOrganizationInput
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganization
 func (c *Organizations) DeleteOrganization(input *DeleteOrganizationInput) (*DeleteOrganizationOutput, error) {
 	req, out := c.DeleteOrganizationRequest(input)
 	return out, req.Send()
@@ -2149,7 +2149,7 @@ const opDeleteOrganizationalUnit = "DeleteOrganizationalUnit"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationalUnit
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationalUnit
 func (c *Organizations) DeleteOrganizationalUnitRequest(input *DeleteOrganizationalUnitInput) (req *request.Request, output *DeleteOrganizationalUnitOutput) {
 	op := &request.Operation{
 		Name:       opDeleteOrganizationalUnit,
@@ -2271,7 +2271,7 @@ func (c *Organizations) DeleteOrganizationalUnitRequest(input *DeleteOrganizatio
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationalUnit
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationalUnit
 func (c *Organizations) DeleteOrganizationalUnit(input *DeleteOrganizationalUnitInput) (*DeleteOrganizationalUnitOutput, error) {
 	req, out := c.DeleteOrganizationalUnitRequest(input)
 	return out, req.Send()
@@ -2318,7 +2318,7 @@ const opDeletePolicy = "DeletePolicy"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeletePolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeletePolicy
 func (c *Organizations) DeletePolicyRequest(input *DeletePolicyInput) (req *request.Request, output *DeletePolicyOutput) {
 	op := &request.Operation{
 		Name:       opDeletePolicy,
@@ -2438,7 +2438,7 @@ func (c *Organizations) DeletePolicyRequest(input *DeletePolicyInput) (req *requ
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeletePolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeletePolicy
 func (c *Organizations) DeletePolicy(input *DeletePolicyInput) (*DeletePolicyOutput, error) {
 	req, out := c.DeletePolicyRequest(input)
 	return out, req.Send()
@@ -2485,7 +2485,7 @@ const opDescribeAccount = "DescribeAccount"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeAccount
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeAccount
 func (c *Organizations) DescribeAccountRequest(input *DescribeAccountInput) (req *request.Request, output *DescribeAccountOutput) {
 	op := &request.Operation{
 		Name:       opDescribeAccount,
@@ -2596,7 +2596,7 @@ func (c *Organizations) DescribeAccountRequest(input *DescribeAccountInput) (req
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeAccount
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeAccount
 func (c *Organizations) DescribeAccount(input *DescribeAccountInput) (*DescribeAccountOutput, error) {
 	req, out := c.DescribeAccountRequest(input)
 	return out, req.Send()
@@ -2643,7 +2643,7 @@ const opDescribeCreateAccountStatus = "DescribeCreateAccountStatus"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatus
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatus
 func (c *Organizations) DescribeCreateAccountStatusRequest(input *DescribeCreateAccountStatusInput) (req *request.Request, output *DescribeCreateAccountStatusOutput) {
 	op := &request.Operation{
 		Name:       opDescribeCreateAccountStatus,
@@ -2753,7 +2753,7 @@ func (c *Organizations) DescribeCreateAccountStatusRequest(input *DescribeCreate
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatus
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatus
 func (c *Organizations) DescribeCreateAccountStatus(input *DescribeCreateAccountStatusInput) (*DescribeCreateAccountStatusOutput, error) {
 	req, out := c.DescribeCreateAccountStatusRequest(input)
 	return out, req.Send()
@@ -2800,7 +2800,7 @@ const opDescribeHandshake = "DescribeHandshake"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeHandshake
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeHandshake
 func (c *Organizations) DescribeHandshakeRequest(input *DescribeHandshakeInput) (req *request.Request, output *DescribeHandshakeOutput) {
 	op := &request.Operation{
 		Name:       opDescribeHandshake,
@@ -2915,7 +2915,7 @@ func (c *Organizations) DescribeHandshakeRequest(input *DescribeHandshakeInput) 
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeHandshake
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeHandshake
 func (c *Organizations) DescribeHandshake(input *DescribeHandshakeInput) (*DescribeHandshakeOutput, error) {
 	req, out := c.DescribeHandshakeRequest(input)
 	return out, req.Send()
@@ -2962,7 +2962,7 @@ const opDescribeOrganization = "DescribeOrganization"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganization
 func (c *Organizations) DescribeOrganizationRequest(input *DescribeOrganizationInput) (req *request.Request, output *DescribeOrganizationOutput) {
 	op := &request.Operation{
 		Name:       opDescribeOrganization,
@@ -3017,7 +3017,7 @@ func (c *Organizations) DescribeOrganizationRequest(input *DescribeOrganizationI
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganization
 func (c *Organizations) DescribeOrganization(input *DescribeOrganizationInput) (*DescribeOrganizationOutput, error) {
 	req, out := c.DescribeOrganizationRequest(input)
 	return out, req.Send()
@@ -3064,7 +3064,7 @@ const opDescribeOrganizationalUnit = "DescribeOrganizationalUnit"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationalUnit
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationalUnit
 func (c *Organizations) DescribeOrganizationalUnitRequest(input *DescribeOrganizationalUnitInput) (req *request.Request, output *DescribeOrganizationalUnitOutput) {
 	op := &request.Operation{
 		Name:       opDescribeOrganizationalUnit,
@@ -3174,7 +3174,7 @@ func (c *Organizations) DescribeOrganizationalUnitRequest(input *DescribeOrganiz
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationalUnit
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationalUnit
 func (c *Organizations) DescribeOrganizationalUnit(input *DescribeOrganizationalUnitInput) (*DescribeOrganizationalUnitOutput, error) {
 	req, out := c.DescribeOrganizationalUnitRequest(input)
 	return out, req.Send()
@@ -3221,7 +3221,7 @@ const opDescribePolicy = "DescribePolicy"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribePolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribePolicy
 func (c *Organizations) DescribePolicyRequest(input *DescribePolicyInput) (req *request.Request, output *DescribePolicyOutput) {
 	op := &request.Operation{
 		Name:       opDescribePolicy,
@@ -3330,7 +3330,7 @@ func (c *Organizations) DescribePolicyRequest(input *DescribePolicyInput) (req *
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribePolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribePolicy
 func (c *Organizations) DescribePolicy(input *DescribePolicyInput) (*DescribePolicyOutput, error) {
 	req, out := c.DescribePolicyRequest(input)
 	return out, req.Send()
@@ -3377,7 +3377,7 @@ const opDetachPolicy = "DetachPolicy"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DetachPolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DetachPolicy
 func (c *Organizations) DetachPolicyRequest(input *DetachPolicyInput) (req *request.Request, output *DetachPolicyOutput) {
 	op := &request.Operation{
 		Name:       opDetachPolicy,
@@ -3595,7 +3595,7 @@ func (c *Organizations) DetachPolicyRequest(input *DetachPolicyInput) (req *requ
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DetachPolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DetachPolicy
 func (c *Organizations) DetachPolicy(input *DetachPolicyInput) (*DetachPolicyOutput, error) {
 	req, out := c.DetachPolicyRequest(input)
 	return out, req.Send()
@@ -3642,7 +3642,7 @@ const opDisableAWSServiceAccess = "DisableAWSServiceAccess"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisableAWSServiceAccess
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisableAWSServiceAccess
 func (c *Organizations) DisableAWSServiceAccessRequest(input *DisableAWSServiceAccessInput) (req *request.Request, output *DisableAWSServiceAccessOutput) {
 	op := &request.Operation{
 		Name:       opDisableAWSServiceAccess,
@@ -3859,7 +3859,7 @@ func (c *Organizations) DisableAWSServiceAccessRequest(input *DisableAWSServiceA
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisableAWSServiceAccess
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisableAWSServiceAccess
 func (c *Organizations) DisableAWSServiceAccess(input *DisableAWSServiceAccessInput) (*DisableAWSServiceAccessOutput, error) {
 	req, out := c.DisableAWSServiceAccessRequest(input)
 	return out, req.Send()
@@ -3906,7 +3906,7 @@ const opDisablePolicyType = "DisablePolicyType"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyType
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyType
 func (c *Organizations) DisablePolicyTypeRequest(input *DisablePolicyTypeInput) (req *request.Request, output *DisablePolicyTypeOutput) {
 	op := &request.Operation{
 		Name:       opDisablePolicyType,
@@ -4115,7 +4115,7 @@ func (c *Organizations) DisablePolicyTypeRequest(input *DisablePolicyTypeInput) 
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyType
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyType
 func (c *Organizations) DisablePolicyType(input *DisablePolicyTypeInput) (*DisablePolicyTypeOutput, error) {
 	req, out := c.DisablePolicyTypeRequest(input)
 	return out, req.Send()
@@ -4162,7 +4162,7 @@ const opEnableAWSServiceAccess = "EnableAWSServiceAccess"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAWSServiceAccess
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAWSServiceAccess
 func (c *Organizations) EnableAWSServiceAccessRequest(input *EnableAWSServiceAccessInput) (req *request.Request, output *EnableAWSServiceAccessOutput) {
 	op := &request.Operation{
 		Name:       opEnableAWSServiceAccess,
@@ -4376,7 +4376,7 @@ func (c *Organizations) EnableAWSServiceAccessRequest(input *EnableAWSServiceAcc
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAWSServiceAccess
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAWSServiceAccess
 func (c *Organizations) EnableAWSServiceAccess(input *EnableAWSServiceAccessInput) (*EnableAWSServiceAccessOutput, error) {
 	req, out := c.EnableAWSServiceAccessRequest(input)
 	return out, req.Send()
@@ -4423,7 +4423,7 @@ const opEnableAllFeatures = "EnableAllFeatures"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAllFeatures
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAllFeatures
 func (c *Organizations) EnableAllFeaturesRequest(input *EnableAllFeaturesInput) (req *request.Request, output *EnableAllFeaturesOutput) {
 	op := &request.Operation{
 		Name:       opEnableAllFeatures,
@@ -4599,7 +4599,7 @@ func (c *Organizations) EnableAllFeaturesRequest(input *EnableAllFeaturesInput) 
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAllFeatures
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAllFeatures
 func (c *Organizations) EnableAllFeatures(input *EnableAllFeaturesInput) (*EnableAllFeaturesOutput, error) {
 	req, out := c.EnableAllFeaturesRequest(input)
 	return out, req.Send()
@@ -4646,7 +4646,7 @@ const opEnablePolicyType = "EnablePolicyType"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyType
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyType
 func (c *Organizations) EnablePolicyTypeRequest(input *EnablePolicyTypeInput) (req *request.Request, output *EnablePolicyTypeOutput) {
 	op := &request.Operation{
 		Name:       opEnablePolicyType,
@@ -4856,7 +4856,7 @@ func (c *Organizations) EnablePolicyTypeRequest(input *EnablePolicyTypeInput) (r
 //   see Enabling and Disabling a Policy Type on a Root (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html#enable_policies_on_root)
 //   in the AWS Organizations User Guide.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyType
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyType
 func (c *Organizations) EnablePolicyType(input *EnablePolicyTypeInput) (*EnablePolicyTypeOutput, error) {
 	req, out := c.EnablePolicyTypeRequest(input)
 	return out, req.Send()
@@ -4903,7 +4903,7 @@ const opInviteAccountToOrganization = "InviteAccountToOrganization"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InviteAccountToOrganization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InviteAccountToOrganization
 func (c *Organizations) InviteAccountToOrganizationRequest(input *InviteAccountToOrganizationInput) (req *request.Request, output *InviteAccountToOrganizationOutput) {
 	op := &request.Operation{
 		Name:       opInviteAccountToOrganization,
@@ -5080,7 +5080,7 @@ func (c *Organizations) InviteAccountToOrganizationRequest(input *InviteAccountT
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InviteAccountToOrganization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InviteAccountToOrganization
 func (c *Organizations) InviteAccountToOrganization(input *InviteAccountToOrganizationInput) (*InviteAccountToOrganizationOutput, error) {
 	req, out := c.InviteAccountToOrganizationRequest(input)
 	return out, req.Send()
@@ -5127,7 +5127,7 @@ const opLeaveOrganization = "LeaveOrganization"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/LeaveOrganization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/LeaveOrganization
 func (c *Organizations) LeaveOrganizationRequest(input *LeaveOrganizationInput) (req *request.Request, output *LeaveOrganizationOutput) {
 	op := &request.Operation{
 		Name:       opLeaveOrganization,
@@ -5360,7 +5360,7 @@ func (c *Organizations) LeaveOrganizationRequest(input *LeaveOrganizationInput) 
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/LeaveOrganization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/LeaveOrganization
 func (c *Organizations) LeaveOrganization(input *LeaveOrganizationInput) (*LeaveOrganizationOutput, error) {
 	req, out := c.LeaveOrganizationRequest(input)
 	return out, req.Send()
@@ -5407,7 +5407,7 @@ const opListAWSServiceAccessForOrganization = "ListAWSServiceAccessForOrganizati
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganization
 func (c *Organizations) ListAWSServiceAccessForOrganizationRequest(input *ListAWSServiceAccessForOrganizationInput) (req *request.Request, output *ListAWSServiceAccessForOrganizationOutput) {
 	op := &request.Operation{
 		Name:       opListAWSServiceAccessForOrganization,
@@ -5612,7 +5612,7 @@ func (c *Organizations) ListAWSServiceAccessForOrganizationRequest(input *ListAW
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganization
 func (c *Organizations) ListAWSServiceAccessForOrganization(input *ListAWSServiceAccessForOrganizationInput) (*ListAWSServiceAccessForOrganizationOutput, error) {
 	req, out := c.ListAWSServiceAccessForOrganizationRequest(input)
 	return out, req.Send()
@@ -5709,7 +5709,7 @@ const opListAccounts = "ListAccounts"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccounts
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccounts
 func (c *Organizations) ListAccountsRequest(input *ListAccountsInput) (req *request.Request, output *ListAccountsOutput) {
 	op := &request.Operation{
 		Name:       opListAccounts,
@@ -5822,7 +5822,7 @@ func (c *Organizations) ListAccountsRequest(input *ListAccountsInput) (req *requ
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccounts
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccounts
 func (c *Organizations) ListAccounts(input *ListAccountsInput) (*ListAccountsOutput, error) {
 	req, out := c.ListAccountsRequest(input)
 	return out, req.Send()
@@ -5919,7 +5919,7 @@ const opListAccountsForParent = "ListAccountsForParent"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParent
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParent
 func (c *Organizations) ListAccountsForParentRequest(input *ListAccountsForParentInput) (req *request.Request, output *ListAccountsForParentOutput) {
 	op := &request.Operation{
 		Name:       opListAccountsForParent,
@@ -6040,7 +6040,7 @@ func (c *Organizations) ListAccountsForParentRequest(input *ListAccountsForParen
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParent
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParent
 func (c *Organizations) ListAccountsForParent(input *ListAccountsForParentInput) (*ListAccountsForParentOutput, error) {
 	req, out := c.ListAccountsForParentRequest(input)
 	return out, req.Send()
@@ -6137,7 +6137,7 @@ const opListChildren = "ListChildren"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListChildren
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListChildren
 func (c *Organizations) ListChildrenRequest(input *ListChildrenInput) (req *request.Request, output *ListChildrenOutput) {
 	op := &request.Operation{
 		Name:       opListChildren,
@@ -6255,7 +6255,7 @@ func (c *Organizations) ListChildrenRequest(input *ListChildrenInput) (req *requ
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListChildren
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListChildren
 func (c *Organizations) ListChildren(input *ListChildrenInput) (*ListChildrenOutput, error) {
 	req, out := c.ListChildrenRequest(input)
 	return out, req.Send()
@@ -6352,7 +6352,7 @@ const opListCreateAccountStatus = "ListCreateAccountStatus"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatus
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatus
 func (c *Organizations) ListCreateAccountStatusRequest(input *ListCreateAccountStatusInput) (req *request.Request, output *ListCreateAccountStatusOutput) {
 	op := &request.Operation{
 		Name:       opListCreateAccountStatus,
@@ -6465,7 +6465,7 @@ func (c *Organizations) ListCreateAccountStatusRequest(input *ListCreateAccountS
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatus
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatus
 func (c *Organizations) ListCreateAccountStatus(input *ListCreateAccountStatusInput) (*ListCreateAccountStatusOutput, error) {
 	req, out := c.ListCreateAccountStatusRequest(input)
 	return out, req.Send()
@@ -6562,7 +6562,7 @@ const opListHandshakesForAccount = "ListHandshakesForAccount"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForAccount
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForAccount
 func (c *Organizations) ListHandshakesForAccountRequest(input *ListHandshakesForAccountInput) (req *request.Request, output *ListHandshakesForAccountOutput) {
 	op := &request.Operation{
 		Name:       opListHandshakesForAccount,
@@ -6679,7 +6679,7 @@ func (c *Organizations) ListHandshakesForAccountRequest(input *ListHandshakesFor
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForAccount
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForAccount
 func (c *Organizations) ListHandshakesForAccount(input *ListHandshakesForAccountInput) (*ListHandshakesForAccountOutput, error) {
 	req, out := c.ListHandshakesForAccountRequest(input)
 	return out, req.Send()
@@ -6776,7 +6776,7 @@ const opListHandshakesForOrganization = "ListHandshakesForOrganization"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForOrganization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForOrganization
 func (c *Organizations) ListHandshakesForOrganizationRequest(input *ListHandshakesForOrganizationInput) (req *request.Request, output *ListHandshakesForOrganizationOutput) {
 	op := &request.Operation{
 		Name:       opListHandshakesForOrganization,
@@ -6899,7 +6899,7 @@ func (c *Organizations) ListHandshakesForOrganizationRequest(input *ListHandshak
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForOrganization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForOrganization
 func (c *Organizations) ListHandshakesForOrganization(input *ListHandshakesForOrganizationInput) (*ListHandshakesForOrganizationOutput, error) {
 	req, out := c.ListHandshakesForOrganizationRequest(input)
 	return out, req.Send()
@@ -6996,7 +6996,7 @@ const opListOrganizationalUnitsForParent = "ListOrganizationalUnitsForParent"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOrganizationalUnitsForParent
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOrganizationalUnitsForParent
 func (c *Organizations) ListOrganizationalUnitsForParentRequest(input *ListOrganizationalUnitsForParentInput) (req *request.Request, output *ListOrganizationalUnitsForParentOutput) {
 	op := &request.Operation{
 		Name:       opListOrganizationalUnitsForParent,
@@ -7112,7 +7112,7 @@ func (c *Organizations) ListOrganizationalUnitsForParentRequest(input *ListOrgan
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOrganizationalUnitsForParent
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOrganizationalUnitsForParent
 func (c *Organizations) ListOrganizationalUnitsForParent(input *ListOrganizationalUnitsForParentInput) (*ListOrganizationalUnitsForParentOutput, error) {
 	req, out := c.ListOrganizationalUnitsForParentRequest(input)
 	return out, req.Send()
@@ -7209,7 +7209,7 @@ const opListParents = "ListParents"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParents
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParents
 func (c *Organizations) ListParentsRequest(input *ListParentsInput) (req *request.Request, output *ListParentsOutput) {
 	op := &request.Operation{
 		Name:       opListParents,
@@ -7329,7 +7329,7 @@ func (c *Organizations) ListParentsRequest(input *ListParentsInput) (req *reques
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParents
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParents
 func (c *Organizations) ListParents(input *ListParentsInput) (*ListParentsOutput, error) {
 	req, out := c.ListParentsRequest(input)
 	return out, req.Send()
@@ -7426,7 +7426,7 @@ const opListPolicies = "ListPolicies"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPolicies
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPolicies
 func (c *Organizations) ListPoliciesRequest(input *ListPoliciesInput) (req *request.Request, output *ListPoliciesOutput) {
 	op := &request.Operation{
 		Name:       opListPolicies,
@@ -7538,7 +7538,7 @@ func (c *Organizations) ListPoliciesRequest(input *ListPoliciesInput) (req *requ
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPolicies
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPolicies
 func (c *Organizations) ListPolicies(input *ListPoliciesInput) (*ListPoliciesOutput, error) {
 	req, out := c.ListPoliciesRequest(input)
 	return out, req.Send()
@@ -7635,7 +7635,7 @@ const opListPoliciesForTarget = "ListPoliciesForTarget"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesForTarget
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesForTarget
 func (c *Organizations) ListPoliciesForTargetRequest(input *ListPoliciesForTargetInput) (req *request.Request, output *ListPoliciesForTargetOutput) {
 	op := &request.Operation{
 		Name:       opListPoliciesForTarget,
@@ -7752,7 +7752,7 @@ func (c *Organizations) ListPoliciesForTargetRequest(input *ListPoliciesForTarge
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesForTarget
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesForTarget
 func (c *Organizations) ListPoliciesForTarget(input *ListPoliciesForTargetInput) (*ListPoliciesForTargetOutput, error) {
 	req, out := c.ListPoliciesForTargetRequest(input)
 	return out, req.Send()
@@ -7849,7 +7849,7 @@ const opListRoots = "ListRoots"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListRoots
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListRoots
 func (c *Organizations) ListRootsRequest(input *ListRootsInput) (req *request.Request, output *ListRootsOutput) {
 	op := &request.Operation{
 		Name:       opListRoots,
@@ -7961,7 +7961,7 @@ func (c *Organizations) ListRootsRequest(input *ListRootsInput) (req *request.Re
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListRoots
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListRoots
 func (c *Organizations) ListRoots(input *ListRootsInput) (*ListRootsOutput, error) {
 	req, out := c.ListRootsRequest(input)
 	return out, req.Send()
@@ -8058,7 +8058,7 @@ const opListTargetsForPolicy = "ListTargetsForPolicy"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTargetsForPolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTargetsForPolicy
 func (c *Organizations) ListTargetsForPolicyRequest(input *ListTargetsForPolicyInput) (req *request.Request, output *ListTargetsForPolicyOutput) {
 	op := &request.Operation{
 		Name:       opListTargetsForPolicy,
@@ -8173,7 +8173,7 @@ func (c *Organizations) ListTargetsForPolicyRequest(input *ListTargetsForPolicyI
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTargetsForPolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTargetsForPolicy
 func (c *Organizations) ListTargetsForPolicy(input *ListTargetsForPolicyInput) (*ListTargetsForPolicyOutput, error) {
 	req, out := c.ListTargetsForPolicyRequest(input)
 	return out, req.Send()
@@ -8270,7 +8270,7 @@ const opMoveAccount = "MoveAccount"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/MoveAccount
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/MoveAccount
 func (c *Organizations) MoveAccountRequest(input *MoveAccountInput) (req *request.Request, output *MoveAccountOutput) {
 	op := &request.Operation{
 		Name:       opMoveAccount,
@@ -8398,7 +8398,7 @@ func (c *Organizations) MoveAccountRequest(input *MoveAccountInput) (req *reques
 //   AWS Organizations can't complete your request because of an internal service
 //   error. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/MoveAccount
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/MoveAccount
 func (c *Organizations) MoveAccount(input *MoveAccountInput) (*MoveAccountOutput, error) {
 	req, out := c.MoveAccountRequest(input)
 	return out, req.Send()
@@ -8445,7 +8445,7 @@ const opRemoveAccountFromOrganization = "RemoveAccountFromOrganization"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/RemoveAccountFromOrganization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/RemoveAccountFromOrganization
 func (c *Organizations) RemoveAccountFromOrganizationRequest(input *RemoveAccountFromOrganizationInput) (req *request.Request, output *RemoveAccountFromOrganizationOutput) {
 	op := &request.Operation{
 		Name:       opRemoveAccountFromOrganization,
@@ -8679,7 +8679,7 @@ func (c *Organizations) RemoveAccountFromOrganizationRequest(input *RemoveAccoun
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/RemoveAccountFromOrganization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/RemoveAccountFromOrganization
 func (c *Organizations) RemoveAccountFromOrganization(input *RemoveAccountFromOrganizationInput) (*RemoveAccountFromOrganizationOutput, error) {
 	req, out := c.RemoveAccountFromOrganizationRequest(input)
 	return out, req.Send()
@@ -8726,7 +8726,7 @@ const opUpdateOrganizationalUnit = "UpdateOrganizationalUnit"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdateOrganizationalUnit
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdateOrganizationalUnit
 func (c *Organizations) UpdateOrganizationalUnitRequest(input *UpdateOrganizationalUnitInput) (req *request.Request, output *UpdateOrganizationalUnitOutput) {
 	op := &request.Operation{
 		Name:       opUpdateOrganizationalUnit,
@@ -8845,7 +8845,7 @@ func (c *Organizations) UpdateOrganizationalUnitRequest(input *UpdateOrganizatio
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdateOrganizationalUnit
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdateOrganizationalUnit
 func (c *Organizations) UpdateOrganizationalUnit(input *UpdateOrganizationalUnitInput) (*UpdateOrganizationalUnitOutput, error) {
 	req, out := c.UpdateOrganizationalUnitRequest(input)
 	return out, req.Send()
@@ -8892,7 +8892,7 @@ const opUpdatePolicy = "UpdatePolicy"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdatePolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdatePolicy
 func (c *Organizations) UpdatePolicyRequest(input *UpdatePolicyInput) (req *request.Request, output *UpdatePolicyOutput) {
 	op := &request.Operation{
 		Name:       opUpdatePolicy,
@@ -9101,7 +9101,7 @@ func (c *Organizations) UpdatePolicyRequest(input *UpdatePolicyInput) (req *requ
 //   You've sent too many requests in too short a period of time. The limit helps
 //   protect against denial-of-service attacks. Try again later.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdatePolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdatePolicy
 func (c *Organizations) UpdatePolicy(input *UpdatePolicyInput) (*UpdatePolicyOutput, error) {
 	req, out := c.UpdatePolicyRequest(input)
 	return out, req.Send()
@@ -9123,7 +9123,7 @@ func (c *Organizations) UpdatePolicyWithContext(ctx aws.Context, input *UpdatePo
 	return out, req.Send()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AcceptHandshakeRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AcceptHandshakeRequest
 type AcceptHandshakeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9165,7 +9165,7 @@ func (s *AcceptHandshakeInput) SetHandshakeId(v string) *AcceptHandshakeInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AcceptHandshakeResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AcceptHandshakeResponse
 type AcceptHandshakeOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9190,7 +9190,7 @@ func (s *AcceptHandshakeOutput) SetHandshake(v *Handshake) *AcceptHandshakeOutpu
 }
 
 // Contains information about an AWS account that is a member of an organization.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Account
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Account
 type Account struct {
 	_ struct{} `type:"structure"`
 
@@ -9282,7 +9282,7 @@ func (s *Account) SetStatus(v string) *Account {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AttachPolicyRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AttachPolicyRequest
 type AttachPolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9354,7 +9354,7 @@ func (s *AttachPolicyInput) SetTargetId(v string) *AttachPolicyInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AttachPolicyOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AttachPolicyOutput
 type AttachPolicyOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -9369,7 +9369,7 @@ func (s AttachPolicyOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CancelHandshakeRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CancelHandshakeRequest
 type CancelHandshakeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9412,7 +9412,7 @@ func (s *CancelHandshakeInput) SetHandshakeId(v string) *CancelHandshakeInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CancelHandshakeResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CancelHandshakeResponse
 type CancelHandshakeOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9437,7 +9437,7 @@ func (s *CancelHandshakeOutput) SetHandshake(v *Handshake) *CancelHandshakeOutpu
 }
 
 // Contains a list of child entities, either OUs or accounts.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Child
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Child
 type Child struct {
 	_ struct{} `type:"structure"`
 
@@ -9480,7 +9480,7 @@ func (s *Child) SetType(v string) *Child {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountRequest
 type CreateAccountInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9589,7 +9589,7 @@ func (s *CreateAccountInput) SetRoleName(v string) *CreateAccountInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountResponse
 type CreateAccountOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9619,7 +9619,7 @@ func (s *CreateAccountOutput) SetCreateAccountStatus(v *CreateAccountStatus) *Cr
 
 // Contains the status about a CreateAccount request to create an AWS account
 // in an organization.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountStatus
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountStatus
 type CreateAccountStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -9721,7 +9721,7 @@ func (s *CreateAccountStatus) SetState(v string) *CreateAccountStatus {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationRequest
 type CreateOrganizationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9757,7 +9757,7 @@ func (s *CreateOrganizationInput) SetFeatureSet(v string) *CreateOrganizationInp
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationResponse
 type CreateOrganizationOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9781,7 +9781,7 @@ func (s *CreateOrganizationOutput) SetOrganization(v *Organization) *CreateOrgan
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationalUnitRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationalUnitRequest
 type CreateOrganizationalUnitInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9849,7 +9849,7 @@ func (s *CreateOrganizationalUnitInput) SetParentId(v string) *CreateOrganizatio
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationalUnitResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationalUnitResponse
 type CreateOrganizationalUnitOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9873,7 +9873,7 @@ func (s *CreateOrganizationalUnitOutput) SetOrganizationalUnit(v *Organizational
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreatePolicyRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreatePolicyRequest
 type CreatePolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9973,7 +9973,7 @@ func (s *CreatePolicyInput) SetType(v string) *CreatePolicyInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreatePolicyResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreatePolicyResponse
 type CreatePolicyOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9997,7 +9997,7 @@ func (s *CreatePolicyOutput) SetPolicy(v *Policy) *CreatePolicyOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeclineHandshakeRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeclineHandshakeRequest
 type DeclineHandshakeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10040,7 +10040,7 @@ func (s *DeclineHandshakeInput) SetHandshakeId(v string) *DeclineHandshakeInput 
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeclineHandshakeResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeclineHandshakeResponse
 type DeclineHandshakeOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10065,7 +10065,7 @@ func (s *DeclineHandshakeOutput) SetHandshake(v *Handshake) *DeclineHandshakeOut
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationInput
 type DeleteOrganizationInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -10080,7 +10080,7 @@ func (s DeleteOrganizationInput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationOutput
 type DeleteOrganizationOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -10095,7 +10095,7 @@ func (s DeleteOrganizationOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationalUnitRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationalUnitRequest
 type DeleteOrganizationalUnitInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10140,7 +10140,7 @@ func (s *DeleteOrganizationalUnitInput) SetOrganizationalUnitId(v string) *Delet
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationalUnitOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationalUnitOutput
 type DeleteOrganizationalUnitOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -10155,7 +10155,7 @@ func (s DeleteOrganizationalUnitOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeletePolicyRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeletePolicyRequest
 type DeletePolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10198,7 +10198,7 @@ func (s *DeletePolicyInput) SetPolicyId(v string) *DeletePolicyInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeletePolicyOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeletePolicyOutput
 type DeletePolicyOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -10213,7 +10213,7 @@ func (s DeletePolicyOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeAccountRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeAccountRequest
 type DescribeAccountInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10256,7 +10256,7 @@ func (s *DescribeAccountInput) SetAccountId(v string) *DescribeAccountInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeAccountResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeAccountResponse
 type DescribeAccountOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10280,7 +10280,7 @@ func (s *DescribeAccountOutput) SetAccount(v *Account) *DescribeAccountOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatusRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatusRequest
 type DescribeCreateAccountStatusInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10325,7 +10325,7 @@ func (s *DescribeCreateAccountStatusInput) SetCreateAccountRequestId(v string) *
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatusResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatusResponse
 type DescribeCreateAccountStatusOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10349,7 +10349,7 @@ func (s *DescribeCreateAccountStatusOutput) SetCreateAccountStatus(v *CreateAcco
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeHandshakeRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeHandshakeRequest
 type DescribeHandshakeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10393,7 +10393,7 @@ func (s *DescribeHandshakeInput) SetHandshakeId(v string) *DescribeHandshakeInpu
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeHandshakeResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeHandshakeResponse
 type DescribeHandshakeOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10417,7 +10417,7 @@ func (s *DescribeHandshakeOutput) SetHandshake(v *Handshake) *DescribeHandshakeO
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationInput
 type DescribeOrganizationInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -10432,7 +10432,7 @@ func (s DescribeOrganizationInput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationResponse
 type DescribeOrganizationOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10456,7 +10456,7 @@ func (s *DescribeOrganizationOutput) SetOrganization(v *Organization) *DescribeO
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationalUnitRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationalUnitRequest
 type DescribeOrganizationalUnitInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10501,7 +10501,7 @@ func (s *DescribeOrganizationalUnitInput) SetOrganizationalUnitId(v string) *Des
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationalUnitResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationalUnitResponse
 type DescribeOrganizationalUnitOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10525,7 +10525,7 @@ func (s *DescribeOrganizationalUnitOutput) SetOrganizationalUnit(v *Organization
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribePolicyRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribePolicyRequest
 type DescribePolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10568,7 +10568,7 @@ func (s *DescribePolicyInput) SetPolicyId(v string) *DescribePolicyInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribePolicyResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribePolicyResponse
 type DescribePolicyOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10592,7 +10592,7 @@ func (s *DescribePolicyOutput) SetPolicy(v *Policy) *DescribePolicyOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DetachPolicyRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DetachPolicyRequest
 type DetachPolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10664,7 +10664,7 @@ func (s *DetachPolicyInput) SetTargetId(v string) *DetachPolicyInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DetachPolicyOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DetachPolicyOutput
 type DetachPolicyOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -10679,7 +10679,7 @@ func (s DetachPolicyOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisableAWSServiceAccessRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisableAWSServiceAccessRequest
 type DisableAWSServiceAccessInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10723,7 +10723,7 @@ func (s *DisableAWSServiceAccessInput) SetServicePrincipal(v string) *DisableAWS
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisableAWSServiceAccessOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisableAWSServiceAccessOutput
 type DisableAWSServiceAccessOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -10738,7 +10738,7 @@ func (s DisableAWSServiceAccessOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyTypeRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyTypeRequest
 type DisablePolicyTypeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10795,7 +10795,7 @@ func (s *DisablePolicyTypeInput) SetRootId(v string) *DisablePolicyTypeInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyTypeResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyTypeResponse
 type DisablePolicyTypeOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10819,7 +10819,7 @@ func (s *DisablePolicyTypeOutput) SetRoot(v *Root) *DisablePolicyTypeOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAWSServiceAccessRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAWSServiceAccessRequest
 type EnableAWSServiceAccessInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10863,7 +10863,7 @@ func (s *EnableAWSServiceAccessInput) SetServicePrincipal(v string) *EnableAWSSe
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAWSServiceAccessOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAWSServiceAccessOutput
 type EnableAWSServiceAccessOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -10878,7 +10878,7 @@ func (s EnableAWSServiceAccessOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAllFeaturesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAllFeaturesRequest
 type EnableAllFeaturesInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -10893,7 +10893,7 @@ func (s EnableAllFeaturesInput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAllFeaturesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAllFeaturesResponse
 type EnableAllFeaturesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10918,7 +10918,7 @@ func (s *EnableAllFeaturesOutput) SetHandshake(v *Handshake) *EnableAllFeaturesO
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyTypeRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyTypeRequest
 type EnablePolicyTypeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10975,7 +10975,7 @@ func (s *EnablePolicyTypeInput) SetRootId(v string) *EnablePolicyTypeInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyTypeResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyTypeResponse
 type EnablePolicyTypeOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -11001,7 +11001,7 @@ func (s *EnablePolicyTypeOutput) SetRoot(v *Root) *EnablePolicyTypeOutput {
 
 // A structure that contains details of a service principal that is enabled
 // to integrate with AWS Organizations.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnabledServicePrincipal
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnabledServicePrincipal
 type EnabledServicePrincipal struct {
 	_ struct{} `type:"structure"`
 
@@ -11044,7 +11044,7 @@ func (s *EnabledServicePrincipal) SetServicePrincipal(v string) *EnabledServiceP
 //
 // Note: Handshakes that are CANCELED, ACCEPTED, or DECLINED show up in lists
 // for only 30 days after entering that state After that they are deleted.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Handshake
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Handshake
 type Handshake struct {
 	_ struct{} `type:"structure"`
 
@@ -11180,7 +11180,7 @@ func (s *Handshake) SetState(v string) *Handshake {
 }
 
 // Specifies the criteria that are used to select the handshakes for the operation.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/HandshakeFilter
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/HandshakeFilter
 type HandshakeFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -11222,7 +11222,7 @@ func (s *HandshakeFilter) SetParentHandshakeId(v string) *HandshakeFilter {
 }
 
 // Identifies a participant in a handshake.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/HandshakeParty
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/HandshakeParty
 type HandshakeParty struct {
 	_ struct{} `type:"structure"`
 
@@ -11282,7 +11282,7 @@ func (s *HandshakeParty) SetType(v string) *HandshakeParty {
 }
 
 // Contains additional data that is needed to process a handshake.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/HandshakeResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/HandshakeResource
 type HandshakeResource struct {
 	_ struct{} `type:"structure"`
 
@@ -11342,7 +11342,7 @@ func (s *HandshakeResource) SetValue(v string) *HandshakeResource {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InviteAccountToOrganizationRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InviteAccountToOrganizationRequest
 type InviteAccountToOrganizationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -11410,7 +11410,7 @@ func (s *InviteAccountToOrganizationInput) SetTarget(v *HandshakeParty) *InviteA
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InviteAccountToOrganizationResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InviteAccountToOrganizationResponse
 type InviteAccountToOrganizationOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -11435,7 +11435,7 @@ func (s *InviteAccountToOrganizationOutput) SetHandshake(v *Handshake) *InviteAc
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/LeaveOrganizationInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/LeaveOrganizationInput
 type LeaveOrganizationInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -11450,7 +11450,7 @@ func (s LeaveOrganizationInput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/LeaveOrganizationOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/LeaveOrganizationOutput
 type LeaveOrganizationOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -11465,7 +11465,7 @@ func (s LeaveOrganizationOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganizationRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganizationRequest
 type ListAWSServiceAccessForOrganizationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -11522,7 +11522,7 @@ func (s *ListAWSServiceAccessForOrganizationInput) SetNextToken(v string) *ListA
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganizationResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganizationResponse
 type ListAWSServiceAccessForOrganizationOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -11561,7 +11561,7 @@ func (s *ListAWSServiceAccessForOrganizationOutput) SetNextToken(v string) *List
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParentRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParentRequest
 type ListAccountsForParentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -11633,7 +11633,7 @@ func (s *ListAccountsForParentInput) SetParentId(v string) *ListAccountsForParen
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParentResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParentResponse
 type ListAccountsForParentOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -11670,7 +11670,7 @@ func (s *ListAccountsForParentOutput) SetNextToken(v string) *ListAccountsForPar
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsRequest
 type ListAccountsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -11727,7 +11727,7 @@ func (s *ListAccountsInput) SetNextToken(v string) *ListAccountsInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsResponse
 type ListAccountsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -11764,7 +11764,7 @@ func (s *ListAccountsOutput) SetNextToken(v string) *ListAccountsOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListChildrenRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListChildrenRequest
 type ListChildrenInput struct {
 	_ struct{} `type:"structure"`
 
@@ -11861,7 +11861,7 @@ func (s *ListChildrenInput) SetParentId(v string) *ListChildrenInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListChildrenResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListChildrenResponse
 type ListChildrenOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -11898,7 +11898,7 @@ func (s *ListChildrenOutput) SetNextToken(v string) *ListChildrenOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatusRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatusRequest
 type ListCreateAccountStatusInput struct {
 	_ struct{} `type:"structure"`
 
@@ -11965,7 +11965,7 @@ func (s *ListCreateAccountStatusInput) SetStates(v []*string) *ListCreateAccount
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatusResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatusResponse
 type ListCreateAccountStatusOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12004,7 +12004,7 @@ func (s *ListCreateAccountStatusOutput) SetNextToken(v string) *ListCreateAccoun
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForAccountRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForAccountRequest
 type ListHandshakesForAccountInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12075,7 +12075,7 @@ func (s *ListHandshakesForAccountInput) SetNextToken(v string) *ListHandshakesFo
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForAccountResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForAccountResponse
 type ListHandshakesForAccountOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12113,7 +12113,7 @@ func (s *ListHandshakesForAccountOutput) SetNextToken(v string) *ListHandshakesF
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForOrganizationRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForOrganizationRequest
 type ListHandshakesForOrganizationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12184,7 +12184,7 @@ func (s *ListHandshakesForOrganizationInput) SetNextToken(v string) *ListHandsha
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForOrganizationResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForOrganizationResponse
 type ListHandshakesForOrganizationOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12222,7 +12222,7 @@ func (s *ListHandshakesForOrganizationOutput) SetNextToken(v string) *ListHandsh
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOrganizationalUnitsForParentRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOrganizationalUnitsForParentRequest
 type ListOrganizationalUnitsForParentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12305,7 +12305,7 @@ func (s *ListOrganizationalUnitsForParentInput) SetParentId(v string) *ListOrgan
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOrganizationalUnitsForParentResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOrganizationalUnitsForParentResponse
 type ListOrganizationalUnitsForParentOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12342,7 +12342,7 @@ func (s *ListOrganizationalUnitsForParentOutput) SetOrganizationalUnits(v []*Org
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParentsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParentsRequest
 type ListParentsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12424,7 +12424,7 @@ func (s *ListParentsInput) SetNextToken(v string) *ListParentsInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParentsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParentsResponse
 type ListParentsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12461,7 +12461,7 @@ func (s *ListParentsOutput) SetParents(v []*Parent) *ListParentsOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesForTargetRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesForTargetRequest
 type ListPoliciesForTargetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12560,7 +12560,7 @@ func (s *ListPoliciesForTargetInput) SetTargetId(v string) *ListPoliciesForTarge
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesForTargetResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesForTargetResponse
 type ListPoliciesForTargetOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12597,7 +12597,7 @@ func (s *ListPoliciesForTargetOutput) SetPolicies(v []*PolicySummary) *ListPolic
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesRequest
 type ListPoliciesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12668,7 +12668,7 @@ func (s *ListPoliciesInput) SetNextToken(v string) *ListPoliciesInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesResponse
 type ListPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12707,7 +12707,7 @@ func (s *ListPoliciesOutput) SetPolicies(v []*PolicySummary) *ListPoliciesOutput
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListRootsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListRootsRequest
 type ListRootsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12764,7 +12764,7 @@ func (s *ListRootsInput) SetNextToken(v string) *ListRootsInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListRootsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListRootsResponse
 type ListRootsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12801,7 +12801,7 @@ func (s *ListRootsOutput) SetRoots(v []*Root) *ListRootsOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTargetsForPolicyRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTargetsForPolicyRequest
 type ListTargetsForPolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12875,7 +12875,7 @@ func (s *ListTargetsForPolicyInput) SetPolicyId(v string) *ListTargetsForPolicyI
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTargetsForPolicyResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTargetsForPolicyResponse
 type ListTargetsForPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12913,7 +12913,7 @@ func (s *ListTargetsForPolicyOutput) SetTargets(v []*PolicyTargetSummary) *ListT
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/MoveAccountRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/MoveAccountRequest
 type MoveAccountInput struct {
 	_ struct{} `type:"structure"`
 
@@ -13007,7 +13007,7 @@ func (s *MoveAccountInput) SetSourceParentId(v string) *MoveAccountInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/MoveAccountOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/MoveAccountOutput
 type MoveAccountOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -13026,7 +13026,7 @@ func (s MoveAccountOutput) GoString() string {
 // accounts that are centrally managed together using consolidated billing,
 // organized hierarchically with organizational units (OUs), and controlled
 // with policies .
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Organization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Organization
 type Organization struct {
 	_ struct{} `type:"structure"`
 
@@ -13130,7 +13130,7 @@ func (s *Organization) SetMasterAccountId(v string) *Organization {
 // Contains details about an organizational unit (OU). An OU is a container
 // of AWS accounts within a root of an organization. Policies that are attached
 // to an OU apply to all accounts contained in that OU and in any child OUs.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/OrganizationalUnit
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/OrganizationalUnit
 type OrganizationalUnit struct {
 	_ struct{} `type:"structure"`
 
@@ -13187,7 +13187,7 @@ func (s *OrganizationalUnit) SetName(v string) *OrganizationalUnit {
 
 // Contains information about either a root or an organizational unit (OU) that
 // can contain OUs or accounts in an organization.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Parent
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Parent
 type Parent struct {
 	_ struct{} `type:"structure"`
 
@@ -13234,7 +13234,7 @@ func (s *Parent) SetType(v string) *Parent {
 // Contains rules to be applied to the affected accounts. Policies can be attached
 // directly to accounts, or to roots and OUs to affect all accounts in those
 // hierarchies.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Policy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Policy
 type Policy struct {
 	_ struct{} `type:"structure"`
 
@@ -13269,7 +13269,7 @@ func (s *Policy) SetPolicySummary(v *PolicySummary) *Policy {
 
 // Contains information about a policy, but does not include the content. To
 // see the content of a policy, see DescribePolicy.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicySummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicySummary
 type PolicySummary struct {
 	_ struct{} `type:"structure"`
 
@@ -13353,7 +13353,7 @@ func (s *PolicySummary) SetType(v string) *PolicySummary {
 
 // Contains information about a root, OU, or account that a policy is attached
 // to.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicyTargetSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicyTargetSummary
 type PolicyTargetSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -13427,7 +13427,7 @@ func (s *PolicyTargetSummary) SetType(v string) *PolicyTargetSummary {
 
 // Contains information about a policy type and its status in the associated
 // root.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicyTypeSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicyTypeSummary
 type PolicyTypeSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -13462,7 +13462,7 @@ func (s *PolicyTypeSummary) SetType(v string) *PolicyTypeSummary {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/RemoveAccountFromOrganizationRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/RemoveAccountFromOrganizationRequest
 type RemoveAccountFromOrganizationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -13505,7 +13505,7 @@ func (s *RemoveAccountFromOrganizationInput) SetAccountId(v string) *RemoveAccou
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/RemoveAccountFromOrganizationOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/RemoveAccountFromOrganizationOutput
 type RemoveAccountFromOrganizationOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -13525,7 +13525,7 @@ func (s RemoveAccountFromOrganizationOutput) GoString() string {
 // Every root contains every AWS account in the organization. Each root enables
 // the accounts to be organized in a different way and to have different policy
 // types enabled for use in that root.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Root
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Root
 type Root struct {
 	_ struct{} `type:"structure"`
 
@@ -13588,7 +13588,7 @@ func (s *Root) SetPolicyTypes(v []*PolicyTypeSummary) *Root {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdateOrganizationalUnitRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdateOrganizationalUnitRequest
 type UpdateOrganizationalUnitInput struct {
 	_ struct{} `type:"structure"`
 
@@ -13649,7 +13649,7 @@ func (s *UpdateOrganizationalUnitInput) SetOrganizationalUnitId(v string) *Updat
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdateOrganizationalUnitResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdateOrganizationalUnitResponse
 type UpdateOrganizationalUnitOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -13674,7 +13674,7 @@ func (s *UpdateOrganizationalUnitOutput) SetOrganizationalUnit(v *Organizational
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdatePolicyRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdatePolicyRequest
 type UpdatePolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -13756,7 +13756,7 @@ func (s *UpdatePolicyInput) SetPolicyId(v string) *UpdatePolicyInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdatePolicyResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdatePolicyResponse
 type UpdatePolicyOutput struct {
 	_ struct{} `type:"structure"`
 

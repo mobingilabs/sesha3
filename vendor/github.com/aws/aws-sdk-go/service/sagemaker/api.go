@@ -38,7 +38,7 @@ const opAddTags = "AddTags"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddTags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddTags
 func (c *SageMaker) AddTagsRequest(input *AddTagsInput) (req *request.Request, output *AddTagsOutput) {
 	op := &request.Operation{
 		Name:       opAddTags,
@@ -72,7 +72,7 @@ func (c *SageMaker) AddTagsRequest(input *AddTagsInput) (req *request.Request, o
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation AddTags for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddTags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddTags
 func (c *SageMaker) AddTags(input *AddTagsInput) (*AddTagsOutput, error) {
 	req, out := c.AddTagsRequest(input)
 	return out, req.Send()
@@ -119,7 +119,7 @@ const opCreateEndpoint = "CreateEndpoint"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpoint
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpoint
 func (c *SageMaker) CreateEndpointRequest(input *CreateEndpointInput) (req *request.Request, output *CreateEndpointOutput) {
 	op := &request.Operation{
 		Name:       opCreateEndpoint,
@@ -171,7 +171,7 @@ func (c *SageMaker) CreateEndpointRequest(input *CreateEndpointInput) (req *requ
 //   You have exceeded an Amazon SageMaker resource limit. For example, you might
 //   have too many training jobs created.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpoint
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpoint
 func (c *SageMaker) CreateEndpoint(input *CreateEndpointInput) (*CreateEndpointOutput, error) {
 	req, out := c.CreateEndpointRequest(input)
 	return out, req.Send()
@@ -218,7 +218,7 @@ const opCreateEndpointConfig = "CreateEndpointConfig"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfig
 func (c *SageMaker) CreateEndpointConfigRequest(input *CreateEndpointConfigInput) (req *request.Request, output *CreateEndpointConfigOutput) {
 	op := &request.Operation{
 		Name:       opCreateEndpointConfig,
@@ -269,7 +269,7 @@ func (c *SageMaker) CreateEndpointConfigRequest(input *CreateEndpointConfigInput
 //   You have exceeded an Amazon SageMaker resource limit. For example, you might
 //   have too many training jobs created.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfig
 func (c *SageMaker) CreateEndpointConfig(input *CreateEndpointConfigInput) (*CreateEndpointConfigOutput, error) {
 	req, out := c.CreateEndpointConfigRequest(input)
 	return out, req.Send()
@@ -316,7 +316,7 @@ const opCreateModel = "CreateModel"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModel
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModel
 func (c *SageMaker) CreateModelRequest(input *CreateModelInput) (req *request.Request, output *CreateModelOutput) {
 	op := &request.Operation{
 		Name:       opCreateModel,
@@ -371,7 +371,7 @@ func (c *SageMaker) CreateModelRequest(input *CreateModelInput) (req *request.Re
 //   You have exceeded an Amazon SageMaker resource limit. For example, you might
 //   have too many training jobs created.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModel
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModel
 func (c *SageMaker) CreateModel(input *CreateModelInput) (*CreateModelOutput, error) {
 	req, out := c.CreateModelRequest(input)
 	return out, req.Send()
@@ -418,7 +418,7 @@ const opCreateNotebookInstance = "CreateNotebookInstance"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstance
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstance
 func (c *SageMaker) CreateNotebookInstanceRequest(input *CreateNotebookInstanceInput) (req *request.Request, output *CreateNotebookInstanceOutput) {
 	op := &request.Operation{
 		Name:       opCreateNotebookInstance,
@@ -487,7 +487,7 @@ func (c *SageMaker) CreateNotebookInstanceRequest(input *CreateNotebookInstanceI
 //   You have exceeded an Amazon SageMaker resource limit. For example, you might
 //   have too many training jobs created.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstance
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstance
 func (c *SageMaker) CreateNotebookInstance(input *CreateNotebookInstanceInput) (*CreateNotebookInstanceOutput, error) {
 	req, out := c.CreateNotebookInstanceRequest(input)
 	return out, req.Send()
@@ -534,7 +534,7 @@ const opCreatePresignedNotebookInstanceUrl = "CreatePresignedNotebookInstanceUrl
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedNotebookInstanceUrl
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedNotebookInstanceUrl
 func (c *SageMaker) CreatePresignedNotebookInstanceUrlRequest(input *CreatePresignedNotebookInstanceUrlInput) (req *request.Request, output *CreatePresignedNotebookInstanceUrlOutput) {
 	op := &request.Operation{
 		Name:       opCreatePresignedNotebookInstanceUrl,
@@ -565,7 +565,7 @@ func (c *SageMaker) CreatePresignedNotebookInstanceUrlRequest(input *CreatePresi
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation CreatePresignedNotebookInstanceUrl for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedNotebookInstanceUrl
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedNotebookInstanceUrl
 func (c *SageMaker) CreatePresignedNotebookInstanceUrl(input *CreatePresignedNotebookInstanceUrlInput) (*CreatePresignedNotebookInstanceUrlOutput, error) {
 	req, out := c.CreatePresignedNotebookInstanceUrlRequest(input)
 	return out, req.Send()
@@ -612,7 +612,7 @@ const opCreateTrainingJob = "CreateTrainingJob"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJob
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJob
 func (c *SageMaker) CreateTrainingJobRequest(input *CreateTrainingJobInput) (req *request.Request, output *CreateTrainingJobOutput) {
 	op := &request.Operation{
 		Name:       opCreateTrainingJob,
@@ -683,7 +683,7 @@ func (c *SageMaker) CreateTrainingJobRequest(input *CreateTrainingJobInput) (req
 //   You have exceeded an Amazon SageMaker resource limit. For example, you might
 //   have too many training jobs created.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJob
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJob
 func (c *SageMaker) CreateTrainingJob(input *CreateTrainingJobInput) (*CreateTrainingJobOutput, error) {
 	req, out := c.CreateTrainingJobRequest(input)
 	return out, req.Send()
@@ -730,7 +730,7 @@ const opDeleteEndpoint = "DeleteEndpoint"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpoint
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpoint
 func (c *SageMaker) DeleteEndpointRequest(input *DeleteEndpointInput) (req *request.Request, output *DeleteEndpointOutput) {
 	op := &request.Operation{
 		Name:       opDeleteEndpoint,
@@ -760,7 +760,7 @@ func (c *SageMaker) DeleteEndpointRequest(input *DeleteEndpointInput) (req *requ
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation DeleteEndpoint for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpoint
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpoint
 func (c *SageMaker) DeleteEndpoint(input *DeleteEndpointInput) (*DeleteEndpointOutput, error) {
 	req, out := c.DeleteEndpointRequest(input)
 	return out, req.Send()
@@ -807,7 +807,7 @@ const opDeleteEndpointConfig = "DeleteEndpointConfig"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointConfig
 func (c *SageMaker) DeleteEndpointConfigRequest(input *DeleteEndpointConfigInput) (req *request.Request, output *DeleteEndpointConfigOutput) {
 	op := &request.Operation{
 		Name:       opDeleteEndpointConfig,
@@ -838,7 +838,7 @@ func (c *SageMaker) DeleteEndpointConfigRequest(input *DeleteEndpointConfigInput
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation DeleteEndpointConfig for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointConfig
 func (c *SageMaker) DeleteEndpointConfig(input *DeleteEndpointConfigInput) (*DeleteEndpointConfigOutput, error) {
 	req, out := c.DeleteEndpointConfigRequest(input)
 	return out, req.Send()
@@ -885,7 +885,7 @@ const opDeleteModel = "DeleteModel"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModel
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModel
 func (c *SageMaker) DeleteModelRequest(input *DeleteModelInput) (req *request.Request, output *DeleteModelOutput) {
 	op := &request.Operation{
 		Name:       opDeleteModel,
@@ -917,7 +917,7 @@ func (c *SageMaker) DeleteModelRequest(input *DeleteModelInput) (req *request.Re
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation DeleteModel for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModel
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModel
 func (c *SageMaker) DeleteModel(input *DeleteModelInput) (*DeleteModelOutput, error) {
 	req, out := c.DeleteModelRequest(input)
 	return out, req.Send()
@@ -964,7 +964,7 @@ const opDeleteNotebookInstance = "DeleteNotebookInstance"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstance
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstance
 func (c *SageMaker) DeleteNotebookInstanceRequest(input *DeleteNotebookInstanceInput) (req *request.Request, output *DeleteNotebookInstanceOutput) {
 	op := &request.Operation{
 		Name:       opDeleteNotebookInstance,
@@ -998,7 +998,7 @@ func (c *SageMaker) DeleteNotebookInstanceRequest(input *DeleteNotebookInstanceI
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation DeleteNotebookInstance for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstance
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstance
 func (c *SageMaker) DeleteNotebookInstance(input *DeleteNotebookInstanceInput) (*DeleteNotebookInstanceOutput, error) {
 	req, out := c.DeleteNotebookInstanceRequest(input)
 	return out, req.Send()
@@ -1045,7 +1045,7 @@ const opDeleteTags = "DeleteTags"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteTags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteTags
 func (c *SageMaker) DeleteTagsRequest(input *DeleteTagsInput) (req *request.Request, output *DeleteTagsOutput) {
 	op := &request.Operation{
 		Name:       opDeleteTags,
@@ -1074,7 +1074,7 @@ func (c *SageMaker) DeleteTagsRequest(input *DeleteTagsInput) (req *request.Requ
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation DeleteTags for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteTags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteTags
 func (c *SageMaker) DeleteTags(input *DeleteTagsInput) (*DeleteTagsOutput, error) {
 	req, out := c.DeleteTagsRequest(input)
 	return out, req.Send()
@@ -1121,7 +1121,7 @@ const opDescribeEndpoint = "DescribeEndpoint"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpoint
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpoint
 func (c *SageMaker) DescribeEndpointRequest(input *DescribeEndpointInput) (req *request.Request, output *DescribeEndpointOutput) {
 	op := &request.Operation{
 		Name:       opDescribeEndpoint,
@@ -1148,7 +1148,7 @@ func (c *SageMaker) DescribeEndpointRequest(input *DescribeEndpointInput) (req *
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation DescribeEndpoint for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpoint
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpoint
 func (c *SageMaker) DescribeEndpoint(input *DescribeEndpointInput) (*DescribeEndpointOutput, error) {
 	req, out := c.DescribeEndpointRequest(input)
 	return out, req.Send()
@@ -1195,7 +1195,7 @@ const opDescribeEndpointConfig = "DescribeEndpointConfig"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfig
 func (c *SageMaker) DescribeEndpointConfigRequest(input *DescribeEndpointConfigInput) (req *request.Request, output *DescribeEndpointConfigOutput) {
 	op := &request.Operation{
 		Name:       opDescribeEndpointConfig,
@@ -1223,7 +1223,7 @@ func (c *SageMaker) DescribeEndpointConfigRequest(input *DescribeEndpointConfigI
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation DescribeEndpointConfig for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfig
 func (c *SageMaker) DescribeEndpointConfig(input *DescribeEndpointConfigInput) (*DescribeEndpointConfigOutput, error) {
 	req, out := c.DescribeEndpointConfigRequest(input)
 	return out, req.Send()
@@ -1270,7 +1270,7 @@ const opDescribeModel = "DescribeModel"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModel
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModel
 func (c *SageMaker) DescribeModelRequest(input *DescribeModelInput) (req *request.Request, output *DescribeModelOutput) {
 	op := &request.Operation{
 		Name:       opDescribeModel,
@@ -1297,7 +1297,7 @@ func (c *SageMaker) DescribeModelRequest(input *DescribeModelInput) (req *reques
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation DescribeModel for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModel
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModel
 func (c *SageMaker) DescribeModel(input *DescribeModelInput) (*DescribeModelOutput, error) {
 	req, out := c.DescribeModelRequest(input)
 	return out, req.Send()
@@ -1344,7 +1344,7 @@ const opDescribeNotebookInstance = "DescribeNotebookInstance"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstance
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstance
 func (c *SageMaker) DescribeNotebookInstanceRequest(input *DescribeNotebookInstanceInput) (req *request.Request, output *DescribeNotebookInstanceOutput) {
 	op := &request.Operation{
 		Name:       opDescribeNotebookInstance,
@@ -1371,7 +1371,7 @@ func (c *SageMaker) DescribeNotebookInstanceRequest(input *DescribeNotebookInsta
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation DescribeNotebookInstance for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstance
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstance
 func (c *SageMaker) DescribeNotebookInstance(input *DescribeNotebookInstanceInput) (*DescribeNotebookInstanceOutput, error) {
 	req, out := c.DescribeNotebookInstanceRequest(input)
 	return out, req.Send()
@@ -1418,7 +1418,7 @@ const opDescribeTrainingJob = "DescribeTrainingJob"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJob
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJob
 func (c *SageMaker) DescribeTrainingJobRequest(input *DescribeTrainingJobInput) (req *request.Request, output *DescribeTrainingJobOutput) {
 	op := &request.Operation{
 		Name:       opDescribeTrainingJob,
@@ -1450,7 +1450,7 @@ func (c *SageMaker) DescribeTrainingJobRequest(input *DescribeTrainingJobInput) 
 //   * ErrCodeResourceNotFound "ResourceNotFound"
 //   Resource being access is not found.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJob
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJob
 func (c *SageMaker) DescribeTrainingJob(input *DescribeTrainingJobInput) (*DescribeTrainingJobOutput, error) {
 	req, out := c.DescribeTrainingJobRequest(input)
 	return out, req.Send()
@@ -1497,7 +1497,7 @@ const opListEndpointConfigs = "ListEndpointConfigs"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointConfigs
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointConfigs
 func (c *SageMaker) ListEndpointConfigsRequest(input *ListEndpointConfigsInput) (req *request.Request, output *ListEndpointConfigsOutput) {
 	op := &request.Operation{
 		Name:       opListEndpointConfigs,
@@ -1530,7 +1530,7 @@ func (c *SageMaker) ListEndpointConfigsRequest(input *ListEndpointConfigsInput) 
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation ListEndpointConfigs for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointConfigs
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointConfigs
 func (c *SageMaker) ListEndpointConfigs(input *ListEndpointConfigsInput) (*ListEndpointConfigsOutput, error) {
 	req, out := c.ListEndpointConfigsRequest(input)
 	return out, req.Send()
@@ -1627,7 +1627,7 @@ const opListEndpoints = "ListEndpoints"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpoints
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpoints
 func (c *SageMaker) ListEndpointsRequest(input *ListEndpointsInput) (req *request.Request, output *ListEndpointsOutput) {
 	op := &request.Operation{
 		Name:       opListEndpoints,
@@ -1660,7 +1660,7 @@ func (c *SageMaker) ListEndpointsRequest(input *ListEndpointsInput) (req *reques
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation ListEndpoints for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpoints
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpoints
 func (c *SageMaker) ListEndpoints(input *ListEndpointsInput) (*ListEndpointsOutput, error) {
 	req, out := c.ListEndpointsRequest(input)
 	return out, req.Send()
@@ -1757,7 +1757,7 @@ const opListModels = "ListModels"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModels
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModels
 func (c *SageMaker) ListModelsRequest(input *ListModelsInput) (req *request.Request, output *ListModelsOutput) {
 	op := &request.Operation{
 		Name:       opListModels,
@@ -1791,7 +1791,7 @@ func (c *SageMaker) ListModelsRequest(input *ListModelsInput) (req *request.Requ
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation ListModels for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModels
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModels
 func (c *SageMaker) ListModels(input *ListModelsInput) (*ListModelsOutput, error) {
 	req, out := c.ListModelsRequest(input)
 	return out, req.Send()
@@ -1888,7 +1888,7 @@ const opListNotebookInstances = "ListNotebookInstances"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstances
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstances
 func (c *SageMaker) ListNotebookInstancesRequest(input *ListNotebookInstancesInput) (req *request.Request, output *ListNotebookInstancesOutput) {
 	op := &request.Operation{
 		Name:       opListNotebookInstances,
@@ -1922,7 +1922,7 @@ func (c *SageMaker) ListNotebookInstancesRequest(input *ListNotebookInstancesInp
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation ListNotebookInstances for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstances
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstances
 func (c *SageMaker) ListNotebookInstances(input *ListNotebookInstancesInput) (*ListNotebookInstancesOutput, error) {
 	req, out := c.ListNotebookInstancesRequest(input)
 	return out, req.Send()
@@ -2019,7 +2019,7 @@ const opListTags = "ListTags"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTags
 func (c *SageMaker) ListTagsRequest(input *ListTagsInput) (req *request.Request, output *ListTagsOutput) {
 	op := &request.Operation{
 		Name:       opListTags,
@@ -2052,7 +2052,7 @@ func (c *SageMaker) ListTagsRequest(input *ListTagsInput) (req *request.Request,
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation ListTags for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTags
 func (c *SageMaker) ListTags(input *ListTagsInput) (*ListTagsOutput, error) {
 	req, out := c.ListTagsRequest(input)
 	return out, req.Send()
@@ -2149,7 +2149,7 @@ const opListTrainingJobs = "ListTrainingJobs"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingJobs
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingJobs
 func (c *SageMaker) ListTrainingJobsRequest(input *ListTrainingJobsInput) (req *request.Request, output *ListTrainingJobsOutput) {
 	op := &request.Operation{
 		Name:       opListTrainingJobs,
@@ -2182,7 +2182,7 @@ func (c *SageMaker) ListTrainingJobsRequest(input *ListTrainingJobsInput) (req *
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation ListTrainingJobs for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingJobs
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingJobs
 func (c *SageMaker) ListTrainingJobs(input *ListTrainingJobsInput) (*ListTrainingJobsOutput, error) {
 	req, out := c.ListTrainingJobsRequest(input)
 	return out, req.Send()
@@ -2279,7 +2279,7 @@ const opStartNotebookInstance = "StartNotebookInstance"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartNotebookInstance
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartNotebookInstance
 func (c *SageMaker) StartNotebookInstanceRequest(input *StartNotebookInstanceInput) (req *request.Request, output *StartNotebookInstanceOutput) {
 	op := &request.Operation{
 		Name:       opStartNotebookInstance,
@@ -2318,7 +2318,7 @@ func (c *SageMaker) StartNotebookInstanceRequest(input *StartNotebookInstanceInp
 //   You have exceeded an Amazon SageMaker resource limit. For example, you might
 //   have too many training jobs created.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartNotebookInstance
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartNotebookInstance
 func (c *SageMaker) StartNotebookInstance(input *StartNotebookInstanceInput) (*StartNotebookInstanceOutput, error) {
 	req, out := c.StartNotebookInstanceRequest(input)
 	return out, req.Send()
@@ -2365,7 +2365,7 @@ const opStopNotebookInstance = "StopNotebookInstance"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopNotebookInstance
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopNotebookInstance
 func (c *SageMaker) StopNotebookInstanceRequest(input *StopNotebookInstanceInput) (req *request.Request, output *StopNotebookInstanceOutput) {
 	op := &request.Operation{
 		Name:       opStopNotebookInstance,
@@ -2401,7 +2401,7 @@ func (c *SageMaker) StopNotebookInstanceRequest(input *StopNotebookInstanceInput
 //
 // See the AWS API reference guide for Amazon SageMaker Service's
 // API operation StopNotebookInstance for usage and error information.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopNotebookInstance
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopNotebookInstance
 func (c *SageMaker) StopNotebookInstance(input *StopNotebookInstanceInput) (*StopNotebookInstanceOutput, error) {
 	req, out := c.StopNotebookInstanceRequest(input)
 	return out, req.Send()
@@ -2448,7 +2448,7 @@ const opStopTrainingJob = "StopTrainingJob"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTrainingJob
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTrainingJob
 func (c *SageMaker) StopTrainingJobRequest(input *StopTrainingJobInput) (req *request.Request, output *StopTrainingJobOutput) {
 	op := &request.Operation{
 		Name:       opStopTrainingJob,
@@ -2494,7 +2494,7 @@ func (c *SageMaker) StopTrainingJobRequest(input *StopTrainingJobInput) (req *re
 //   * ErrCodeResourceNotFound "ResourceNotFound"
 //   Resource being access is not found.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTrainingJob
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTrainingJob
 func (c *SageMaker) StopTrainingJob(input *StopTrainingJobInput) (*StopTrainingJobOutput, error) {
 	req, out := c.StopTrainingJobRequest(input)
 	return out, req.Send()
@@ -2541,7 +2541,7 @@ const opUpdateEndpoint = "UpdateEndpoint"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpoint
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpoint
 func (c *SageMaker) UpdateEndpointRequest(input *UpdateEndpointInput) (req *request.Request, output *UpdateEndpointOutput) {
 	op := &request.Operation{
 		Name:       opUpdateEndpoint,
@@ -2581,7 +2581,7 @@ func (c *SageMaker) UpdateEndpointRequest(input *UpdateEndpointInput) (req *requ
 //   You have exceeded an Amazon SageMaker resource limit. For example, you might
 //   have too many training jobs created.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpoint
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpoint
 func (c *SageMaker) UpdateEndpoint(input *UpdateEndpointInput) (*UpdateEndpointOutput, error) {
 	req, out := c.UpdateEndpointRequest(input)
 	return out, req.Send()
@@ -2628,7 +2628,7 @@ const opUpdateEndpointWeightsAndCapacities = "UpdateEndpointWeightsAndCapacities
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointWeightsAndCapacities
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointWeightsAndCapacities
 func (c *SageMaker) UpdateEndpointWeightsAndCapacitiesRequest(input *UpdateEndpointWeightsAndCapacitiesInput) (req *request.Request, output *UpdateEndpointWeightsAndCapacitiesOutput) {
 	op := &request.Operation{
 		Name:       opUpdateEndpointWeightsAndCapacities,
@@ -2667,7 +2667,7 @@ func (c *SageMaker) UpdateEndpointWeightsAndCapacitiesRequest(input *UpdateEndpo
 //   You have exceeded an Amazon SageMaker resource limit. For example, you might
 //   have too many training jobs created.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointWeightsAndCapacities
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointWeightsAndCapacities
 func (c *SageMaker) UpdateEndpointWeightsAndCapacities(input *UpdateEndpointWeightsAndCapacitiesInput) (*UpdateEndpointWeightsAndCapacitiesOutput, error) {
 	req, out := c.UpdateEndpointWeightsAndCapacitiesRequest(input)
 	return out, req.Send()
@@ -2714,7 +2714,7 @@ const opUpdateNotebookInstance = "UpdateNotebookInstance"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstance
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstance
 func (c *SageMaker) UpdateNotebookInstanceRequest(input *UpdateNotebookInstanceInput) (req *request.Request, output *UpdateNotebookInstanceOutput) {
 	op := &request.Operation{
 		Name:       opUpdateNotebookInstance,
@@ -2750,7 +2750,7 @@ func (c *SageMaker) UpdateNotebookInstanceRequest(input *UpdateNotebookInstanceI
 //   You have exceeded an Amazon SageMaker resource limit. For example, you might
 //   have too many training jobs created.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstance
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstance
 func (c *SageMaker) UpdateNotebookInstance(input *UpdateNotebookInstanceInput) (*UpdateNotebookInstanceOutput, error) {
 	req, out := c.UpdateNotebookInstanceRequest(input)
 	return out, req.Send()
@@ -2772,7 +2772,7 @@ func (c *SageMaker) UpdateNotebookInstanceWithContext(ctx aws.Context, input *Up
 	return out, req.Send()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddTagsInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddTagsInput
 type AddTagsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2837,7 +2837,7 @@ func (s *AddTagsInput) SetTags(v []*Tag) *AddTagsInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddTagsOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddTagsOutput
 type AddTagsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -2867,7 +2867,7 @@ func (s *AddTagsOutput) SetTags(v []*Tag) *AddTagsOutput {
 // For more information about algorithms provided by Amazon SageMaker, see Algorithms
 // (http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html). For information
 // about using your own algorithms, see Bring Your Own Algorithms  (http://docs.aws.amazon.com/sagemaker/latest/dg/adv-topics-own-algo.html).
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmSpecification
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmSpecification
 type AlgorithmSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -2941,7 +2941,7 @@ func (s *AlgorithmSpecification) SetTrainingInputMode(v string) *AlgorithmSpecif
 }
 
 // A channel is a named input source that training algorithms can consume.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Channel
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Channel
 type Channel struct {
 	_ struct{} `type:"structure"`
 
@@ -3036,7 +3036,7 @@ func (s *Channel) SetRecordWrapperType(v string) *Channel {
 }
 
 // Describes the container, as part of model definition.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ContainerDefinition
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ContainerDefinition
 type ContainerDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -3110,7 +3110,7 @@ func (s *ContainerDefinition) SetModelDataUrl(v string) *ContainerDefinition {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfigInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfigInput
 type CreateEndpointConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3200,7 +3200,7 @@ func (s *CreateEndpointConfigInput) SetTags(v []*Tag) *CreateEndpointConfigInput
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfigOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfigOutput
 type CreateEndpointConfigOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3226,7 +3226,7 @@ func (s *CreateEndpointConfigOutput) SetEndpointConfigArn(v string) *CreateEndpo
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointInput
 type CreateEndpointInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3302,7 +3302,7 @@ func (s *CreateEndpointInput) SetTags(v []*Tag) *CreateEndpointInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointOutput
 type CreateEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3328,7 +3328,7 @@ func (s *CreateEndpointOutput) SetEndpointArn(v string) *CreateEndpointOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelInput
 type CreateModelInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3336,9 +3336,7 @@ type CreateModelInput struct {
 	// assume to access model artifacts and docker image for deployment on ML compute
 	// instances. Deploying on ML compute instances is part of model hosting. For
 	// more information, see Amazon SageMaker Roles (http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html).
-	//
-	// ExecutionRoleArn is a required field
-	ExecutionRoleArn *string `min:"20" type:"string" required:"true"`
+	ExecutionRoleArn *string `min:"20" type:"string"`
 
 	// The name of the new model.
 	//
@@ -3374,9 +3372,6 @@ func (s CreateModelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateModelInput) Validate() error {
 	invalidParams := request.ErrInvalidParams{Context: "CreateModelInput"}
-	if s.ExecutionRoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ExecutionRoleArn"))
-	}
 	if s.ExecutionRoleArn != nil && len(*s.ExecutionRoleArn) < 20 {
 		invalidParams.Add(request.NewErrParamMinLen("ExecutionRoleArn", 20))
 	}
@@ -3448,7 +3443,7 @@ func (s *CreateModelInput) SetTags(v []*Tag) *CreateModelInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelOutput
 type CreateModelOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3474,7 +3469,7 @@ func (s *CreateModelOutput) SetModelArn(v string) *CreateModelOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceInput
 type CreateNotebookInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3599,7 +3594,7 @@ func (s *CreateNotebookInstanceInput) SetTags(v []*Tag) *CreateNotebookInstanceI
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceOutput
 type CreateNotebookInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3623,7 +3618,7 @@ func (s *CreateNotebookInstanceOutput) SetNotebookInstanceArn(v string) *CreateN
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedNotebookInstanceUrlInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedNotebookInstanceUrlInput
 type CreatePresignedNotebookInstanceUrlInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3674,7 +3669,7 @@ func (s *CreatePresignedNotebookInstanceUrlInput) SetSessionExpirationDurationIn
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedNotebookInstanceUrlOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedNotebookInstanceUrlOutput
 type CreatePresignedNotebookInstanceUrlOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3698,7 +3693,7 @@ func (s *CreatePresignedNotebookInstanceUrlOutput) SetAuthorizedUrl(v string) *C
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobRequest
 type CreateTrainingJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3937,7 +3932,7 @@ func (s *CreateTrainingJobInput) SetTrainingJobName(v string) *CreateTrainingJob
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobResponse
 type CreateTrainingJobOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3964,7 +3959,7 @@ func (s *CreateTrainingJobOutput) SetTrainingJobArn(v string) *CreateTrainingJob
 }
 
 // Describes the location of the channel data.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DataSource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DataSource
 type DataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -4008,7 +4003,7 @@ func (s *DataSource) SetS3DataSource(v *S3DataSource) *DataSource {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointConfigInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointConfigInput
 type DeleteEndpointConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4047,7 +4042,7 @@ func (s *DeleteEndpointConfigInput) SetEndpointConfigName(v string) *DeleteEndpo
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointConfigOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointConfigOutput
 type DeleteEndpointConfigOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -4062,7 +4057,7 @@ func (s DeleteEndpointConfigOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointInput
 type DeleteEndpointInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4101,7 +4096,7 @@ func (s *DeleteEndpointInput) SetEndpointName(v string) *DeleteEndpointInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointOutput
 type DeleteEndpointOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -4116,7 +4111,7 @@ func (s DeleteEndpointOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelInput
 type DeleteModelInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4155,7 +4150,7 @@ func (s *DeleteModelInput) SetModelName(v string) *DeleteModelInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelOutput
 type DeleteModelOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -4170,7 +4165,7 @@ func (s DeleteModelOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstanceInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstanceInput
 type DeleteNotebookInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4209,7 +4204,7 @@ func (s *DeleteNotebookInstanceInput) SetNotebookInstanceName(v string) *DeleteN
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstanceOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstanceOutput
 type DeleteNotebookInstanceOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -4224,7 +4219,7 @@ func (s DeleteNotebookInstanceOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteTagsInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteTagsInput
 type DeleteTagsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4280,7 +4275,7 @@ func (s *DeleteTagsInput) SetTagKeys(v []*string) *DeleteTagsInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteTagsOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteTagsOutput
 type DeleteTagsOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -4295,7 +4290,7 @@ func (s DeleteTagsOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfigInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfigInput
 type DescribeEndpointConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4334,7 +4329,7 @@ func (s *DescribeEndpointConfigInput) SetEndpointConfigName(v string) *DescribeE
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfigOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfigOutput
 type DescribeEndpointConfigOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4394,7 +4389,7 @@ func (s *DescribeEndpointConfigOutput) SetProductionVariants(v []*ProductionVari
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointInput
 type DescribeEndpointInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4433,7 +4428,7 @@ func (s *DescribeEndpointInput) SetEndpointName(v string) *DescribeEndpointInput
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointOutput
 type DescribeEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4533,7 +4528,7 @@ func (s *DescribeEndpointOutput) SetProductionVariants(v []*ProductionVariantSum
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelInput
 type DescribeModelInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4572,7 +4567,7 @@ func (s *DescribeModelInput) SetModelName(v string) *DescribeModelInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelOutput
 type DescribeModelOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4656,7 +4651,7 @@ func (s *DescribeModelOutput) SetSupplementalContainers(v []*ContainerDefinition
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceInput
 type DescribeNotebookInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4695,7 +4690,7 @@ func (s *DescribeNotebookInstanceInput) SetNotebookInstanceName(v string) *Descr
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceOutput
 type DescribeNotebookInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4832,7 +4827,7 @@ func (s *DescribeNotebookInstanceOutput) SetUrl(v string) *DescribeNotebookInsta
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobRequest
 type DescribeTrainingJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4874,7 +4869,7 @@ func (s *DescribeTrainingJobInput) SetTrainingJobName(v string) *DescribeTrainin
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobResponse
 type DescribeTrainingJobOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5085,7 +5080,7 @@ func (s *DescribeTrainingJobOutput) SetTrainingStartTime(v time.Time) *DescribeT
 }
 
 // Specifies weight and capacity values for a production variant.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DesiredWeightAndCapacity
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DesiredWeightAndCapacity
 type DesiredWeightAndCapacity struct {
 	_ struct{} `type:"structure"`
 
@@ -5146,7 +5141,7 @@ func (s *DesiredWeightAndCapacity) SetVariantName(v string) *DesiredWeightAndCap
 }
 
 // Provides summary information for an endpoint configuration.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointConfigSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointConfigSummary
 type EndpointConfigSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -5195,7 +5190,7 @@ func (s *EndpointConfigSummary) SetEndpointConfigName(v string) *EndpointConfigS
 }
 
 // Provides summary information for an endpoint.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointSummary
 type EndpointSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -5265,7 +5260,7 @@ func (s *EndpointSummary) SetLastModifiedTime(v time.Time) *EndpointSummary {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointConfigsInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointConfigsInput
 type ListEndpointConfigsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5361,7 +5356,7 @@ func (s *ListEndpointConfigsInput) SetSortOrder(v string) *ListEndpointConfigsIn
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointConfigsOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointConfigsOutput
 type ListEndpointConfigsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5397,7 +5392,7 @@ func (s *ListEndpointConfigsOutput) SetNextToken(v string) *ListEndpointConfigsO
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointsInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointsInput
 type ListEndpointsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5522,7 +5517,7 @@ func (s *ListEndpointsInput) SetStatusEquals(v string) *ListEndpointsInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointsOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointsOutput
 type ListEndpointsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5558,7 +5553,7 @@ func (s *ListEndpointsOutput) SetNextToken(v string) *ListEndpointsOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelsInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelsInput
 type ListModelsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5652,7 +5647,7 @@ func (s *ListModelsInput) SetSortOrder(v string) *ListModelsInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelsOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelsOutput
 type ListModelsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5688,7 +5683,7 @@ func (s *ListModelsOutput) SetNextToken(v string) *ListModelsOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstancesInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstancesInput
 type ListNotebookInstancesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5817,7 +5812,7 @@ func (s *ListNotebookInstancesInput) SetStatusEquals(v string) *ListNotebookInst
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstancesOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstancesOutput
 type ListNotebookInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5852,7 +5847,7 @@ func (s *ListNotebookInstancesOutput) SetNotebookInstances(v []*NotebookInstance
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTagsInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTagsInput
 type ListTagsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5914,7 +5909,7 @@ func (s *ListTagsInput) SetResourceArn(v string) *ListTagsInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTagsOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTagsOutput
 type ListTagsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5948,7 +5943,7 @@ func (s *ListTagsOutput) SetTags(v []*Tag) *ListTagsOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingJobsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingJobsRequest
 type ListTrainingJobsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6072,7 +6067,7 @@ func (s *ListTrainingJobsInput) SetStatusEquals(v string) *ListTrainingJobsInput
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingJobsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingJobsResponse
 type ListTrainingJobsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6110,7 +6105,7 @@ func (s *ListTrainingJobsOutput) SetTrainingJobSummaries(v []*TrainingJobSummary
 
 // Provides information about the location that is configured for storing model
 // artifacts.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelArtifacts
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelArtifacts
 type ModelArtifacts struct {
 	_ struct{} `type:"structure"`
 
@@ -6138,7 +6133,7 @@ func (s *ModelArtifacts) SetS3ModelArtifacts(v string) *ModelArtifacts {
 }
 
 // Provides summary information about a model.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelSummary
 type ModelSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -6187,7 +6182,7 @@ func (s *ModelSummary) SetModelName(v string) *ModelSummary {
 }
 
 // Provides summary information for an Amazon SageMaker notebook instance.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NotebookInstanceSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NotebookInstanceSummary
 type NotebookInstanceSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -6271,7 +6266,7 @@ func (s *NotebookInstanceSummary) SetUrl(v string) *NotebookInstanceSummary {
 }
 
 // Provides information about how to store model training results (model artifacts).
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputDataConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputDataConfig
 type OutputDataConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -6334,7 +6329,7 @@ func (s *OutputDataConfig) SetS3OutputPath(v string) *OutputDataConfig {
 // Identifies a model that you want to host and the resources to deploy for
 // hosting it. If you are deploying multiple models, tell Amazon SageMaker how
 // to distribute traffic among the models by specifying variant weights.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariant
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariant
 type ProductionVariant struct {
 	_ struct{} `type:"structure"`
 
@@ -6434,7 +6429,7 @@ func (s *ProductionVariant) SetVariantName(v string) *ProductionVariant {
 // Describes weight and capacities for a production variant associated with
 // an endpoint. If you sent a request to the UpdateWeightAndCapacities API and
 // the endpoint status is Updating, you get different desired and current values.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantSummary
 type ProductionVariantSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -6498,7 +6493,7 @@ func (s *ProductionVariantSummary) SetVariantName(v string) *ProductionVariantSu
 
 // Describes the resources, including ML compute instances and ML storage volumes,
 // to use for model training.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceConfig
 type ResourceConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -6583,7 +6578,7 @@ func (s *ResourceConfig) SetVolumeSizeInGB(v int64) *ResourceConfig {
 }
 
 // Describes the S3 data source.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/S3DataSource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/S3DataSource
 type S3DataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -6701,7 +6696,7 @@ func (s *S3DataSource) SetS3Uri(v string) *S3DataSource {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartNotebookInstanceInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartNotebookInstanceInput
 type StartNotebookInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6740,7 +6735,7 @@ func (s *StartNotebookInstanceInput) SetNotebookInstanceName(v string) *StartNot
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartNotebookInstanceOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartNotebookInstanceOutput
 type StartNotebookInstanceOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -6755,7 +6750,7 @@ func (s StartNotebookInstanceOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopNotebookInstanceInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopNotebookInstanceInput
 type StopNotebookInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6794,7 +6789,7 @@ func (s *StopNotebookInstanceInput) SetNotebookInstanceName(v string) *StopNoteb
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopNotebookInstanceOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopNotebookInstanceOutput
 type StopNotebookInstanceOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -6809,7 +6804,7 @@ func (s StopNotebookInstanceOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTrainingJobRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTrainingJobRequest
 type StopTrainingJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6851,7 +6846,7 @@ func (s *StopTrainingJobInput) SetTrainingJobName(v string) *StopTrainingJobInpu
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTrainingJobOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTrainingJobOutput
 type StopTrainingJobOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -6879,7 +6874,7 @@ func (s StopTrainingJobOutput) GoString() string {
 // model might not be ready to save as some stages, for example training just
 // started). This intermediate data is a valid model artifact. You can use it
 // to create a model (CreateModel).
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StoppingCondition
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StoppingCondition
 type StoppingCondition struct {
 	_ struct{} `type:"structure"`
 
@@ -6920,7 +6915,7 @@ func (s *StoppingCondition) SetMaxRuntimeInSeconds(v int64) *StoppingCondition {
 }
 
 // Describes a tag.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Tag
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -6977,7 +6972,7 @@ func (s *Tag) SetValue(v string) *Tag {
 }
 
 // Provides summary information about a training job.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJobSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJobSummary
 type TrainingJobSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -7056,7 +7051,7 @@ func (s *TrainingJobSummary) SetTrainingJobStatus(v string) *TrainingJobSummary 
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointInput
 type UpdateEndpointInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7109,7 +7104,7 @@ func (s *UpdateEndpointInput) SetEndpointName(v string) *UpdateEndpointInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointOutput
 type UpdateEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -7135,7 +7130,7 @@ func (s *UpdateEndpointOutput) SetEndpointArn(v string) *UpdateEndpointOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointWeightsAndCapacitiesInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointWeightsAndCapacitiesInput
 type UpdateEndpointWeightsAndCapacitiesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7201,7 +7196,7 @@ func (s *UpdateEndpointWeightsAndCapacitiesInput) SetEndpointName(v string) *Upd
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointWeightsAndCapacitiesOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointWeightsAndCapacitiesOutput
 type UpdateEndpointWeightsAndCapacitiesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -7227,7 +7222,7 @@ func (s *UpdateEndpointWeightsAndCapacitiesOutput) SetEndpointArn(v string) *Upd
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceInput
 type UpdateNotebookInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7287,7 +7282,7 @@ func (s *UpdateNotebookInstanceInput) SetRoleArn(v string) *UpdateNotebookInstan
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceOutput
 type UpdateNotebookInstanceOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -9,63 +9,15 @@
 
 [[projects]]
   name = "github.com/astaxie/beego"
-  packages = [
-    ".",
-    "config",
-    "context",
-    "context/param",
-    "grace",
-    "logs",
-    "plugins/cors",
-    "session",
-    "toolbox",
-    "utils"
-  ]
-  revision = "bf5c5626ab429e66d88602e1ab1ab5fbf4629a01"
-  version = "v1.9.2"
+  packages = [".","config","context","context/param","grace","logs","plugins/cors","session","toolbox","utils"]
+  revision = "d96289a81bf67728cff7a19b067aaecc65a62ec6"
+  version = "v1.9.0"
 
 [[projects]]
   name = "github.com/aws/aws-sdk-go"
-  packages = [
-    "aws",
-    "aws/awserr",
-    "aws/awsutil",
-    "aws/client",
-    "aws/client/metadata",
-    "aws/corehandlers",
-    "aws/credentials",
-    "aws/credentials/ec2rolecreds",
-    "aws/credentials/endpointcreds",
-    "aws/credentials/stscreds",
-    "aws/defaults",
-    "aws/ec2metadata",
-    "aws/endpoints",
-    "aws/request",
-    "aws/session",
-    "aws/signer/v4",
-    "internal/shareddefaults",
-    "private/protocol",
-    "private/protocol/ec2query",
-    "private/protocol/json/jsonutil",
-    "private/protocol/jsonrpc",
-    "private/protocol/query",
-    "private/protocol/query/queryutil",
-    "private/protocol/rest",
-    "private/protocol/restxml",
-    "private/protocol/xml/xmlutil",
-    "service/cloudwatch",
-    "service/dynamodb",
-    "service/dynamodb/dynamodbattribute",
-    "service/dynamodb/dynamodbiface",
-    "service/ec2",
-    "service/route53",
-    "service/s3",
-    "service/s3/s3iface",
-    "service/s3/s3manager",
-    "service/sts"
-  ]
-  revision = "ab772a0ae5d958feb51cba2a65eca3911882d791"
-  version = "v1.12.49"
+  packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/shareddefaults","private/protocol","private/protocol/ec2query","private/protocol/json/jsonutil","private/protocol/jsonrpc","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/restxml","private/protocol/xml/xmlutil","service/cloudwatch","service/dynamodb","service/dynamodb/dynamodbattribute","service/dynamodb/dynamodbiface","service/ec2","service/route53","service/s3","service/s3/s3iface","service/s3/s3manager","service/sts"]
+  revision = "a9c63ac6fd79402f91191c2e0a1348d0b8968e6c"
+  version = "v1.12.41"
 
 [[projects]]
   name = "github.com/cenkalti/backoff"
@@ -106,10 +58,7 @@
 [[projects]]
   branch = "master"
   name = "github.com/guregu/dynamo"
-  packages = [
-    ".",
-    "internal/exprs"
-  ]
+  packages = [".","internal/exprs"]
   revision = "78f36f7876767b1899b4bac7381d109fe5a58539"
 
 [[projects]]
@@ -137,18 +86,7 @@
 
 [[projects]]
   name = "github.com/mobingilabs/mobingi-sdk-go"
-  packages = [
-    "client",
-    "mobingi/alm",
-    "mobingi/credentials",
-    "mobingi/sesha3",
-    "mobingi/session",
-    "pkg/cmdline",
-    "pkg/debug",
-    "pkg/jwt",
-    "pkg/notification",
-    "pkg/private"
-  ]
+  packages = ["client","mobingi/alm","mobingi/credentials","mobingi/sesha3","mobingi/session","pkg/cmdline","pkg/debug","pkg/jwt","pkg/notification","pkg/private"]
   revision = "60282744cb55e139b09b9903b8684e4f7925d87b"
   version = "v0.1.30"
 
@@ -174,7 +112,7 @@
   branch = "master"
   name = "github.com/spf13/cobra"
   packages = ["."]
-  revision = "ccaecb155a2177302cb56cae929251a256d0f646"
+  revision = "de2d9c4eca8f3c1de17d48b096b6504e0296f003"
 
 [[projects]]
   name = "github.com/spf13/pflag"
@@ -186,22 +124,19 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
-  revision = "d585fd2cc9195196078f516b69daff6744ef5e84"
+  revision = "94eea52f7b742c7cbe0b03b22f0c4c8631ece122"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context"]
-  revision = "d866cfc389cec985d6fda2859936a575a55a3ab6"
+  revision = "a8b9294777976932365dabb6640cf1468d95c70f"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
-  packages = [
-    "unix",
-    "windows"
-  ]
-  revision = "571f7bbbe08da2a8955aed9d4db316e78630e9a3"
+  packages = ["unix","windows"]
+  revision = "8b4580aae2a0dd0c231a45d3ccb8434ff533b840"
 
 [solve-meta]
   analyzer-name = "dep"

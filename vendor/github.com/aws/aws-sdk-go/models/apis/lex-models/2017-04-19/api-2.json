@@ -572,13 +572,13 @@
       "type":"string",
       "max":100,
       "min":1,
-      "pattern":"^([A-Za-z]_?)+$"
+      "pattern":"^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)"
     },
     "AliasNameOrListAll":{
       "type":"string",
       "max":100,
       "min":1,
-      "pattern":"^(-|^([A-Za-z]_?)+$)$"
+      "pattern":"^(-|^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*))$"
     },
     "BadRequestException":{
       "type":"structure",
@@ -614,9 +614,7 @@
         "botName":{"shape":"BotName"},
         "createdDate":{"shape":"Timestamp"},
         "type":{"shape":"ChannelType"},
-        "botConfiguration":{"shape":"ChannelConfigurationMap"},
-        "status":{"shape":"ChannelStatus"},
-        "failureReason":{"shape":"String"}
+        "botConfiguration":{"shape":"ChannelConfigurationMap"}
       }
     },
     "BotChannelAssociationList":{
@@ -627,7 +625,7 @@
       "type":"string",
       "max":100,
       "min":1,
-      "pattern":"^([A-Za-z]_?)+$"
+      "pattern":"^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)"
     },
     "BotMetadata":{
       "type":"structure",
@@ -648,7 +646,7 @@
       "type":"string",
       "max":50,
       "min":2,
-      "pattern":"^([A-Za-z]_?)+$"
+      "pattern":"^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)"
     },
     "BotVersions":{
       "type":"list",
@@ -697,14 +695,6 @@
       "max":10,
       "min":1,
       "sensitive":true
-    },
-    "ChannelStatus":{
-      "type":"string",
-      "enum":[
-        "IN_PROGRESS",
-        "CREATED",
-        "FAILED"
-      ]
     },
     "ChannelType":{
       "type":"string",
@@ -839,7 +829,7 @@
       "type":"string",
       "max":100,
       "min":1,
-      "pattern":"^((AMAZON\\.)_?|[A-Za-z]_?)+"
+      "pattern":"^([a-zA-Z]|AMAZON.)+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)"
     },
     "DeleteBotAliasRequest":{
       "type":"structure",
@@ -1149,9 +1139,7 @@
         "botName":{"shape":"BotName"},
         "createdDate":{"shape":"Timestamp"},
         "type":{"shape":"ChannelType"},
-        "botConfiguration":{"shape":"ChannelConfigurationMap"},
-        "status":{"shape":"ChannelStatus"},
-        "failureReason":{"shape":"String"}
+        "botConfiguration":{"shape":"ChannelConfigurationMap"}
       }
     },
     "GetBotChannelAssociationsRequest":{
@@ -1661,7 +1649,7 @@
       "type":"string",
       "max":100,
       "min":1,
-      "pattern":"^([A-Za-z]_?)+$"
+      "pattern":"^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)"
     },
     "IntentUtteranceList":{
       "type":"list",
@@ -2023,7 +2011,7 @@
       "type":"string",
       "max":100,
       "min":1,
-      "pattern":"^([A-Za-z](-|_|.)?)+$"
+      "pattern":"^[a-zA-Z]+(((_|.)[a-zA-Z]+)*|([a-zA-Z]+(_|.))*|(_|.))"
     },
     "SlotTypeMetadata":{
       "type":"structure",
@@ -2043,7 +2031,7 @@
       "type":"string",
       "max":100,
       "min":1,
-      "pattern":"^([A-Za-z]_?)+$"
+      "pattern":"^[a-zA-Z]+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)"
     },
     "SlotUtteranceList":{
       "type":"list",

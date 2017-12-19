@@ -36,7 +36,7 @@ const opCreateCluster = "CreateCluster"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCluster
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCluster
 func (c *ECS) CreateClusterRequest(input *CreateClusterInput) (req *request.Request, output *CreateClusterOutput) {
 	op := &request.Operation{
 		Name:       opCreateCluster,
@@ -87,7 +87,7 @@ func (c *ECS) CreateClusterRequest(input *CreateClusterInput) (req *request.Requ
 //   The specified parameter is invalid. Review the available parameters for the
 //   API request.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCluster
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCluster
 func (c *ECS) CreateCluster(input *CreateClusterInput) (*CreateClusterOutput, error) {
 	req, out := c.CreateClusterRequest(input)
 	return out, req.Send()
@@ -134,7 +134,7 @@ const opCreateService = "CreateService"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateService
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateService
 func (c *ECS) CreateServiceRequest(input *CreateServiceInput) (req *request.Request, output *CreateServiceOutput) {
 	op := &request.Operation{
 		Name:       opCreateService,
@@ -250,7 +250,7 @@ func (c *ECS) CreateServiceRequest(input *CreateServiceInput) (req *request.Requ
 //   * ErrCodeAccessDeniedException "AccessDeniedException"
 //   You do not have authorization to perform the requested action.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateService
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateService
 func (c *ECS) CreateService(input *CreateServiceInput) (*CreateServiceOutput, error) {
 	req, out := c.CreateServiceRequest(input)
 	return out, req.Send()
@@ -297,7 +297,7 @@ const opDeleteAttributes = "DeleteAttributes"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAttributes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAttributes
 func (c *ECS) DeleteAttributesRequest(input *DeleteAttributesInput) (req *request.Request, output *DeleteAttributesOutput) {
 	op := &request.Operation{
 		Name:       opDeleteAttributes,
@@ -339,7 +339,7 @@ func (c *ECS) DeleteAttributesRequest(input *DeleteAttributesInput) (req *reques
 //   The specified parameter is invalid. Review the available parameters for the
 //   API request.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAttributes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAttributes
 func (c *ECS) DeleteAttributes(input *DeleteAttributesInput) (*DeleteAttributesOutput, error) {
 	req, out := c.DeleteAttributesRequest(input)
 	return out, req.Send()
@@ -386,7 +386,7 @@ const opDeleteCluster = "DeleteCluster"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCluster
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCluster
 func (c *ECS) DeleteClusterRequest(input *DeleteClusterInput) (req *request.Request, output *DeleteClusterOutput) {
 	op := &request.Operation{
 		Name:       opDeleteCluster,
@@ -446,7 +446,7 @@ func (c *ECS) DeleteClusterRequest(input *DeleteClusterInput) (req *request.Requ
 //   * ErrCodeClusterContainsTasksException "ClusterContainsTasksException"
 //   You cannot delete a cluster that has active tasks.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCluster
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCluster
 func (c *ECS) DeleteCluster(input *DeleteClusterInput) (*DeleteClusterOutput, error) {
 	req, out := c.DeleteClusterRequest(input)
 	return out, req.Send()
@@ -493,7 +493,7 @@ const opDeleteService = "DeleteService"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService
 func (c *ECS) DeleteServiceRequest(input *DeleteServiceInput) (req *request.Request, output *DeleteServiceOutput) {
 	op := &request.Operation{
 		Name:       opDeleteService,
@@ -555,7 +555,7 @@ func (c *ECS) DeleteServiceRequest(input *DeleteServiceInput) (req *request.Requ
 //   The specified service could not be found. You can view your available services
 //   with ListServices. Amazon ECS services are cluster-specific and region-specific.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService
 func (c *ECS) DeleteService(input *DeleteServiceInput) (*DeleteServiceOutput, error) {
 	req, out := c.DeleteServiceRequest(input)
 	return out, req.Send()
@@ -602,7 +602,7 @@ const opDeregisterContainerInstance = "DeregisterContainerInstance"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstance
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstance
 func (c *ECS) DeregisterContainerInstanceRequest(input *DeregisterContainerInstanceInput) (req *request.Request, output *DeregisterContainerInstanceOutput) {
 	op := &request.Operation{
 		Name:       opDeregisterContainerInstance,
@@ -661,7 +661,7 @@ func (c *ECS) DeregisterContainerInstanceRequest(input *DeregisterContainerInsta
 //   The specified cluster could not be found. You can view your available clusters
 //   with ListClusters. Amazon ECS clusters are region-specific.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstance
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstance
 func (c *ECS) DeregisterContainerInstance(input *DeregisterContainerInstanceInput) (*DeregisterContainerInstanceOutput, error) {
 	req, out := c.DeregisterContainerInstanceRequest(input)
 	return out, req.Send()
@@ -708,7 +708,7 @@ const opDeregisterTaskDefinition = "DeregisterTaskDefinition"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinition
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinition
 func (c *ECS) DeregisterTaskDefinitionRequest(input *DeregisterTaskDefinitionInput) (req *request.Request, output *DeregisterTaskDefinitionOutput) {
 	op := &request.Operation{
 		Name:       opDeregisterTaskDefinition,
@@ -763,7 +763,7 @@ func (c *ECS) DeregisterTaskDefinitionRequest(input *DeregisterTaskDefinitionInp
 //   The specified parameter is invalid. Review the available parameters for the
 //   API request.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinition
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinition
 func (c *ECS) DeregisterTaskDefinition(input *DeregisterTaskDefinitionInput) (*DeregisterTaskDefinitionOutput, error) {
 	req, out := c.DeregisterTaskDefinitionRequest(input)
 	return out, req.Send()
@@ -810,7 +810,7 @@ const opDescribeClusters = "DescribeClusters"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClusters
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClusters
 func (c *ECS) DescribeClustersRequest(input *DescribeClustersInput) (req *request.Request, output *DescribeClustersOutput) {
 	op := &request.Operation{
 		Name:       opDescribeClusters,
@@ -851,7 +851,7 @@ func (c *ECS) DescribeClustersRequest(input *DescribeClustersInput) (req *reques
 //   The specified parameter is invalid. Review the available parameters for the
 //   API request.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClusters
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClusters
 func (c *ECS) DescribeClusters(input *DescribeClustersInput) (*DescribeClustersOutput, error) {
 	req, out := c.DescribeClustersRequest(input)
 	return out, req.Send()
@@ -898,7 +898,7 @@ const opDescribeContainerInstances = "DescribeContainerInstances"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstances
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstances
 func (c *ECS) DescribeContainerInstancesRequest(input *DescribeContainerInstancesInput) (req *request.Request, output *DescribeContainerInstancesOutput) {
 	op := &request.Operation{
 		Name:       opDescribeContainerInstances,
@@ -944,7 +944,7 @@ func (c *ECS) DescribeContainerInstancesRequest(input *DescribeContainerInstance
 //   The specified cluster could not be found. You can view your available clusters
 //   with ListClusters. Amazon ECS clusters are region-specific.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstances
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstances
 func (c *ECS) DescribeContainerInstances(input *DescribeContainerInstancesInput) (*DescribeContainerInstancesOutput, error) {
 	req, out := c.DescribeContainerInstancesRequest(input)
 	return out, req.Send()
@@ -991,7 +991,7 @@ const opDescribeServices = "DescribeServices"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServices
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServices
 func (c *ECS) DescribeServicesRequest(input *DescribeServicesInput) (req *request.Request, output *DescribeServicesOutput) {
 	op := &request.Operation{
 		Name:       opDescribeServices,
@@ -1036,7 +1036,7 @@ func (c *ECS) DescribeServicesRequest(input *DescribeServicesInput) (req *reques
 //   The specified cluster could not be found. You can view your available clusters
 //   with ListClusters. Amazon ECS clusters are region-specific.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServices
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServices
 func (c *ECS) DescribeServices(input *DescribeServicesInput) (*DescribeServicesOutput, error) {
 	req, out := c.DescribeServicesRequest(input)
 	return out, req.Send()
@@ -1083,7 +1083,7 @@ const opDescribeTaskDefinition = "DescribeTaskDefinition"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinition
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinition
 func (c *ECS) DescribeTaskDefinitionRequest(input *DescribeTaskDefinitionInput) (req *request.Request, output *DescribeTaskDefinitionOutput) {
 	op := &request.Operation{
 		Name:       opDescribeTaskDefinition,
@@ -1129,7 +1129,7 @@ func (c *ECS) DescribeTaskDefinitionRequest(input *DescribeTaskDefinitionInput) 
 //   The specified parameter is invalid. Review the available parameters for the
 //   API request.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinition
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinition
 func (c *ECS) DescribeTaskDefinition(input *DescribeTaskDefinitionInput) (*DescribeTaskDefinitionOutput, error) {
 	req, out := c.DescribeTaskDefinitionRequest(input)
 	return out, req.Send()
@@ -1176,7 +1176,7 @@ const opDescribeTasks = "DescribeTasks"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasks
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasks
 func (c *ECS) DescribeTasksRequest(input *DescribeTasksInput) (req *request.Request, output *DescribeTasksOutput) {
 	op := &request.Operation{
 		Name:       opDescribeTasks,
@@ -1221,7 +1221,7 @@ func (c *ECS) DescribeTasksRequest(input *DescribeTasksInput) (req *request.Requ
 //   The specified cluster could not be found. You can view your available clusters
 //   with ListClusters. Amazon ECS clusters are region-specific.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasks
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasks
 func (c *ECS) DescribeTasks(input *DescribeTasksInput) (*DescribeTasksOutput, error) {
 	req, out := c.DescribeTasksRequest(input)
 	return out, req.Send()
@@ -1268,7 +1268,7 @@ const opDiscoverPollEndpoint = "DiscoverPollEndpoint"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpoint
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpoint
 func (c *ECS) DiscoverPollEndpointRequest(input *DiscoverPollEndpointInput) (req *request.Request, output *DiscoverPollEndpointOutput) {
 	op := &request.Operation{
 		Name:       opDiscoverPollEndpoint,
@@ -1308,7 +1308,7 @@ func (c *ECS) DiscoverPollEndpointRequest(input *DiscoverPollEndpointInput) (req
 //   or resource on behalf of a user that doesn't have permissions to use the
 //   action or resource, or specifying an identifier that is not valid.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpoint
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpoint
 func (c *ECS) DiscoverPollEndpoint(input *DiscoverPollEndpointInput) (*DiscoverPollEndpointOutput, error) {
 	req, out := c.DiscoverPollEndpointRequest(input)
 	return out, req.Send()
@@ -1355,7 +1355,7 @@ const opListAttributes = "ListAttributes"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListAttributes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListAttributes
 func (c *ECS) ListAttributesRequest(input *ListAttributesInput) (req *request.Request, output *ListAttributesOutput) {
 	op := &request.Operation{
 		Name:       opListAttributes,
@@ -1398,7 +1398,7 @@ func (c *ECS) ListAttributesRequest(input *ListAttributesInput) (req *request.Re
 //   The specified parameter is invalid. Review the available parameters for the
 //   API request.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListAttributes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListAttributes
 func (c *ECS) ListAttributes(input *ListAttributesInput) (*ListAttributesOutput, error) {
 	req, out := c.ListAttributesRequest(input)
 	return out, req.Send()
@@ -1445,7 +1445,7 @@ const opListClusters = "ListClusters"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListClusters
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListClusters
 func (c *ECS) ListClustersRequest(input *ListClustersInput) (req *request.Request, output *ListClustersOutput) {
 	op := &request.Operation{
 		Name:       opListClusters,
@@ -1492,7 +1492,7 @@ func (c *ECS) ListClustersRequest(input *ListClustersInput) (req *request.Reques
 //   The specified parameter is invalid. Review the available parameters for the
 //   API request.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListClusters
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListClusters
 func (c *ECS) ListClusters(input *ListClustersInput) (*ListClustersOutput, error) {
 	req, out := c.ListClustersRequest(input)
 	return out, req.Send()
@@ -1589,7 +1589,7 @@ const opListContainerInstances = "ListContainerInstances"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstances
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstances
 func (c *ECS) ListContainerInstancesRequest(input *ListContainerInstancesInput) (req *request.Request, output *ListContainerInstancesOutput) {
 	op := &request.Operation{
 		Name:       opListContainerInstances,
@@ -1644,7 +1644,7 @@ func (c *ECS) ListContainerInstancesRequest(input *ListContainerInstancesInput) 
 //   The specified cluster could not be found. You can view your available clusters
 //   with ListClusters. Amazon ECS clusters are region-specific.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstances
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstances
 func (c *ECS) ListContainerInstances(input *ListContainerInstancesInput) (*ListContainerInstancesOutput, error) {
 	req, out := c.ListContainerInstancesRequest(input)
 	return out, req.Send()
@@ -1741,7 +1741,7 @@ const opListServices = "ListServices"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServices
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServices
 func (c *ECS) ListServicesRequest(input *ListServicesInput) (req *request.Request, output *ListServicesOutput) {
 	op := &request.Operation{
 		Name:       opListServices,
@@ -1792,7 +1792,7 @@ func (c *ECS) ListServicesRequest(input *ListServicesInput) (req *request.Reques
 //   The specified cluster could not be found. You can view your available clusters
 //   with ListClusters. Amazon ECS clusters are region-specific.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServices
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServices
 func (c *ECS) ListServices(input *ListServicesInput) (*ListServicesOutput, error) {
 	req, out := c.ListServicesRequest(input)
 	return out, req.Send()
@@ -1889,7 +1889,7 @@ const opListTaskDefinitionFamilies = "ListTaskDefinitionFamilies"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionFamilies
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionFamilies
 func (c *ECS) ListTaskDefinitionFamiliesRequest(input *ListTaskDefinitionFamiliesInput) (req *request.Request, output *ListTaskDefinitionFamiliesOutput) {
 	op := &request.Operation{
 		Name:       opListTaskDefinitionFamilies,
@@ -1942,7 +1942,7 @@ func (c *ECS) ListTaskDefinitionFamiliesRequest(input *ListTaskDefinitionFamilie
 //   The specified parameter is invalid. Review the available parameters for the
 //   API request.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionFamilies
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionFamilies
 func (c *ECS) ListTaskDefinitionFamilies(input *ListTaskDefinitionFamiliesInput) (*ListTaskDefinitionFamiliesOutput, error) {
 	req, out := c.ListTaskDefinitionFamiliesRequest(input)
 	return out, req.Send()
@@ -2039,7 +2039,7 @@ const opListTaskDefinitions = "ListTaskDefinitions"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitions
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitions
 func (c *ECS) ListTaskDefinitionsRequest(input *ListTaskDefinitionsInput) (req *request.Request, output *ListTaskDefinitionsOutput) {
 	op := &request.Operation{
 		Name:       opListTaskDefinitions,
@@ -2088,7 +2088,7 @@ func (c *ECS) ListTaskDefinitionsRequest(input *ListTaskDefinitionsInput) (req *
 //   The specified parameter is invalid. Review the available parameters for the
 //   API request.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitions
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitions
 func (c *ECS) ListTaskDefinitions(input *ListTaskDefinitionsInput) (*ListTaskDefinitionsOutput, error) {
 	req, out := c.ListTaskDefinitionsRequest(input)
 	return out, req.Send()
@@ -2185,7 +2185,7 @@ const opListTasks = "ListTasks"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasks
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasks
 func (c *ECS) ListTasksRequest(input *ListTasksInput) (req *request.Request, output *ListTasksOutput) {
 	op := &request.Operation{
 		Name:       opListTasks,
@@ -2245,7 +2245,7 @@ func (c *ECS) ListTasksRequest(input *ListTasksInput) (req *request.Request, out
 //   The specified service could not be found. You can view your available services
 //   with ListServices. Amazon ECS services are cluster-specific and region-specific.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasks
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasks
 func (c *ECS) ListTasks(input *ListTasksInput) (*ListTasksOutput, error) {
 	req, out := c.ListTasksRequest(input)
 	return out, req.Send()
@@ -2342,7 +2342,7 @@ const opPutAttributes = "PutAttributes"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAttributes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAttributes
 func (c *ECS) PutAttributesRequest(input *PutAttributesInput) (req *request.Request, output *PutAttributesOutput) {
 	op := &request.Operation{
 		Name:       opPutAttributes,
@@ -2393,7 +2393,7 @@ func (c *ECS) PutAttributesRequest(input *PutAttributesInput) (req *request.Requ
 //   The specified parameter is invalid. Review the available parameters for the
 //   API request.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAttributes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAttributes
 func (c *ECS) PutAttributes(input *PutAttributesInput) (*PutAttributesOutput, error) {
 	req, out := c.PutAttributesRequest(input)
 	return out, req.Send()
@@ -2440,7 +2440,7 @@ const opRegisterContainerInstance = "RegisterContainerInstance"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstance
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstance
 func (c *ECS) RegisterContainerInstanceRequest(input *RegisterContainerInstanceInput) (req *request.Request, output *RegisterContainerInstanceOutput) {
 	op := &request.Operation{
 		Name:       opRegisterContainerInstance,
@@ -2485,7 +2485,7 @@ func (c *ECS) RegisterContainerInstanceRequest(input *RegisterContainerInstanceI
 //   The specified parameter is invalid. Review the available parameters for the
 //   API request.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstance
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstance
 func (c *ECS) RegisterContainerInstance(input *RegisterContainerInstanceInput) (*RegisterContainerInstanceOutput, error) {
 	req, out := c.RegisterContainerInstanceRequest(input)
 	return out, req.Send()
@@ -2532,7 +2532,7 @@ const opRegisterTaskDefinition = "RegisterTaskDefinition"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinition
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinition
 func (c *ECS) RegisterTaskDefinitionRequest(input *RegisterTaskDefinitionInput) (req *request.Request, output *RegisterTaskDefinitionOutput) {
 	op := &request.Operation{
 		Name:       opRegisterTaskDefinition,
@@ -2593,7 +2593,7 @@ func (c *ECS) RegisterTaskDefinitionRequest(input *RegisterTaskDefinitionInput) 
 //   The specified parameter is invalid. Review the available parameters for the
 //   API request.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinition
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinition
 func (c *ECS) RegisterTaskDefinition(input *RegisterTaskDefinitionInput) (*RegisterTaskDefinitionOutput, error) {
 	req, out := c.RegisterTaskDefinitionRequest(input)
 	return out, req.Send()
@@ -2640,7 +2640,7 @@ const opRunTask = "RunTask"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTask
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTask
 func (c *ECS) RunTaskRequest(input *RunTaskInput) (req *request.Request, output *RunTaskOutput) {
 	op := &request.Operation{
 		Name:       opRunTask,
@@ -2710,7 +2710,7 @@ func (c *ECS) RunTaskRequest(input *RunTaskInput) (req *request.Request, output 
 //   Your AWS account has been blocked. Contact AWS Customer Support (http://aws.amazon.com/contact-us/)
 //   for more information.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTask
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTask
 func (c *ECS) RunTask(input *RunTaskInput) (*RunTaskOutput, error) {
 	req, out := c.RunTaskRequest(input)
 	return out, req.Send()
@@ -2757,7 +2757,7 @@ const opStartTask = "StartTask"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StartTask
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StartTask
 func (c *ECS) StartTaskRequest(input *StartTaskInput) (req *request.Request, output *StartTaskOutput) {
 	op := &request.Operation{
 		Name:       opStartTask,
@@ -2807,7 +2807,7 @@ func (c *ECS) StartTaskRequest(input *StartTaskInput) (req *request.Request, out
 //   The specified cluster could not be found. You can view your available clusters
 //   with ListClusters. Amazon ECS clusters are region-specific.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StartTask
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StartTask
 func (c *ECS) StartTask(input *StartTaskInput) (*StartTaskOutput, error) {
 	req, out := c.StartTaskRequest(input)
 	return out, req.Send()
@@ -2854,7 +2854,7 @@ const opStopTask = "StopTask"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask
 func (c *ECS) StopTaskRequest(input *StopTaskInput) (req *request.Request, output *StopTaskOutput) {
 	op := &request.Operation{
 		Name:       opStopTask,
@@ -2910,7 +2910,7 @@ func (c *ECS) StopTaskRequest(input *StopTaskInput) (req *request.Request, outpu
 //   The specified cluster could not be found. You can view your available clusters
 //   with ListClusters. Amazon ECS clusters are region-specific.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask
 func (c *ECS) StopTask(input *StopTaskInput) (*StopTaskOutput, error) {
 	req, out := c.StopTaskRequest(input)
 	return out, req.Send()
@@ -2957,7 +2957,7 @@ const opSubmitContainerStateChange = "SubmitContainerStateChange"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitContainerStateChange
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitContainerStateChange
 func (c *ECS) SubmitContainerStateChangeRequest(input *SubmitContainerStateChangeInput) (req *request.Request, output *SubmitContainerStateChangeOutput) {
 	op := &request.Operation{
 		Name:       opSubmitContainerStateChange,
@@ -3000,7 +3000,7 @@ func (c *ECS) SubmitContainerStateChangeRequest(input *SubmitContainerStateChang
 //   * ErrCodeAccessDeniedException "AccessDeniedException"
 //   You do not have authorization to perform the requested action.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitContainerStateChange
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitContainerStateChange
 func (c *ECS) SubmitContainerStateChange(input *SubmitContainerStateChangeInput) (*SubmitContainerStateChangeOutput, error) {
 	req, out := c.SubmitContainerStateChangeRequest(input)
 	return out, req.Send()
@@ -3047,7 +3047,7 @@ const opSubmitTaskStateChange = "SubmitTaskStateChange"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitTaskStateChange
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitTaskStateChange
 func (c *ECS) SubmitTaskStateChangeRequest(input *SubmitTaskStateChangeInput) (req *request.Request, output *SubmitTaskStateChangeOutput) {
 	op := &request.Operation{
 		Name:       opSubmitTaskStateChange,
@@ -3090,7 +3090,7 @@ func (c *ECS) SubmitTaskStateChangeRequest(input *SubmitTaskStateChangeInput) (r
 //   * ErrCodeAccessDeniedException "AccessDeniedException"
 //   You do not have authorization to perform the requested action.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitTaskStateChange
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitTaskStateChange
 func (c *ECS) SubmitTaskStateChange(input *SubmitTaskStateChangeInput) (*SubmitTaskStateChangeOutput, error) {
 	req, out := c.SubmitTaskStateChangeRequest(input)
 	return out, req.Send()
@@ -3137,7 +3137,7 @@ const opUpdateContainerAgent = "UpdateContainerAgent"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgent
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgent
 func (c *ECS) UpdateContainerAgentRequest(input *UpdateContainerAgentInput) (req *request.Request, output *UpdateContainerAgentOutput) {
 	op := &request.Operation{
 		Name:       opUpdateContainerAgent,
@@ -3210,7 +3210,7 @@ func (c *ECS) UpdateContainerAgentRequest(input *UpdateContainerAgentInput) (req
 //   with an update. This could be because the agent running on the container
 //   instance is an older or custom version that does not use our version information.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgent
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgent
 func (c *ECS) UpdateContainerAgent(input *UpdateContainerAgentInput) (*UpdateContainerAgentOutput, error) {
 	req, out := c.UpdateContainerAgentRequest(input)
 	return out, req.Send()
@@ -3257,7 +3257,7 @@ const opUpdateContainerInstancesState = "UpdateContainerInstancesState"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesState
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesState
 func (c *ECS) UpdateContainerInstancesStateRequest(input *UpdateContainerInstancesStateInput) (req *request.Request, output *UpdateContainerInstancesStateOutput) {
 	op := &request.Operation{
 		Name:       opUpdateContainerInstancesState,
@@ -3345,7 +3345,7 @@ func (c *ECS) UpdateContainerInstancesStateRequest(input *UpdateContainerInstanc
 //   The specified cluster could not be found. You can view your available clusters
 //   with ListClusters. Amazon ECS clusters are region-specific.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesState
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesState
 func (c *ECS) UpdateContainerInstancesState(input *UpdateContainerInstancesStateInput) (*UpdateContainerInstancesStateOutput, error) {
 	req, out := c.UpdateContainerInstancesStateRequest(input)
 	return out, req.Send()
@@ -3392,7 +3392,7 @@ const opUpdateService = "UpdateService"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService
 func (c *ECS) UpdateServiceRequest(input *UpdateServiceInput) (req *request.Request, output *UpdateServiceOutput) {
 	op := &request.Operation{
 		Name:       opUpdateService,
@@ -3521,7 +3521,7 @@ func (c *ECS) UpdateServiceRequest(input *UpdateServiceInput) (req *request.Requ
 //   * ErrCodeAccessDeniedException "AccessDeniedException"
 //   You do not have authorization to perform the requested action.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService
 func (c *ECS) UpdateService(input *UpdateServiceInput) (*UpdateServiceOutput, error) {
 	req, out := c.UpdateServiceRequest(input)
 	return out, req.Send()
@@ -3544,7 +3544,7 @@ func (c *ECS) UpdateServiceWithContext(ctx aws.Context, input *UpdateServiceInpu
 }
 
 // An object representing a container instance or task attachment.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Attachment
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Attachment
 type Attachment struct {
 	_ struct{} `type:"structure"`
 
@@ -3599,7 +3599,7 @@ func (s *Attachment) SetType(v string) *Attachment {
 }
 
 // An object representing a change in state for a task attachment.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AttachmentStateChange
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AttachmentStateChange
 type AttachmentStateChange struct {
 	_ struct{} `type:"structure"`
 
@@ -3656,7 +3656,7 @@ func (s *AttachmentStateChange) SetStatus(v string) *AttachmentStateChange {
 // enable you to extend the Amazon ECS data model by adding custom metadata
 // to your resources. For more information, see Attributes (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes)
 // in the Amazon Elastic Container Service Developer Guide.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Attribute
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Attribute
 type Attribute struct {
 	_ struct{} `type:"structure"`
 
@@ -3729,7 +3729,7 @@ func (s *Attribute) SetValue(v string) *Attribute {
 }
 
 // An object representing the networking details for a task or service.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AwsVpcConfiguration
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AwsVpcConfiguration
 type AwsVpcConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -3792,7 +3792,7 @@ func (s *AwsVpcConfiguration) SetSubnets(v []*string) *AwsVpcConfiguration {
 // task requests. Each account receives a default cluster the first time you
 // use the Amazon ECS service, but you may also create other clusters. Clusters
 // may contain more than one instance type simultaneously.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Cluster
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Cluster
 type Cluster struct {
 	_ struct{} `type:"structure"`
 
@@ -3903,7 +3903,7 @@ func (s *Cluster) SetStatus(v string) *Cluster {
 }
 
 // A Docker container that is part of a task.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Container
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Container
 type Container struct {
 	_ struct{} `type:"structure"`
 
@@ -3993,7 +3993,7 @@ func (s *Container) SetTaskArn(v string) *Container {
 
 // Container definitions are used in task definitions to describe the different
 // containers that are launched as part of a task.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerDefinition
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerDefinition
 type ContainerDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -4005,14 +4005,19 @@ type ContainerDefinition struct {
 	// (https://docs.docker.com/engine/reference/builder/#cmd).
 	Command []*string `locationName:"command" type:"list"`
 
-	// The number of cpu units reserved for the container. This parameter maps to
-	// CpuShares in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container)
+	// The number of cpu units reserved for the container. If your containers will
+	// be part of a task using the Fargate launch type, this field is optional and
+	// the only requirement is that the total amount of CPU reserved for all containers
+	// within a task be lower than the task cpu value.
+	//
+	// For containers that will be part of a task using the EC2 launch type, a container
+	// instance has 1,024 cpu units for every CPU core. This parameter specifies
+	// the minimum amount of CPU to reserve for a container, and containers share
+	// unallocated CPU units with other containers on the instance with the same
+	// ratio as their allocated amount. This parameter maps to CpuShares in the
+	// Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/)
 	// and the --cpu-shares option to docker run (https://docs.docker.com/engine/reference/run/).
-	//
-	// This field is optional for tasks using the Fargate launch type, and the only
-	// requirement is that the total amount of CPU reserved for all containers within
-	// a task be lower than the task-level cpu value.
 	//
 	// You can determine the number of CPU units that are available per EC2 instance
 	// type by multiplying the vCPUs listed for that instance type on the Amazon
@@ -4028,24 +4033,13 @@ type ContainerDefinition struct {
 	// higher CPU usage if the other container was not using it, but if both tasks
 	// were 100% active all of the time, they would be limited to 512 CPU units.
 	//
-	// Linux containers share unallocated CPU units with other containers on the
-	// container instance with the same ratio as their allocated amount. For example,
-	// if you run a single-container task on a single-core instance type with 512
-	// CPU units specified for that container, and that is the only task running
-	// on the container instance, that container could use the full 1,024 CPU unit
-	// share at any given time. However, if you launched another copy of the same
-	// task on that container instance, each task would be guaranteed a minimum
-	// of 512 CPU units when needed, and each container could float to higher CPU
-	// usage if the other container was not using it, but if both tasks were 100%
-	// active all of the time, they would be limited to 512 CPU units.
-	//
-	// On Linux container instances, the Docker daemon on the container instance
-	// uses the CPU value to calculate the relative CPU share ratios for running
-	// containers. For more information, see CPU share constraint (https://docs.docker.com/engine/reference/run/#cpu-share-constraint)
+	// The Docker daemon on the container instance uses the CPU value to calculate
+	// the relative CPU share ratios for running containers. For more information,
+	// see CPU share constraint (https://docs.docker.com/engine/reference/run/#cpu-share-constraint)
 	// in the Docker documentation. The minimum valid CPU share value that the Linux
-	// kernel will allow is 2; however, the CPU parameter is not required, and you
-	// can use CPU values below 2 in your container definitions. For CPU values
-	// below 2 (including null), the behavior varies based on your Amazon ECS container
+	// kernel allows is 2; however, the CPU parameter is not required, and you can
+	// use CPU values below 2 in your container definitions. For CPU values below
+	// 2 (including null), the behavior varies based on your Amazon ECS container
 	// agent version:
 	//
 	//    * Agent versions less than or equal to 1.1.0: Null and zero CPU values
@@ -4055,33 +4049,23 @@ type ContainerDefinition struct {
 	//
 	//    * Agent versions greater than or equal to 1.2.0: Null, zero, and CPU values
 	//    of 1 are passed to Docker as 2.
-	//
-	// On Windows container instances, the CPU limit is enforced as an absolute
-	// limit, or a quota. Windows containers only have access to the specified amount
-	// of CPU that is described in the task definition.
 	Cpu *int64 `locationName:"cpu" type:"integer"`
 
 	// When this parameter is true, networking is disabled within the container.
 	// This parameter maps to NetworkDisabled in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/).
-	//
-	// This parameter is not supported for Windows containers.
 	DisableNetworking *bool `locationName:"disableNetworking" type:"boolean"`
 
 	// A list of DNS search domains that are presented to the container. This parameter
 	// maps to DnsSearch in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/)
 	// and the --dns-search option to docker run (https://docs.docker.com/engine/reference/run/).
-	//
-	// This parameter is not supported for Windows containers.
 	DnsSearchDomains []*string `locationName:"dnsSearchDomains" type:"list"`
 
 	// A list of DNS servers that are presented to the container. This parameter
 	// maps to Dns in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/)
 	// and the --dns option to docker run (https://docs.docker.com/engine/reference/run/).
-	//
-	// This parameter is not supported for Windows containers.
 	DnsServers []*string `locationName:"dnsServers" type:"list"`
 
 	// A key/value map of labels to add to the container. This parameter maps to
@@ -4108,8 +4092,6 @@ type ContainerDefinition struct {
 	// options. For more information, see Amazon ECS Container Agent Configuration
 	// (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html)
 	// in the Amazon Elastic Container Service Developer Guide.
-	//
-	// This parameter is not supported for Windows containers.
 	DockerSecurityOptions []*string `locationName:"dockerSecurityOptions" type:"list"`
 
 	// Early versions of the Amazon ECS container agent do not properly handle entryPoint
@@ -4153,8 +4135,6 @@ type ContainerDefinition struct {
 	// to ExtraHosts in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/)
 	// and the --add-host option to docker run (https://docs.docker.com/engine/reference/run/).
-	//
-	// This parameter is not supported for Windows containers.
 	ExtraHosts []*HostEntry `locationName:"extraHosts" type:"list"`
 
 	// The hostname to use for your container. This parameter maps to Hostname in
@@ -4190,17 +4170,16 @@ type ContainerDefinition struct {
 	Image *string `locationName:"image" type:"string"`
 
 	// The link parameter allows containers to communicate with each other without
-	// the need for port mappings. Only supported if the network mode of a task
-	// definition is set to bridge. The name:internalName construct is analogous
-	// to name:alias in Docker links. Up to 255 letters (uppercase and lowercase),
-	// numbers, hyphens, and underscores are allowed. For more information about
-	// linking Docker containers, go to https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/
+	// the need for port mappings, using the name parameter and optionally, an alias
+	// for the link. This construct is analogous to name:alias in Docker links.
+	// This field is not valid for containers in tasks using the Fargate launch
+	// type. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and
+	// underscores are allowed for each name and alias. For more information on
+	// linking Docker containers, see https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/
 	// (https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/).
 	// This parameter maps to Links in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/)
-	// and the --link option to docker run (https://docs.docker.com/engine/reference/commandline/run/).
-	//
-	// This parameter is not supported for Windows containers.
+	// and the --link option to docker run (https://docs.docker.com/engine/reference/run/).
 	//
 	// Containers that are collocated on a single container instance may be able
 	// to communicate with each other without requiring links or host port mappings.
@@ -4209,10 +4188,8 @@ type ContainerDefinition struct {
 	Links []*string `locationName:"links" type:"list"`
 
 	// Linux-specific modifications that are applied to the container, such as Linux
-	// KernelCapabilities.
-	//
-	// This parameter is not supported for Windows containers or tasks using the
-	// Fargate launch type.
+	// KernelCapabilities. This field is not valid for containers in tasks using
+	// the Fargate launch type.
 	LinuxParameters *LinuxParameters `locationName:"linuxParameters" type:"structure"`
 
 	// The log configuration specification for the container.
@@ -4296,13 +4273,11 @@ type ContainerDefinition struct {
 
 	// The mount points for data volumes in your container.
 	//
+	// If using the Fargate launch type, the sourceVolume parameter is not supported.
+	//
 	// This parameter maps to Volumes in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/)
 	// and the --volume option to docker run (https://docs.docker.com/engine/reference/run/).
-	//
-	// Windows containers can mount whole directories on the same drive as $env:ProgramData.
-	// Windows containers cannot mount directories on a different drive, and mount
-	// point cannot be across drives.
 	MountPoints []*MountPoint `locationName:"mountPoints" type:"list"`
 
 	// The name of a container. If you are linking multiple containers together
@@ -4317,13 +4292,9 @@ type ContainerDefinition struct {
 	// The list of port mappings for the container. Port mappings allow containers
 	// to access ports on the host container instance to send or receive traffic.
 	//
-	// For task definitions that use the awsvpc network mode, you should only specify
-	// the containerPort. The hostPort can be left blank or it must be the same
+	// If using containers in a task with the Fargate, exposed ports should be specified
+	// using containerPort. The hostPort can be left blank or it must be the same
 	// value as the containerPort.
-	//
-	// Port mappings on Windows use the NetNAT gateway address rather than localhost.
-	// There is no loopback for port mappings on Windows, so you cannot access a
-	// container's mapped port from the host itself.
 	//
 	// This parameter maps to PortBindings in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/)
@@ -4344,9 +4315,6 @@ type ContainerDefinition struct {
 	// to Privileged in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/)
 	// and the --privileged option to docker run (https://docs.docker.com/engine/reference/run/).
-	//
-	// This parameter is not supported for Windows containers or tasks using the
-	// Fargate launch type.
 	Privileged *bool `locationName:"privileged" type:"boolean"`
 
 	// When this parameter is true, the container is given read-only access to its
@@ -4354,8 +4322,6 @@ type ContainerDefinition struct {
 	// (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/)
 	// and the --read-only option to docker run.
-	//
-	// This parameter is not supported for Windows containers.
 	ReadonlyRootFilesystem *bool `locationName:"readonlyRootFilesystem" type:"boolean"`
 
 	// A list of ulimits to set in the container. This parameter maps to Ulimits
@@ -4367,16 +4333,12 @@ type ContainerDefinition struct {
 	// instance. To check the Docker Remote API version on your container instance,
 	// log in to your container instance and run the following command: sudo docker
 	// version | grep "Server API version"
-	//
-	// This parameter is not supported for Windows containers.
 	Ulimits []*Ulimit `locationName:"ulimits" type:"list"`
 
 	// The user name to use inside the container. This parameter maps to User in
 	// the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/)
 	// and the --user option to docker run (https://docs.docker.com/engine/reference/run/).
-	//
-	// This parameter is not supported for Windows containers.
 	User *string `locationName:"user" type:"string"`
 
 	// Data volumes to mount from another container. This parameter maps to VolumesFrom
@@ -4606,7 +4568,7 @@ func (s *ContainerDefinition) SetWorkingDirectory(v string) *ContainerDefinition
 
 // An EC2 instance that is running the Amazon ECS agent and has been registered
 // with a cluster.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerInstance
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerInstance
 type ContainerInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -4775,7 +4737,7 @@ func (s *ContainerInstance) SetVersionInfo(v *VersionInfo) *ContainerInstance {
 }
 
 // The overrides that should be sent to a container.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerOverride
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerOverride
 type ContainerOverride struct {
 	_ struct{} `type:"structure"`
 
@@ -4857,7 +4819,7 @@ func (s *ContainerOverride) SetName(v string) *ContainerOverride {
 }
 
 // An object representing a change in state for a container.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerStateChange
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerStateChange
 type ContainerStateChange struct {
 	_ struct{} `type:"structure"`
 
@@ -4918,7 +4880,7 @@ func (s *ContainerStateChange) SetStatus(v string) *ContainerStateChange {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateClusterRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateClusterRequest
 type CreateClusterInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4944,7 +4906,7 @@ func (s *CreateClusterInput) SetClusterName(v string) *CreateClusterInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateClusterResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateClusterResponse
 type CreateClusterOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4968,7 +4930,7 @@ func (s *CreateClusterOutput) SetCluster(v *Cluster) *CreateClusterOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceRequest
 type CreateServiceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5183,7 +5145,7 @@ func (s *CreateServiceInput) SetTaskDefinition(v string) *CreateServiceInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceResponse
 type CreateServiceOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5207,7 +5169,7 @@ func (s *CreateServiceOutput) SetService(v *Service) *CreateServiceOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAttributesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAttributesRequest
 type DeleteAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5270,7 +5232,7 @@ func (s *DeleteAttributesInput) SetCluster(v string) *DeleteAttributesInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAttributesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAttributesResponse
 type DeleteAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5294,7 +5256,7 @@ func (s *DeleteAttributesOutput) SetAttributes(v []*Attribute) *DeleteAttributes
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteClusterRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteClusterRequest
 type DeleteClusterInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5333,7 +5295,7 @@ func (s *DeleteClusterInput) SetCluster(v string) *DeleteClusterInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteClusterResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteClusterResponse
 type DeleteClusterOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5357,7 +5319,7 @@ func (s *DeleteClusterOutput) SetCluster(v *Cluster) *DeleteClusterOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteServiceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteServiceRequest
 type DeleteServiceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5407,7 +5369,7 @@ func (s *DeleteServiceInput) SetService(v string) *DeleteServiceInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteServiceResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteServiceResponse
 type DeleteServiceOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5432,7 +5394,7 @@ func (s *DeleteServiceOutput) SetService(v *Service) *DeleteServiceOutput {
 }
 
 // The details of an Amazon ECS service deployment.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Deployment
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Deployment
 type Deployment struct {
 	_ struct{} `type:"structure"`
 
@@ -5553,7 +5515,7 @@ func (s *Deployment) SetUpdatedAt(v time.Time) *Deployment {
 
 // Optional deployment parameters that control how many tasks run during the
 // deployment and the ordering of stopping and starting tasks.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentConfiguration
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentConfiguration
 type DeploymentConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -5593,7 +5555,7 @@ func (s *DeploymentConfiguration) SetMinimumHealthyPercent(v int64) *DeploymentC
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstanceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstanceRequest
 type DeregisterContainerInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5667,7 +5629,7 @@ func (s *DeregisterContainerInstanceInput) SetForce(v bool) *DeregisterContainer
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstanceResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstanceResponse
 type DeregisterContainerInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5691,7 +5653,7 @@ func (s *DeregisterContainerInstanceOutput) SetContainerInstance(v *ContainerIns
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinitionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinitionRequest
 type DeregisterTaskDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5731,7 +5693,7 @@ func (s *DeregisterTaskDefinitionInput) SetTaskDefinition(v string) *DeregisterT
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinitionResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinitionResponse
 type DeregisterTaskDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5755,7 +5717,7 @@ func (s *DeregisterTaskDefinitionOutput) SetTaskDefinition(v *TaskDefinition) *D
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClustersRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClustersRequest
 type DescribeClustersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5806,7 +5768,7 @@ func (s *DescribeClustersInput) SetInclude(v []*string) *DescribeClustersInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClustersResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClustersResponse
 type DescribeClustersOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5839,7 +5801,7 @@ func (s *DescribeClustersOutput) SetFailures(v []*Failure) *DescribeClustersOutp
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstancesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstancesRequest
 type DescribeContainerInstancesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5889,7 +5851,7 @@ func (s *DescribeContainerInstancesInput) SetContainerInstances(v []*string) *De
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstancesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstancesResponse
 type DescribeContainerInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5922,7 +5884,7 @@ func (s *DescribeContainerInstancesOutput) SetFailures(v []*Failure) *DescribeCo
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServicesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServicesRequest
 type DescribeServicesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5973,7 +5935,7 @@ func (s *DescribeServicesInput) SetServices(v []*string) *DescribeServicesInput 
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServicesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServicesResponse
 type DescribeServicesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6006,7 +5968,7 @@ func (s *DescribeServicesOutput) SetServices(v []*Service) *DescribeServicesOutp
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinitionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinitionRequest
 type DescribeTaskDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6047,7 +6009,7 @@ func (s *DescribeTaskDefinitionInput) SetTaskDefinition(v string) *DescribeTaskD
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinitionResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinitionResponse
 type DescribeTaskDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6071,7 +6033,7 @@ func (s *DescribeTaskDefinitionOutput) SetTaskDefinition(v *TaskDefinition) *Des
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasksRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasksRequest
 type DescribeTasksInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6121,7 +6083,7 @@ func (s *DescribeTasksInput) SetTasks(v []*string) *DescribeTasksInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasksResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasksResponse
 type DescribeTasksOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6155,7 +6117,7 @@ func (s *DescribeTasksOutput) SetTasks(v []*Task) *DescribeTasksOutput {
 }
 
 // An object representing a container instance host device.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Device
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Device
 type Device struct {
 	_ struct{} `type:"structure"`
 
@@ -6213,7 +6175,7 @@ func (s *Device) SetPermissions(v []*string) *Device {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpointRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpointRequest
 type DiscoverPollEndpointInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6250,7 +6212,7 @@ func (s *DiscoverPollEndpointInput) SetContainerInstance(v string) *DiscoverPoll
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpointResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpointResponse
 type DiscoverPollEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6284,7 +6246,7 @@ func (s *DiscoverPollEndpointOutput) SetTelemetryEndpoint(v string) *DiscoverPol
 }
 
 // A failed resource.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Failure
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Failure
 type Failure struct {
 	_ struct{} `type:"structure"`
 
@@ -6319,7 +6281,7 @@ func (s *Failure) SetReason(v string) *Failure {
 
 // Hostnames and IP address entries that are added to the /etc/hosts file of
 // a container via the extraHosts parameter of its ContainerDefinition.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/HostEntry
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/HostEntry
 type HostEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -6373,7 +6335,7 @@ func (s *HostEntry) SetIpAddress(v string) *HostEntry {
 }
 
 // Details on a container instance host volume.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/HostVolumeProperties
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/HostVolumeProperties
 type HostVolumeProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -6385,8 +6347,7 @@ type HostVolumeProperties struct {
 	// on the host container instance, the Docker daemon creates it. If the location
 	// does exist, the contents of the source path folder are exported.
 	//
-	// If you are using the Fargate launch type, the sourcePath parameter is not
-	// supported.
+	// If you are using the Fargate launch type, the host parameter is not supported.
 	SourcePath *string `locationName:"sourcePath" type:"string"`
 }
 
@@ -6413,7 +6374,7 @@ func (s *HostVolumeProperties) SetSourcePath(v string) *HostVolumeProperties {
 // in the Docker run reference. For more detailed information on these Linux
 // capabilities, see the capabilities(7) (http://man7.org/linux/man-pages/man7/capabilities.7.html)
 // Linux manual page.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/KernelCapabilities
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/KernelCapabilities
 type KernelCapabilities struct {
 	_ struct{} `type:"structure"`
 
@@ -6473,7 +6434,7 @@ func (s *KernelCapabilities) SetDrop(v []*string) *KernelCapabilities {
 }
 
 // A key and value pair object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/KeyValuePair
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/KeyValuePair
 type KeyValuePair struct {
 	_ struct{} `type:"structure"`
 
@@ -6509,7 +6470,7 @@ func (s *KeyValuePair) SetValue(v string) *KeyValuePair {
 }
 
 // Linux-specific options that are applied to the container, such as Linux KernelCapabilities.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LinuxParameters
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LinuxParameters
 type LinuxParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -6580,7 +6541,7 @@ func (s *LinuxParameters) SetInitProcessEnabled(v bool) *LinuxParameters {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListAttributesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListAttributesRequest
 type ListAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6678,7 +6639,7 @@ func (s *ListAttributesInput) SetTargetType(v string) *ListAttributesInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListAttributesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListAttributesResponse
 type ListAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6714,7 +6675,7 @@ func (s *ListAttributesOutput) SetNextToken(v string) *ListAttributesOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListClustersRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListClustersRequest
 type ListClustersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6759,7 +6720,7 @@ func (s *ListClustersInput) SetNextToken(v string) *ListClustersInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListClustersResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListClustersResponse
 type ListClustersOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6796,7 +6757,7 @@ func (s *ListClustersOutput) SetNextToken(v string) *ListClustersOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstancesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstancesRequest
 type ListContainerInstancesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6878,7 +6839,7 @@ func (s *ListContainerInstancesInput) SetStatus(v string) *ListContainerInstance
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstancesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstancesResponse
 type ListContainerInstancesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6915,7 +6876,7 @@ func (s *ListContainerInstancesOutput) SetNextToken(v string) *ListContainerInst
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServicesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServicesRequest
 type ListServicesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6980,7 +6941,7 @@ func (s *ListServicesInput) SetNextToken(v string) *ListServicesInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServicesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServicesResponse
 type ListServicesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -7017,7 +6978,7 @@ func (s *ListServicesOutput) SetServiceArns(v []*string) *ListServicesOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionFamiliesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionFamiliesRequest
 type ListTaskDefinitionFamiliesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7089,7 +7050,7 @@ func (s *ListTaskDefinitionFamiliesInput) SetStatus(v string) *ListTaskDefinitio
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionFamiliesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionFamiliesResponse
 type ListTaskDefinitionFamiliesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -7126,7 +7087,7 @@ func (s *ListTaskDefinitionFamiliesOutput) SetNextToken(v string) *ListTaskDefin
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionsRequest
 type ListTaskDefinitionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7209,7 +7170,7 @@ func (s *ListTaskDefinitionsInput) SetStatus(v string) *ListTaskDefinitionsInput
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionsResponse
 type ListTaskDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -7246,7 +7207,7 @@ func (s *ListTaskDefinitionsOutput) SetTaskDefinitionArns(v []*string) *ListTask
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasksRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasksRequest
 type ListTasksInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7370,7 +7331,7 @@ func (s *ListTasksInput) SetStartedBy(v string) *ListTasksInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasksResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasksResponse
 type ListTasksOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -7407,7 +7368,7 @@ func (s *ListTasksOutput) SetTaskArns(v []*string) *ListTasksOutput {
 }
 
 // Details on a load balancer that is used with a service.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LoadBalancer
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LoadBalancer
 type LoadBalancer struct {
 	_ struct{} `type:"structure"`
 
@@ -7464,7 +7425,7 @@ func (s *LoadBalancer) SetTargetGroupArn(v string) *LoadBalancer {
 }
 
 // Log configuration options to send to a custom log driver for the container.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LogConfiguration
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LogConfiguration
 type LogConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -7534,7 +7495,7 @@ func (s *LogConfiguration) SetOptions(v map[string]*string) *LogConfiguration {
 }
 
 // Details on a volume mount point that is used in a container definition.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/MountPoint
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/MountPoint
 type MountPoint struct {
 	_ struct{} `type:"structure"`
 
@@ -7546,7 +7507,8 @@ type MountPoint struct {
 	// value is false.
 	ReadOnly *bool `locationName:"readOnly" type:"boolean"`
 
-	// The name of the volume to mount.
+	// The name of the volume to mount. If using the Fargate launch type, the sourceVolume
+	// parameter is not supported.
 	SourceVolume *string `locationName:"sourceVolume" type:"string"`
 }
 
@@ -7582,7 +7544,7 @@ func (s *MountPoint) SetSourceVolume(v string) *MountPoint {
 // instance. After a task reaches the RUNNING status, manual and automatic host
 // and container port assignments are visible in the networkBindings section
 // of DescribeTasks API responses.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NetworkBinding
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NetworkBinding
 type NetworkBinding struct {
 	_ struct{} `type:"structure"`
 
@@ -7634,7 +7596,7 @@ func (s *NetworkBinding) SetProtocol(v string) *NetworkBinding {
 }
 
 // An object representing the network configuration for a task or service.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NetworkConfiguration
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NetworkConfiguration
 type NetworkConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -7675,7 +7637,7 @@ func (s *NetworkConfiguration) SetAwsvpcConfiguration(v *AwsVpcConfiguration) *N
 
 // An object representing the Elastic Network Interface for tasks that use the
 // awsvpc network mode.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NetworkInterface
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NetworkInterface
 type NetworkInterface struct {
 	_ struct{} `type:"structure"`
 
@@ -7720,7 +7682,7 @@ func (s *NetworkInterface) SetPrivateIpv4Address(v string) *NetworkInterface {
 // An object representing a constraint on task placement. For more information,
 // see Task Placement Constraints (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
 // in the Amazon Elastic Container Service Developer Guide.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PlacementConstraint
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PlacementConstraint
 type PlacementConstraint struct {
 	_ struct{} `type:"structure"`
 
@@ -7762,7 +7724,7 @@ func (s *PlacementConstraint) SetType(v string) *PlacementConstraint {
 // The task placement strategy for a task or service. For more information,
 // see Task Placement Strategies (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html)
 // in the Amazon Elastic Container Service Developer Guide.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PlacementStrategy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PlacementStrategy
 type PlacementStrategy struct {
 	_ struct{} `type:"structure"`
 
@@ -7817,7 +7779,7 @@ func (s *PlacementStrategy) SetType(v string) *PlacementStrategy {
 // After a task reaches the RUNNING status, manual and automatic host and container
 // port assignments are visible in the networkBindings section of DescribeTasks
 // API responses.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PortMapping
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PortMapping
 type PortMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -7898,7 +7860,7 @@ func (s *PortMapping) SetProtocol(v string) *PortMapping {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAttributesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAttributesRequest
 type PutAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7960,7 +7922,7 @@ func (s *PutAttributesInput) SetCluster(v string) *PutAttributesInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAttributesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAttributesResponse
 type PutAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -7984,7 +7946,7 @@ func (s *PutAttributesOutput) SetAttributes(v []*Attribute) *PutAttributesOutput
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstanceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstanceRequest
 type RegisterContainerInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -8088,7 +8050,7 @@ func (s *RegisterContainerInstanceInput) SetVersionInfo(v *VersionInfo) *Registe
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstanceResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstanceResponse
 type RegisterContainerInstanceOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -8112,7 +8074,7 @@ func (s *RegisterContainerInstanceOutput) SetContainerInstance(v *ContainerInsta
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionRequest
 type RegisterTaskDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -8194,10 +8156,6 @@ type RegisterTaskDefinitionInput struct {
 	//
 	// If the network mode is host, you can't run multiple instantiations of the
 	// same task on a single container instance when port mappings are used.
-	//
-	// Docker for Windows uses different network modes than Docker for Linux. When
-	// you register a task definition with Windows containers, you must not specify
-	// a network mode.
 	//
 	// For more information, see Network settings (https://docs.docker.com/engine/reference/run/#network-settings)
 	// in the Docker run reference.
@@ -8320,7 +8278,7 @@ func (s *RegisterTaskDefinitionInput) SetVolumes(v []*Volume) *RegisterTaskDefin
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionResponse
 type RegisterTaskDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -8345,7 +8303,7 @@ func (s *RegisterTaskDefinitionOutput) SetTaskDefinition(v *TaskDefinition) *Reg
 }
 
 // Describes the resources available for a container instance.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Resource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Resource
 type Resource struct {
 	_ struct{} `type:"structure"`
 
@@ -8417,7 +8375,7 @@ func (s *Resource) SetType(v string) *Resource {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTaskRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTaskRequest
 type RunTaskInput struct {
 	_ struct{} `type:"structure"`
 
@@ -8581,7 +8539,7 @@ func (s *RunTaskInput) SetTaskDefinition(v string) *RunTaskInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTaskResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTaskResponse
 type RunTaskOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -8616,7 +8574,7 @@ func (s *RunTaskOutput) SetTasks(v []*Task) *RunTaskOutput {
 }
 
 // Details on a service within a cluster
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Service
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Service
 type Service struct {
 	_ struct{} `type:"structure"`
 
@@ -8821,7 +8779,7 @@ func (s *Service) SetTaskDefinition(v string) *Service {
 }
 
 // Details on an event associated with a service.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceEvent
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceEvent
 type ServiceEvent struct {
 	_ struct{} `type:"structure"`
 
@@ -8863,7 +8821,7 @@ func (s *ServiceEvent) SetMessage(v string) *ServiceEvent {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StartTaskRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StartTaskRequest
 type StartTaskInput struct {
 	_ struct{} `type:"structure"`
 
@@ -8990,7 +8948,7 @@ func (s *StartTaskInput) SetTaskDefinition(v string) *StartTaskInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StartTaskResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StartTaskResponse
 type StartTaskOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9024,7 +8982,7 @@ func (s *StartTaskOutput) SetTasks(v []*Task) *StartTaskOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTaskRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTaskRequest
 type StopTaskInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9086,7 +9044,7 @@ func (s *StopTaskInput) SetTask(v string) *StopTaskInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTaskResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTaskResponse
 type StopTaskOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9110,7 +9068,7 @@ func (s *StopTaskOutput) SetTask(v *Task) *StopTaskOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitContainerStateChangeRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitContainerStateChangeRequest
 type SubmitContainerStateChangeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9189,7 +9147,7 @@ func (s *SubmitContainerStateChangeInput) SetTask(v string) *SubmitContainerStat
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitContainerStateChangeResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitContainerStateChangeResponse
 type SubmitContainerStateChangeOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9213,7 +9171,7 @@ func (s *SubmitContainerStateChangeOutput) SetAcknowledgment(v string) *SubmitCo
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitTaskStateChangeRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitTaskStateChangeRequest
 type SubmitTaskStateChangeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9330,7 +9288,7 @@ func (s *SubmitTaskStateChangeInput) SetTask(v string) *SubmitTaskStateChangeInp
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitTaskStateChangeResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitTaskStateChangeResponse
 type SubmitTaskStateChangeOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9355,7 +9313,7 @@ func (s *SubmitTaskStateChangeOutput) SetAcknowledgment(v string) *SubmitTaskSta
 }
 
 // Details on a task in a cluster.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Task
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Task
 type Task struct {
 	_ struct{} `type:"structure"`
 
@@ -9650,7 +9608,7 @@ func (s *Task) SetVersion(v int64) *Task {
 }
 
 // Details of a task definition.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinition
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinition
 type TaskDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -9730,17 +9688,8 @@ type TaskDefinition struct {
 	// (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
-	// Currently, only the Amazon ECS-optimized AMI, other Amazon Linux variants
-	// with the ecs-init package, or AWS Fargate infrastructure support the awsvpc
-	// network mode.
-	//
 	// If the network mode is host, you can't run multiple instantiations of the
 	// same task on a single container instance when port mappings are used.
-	//
-	// Docker for Windows uses different network modes than Docker for Linux. When
-	// you register a task definition with Windows containers, you must not specify
-	// a network mode. If you use the console to register a task definition with
-	// Windows containers, you must choose the <default> network mode object.
 	//
 	// For more information, see Network settings (https://docs.docker.com/engine/reference/run/#network-settings)
 	// in the Docker run reference.
@@ -9772,12 +9721,6 @@ type TaskDefinition struct {
 
 	// The ARN of the IAM role that containers in this task can assume. All containers
 	// in this task are granted the permissions that are specified in this role.
-	//
-	// IAM roles for tasks on Windows require that the -EnableTaskIAMRole option
-	// is set when you launch the Amazon ECS-optimized Windows AMI. Your containers
-	// must also run some configuration code in order to take advantage of the feature.
-	// For more information, see Windows IAM Roles for Tasks (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows_task_IAM_roles.html)
-	// in the Amazon Elastic Container Service Developer Guide.
 	TaskRoleArn *string `locationName:"taskRoleArn" type:"string"`
 
 	// The list of volumes in a task.
@@ -9898,7 +9841,7 @@ func (s *TaskDefinition) SetVolumes(v []*Volume) *TaskDefinition {
 //
 // For more information, see Task Placement Constraints (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
 // in the Amazon Elastic Container Service Developer Guide.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinitionPlacementConstraint
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinitionPlacementConstraint
 type TaskDefinitionPlacementConstraint struct {
 	_ struct{} `type:"structure"`
 
@@ -9936,7 +9879,7 @@ func (s *TaskDefinitionPlacementConstraint) SetType(v string) *TaskDefinitionPla
 }
 
 // The overrides associated with a task.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskOverride
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskOverride
 type TaskOverride struct {
 	_ struct{} `type:"structure"`
 
@@ -9982,7 +9925,7 @@ func (s *TaskOverride) SetTaskRoleArn(v string) *TaskOverride {
 }
 
 // The ulimit settings to pass to the container.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Ulimit
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Ulimit
 type Ulimit struct {
 	_ struct{} `type:"structure"`
 
@@ -10049,7 +9992,7 @@ func (s *Ulimit) SetSoftLimit(v int64) *Ulimit {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgentRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgentRequest
 type UpdateContainerAgentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10100,7 +10043,7 @@ func (s *UpdateContainerAgentInput) SetContainerInstance(v string) *UpdateContai
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgentResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgentResponse
 type UpdateContainerAgentOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10124,7 +10067,7 @@ func (s *UpdateContainerAgentOutput) SetContainerInstance(v *ContainerInstance) 
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesStateRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesStateRequest
 type UpdateContainerInstancesStateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10188,7 +10131,7 @@ func (s *UpdateContainerInstancesStateInput) SetStatus(v string) *UpdateContaine
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesStateResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesStateResponse
 type UpdateContainerInstancesStateOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10221,7 +10164,7 @@ func (s *UpdateContainerInstancesStateOutput) SetFailures(v []*Failure) *UpdateC
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceRequest
 type UpdateServiceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10345,7 +10288,7 @@ func (s *UpdateServiceInput) SetTaskDefinition(v string) *UpdateServiceInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceResponse
 type UpdateServiceOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10371,7 +10314,7 @@ func (s *UpdateServiceOutput) SetService(v *Service) *UpdateServiceOutput {
 
 // The Docker and Amazon ECS container agent version information about a container
 // instance.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/VersionInfo
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/VersionInfo
 type VersionInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -10415,7 +10358,7 @@ func (s *VersionInfo) SetDockerVersion(v string) *VersionInfo {
 }
 
 // A data volume used in a task definition.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Volume
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Volume
 type Volume struct {
 	_ struct{} `type:"structure"`
 
@@ -10425,10 +10368,7 @@ type Volume struct {
 	// but the data is not guaranteed to persist after the containers associated
 	// with it stop running.
 	//
-	// Windows containers can mount whole directories on the same drive as $env:ProgramData.
-	// Windows containers cannot mount directories on a different drive, and mount
-	// point cannot be across drives. For example, you can mount C:\my\path:C:\my\path
-	// and D:\:D:\, but not D:\my\path:C:\my\path or D:\:C:\my\path.
+	// If you are using the Fargate launch type, the host parameter is not supported.
 	Host *HostVolumeProperties `locationName:"host" type:"structure"`
 
 	// The name of the volume. Up to 255 letters (uppercase and lowercase), numbers,
@@ -10460,7 +10400,7 @@ func (s *Volume) SetName(v string) *Volume {
 }
 
 // Details on a data volume from another container in the same task definition.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/VolumeFrom
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/VolumeFrom
 type VolumeFrom struct {
 	_ struct{} `type:"structure"`
 

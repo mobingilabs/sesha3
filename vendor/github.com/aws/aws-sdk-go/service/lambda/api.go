@@ -38,7 +38,7 @@ const opAddPermission = "AddPermission"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermission
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermission
 func (c *Lambda) AddPermissionRequest(input *AddPermissionInput) (req *request.Request, output *AddPermissionOutput) {
 	op := &request.Operation{
 		Name:       opAddPermission,
@@ -109,7 +109,7 @@ func (c *Lambda) AddPermissionRequest(input *AddPermissionInput) (req *request.R
 //   is exceeded and you have not reserved concurrency on any function. For more
 //   information, see concurrent-executions
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermission
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermission
 func (c *Lambda) AddPermission(input *AddPermissionInput) (*AddPermissionOutput, error) {
 	req, out := c.AddPermissionRequest(input)
 	return out, req.Send()
@@ -156,7 +156,7 @@ const opCreateAlias = "CreateAlias"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAlias
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAlias
 func (c *Lambda) CreateAliasRequest(input *CreateAliasInput) (req *request.Request, output *AliasConfiguration) {
 	op := &request.Operation{
 		Name:       opCreateAlias,
@@ -214,7 +214,7 @@ func (c *Lambda) CreateAliasRequest(input *CreateAliasInput) (req *request.Reque
 //   is exceeded and you have not reserved concurrency on any function. For more
 //   information, see concurrent-executions
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAlias
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAlias
 func (c *Lambda) CreateAlias(input *CreateAliasInput) (*AliasConfiguration, error) {
 	req, out := c.CreateAliasRequest(input)
 	return out, req.Send()
@@ -261,7 +261,7 @@ const opCreateEventSourceMapping = "CreateEventSourceMapping"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMapping
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMapping
 func (c *Lambda) CreateEventSourceMappingRequest(input *CreateEventSourceMappingInput) (req *request.Request, output *EventSourceMappingConfiguration) {
 	op := &request.Operation{
 		Name:       opCreateEventSourceMapping,
@@ -339,7 +339,7 @@ func (c *Lambda) CreateEventSourceMappingRequest(input *CreateEventSourceMapping
 //   The resource (for example, a Lambda function or access policy statement)
 //   specified in the request does not exist.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMapping
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMapping
 func (c *Lambda) CreateEventSourceMapping(input *CreateEventSourceMappingInput) (*EventSourceMappingConfiguration, error) {
 	req, out := c.CreateEventSourceMappingRequest(input)
 	return out, req.Send()
@@ -386,7 +386,7 @@ const opCreateFunction = "CreateFunction"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction
 func (c *Lambda) CreateFunctionRequest(input *CreateFunctionInput) (req *request.Request, output *FunctionConfiguration) {
 	op := &request.Operation{
 		Name:       opCreateFunction,
@@ -452,7 +452,7 @@ func (c *Lambda) CreateFunctionRequest(input *CreateFunctionInput) (req *request
 //   * ErrCodeCodeStorageExceededException "CodeStorageExceededException"
 //   You have exceeded your maximum total code size per account. Limits (http://docs.aws.amazon.com/lambda/latest/dg/limits.html)
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction
 func (c *Lambda) CreateFunction(input *CreateFunctionInput) (*FunctionConfiguration, error) {
 	req, out := c.CreateFunctionRequest(input)
 	return out, req.Send()
@@ -499,7 +499,7 @@ const opDeleteAlias = "DeleteAlias"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteAlias
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteAlias
 func (c *Lambda) DeleteAliasRequest(input *DeleteAliasInput) (req *request.Request, output *DeleteAliasOutput) {
 	op := &request.Operation{
 		Name:       opDeleteAlias,
@@ -551,7 +551,7 @@ func (c *Lambda) DeleteAliasRequest(input *DeleteAliasInput) (req *request.Reque
 //   is exceeded and you have not reserved concurrency on any function. For more
 //   information, see concurrent-executions
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteAlias
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteAlias
 func (c *Lambda) DeleteAlias(input *DeleteAliasInput) (*DeleteAliasOutput, error) {
 	req, out := c.DeleteAliasRequest(input)
 	return out, req.Send()
@@ -598,7 +598,7 @@ const opDeleteEventSourceMapping = "DeleteEventSourceMapping"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMapping
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMapping
 func (c *Lambda) DeleteEventSourceMappingRequest(input *DeleteEventSourceMappingInput) (req *request.Request, output *EventSourceMappingConfiguration) {
 	op := &request.Operation{
 		Name:       opDeleteEventSourceMapping,
@@ -653,7 +653,7 @@ func (c *Lambda) DeleteEventSourceMappingRequest(input *DeleteEventSourceMapping
 //   is exceeded and you have not reserved concurrency on any function. For more
 //   information, see concurrent-executions
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMapping
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMapping
 func (c *Lambda) DeleteEventSourceMapping(input *DeleteEventSourceMappingInput) (*EventSourceMappingConfiguration, error) {
 	req, out := c.DeleteEventSourceMappingRequest(input)
 	return out, req.Send()
@@ -700,7 +700,7 @@ const opDeleteFunction = "DeleteFunction"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunction
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunction
 func (c *Lambda) DeleteFunctionRequest(input *DeleteFunctionInput) (req *request.Request, output *DeleteFunctionOutput) {
 	op := &request.Operation{
 		Name:       opDeleteFunction,
@@ -768,7 +768,7 @@ func (c *Lambda) DeleteFunctionRequest(input *DeleteFunctionInput) (req *request
 //   * ErrCodeResourceConflictException "ResourceConflictException"
 //   The resource already exists.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunction
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunction
 func (c *Lambda) DeleteFunction(input *DeleteFunctionInput) (*DeleteFunctionOutput, error) {
 	req, out := c.DeleteFunctionRequest(input)
 	return out, req.Send()
@@ -815,7 +815,7 @@ const opDeleteFunctionConcurrency = "DeleteFunctionConcurrency"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrency
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrency
 func (c *Lambda) DeleteFunctionConcurrencyRequest(input *DeleteFunctionConcurrencyInput) (req *request.Request, output *DeleteFunctionConcurrencyOutput) {
 	op := &request.Operation{
 		Name:       opDeleteFunctionConcurrency,
@@ -868,7 +868,7 @@ func (c *Lambda) DeleteFunctionConcurrencyRequest(input *DeleteFunctionConcurren
 //   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
 //   API, that AWS Lambda is unable to assume you will get this exception.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrency
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrency
 func (c *Lambda) DeleteFunctionConcurrency(input *DeleteFunctionConcurrencyInput) (*DeleteFunctionConcurrencyOutput, error) {
 	req, out := c.DeleteFunctionConcurrencyRequest(input)
 	return out, req.Send()
@@ -915,7 +915,7 @@ const opGetAccountSettings = "GetAccountSettings"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettings
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettings
 func (c *Lambda) GetAccountSettingsRequest(input *GetAccountSettingsInput) (req *request.Request, output *GetAccountSettingsOutput) {
 	op := &request.Operation{
 		Name:       opGetAccountSettings,
@@ -963,7 +963,7 @@ func (c *Lambda) GetAccountSettingsRequest(input *GetAccountSettingsInput) (req 
 //   * ErrCodeServiceException "ServiceException"
 //   The AWS Lambda service encountered an internal error.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettings
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettings
 func (c *Lambda) GetAccountSettings(input *GetAccountSettingsInput) (*GetAccountSettingsOutput, error) {
 	req, out := c.GetAccountSettingsRequest(input)
 	return out, req.Send()
@@ -1010,7 +1010,7 @@ const opGetAlias = "GetAlias"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAlias
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAlias
 func (c *Lambda) GetAliasRequest(input *GetAliasInput) (req *request.Request, output *AliasConfiguration) {
 	op := &request.Operation{
 		Name:       opGetAlias,
@@ -1065,7 +1065,7 @@ func (c *Lambda) GetAliasRequest(input *GetAliasInput) (req *request.Request, ou
 //   is exceeded and you have not reserved concurrency on any function. For more
 //   information, see concurrent-executions
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAlias
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAlias
 func (c *Lambda) GetAlias(input *GetAliasInput) (*AliasConfiguration, error) {
 	req, out := c.GetAliasRequest(input)
 	return out, req.Send()
@@ -1112,7 +1112,7 @@ const opGetEventSourceMapping = "GetEventSourceMapping"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMapping
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMapping
 func (c *Lambda) GetEventSourceMappingRequest(input *GetEventSourceMappingInput) (req *request.Request, output *EventSourceMappingConfiguration) {
 	op := &request.Operation{
 		Name:       opGetEventSourceMapping,
@@ -1166,7 +1166,7 @@ func (c *Lambda) GetEventSourceMappingRequest(input *GetEventSourceMappingInput)
 //   is exceeded and you have not reserved concurrency on any function. For more
 //   information, see concurrent-executions
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMapping
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMapping
 func (c *Lambda) GetEventSourceMapping(input *GetEventSourceMappingInput) (*EventSourceMappingConfiguration, error) {
 	req, out := c.GetEventSourceMappingRequest(input)
 	return out, req.Send()
@@ -1213,7 +1213,7 @@ const opGetFunction = "GetFunction"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunction
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunction
 func (c *Lambda) GetFunctionRequest(input *GetFunctionInput) (req *request.Request, output *GetFunctionOutput) {
 	op := &request.Operation{
 		Name:       opGetFunction,
@@ -1276,7 +1276,7 @@ func (c *Lambda) GetFunctionRequest(input *GetFunctionInput) (req *request.Reque
 //   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
 //   API, that AWS Lambda is unable to assume you will get this exception.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunction
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunction
 func (c *Lambda) GetFunction(input *GetFunctionInput) (*GetFunctionOutput, error) {
 	req, out := c.GetFunctionRequest(input)
 	return out, req.Send()
@@ -1323,7 +1323,7 @@ const opGetFunctionConfiguration = "GetFunctionConfiguration"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfiguration
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfiguration
 func (c *Lambda) GetFunctionConfigurationRequest(input *GetFunctionConfigurationInput) (req *request.Request, output *FunctionConfiguration) {
 	op := &request.Operation{
 		Name:       opGetFunctionConfiguration,
@@ -1386,7 +1386,7 @@ func (c *Lambda) GetFunctionConfigurationRequest(input *GetFunctionConfiguration
 //   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
 //   API, that AWS Lambda is unable to assume you will get this exception.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfiguration
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfiguration
 func (c *Lambda) GetFunctionConfiguration(input *GetFunctionConfigurationInput) (*FunctionConfiguration, error) {
 	req, out := c.GetFunctionConfigurationRequest(input)
 	return out, req.Send()
@@ -1433,7 +1433,7 @@ const opGetPolicy = "GetPolicy"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicy
 func (c *Lambda) GetPolicyRequest(input *GetPolicyInput) (req *request.Request, output *GetPolicyOutput) {
 	op := &request.Operation{
 		Name:       opGetPolicy,
@@ -1491,7 +1491,7 @@ func (c *Lambda) GetPolicyRequest(input *GetPolicyInput) (req *request.Request, 
 //   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
 //   API, that AWS Lambda is unable to assume you will get this exception.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicy
 func (c *Lambda) GetPolicy(input *GetPolicyInput) (*GetPolicyOutput, error) {
 	req, out := c.GetPolicyRequest(input)
 	return out, req.Send()
@@ -1538,7 +1538,7 @@ const opInvoke = "Invoke"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Invoke
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Invoke
 func (c *Lambda) InvokeRequest(input *InvokeInput) (req *request.Request, output *InvokeOutput) {
 	op := &request.Operation{
 		Name:       opInvoke,
@@ -1658,7 +1658,7 @@ func (c *Lambda) InvokeRequest(input *InvokeInput) (req *request.Request, output
 //   * ErrCodeInvalidRuntimeException "InvalidRuntimeException"
 //   The runtime or runtime version specified is not supported.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Invoke
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Invoke
 func (c *Lambda) Invoke(input *InvokeInput) (*InvokeOutput, error) {
 	req, out := c.InvokeRequest(input)
 	return out, req.Send()
@@ -1705,7 +1705,7 @@ const opInvokeAsync = "InvokeAsync"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsync
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsync
 func (c *Lambda) InvokeAsyncRequest(input *InvokeAsyncInput) (req *request.Request, output *InvokeAsyncOutput) {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, InvokeAsync, has been deprecated")
@@ -1756,7 +1756,7 @@ func (c *Lambda) InvokeAsyncRequest(input *InvokeAsyncInput) (req *request.Reque
 //   * ErrCodeInvalidRuntimeException "InvalidRuntimeException"
 //   The runtime or runtime version specified is not supported.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsync
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsync
 func (c *Lambda) InvokeAsync(input *InvokeAsyncInput) (*InvokeAsyncOutput, error) {
 	req, out := c.InvokeAsyncRequest(input)
 	return out, req.Send()
@@ -1803,7 +1803,7 @@ const opListAliases = "ListAliases"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliases
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliases
 func (c *Lambda) ListAliasesRequest(input *ListAliasesInput) (req *request.Request, output *ListAliasesOutput) {
 	op := &request.Operation{
 		Name:       opListAliases,
@@ -1859,7 +1859,7 @@ func (c *Lambda) ListAliasesRequest(input *ListAliasesInput) (req *request.Reque
 //   is exceeded and you have not reserved concurrency on any function. For more
 //   information, see concurrent-executions
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliases
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliases
 func (c *Lambda) ListAliases(input *ListAliasesInput) (*ListAliasesOutput, error) {
 	req, out := c.ListAliasesRequest(input)
 	return out, req.Send()
@@ -1906,7 +1906,7 @@ const opListEventSourceMappings = "ListEventSourceMappings"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappings
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappings
 func (c *Lambda) ListEventSourceMappingsRequest(input *ListEventSourceMappingsInput) (req *request.Request, output *ListEventSourceMappingsOutput) {
 	op := &request.Operation{
 		Name:       opListEventSourceMappings,
@@ -1975,7 +1975,7 @@ func (c *Lambda) ListEventSourceMappingsRequest(input *ListEventSourceMappingsIn
 //   is exceeded and you have not reserved concurrency on any function. For more
 //   information, see concurrent-executions
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappings
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappings
 func (c *Lambda) ListEventSourceMappings(input *ListEventSourceMappingsInput) (*ListEventSourceMappingsOutput, error) {
 	req, out := c.ListEventSourceMappingsRequest(input)
 	return out, req.Send()
@@ -2072,7 +2072,7 @@ const opListFunctions = "ListFunctions"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions
 func (c *Lambda) ListFunctionsRequest(input *ListFunctionsInput) (req *request.Request, output *ListFunctionsOutput) {
 	op := &request.Operation{
 		Name:       opListFunctions,
@@ -2133,7 +2133,7 @@ func (c *Lambda) ListFunctionsRequest(input *ListFunctionsInput) (req *request.R
 //   an IAM role for AWS Lambda to assume in the CreateFunction or the UpdateFunctionConfiguration
 //   API, that AWS Lambda is unable to assume you will get this exception.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions
 func (c *Lambda) ListFunctions(input *ListFunctionsInput) (*ListFunctionsOutput, error) {
 	req, out := c.ListFunctionsRequest(input)
 	return out, req.Send()
@@ -2230,7 +2230,7 @@ const opListTags = "ListTags"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTags
 func (c *Lambda) ListTagsRequest(input *ListTagsInput) (req *request.Request, output *ListTagsOutput) {
 	op := &request.Operation{
 		Name:       opListTags,
@@ -2282,7 +2282,7 @@ func (c *Lambda) ListTagsRequest(input *ListTagsInput) (req *request.Request, ou
 //   is exceeded and you have not reserved concurrency on any function. For more
 //   information, see concurrent-executions
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTags
 func (c *Lambda) ListTags(input *ListTagsInput) (*ListTagsOutput, error) {
 	req, out := c.ListTagsRequest(input)
 	return out, req.Send()
@@ -2329,7 +2329,7 @@ const opListVersionsByFunction = "ListVersionsByFunction"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction
 func (c *Lambda) ListVersionsByFunctionRequest(input *ListVersionsByFunctionInput) (req *request.Request, output *ListVersionsByFunctionOutput) {
 	op := &request.Operation{
 		Name:       opListVersionsByFunction,
@@ -2381,7 +2381,7 @@ func (c *Lambda) ListVersionsByFunctionRequest(input *ListVersionsByFunctionInpu
 //   is exceeded and you have not reserved concurrency on any function. For more
 //   information, see concurrent-executions
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction
 func (c *Lambda) ListVersionsByFunction(input *ListVersionsByFunctionInput) (*ListVersionsByFunctionOutput, error) {
 	req, out := c.ListVersionsByFunctionRequest(input)
 	return out, req.Send()
@@ -2428,7 +2428,7 @@ const opPublishVersion = "PublishVersion"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion
 func (c *Lambda) PublishVersionRequest(input *PublishVersionInput) (req *request.Request, output *FunctionConfiguration) {
 	op := &request.Operation{
 		Name:       opPublishVersion,
@@ -2486,7 +2486,7 @@ func (c *Lambda) PublishVersionRequest(input *PublishVersionInput) (req *request
 //   * ErrCodeCodeStorageExceededException "CodeStorageExceededException"
 //   You have exceeded your maximum total code size per account. Limits (http://docs.aws.amazon.com/lambda/latest/dg/limits.html)
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion
 func (c *Lambda) PublishVersion(input *PublishVersionInput) (*FunctionConfiguration, error) {
 	req, out := c.PublishVersionRequest(input)
 	return out, req.Send()
@@ -2533,7 +2533,7 @@ const opPutFunctionConcurrency = "PutFunctionConcurrency"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionConcurrency
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionConcurrency
 func (c *Lambda) PutFunctionConcurrencyRequest(input *PutFunctionConcurrencyInput) (req *request.Request, output *PutFunctionConcurrencyOutput) {
 	op := &request.Operation{
 		Name:       opPutFunctionConcurrency,
@@ -2589,7 +2589,7 @@ func (c *Lambda) PutFunctionConcurrencyRequest(input *PutFunctionConcurrencyInpu
 //   is exceeded and you have not reserved concurrency on any function. For more
 //   information, see concurrent-executions
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionConcurrency
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionConcurrency
 func (c *Lambda) PutFunctionConcurrency(input *PutFunctionConcurrencyInput) (*PutFunctionConcurrencyOutput, error) {
 	req, out := c.PutFunctionConcurrencyRequest(input)
 	return out, req.Send()
@@ -2636,7 +2636,7 @@ const opRemovePermission = "RemovePermission"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermission
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermission
 func (c *Lambda) RemovePermissionRequest(input *RemovePermissionInput) (req *request.Request, output *RemovePermissionOutput) {
 	op := &request.Operation{
 		Name:       opRemovePermission,
@@ -2701,7 +2701,7 @@ func (c *Lambda) RemovePermissionRequest(input *RemovePermissionInput) (req *req
 //   is exceeded and you have not reserved concurrency on any function. For more
 //   information, see concurrent-executions
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermission
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermission
 func (c *Lambda) RemovePermission(input *RemovePermissionInput) (*RemovePermissionOutput, error) {
 	req, out := c.RemovePermissionRequest(input)
 	return out, req.Send()
@@ -2748,7 +2748,7 @@ const opTagResource = "TagResource"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagResource
 func (c *Lambda) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
 	op := &request.Operation{
 		Name:       opTagResource,
@@ -2803,7 +2803,7 @@ func (c *Lambda) TagResourceRequest(input *TagResourceInput) (req *request.Reque
 //   is exceeded and you have not reserved concurrency on any function. For more
 //   information, see concurrent-executions
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagResource
 func (c *Lambda) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
 	req, out := c.TagResourceRequest(input)
 	return out, req.Send()
@@ -2850,7 +2850,7 @@ const opUntagResource = "UntagResource"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UntagResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UntagResource
 func (c *Lambda) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
 	op := &request.Operation{
 		Name:       opUntagResource,
@@ -2904,7 +2904,7 @@ func (c *Lambda) UntagResourceRequest(input *UntagResourceInput) (req *request.R
 //   is exceeded and you have not reserved concurrency on any function. For more
 //   information, see concurrent-executions
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UntagResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UntagResource
 func (c *Lambda) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
 	req, out := c.UntagResourceRequest(input)
 	return out, req.Send()
@@ -2951,7 +2951,7 @@ const opUpdateAlias = "UpdateAlias"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAlias
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAlias
 func (c *Lambda) UpdateAliasRequest(input *UpdateAliasInput) (req *request.Request, output *AliasConfiguration) {
 	op := &request.Operation{
 		Name:       opUpdateAlias,
@@ -3006,7 +3006,7 @@ func (c *Lambda) UpdateAliasRequest(input *UpdateAliasInput) (req *request.Reque
 //   is exceeded and you have not reserved concurrency on any function. For more
 //   information, see concurrent-executions
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAlias
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAlias
 func (c *Lambda) UpdateAlias(input *UpdateAliasInput) (*AliasConfiguration, error) {
 	req, out := c.UpdateAliasRequest(input)
 	return out, req.Send()
@@ -3053,7 +3053,7 @@ const opUpdateEventSourceMapping = "UpdateEventSourceMapping"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMapping
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMapping
 func (c *Lambda) UpdateEventSourceMappingRequest(input *UpdateEventSourceMappingInput) (req *request.Request, output *EventSourceMappingConfiguration) {
 	op := &request.Operation{
 		Name:       opUpdateEventSourceMapping,
@@ -3123,7 +3123,7 @@ func (c *Lambda) UpdateEventSourceMappingRequest(input *UpdateEventSourceMapping
 //   * ErrCodeResourceConflictException "ResourceConflictException"
 //   The resource already exists.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMapping
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMapping
 func (c *Lambda) UpdateEventSourceMapping(input *UpdateEventSourceMappingInput) (*EventSourceMappingConfiguration, error) {
 	req, out := c.UpdateEventSourceMappingRequest(input)
 	return out, req.Send()
@@ -3170,7 +3170,7 @@ const opUpdateFunctionCode = "UpdateFunctionCode"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode
 func (c *Lambda) UpdateFunctionCodeRequest(input *UpdateFunctionCodeInput) (req *request.Request, output *FunctionConfiguration) {
 	op := &request.Operation{
 		Name:       opUpdateFunctionCode,
@@ -3232,7 +3232,7 @@ func (c *Lambda) UpdateFunctionCodeRequest(input *UpdateFunctionCodeInput) (req 
 //   * ErrCodeCodeStorageExceededException "CodeStorageExceededException"
 //   You have exceeded your maximum total code size per account. Limits (http://docs.aws.amazon.com/lambda/latest/dg/limits.html)
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode
 func (c *Lambda) UpdateFunctionCode(input *UpdateFunctionCodeInput) (*FunctionConfiguration, error) {
 	req, out := c.UpdateFunctionCodeRequest(input)
 	return out, req.Send()
@@ -3279,7 +3279,7 @@ const opUpdateFunctionConfiguration = "UpdateFunctionConfiguration"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration
 func (c *Lambda) UpdateFunctionConfigurationRequest(input *UpdateFunctionConfigurationInput) (req *request.Request, output *FunctionConfiguration) {
 	op := &request.Operation{
 		Name:       opUpdateFunctionConfiguration,
@@ -3343,7 +3343,7 @@ func (c *Lambda) UpdateFunctionConfigurationRequest(input *UpdateFunctionConfigu
 //   * ErrCodeResourceConflictException "ResourceConflictException"
 //   The resource already exists.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration
 func (c *Lambda) UpdateFunctionConfiguration(input *UpdateFunctionConfigurationInput) (*FunctionConfiguration, error) {
 	req, out := c.UpdateFunctionConfigurationRequest(input)
 	return out, req.Send()
@@ -3367,7 +3367,7 @@ func (c *Lambda) UpdateFunctionConfigurationWithContext(ctx aws.Context, input *
 
 // Provides limits of code size and concurrency associated with the current
 // account and region.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AccountLimit
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AccountLimit
 type AccountLimit struct {
 	_ struct{} `type:"structure"`
 
@@ -3437,7 +3437,7 @@ func (s *AccountLimit) SetUnreservedConcurrentExecutions(v int64) *AccountLimit 
 
 // Provides code size usage and function count associated with the current account
 // and region.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AccountUsage
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AccountUsage
 type AccountUsage struct {
 	_ struct{} `type:"structure"`
 
@@ -3470,7 +3470,7 @@ func (s *AccountUsage) SetTotalCodeSize(v int64) *AccountUsage {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermissionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermissionRequest
 type AddPermissionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3641,7 +3641,7 @@ func (s *AddPermissionInput) SetStatementId(v string) *AddPermissionInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermissionResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermissionResponse
 type AddPermissionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3668,7 +3668,7 @@ func (s *AddPermissionOutput) SetStatement(v string) *AddPermissionOutput {
 }
 
 // Provides configuration information about a Lambda function version alias.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AliasConfiguration
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AliasConfiguration
 type AliasConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -3734,7 +3734,7 @@ func (s *AliasConfiguration) SetRoutingConfig(v *AliasRoutingConfiguration) *Ali
 
 // The parent object that implements what percentage of traffic will invoke
 // each function version. For more information, see lambda-traffic-shifting-using-aliases.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AliasRoutingConfiguration
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AliasRoutingConfiguration
 type AliasRoutingConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -3760,7 +3760,7 @@ func (s *AliasRoutingConfiguration) SetAdditionalVersionWeights(v map[string]*fl
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAliasRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAliasRequest
 type CreateAliasInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3858,7 +3858,7 @@ func (s *CreateAliasInput) SetRoutingConfig(v *AliasRoutingConfiguration) *Creat
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMappingRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMappingRequest
 type CreateEventSourceMappingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3986,7 +3986,7 @@ func (s *CreateEventSourceMappingInput) SetStartingPositionTimestamp(v time.Time
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest
 type CreateFunctionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4222,7 +4222,7 @@ func (s *CreateFunctionInput) SetVpcConfig(v *VpcConfig) *CreateFunctionInput {
 
 // The parent object that contains the target ARN (Amazon Resource Name) of
 // an Amazon SQS queue or Amazon SNS topic.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeadLetterConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeadLetterConfig
 type DeadLetterConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -4247,7 +4247,7 @@ func (s *DeadLetterConfig) SetTargetArn(v string) *DeadLetterConfig {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteAliasRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteAliasRequest
 type DeleteAliasInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4309,7 +4309,7 @@ func (s *DeleteAliasInput) SetName(v string) *DeleteAliasInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteAliasOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteAliasOutput
 type DeleteAliasOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -4324,7 +4324,7 @@ func (s DeleteAliasOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMappingRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMappingRequest
 type DeleteEventSourceMappingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4363,7 +4363,7 @@ func (s *DeleteEventSourceMappingInput) SetUUID(v string) *DeleteEventSourceMapp
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrencyRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrencyRequest
 type DeleteFunctionConcurrencyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4405,7 +4405,7 @@ func (s *DeleteFunctionConcurrencyInput) SetFunctionName(v string) *DeleteFuncti
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrencyOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrencyOutput
 type DeleteFunctionConcurrencyOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -4420,7 +4420,7 @@ func (s DeleteFunctionConcurrencyOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionRequest
 type DeleteFunctionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4495,7 +4495,7 @@ func (s *DeleteFunctionInput) SetQualifier(v string) *DeleteFunctionInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionOutput
 type DeleteFunctionOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -4511,7 +4511,7 @@ func (s DeleteFunctionOutput) GoString() string {
 }
 
 // The parent object that contains your environment's configuration settings.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Environment
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Environment
 type Environment struct {
 	_ struct{} `type:"structure"`
 
@@ -4537,7 +4537,7 @@ func (s *Environment) SetVariables(v map[string]*string) *Environment {
 
 // The parent object that contains error information associated with your configuration
 // settings.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EnvironmentError
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EnvironmentError
 type EnvironmentError struct {
 	_ struct{} `type:"structure"`
 
@@ -4572,7 +4572,7 @@ func (s *EnvironmentError) SetMessage(v string) *EnvironmentError {
 
 // The parent object returned that contains your environment's configuration
 // settings or any error information associated with your configuration settings.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EnvironmentResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EnvironmentResponse
 type EnvironmentResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -4608,7 +4608,7 @@ func (s *EnvironmentResponse) SetVariables(v map[string]*string) *EnvironmentRes
 }
 
 // Describes mapping between an Amazon Kinesis stream and a Lambda function.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingConfiguration
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingConfiguration
 type EventSourceMappingConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -4701,7 +4701,7 @@ func (s *EventSourceMappingConfiguration) SetUUID(v string) *EventSourceMappingC
 }
 
 // The code for the Lambda function.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCode
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCode
 type FunctionCode struct {
 	_ struct{} `type:"structure"`
 
@@ -4781,7 +4781,7 @@ func (s *FunctionCode) SetZipFile(v []byte) *FunctionCode {
 }
 
 // The object for the Lambda function location.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCodeLocation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCodeLocation
 type FunctionCodeLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -4816,7 +4816,7 @@ func (s *FunctionCodeLocation) SetRepositoryType(v string) *FunctionCodeLocation
 }
 
 // A complex type that describes function metadata.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration
 type FunctionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -5005,7 +5005,7 @@ func (s *FunctionConfiguration) SetVpcConfig(v *VpcConfigResponse) *FunctionConf
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettingsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettingsRequest
 type GetAccountSettingsInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -5020,7 +5020,7 @@ func (s GetAccountSettingsInput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettingsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettingsResponse
 type GetAccountSettingsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5055,7 +5055,7 @@ func (s *GetAccountSettingsOutput) SetAccountUsage(v *AccountUsage) *GetAccountS
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAliasRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAliasRequest
 type GetAliasInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5118,7 +5118,7 @@ func (s *GetAliasInput) SetName(v string) *GetAliasInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMappingRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMappingRequest
 type GetEventSourceMappingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5157,7 +5157,7 @@ func (s *GetEventSourceMappingInput) SetUUID(v string) *GetEventSourceMappingInp
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfigurationRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfigurationRequest
 type GetFunctionConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5225,7 +5225,7 @@ func (s *GetFunctionConfigurationInput) SetQualifier(v string) *GetFunctionConfi
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionRequest
 type GetFunctionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5292,7 +5292,7 @@ func (s *GetFunctionInput) SetQualifier(v string) *GetFunctionInput {
 }
 
 // This response contains the object for the Lambda function location (see FunctionCodeLocation.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionResponse
 type GetFunctionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5343,7 +5343,7 @@ func (s *GetFunctionOutput) SetTags(v map[string]*string) *GetFunctionOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicyRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicyRequest
 type GetPolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5409,7 +5409,7 @@ func (s *GetPolicyInput) SetQualifier(v string) *GetPolicyInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicyResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicyResponse
 type GetPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5435,7 +5435,7 @@ func (s *GetPolicyOutput) SetPolicy(v string) *GetPolicyOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsyncRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsyncRequest
 type InvokeAsyncInput struct {
 	_ struct{} `deprecated:"true" type:"structure" payload:"InvokeArgs"`
 
@@ -5494,7 +5494,7 @@ func (s *InvokeAsyncInput) SetInvokeArgs(v io.ReadSeeker) *InvokeAsyncInput {
 }
 
 // Upon success, it returns empty response. Otherwise, throws an exception.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsyncResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsyncResponse
 type InvokeAsyncOutput struct {
 	_ struct{} `deprecated:"true" type:"structure"`
 
@@ -5518,7 +5518,7 @@ func (s *InvokeAsyncOutput) SetStatus(v int64) *InvokeAsyncOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvocationRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvocationRequest
 type InvokeInput struct {
 	_ struct{} `type:"structure" payload:"Payload"`
 
@@ -5638,7 +5638,7 @@ func (s *InvokeInput) SetQualifier(v string) *InvokeInput {
 }
 
 // Upon success, returns an empty response. Otherwise, throws an exception.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvocationResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvocationResponse
 type InvokeOutput struct {
 	_ struct{} `type:"structure" payload:"Payload"`
 
@@ -5714,7 +5714,7 @@ func (s *InvokeOutput) SetStatusCode(v int64) *InvokeOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliasesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliasesRequest
 type ListAliasesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5795,7 +5795,7 @@ func (s *ListAliasesInput) SetMaxItems(v int64) *ListAliasesInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliasesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliasesResponse
 type ListAliasesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5828,7 +5828,7 @@ func (s *ListAliasesOutput) SetNextMarker(v string) *ListAliasesOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappingsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappingsRequest
 type ListEventSourceMappingsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5909,7 +5909,7 @@ func (s *ListEventSourceMappingsInput) SetMaxItems(v int64) *ListEventSourceMapp
 }
 
 // Contains a list of event sources (see EventSourceMappingConfiguration)
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappingsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappingsResponse
 type ListEventSourceMappingsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5942,7 +5942,7 @@ func (s *ListEventSourceMappingsOutput) SetNextMarker(v string) *ListEventSource
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionsRequest
 type ListFunctionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6024,7 +6024,7 @@ func (s *ListFunctionsInput) SetMaxItems(v int64) *ListFunctionsInput {
 }
 
 // Contains a list of AWS Lambda function configurations (see FunctionConfiguration.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionsResponse
 type ListFunctionsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6057,7 +6057,7 @@ func (s *ListFunctionsOutput) SetNextMarker(v string) *ListFunctionsOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTagsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTagsRequest
 type ListTagsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6096,7 +6096,7 @@ func (s *ListTagsInput) SetResource(v string) *ListTagsInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTagsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTagsResponse
 type ListTagsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6120,7 +6120,7 @@ func (s *ListTagsOutput) SetTags(v map[string]*string) *ListTagsOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunctionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunctionRequest
 type ListVersionsByFunctionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6190,7 +6190,7 @@ func (s *ListVersionsByFunctionInput) SetMaxItems(v int64) *ListVersionsByFuncti
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunctionResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunctionResponse
 type ListVersionsByFunctionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6223,7 +6223,7 @@ func (s *ListVersionsByFunctionOutput) SetVersions(v []*FunctionConfiguration) *
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersionRequest
 type PublishVersionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6293,7 +6293,7 @@ func (s *PublishVersionInput) SetFunctionName(v string) *PublishVersionInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionConcurrencyRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionConcurrencyRequest
 type PutFunctionConcurrencyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6349,7 +6349,7 @@ func (s *PutFunctionConcurrencyInput) SetReservedConcurrentExecutions(v int64) *
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Concurrency
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Concurrency
 type PutFunctionConcurrencyOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6373,7 +6373,7 @@ func (s *PutFunctionConcurrencyOutput) SetReservedConcurrentExecutions(v int64) 
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermissionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermissionRequest
 type RemovePermissionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6453,7 +6453,7 @@ func (s *RemovePermissionInput) SetStatementId(v string) *RemovePermissionInput 
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermissionOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermissionOutput
 type RemovePermissionOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -6468,7 +6468,7 @@ func (s RemovePermissionOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagResourceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagResourceRequest
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6521,7 +6521,7 @@ func (s *TagResourceInput) SetTags(v map[string]*string) *TagResourceInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagResourceOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagResourceOutput
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -6537,7 +6537,7 @@ func (s TagResourceOutput) GoString() string {
 }
 
 // The parent object that contains your function's tracing settings.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TracingConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TracingConfig
 type TracingConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -6566,7 +6566,7 @@ func (s *TracingConfig) SetMode(v string) *TracingConfig {
 }
 
 // Parent object of the tracing information associated with your Lambda function.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TracingConfigResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TracingConfigResponse
 type TracingConfigResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -6590,7 +6590,7 @@ func (s *TracingConfigResponse) SetMode(v string) *TracingConfigResponse {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UntagResourceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UntagResourceRequest
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6643,7 +6643,7 @@ func (s *UntagResourceInput) SetTagKeys(v []*string) *UntagResourceInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UntagResourceOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UntagResourceOutput
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -6658,7 +6658,7 @@ func (s UntagResourceOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAliasRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAliasRequest
 type UpdateAliasInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6752,7 +6752,7 @@ func (s *UpdateAliasInput) SetRoutingConfig(v *AliasRoutingConfiguration) *Updat
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMappingRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMappingRequest
 type UpdateEventSourceMappingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6840,7 +6840,7 @@ func (s *UpdateEventSourceMappingInput) SetUUID(v string) *UpdateEventSourceMapp
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCodeRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCodeRequest
 type UpdateFunctionCodeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6966,7 +6966,7 @@ func (s *UpdateFunctionCodeInput) SetZipFile(v []byte) *UpdateFunctionCodeInput 
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest
 type UpdateFunctionConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7151,7 +7151,7 @@ func (s *UpdateFunctionConfigurationInput) SetVpcConfig(v *VpcConfig) *UpdateFun
 // identifying the list of security group IDs and subnet IDs. These must belong
 // to the same VPC. You must provide at least one security group and one subnet
 // ID.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/VpcConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/VpcConfig
 type VpcConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -7185,7 +7185,7 @@ func (s *VpcConfig) SetSubnetIds(v []*string) *VpcConfig {
 }
 
 // VPC configuration associated with your Lambda function.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/VpcConfigResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/VpcConfigResponse
 type VpcConfigResponse struct {
 	_ struct{} `type:"structure"`
 

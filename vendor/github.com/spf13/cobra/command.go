@@ -685,7 +685,7 @@ func (c *Command) execute(a []string) (err error) {
 		return err
 	}
 
-	if helpVal {
+	if helpVal || !c.Runnable() {
 		return flag.ErrHelp
 	}
 
@@ -703,10 +703,6 @@ func (c *Command) execute(a []string) (err error) {
 			}
 			return err
 		}
-	}
-
-	if !c.Runnable() {
-		return flag.ErrHelp
 	}
 
 	c.preRun()

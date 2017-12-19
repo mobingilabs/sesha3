@@ -33,7 +33,7 @@ const opAcceptInvitation = "AcceptInvitation"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptInvitation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptInvitation
 func (c *GuardDuty) AcceptInvitationRequest(input *AcceptInvitationInput) (req *request.Request, output *AcceptInvitationOutput) {
 	op := &request.Operation{
 		Name:       opAcceptInvitation,
@@ -68,7 +68,7 @@ func (c *GuardDuty) AcceptInvitationRequest(input *AcceptInvitationInput) (req *
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptInvitation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptInvitation
 func (c *GuardDuty) AcceptInvitation(input *AcceptInvitationInput) (*AcceptInvitationOutput, error) {
 	req, out := c.AcceptInvitationRequest(input)
 	return out, req.Send()
@@ -115,7 +115,7 @@ const opArchiveFindings = "ArchiveFindings"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ArchiveFindings
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ArchiveFindings
 func (c *GuardDuty) ArchiveFindingsRequest(input *ArchiveFindingsInput) (req *request.Request, output *ArchiveFindingsOutput) {
 	op := &request.Operation{
 		Name:       opArchiveFindings,
@@ -150,7 +150,7 @@ func (c *GuardDuty) ArchiveFindingsRequest(input *ArchiveFindingsInput) (req *re
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ArchiveFindings
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ArchiveFindings
 func (c *GuardDuty) ArchiveFindings(input *ArchiveFindingsInput) (*ArchiveFindingsOutput, error) {
 	req, out := c.ArchiveFindingsRequest(input)
 	return out, req.Send()
@@ -197,7 +197,7 @@ const opCreateDetector = "CreateDetector"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetector
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetector
 func (c *GuardDuty) CreateDetectorRequest(input *CreateDetectorInput) (req *request.Request, output *CreateDetectorOutput) {
 	op := &request.Operation{
 		Name:       opCreateDetector,
@@ -234,7 +234,7 @@ func (c *GuardDuty) CreateDetectorRequest(input *CreateDetectorInput) (req *requ
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetector
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetector
 func (c *GuardDuty) CreateDetector(input *CreateDetectorInput) (*CreateDetectorOutput, error) {
 	req, out := c.CreateDetectorRequest(input)
 	return out, req.Send()
@@ -281,7 +281,7 @@ const opCreateIPSet = "CreateIPSet"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSet
 func (c *GuardDuty) CreateIPSetRequest(input *CreateIPSetInput) (req *request.Request, output *CreateIPSetOutput) {
 	op := &request.Operation{
 		Name:       opCreateIPSet,
@@ -317,7 +317,7 @@ func (c *GuardDuty) CreateIPSetRequest(input *CreateIPSetInput) (req *request.Re
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSet
 func (c *GuardDuty) CreateIPSet(input *CreateIPSetInput) (*CreateIPSetOutput, error) {
 	req, out := c.CreateIPSetRequest(input)
 	return out, req.Send()
@@ -364,7 +364,7 @@ const opCreateMembers = "CreateMembers"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMembers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMembers
 func (c *GuardDuty) CreateMembersRequest(input *CreateMembersInput) (req *request.Request, output *CreateMembersOutput) {
 	op := &request.Operation{
 		Name:       opCreateMembers,
@@ -401,7 +401,7 @@ func (c *GuardDuty) CreateMembersRequest(input *CreateMembersInput) (req *reques
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMembers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMembers
 func (c *GuardDuty) CreateMembers(input *CreateMembersInput) (*CreateMembersOutput, error) {
 	req, out := c.CreateMembersRequest(input)
 	return out, req.Send()
@@ -448,7 +448,7 @@ const opCreateSampleFindings = "CreateSampleFindings"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateSampleFindings
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateSampleFindings
 func (c *GuardDuty) CreateSampleFindingsRequest(input *CreateSampleFindingsInput) (req *request.Request, output *CreateSampleFindingsOutput) {
 	op := &request.Operation{
 		Name:       opCreateSampleFindings,
@@ -485,7 +485,7 @@ func (c *GuardDuty) CreateSampleFindingsRequest(input *CreateSampleFindingsInput
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateSampleFindings
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateSampleFindings
 func (c *GuardDuty) CreateSampleFindings(input *CreateSampleFindingsInput) (*CreateSampleFindingsOutput, error) {
 	req, out := c.CreateSampleFindingsRequest(input)
 	return out, req.Send()
@@ -532,7 +532,7 @@ const opCreateThreatIntelSet = "CreateThreatIntelSet"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSet
 func (c *GuardDuty) CreateThreatIntelSetRequest(input *CreateThreatIntelSetInput) (req *request.Request, output *CreateThreatIntelSetOutput) {
 	op := &request.Operation{
 		Name:       opCreateThreatIntelSet,
@@ -568,7 +568,7 @@ func (c *GuardDuty) CreateThreatIntelSetRequest(input *CreateThreatIntelSetInput
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSet
 func (c *GuardDuty) CreateThreatIntelSet(input *CreateThreatIntelSetInput) (*CreateThreatIntelSetOutput, error) {
 	req, out := c.CreateThreatIntelSetRequest(input)
 	return out, req.Send()
@@ -615,7 +615,7 @@ const opDeclineInvitations = "DeclineInvitations"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeclineInvitations
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeclineInvitations
 func (c *GuardDuty) DeclineInvitationsRequest(input *DeclineInvitationsInput) (req *request.Request, output *DeclineInvitationsOutput) {
 	op := &request.Operation{
 		Name:       opDeclineInvitations,
@@ -651,7 +651,7 @@ func (c *GuardDuty) DeclineInvitationsRequest(input *DeclineInvitationsInput) (r
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeclineInvitations
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeclineInvitations
 func (c *GuardDuty) DeclineInvitations(input *DeclineInvitationsInput) (*DeclineInvitationsOutput, error) {
 	req, out := c.DeclineInvitationsRequest(input)
 	return out, req.Send()
@@ -698,7 +698,7 @@ const opDeleteDetector = "DeleteDetector"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetector
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetector
 func (c *GuardDuty) DeleteDetectorRequest(input *DeleteDetectorInput) (req *request.Request, output *DeleteDetectorOutput) {
 	op := &request.Operation{
 		Name:       opDeleteDetector,
@@ -733,7 +733,7 @@ func (c *GuardDuty) DeleteDetectorRequest(input *DeleteDetectorInput) (req *requ
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetector
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetector
 func (c *GuardDuty) DeleteDetector(input *DeleteDetectorInput) (*DeleteDetectorOutput, error) {
 	req, out := c.DeleteDetectorRequest(input)
 	return out, req.Send()
@@ -780,7 +780,7 @@ const opDeleteIPSet = "DeleteIPSet"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteIPSet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteIPSet
 func (c *GuardDuty) DeleteIPSetRequest(input *DeleteIPSetInput) (req *request.Request, output *DeleteIPSetOutput) {
 	op := &request.Operation{
 		Name:       opDeleteIPSet,
@@ -815,7 +815,7 @@ func (c *GuardDuty) DeleteIPSetRequest(input *DeleteIPSetInput) (req *request.Re
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteIPSet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteIPSet
 func (c *GuardDuty) DeleteIPSet(input *DeleteIPSetInput) (*DeleteIPSetOutput, error) {
 	req, out := c.DeleteIPSetRequest(input)
 	return out, req.Send()
@@ -862,7 +862,7 @@ const opDeleteInvitations = "DeleteInvitations"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteInvitations
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteInvitations
 func (c *GuardDuty) DeleteInvitationsRequest(input *DeleteInvitationsInput) (req *request.Request, output *DeleteInvitationsOutput) {
 	op := &request.Operation{
 		Name:       opDeleteInvitations,
@@ -898,7 +898,7 @@ func (c *GuardDuty) DeleteInvitationsRequest(input *DeleteInvitationsInput) (req
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteInvitations
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteInvitations
 func (c *GuardDuty) DeleteInvitations(input *DeleteInvitationsInput) (*DeleteInvitationsOutput, error) {
 	req, out := c.DeleteInvitationsRequest(input)
 	return out, req.Send()
@@ -945,7 +945,7 @@ const opDeleteMembers = "DeleteMembers"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteMembers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteMembers
 func (c *GuardDuty) DeleteMembersRequest(input *DeleteMembersInput) (req *request.Request, output *DeleteMembersOutput) {
 	op := &request.Operation{
 		Name:       opDeleteMembers,
@@ -981,7 +981,7 @@ func (c *GuardDuty) DeleteMembersRequest(input *DeleteMembersInput) (req *reques
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteMembers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteMembers
 func (c *GuardDuty) DeleteMembers(input *DeleteMembersInput) (*DeleteMembersOutput, error) {
 	req, out := c.DeleteMembersRequest(input)
 	return out, req.Send()
@@ -1028,7 +1028,7 @@ const opDeleteThreatIntelSet = "DeleteThreatIntelSet"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSet
 func (c *GuardDuty) DeleteThreatIntelSetRequest(input *DeleteThreatIntelSetInput) (req *request.Request, output *DeleteThreatIntelSetOutput) {
 	op := &request.Operation{
 		Name:       opDeleteThreatIntelSet,
@@ -1063,7 +1063,7 @@ func (c *GuardDuty) DeleteThreatIntelSetRequest(input *DeleteThreatIntelSetInput
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSet
 func (c *GuardDuty) DeleteThreatIntelSet(input *DeleteThreatIntelSetInput) (*DeleteThreatIntelSetOutput, error) {
 	req, out := c.DeleteThreatIntelSetRequest(input)
 	return out, req.Send()
@@ -1110,7 +1110,7 @@ const opDisassociateFromMasterAccount = "DisassociateFromMasterAccount"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromMasterAccount
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromMasterAccount
 func (c *GuardDuty) DisassociateFromMasterAccountRequest(input *DisassociateFromMasterAccountInput) (req *request.Request, output *DisassociateFromMasterAccountOutput) {
 	op := &request.Operation{
 		Name:       opDisassociateFromMasterAccount,
@@ -1145,7 +1145,7 @@ func (c *GuardDuty) DisassociateFromMasterAccountRequest(input *DisassociateFrom
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromMasterAccount
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromMasterAccount
 func (c *GuardDuty) DisassociateFromMasterAccount(input *DisassociateFromMasterAccountInput) (*DisassociateFromMasterAccountOutput, error) {
 	req, out := c.DisassociateFromMasterAccountRequest(input)
 	return out, req.Send()
@@ -1192,7 +1192,7 @@ const opDisassociateMembers = "DisassociateMembers"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateMembers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateMembers
 func (c *GuardDuty) DisassociateMembersRequest(input *DisassociateMembersInput) (req *request.Request, output *DisassociateMembersOutput) {
 	op := &request.Operation{
 		Name:       opDisassociateMembers,
@@ -1228,7 +1228,7 @@ func (c *GuardDuty) DisassociateMembersRequest(input *DisassociateMembersInput) 
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateMembers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateMembers
 func (c *GuardDuty) DisassociateMembers(input *DisassociateMembersInput) (*DisassociateMembersOutput, error) {
 	req, out := c.DisassociateMembersRequest(input)
 	return out, req.Send()
@@ -1275,7 +1275,7 @@ const opGetDetector = "GetDetector"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetector
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetector
 func (c *GuardDuty) GetDetectorRequest(input *GetDetectorInput) (req *request.Request, output *GetDetectorOutput) {
 	op := &request.Operation{
 		Name:       opGetDetector,
@@ -1310,7 +1310,7 @@ func (c *GuardDuty) GetDetectorRequest(input *GetDetectorInput) (req *request.Re
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetector
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetector
 func (c *GuardDuty) GetDetector(input *GetDetectorInput) (*GetDetectorOutput, error) {
 	req, out := c.GetDetectorRequest(input)
 	return out, req.Send()
@@ -1357,7 +1357,7 @@ const opGetFindings = "GetFindings"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindings
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindings
 func (c *GuardDuty) GetFindingsRequest(input *GetFindingsInput) (req *request.Request, output *GetFindingsOutput) {
 	op := &request.Operation{
 		Name:       opGetFindings,
@@ -1392,7 +1392,7 @@ func (c *GuardDuty) GetFindingsRequest(input *GetFindingsInput) (req *request.Re
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindings
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindings
 func (c *GuardDuty) GetFindings(input *GetFindingsInput) (*GetFindingsOutput, error) {
 	req, out := c.GetFindingsRequest(input)
 	return out, req.Send()
@@ -1439,7 +1439,7 @@ const opGetFindingsStatistics = "GetFindingsStatistics"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatistics
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatistics
 func (c *GuardDuty) GetFindingsStatisticsRequest(input *GetFindingsStatisticsInput) (req *request.Request, output *GetFindingsStatisticsOutput) {
 	op := &request.Operation{
 		Name:       opGetFindingsStatistics,
@@ -1474,7 +1474,7 @@ func (c *GuardDuty) GetFindingsStatisticsRequest(input *GetFindingsStatisticsInp
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatistics
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatistics
 func (c *GuardDuty) GetFindingsStatistics(input *GetFindingsStatisticsInput) (*GetFindingsStatisticsOutput, error) {
 	req, out := c.GetFindingsStatisticsRequest(input)
 	return out, req.Send()
@@ -1521,7 +1521,7 @@ const opGetIPSet = "GetIPSet"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSet
 func (c *GuardDuty) GetIPSetRequest(input *GetIPSetInput) (req *request.Request, output *GetIPSetOutput) {
 	op := &request.Operation{
 		Name:       opGetIPSet,
@@ -1556,7 +1556,7 @@ func (c *GuardDuty) GetIPSetRequest(input *GetIPSetInput) (req *request.Request,
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSet
 func (c *GuardDuty) GetIPSet(input *GetIPSetInput) (*GetIPSetOutput, error) {
 	req, out := c.GetIPSetRequest(input)
 	return out, req.Send()
@@ -1603,7 +1603,7 @@ const opGetInvitationsCount = "GetInvitationsCount"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvitationsCount
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvitationsCount
 func (c *GuardDuty) GetInvitationsCountRequest(input *GetInvitationsCountInput) (req *request.Request, output *GetInvitationsCountOutput) {
 	op := &request.Operation{
 		Name:       opGetInvitationsCount,
@@ -1639,7 +1639,7 @@ func (c *GuardDuty) GetInvitationsCountRequest(input *GetInvitationsCountInput) 
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvitationsCount
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvitationsCount
 func (c *GuardDuty) GetInvitationsCount(input *GetInvitationsCountInput) (*GetInvitationsCountOutput, error) {
 	req, out := c.GetInvitationsCountRequest(input)
 	return out, req.Send()
@@ -1686,7 +1686,7 @@ const opGetMasterAccount = "GetMasterAccount"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccount
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccount
 func (c *GuardDuty) GetMasterAccountRequest(input *GetMasterAccountInput) (req *request.Request, output *GetMasterAccountOutput) {
 	op := &request.Operation{
 		Name:       opGetMasterAccount,
@@ -1722,7 +1722,7 @@ func (c *GuardDuty) GetMasterAccountRequest(input *GetMasterAccountInput) (req *
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccount
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccount
 func (c *GuardDuty) GetMasterAccount(input *GetMasterAccountInput) (*GetMasterAccountOutput, error) {
 	req, out := c.GetMasterAccountRequest(input)
 	return out, req.Send()
@@ -1769,7 +1769,7 @@ const opGetMembers = "GetMembers"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMembers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMembers
 func (c *GuardDuty) GetMembersRequest(input *GetMembersInput) (req *request.Request, output *GetMembersOutput) {
 	op := &request.Operation{
 		Name:       opGetMembers,
@@ -1805,7 +1805,7 @@ func (c *GuardDuty) GetMembersRequest(input *GetMembersInput) (req *request.Requ
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMembers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMembers
 func (c *GuardDuty) GetMembers(input *GetMembersInput) (*GetMembersOutput, error) {
 	req, out := c.GetMembersRequest(input)
 	return out, req.Send()
@@ -1852,7 +1852,7 @@ const opGetThreatIntelSet = "GetThreatIntelSet"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSet
 func (c *GuardDuty) GetThreatIntelSetRequest(input *GetThreatIntelSetInput) (req *request.Request, output *GetThreatIntelSetOutput) {
 	op := &request.Operation{
 		Name:       opGetThreatIntelSet,
@@ -1887,7 +1887,7 @@ func (c *GuardDuty) GetThreatIntelSetRequest(input *GetThreatIntelSetInput) (req
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSet
 func (c *GuardDuty) GetThreatIntelSet(input *GetThreatIntelSetInput) (*GetThreatIntelSetOutput, error) {
 	req, out := c.GetThreatIntelSetRequest(input)
 	return out, req.Send()
@@ -1934,7 +1934,7 @@ const opInviteMembers = "InviteMembers"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembers
 func (c *GuardDuty) InviteMembersRequest(input *InviteMembersInput) (req *request.Request, output *InviteMembersOutput) {
 	op := &request.Operation{
 		Name:       opInviteMembers,
@@ -1972,7 +1972,7 @@ func (c *GuardDuty) InviteMembersRequest(input *InviteMembersInput) (req *reques
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembers
 func (c *GuardDuty) InviteMembers(input *InviteMembersInput) (*InviteMembersOutput, error) {
 	req, out := c.InviteMembersRequest(input)
 	return out, req.Send()
@@ -2019,7 +2019,7 @@ const opListDetectors = "ListDetectors"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListDetectors
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListDetectors
 func (c *GuardDuty) ListDetectorsRequest(input *ListDetectorsInput) (req *request.Request, output *ListDetectorsOutput) {
 	op := &request.Operation{
 		Name:       opListDetectors,
@@ -2060,7 +2060,7 @@ func (c *GuardDuty) ListDetectorsRequest(input *ListDetectorsInput) (req *reques
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListDetectors
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListDetectors
 func (c *GuardDuty) ListDetectors(input *ListDetectorsInput) (*ListDetectorsOutput, error) {
 	req, out := c.ListDetectorsRequest(input)
 	return out, req.Send()
@@ -2157,7 +2157,7 @@ const opListFindings = "ListFindings"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFindings
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFindings
 func (c *GuardDuty) ListFindingsRequest(input *ListFindingsInput) (req *request.Request, output *ListFindingsOutput) {
 	op := &request.Operation{
 		Name:       opListFindings,
@@ -2198,7 +2198,7 @@ func (c *GuardDuty) ListFindingsRequest(input *ListFindingsInput) (req *request.
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFindings
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFindings
 func (c *GuardDuty) ListFindings(input *ListFindingsInput) (*ListFindingsOutput, error) {
 	req, out := c.ListFindingsRequest(input)
 	return out, req.Send()
@@ -2295,7 +2295,7 @@ const opListIPSets = "ListIPSets"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSets
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSets
 func (c *GuardDuty) ListIPSetsRequest(input *ListIPSetsInput) (req *request.Request, output *ListIPSetsOutput) {
 	op := &request.Operation{
 		Name:       opListIPSets,
@@ -2336,7 +2336,7 @@ func (c *GuardDuty) ListIPSetsRequest(input *ListIPSetsInput) (req *request.Requ
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSets
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSets
 func (c *GuardDuty) ListIPSets(input *ListIPSetsInput) (*ListIPSetsOutput, error) {
 	req, out := c.ListIPSetsRequest(input)
 	return out, req.Send()
@@ -2433,7 +2433,7 @@ const opListInvitations = "ListInvitations"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvitations
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvitations
 func (c *GuardDuty) ListInvitationsRequest(input *ListInvitationsInput) (req *request.Request, output *ListInvitationsOutput) {
 	op := &request.Operation{
 		Name:       opListInvitations,
@@ -2475,7 +2475,7 @@ func (c *GuardDuty) ListInvitationsRequest(input *ListInvitationsInput) (req *re
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvitations
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvitations
 func (c *GuardDuty) ListInvitations(input *ListInvitationsInput) (*ListInvitationsOutput, error) {
 	req, out := c.ListInvitationsRequest(input)
 	return out, req.Send()
@@ -2572,7 +2572,7 @@ const opListMembers = "ListMembers"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembers
 func (c *GuardDuty) ListMembersRequest(input *ListMembersInput) (req *request.Request, output *ListMembersOutput) {
 	op := &request.Operation{
 		Name:       opListMembers,
@@ -2614,7 +2614,7 @@ func (c *GuardDuty) ListMembersRequest(input *ListMembersInput) (req *request.Re
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembers
 func (c *GuardDuty) ListMembers(input *ListMembersInput) (*ListMembersOutput, error) {
 	req, out := c.ListMembersRequest(input)
 	return out, req.Send()
@@ -2711,7 +2711,7 @@ const opListThreatIntelSets = "ListThreatIntelSets"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSets
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSets
 func (c *GuardDuty) ListThreatIntelSetsRequest(input *ListThreatIntelSetsInput) (req *request.Request, output *ListThreatIntelSetsOutput) {
 	op := &request.Operation{
 		Name:       opListThreatIntelSets,
@@ -2753,7 +2753,7 @@ func (c *GuardDuty) ListThreatIntelSetsRequest(input *ListThreatIntelSetsInput) 
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSets
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSets
 func (c *GuardDuty) ListThreatIntelSets(input *ListThreatIntelSetsInput) (*ListThreatIntelSetsOutput, error) {
 	req, out := c.ListThreatIntelSetsRequest(input)
 	return out, req.Send()
@@ -2850,7 +2850,7 @@ const opStartMonitoringMembers = "StartMonitoringMembers"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMonitoringMembers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMonitoringMembers
 func (c *GuardDuty) StartMonitoringMembersRequest(input *StartMonitoringMembersInput) (req *request.Request, output *StartMonitoringMembersOutput) {
 	op := &request.Operation{
 		Name:       opStartMonitoringMembers,
@@ -2887,7 +2887,7 @@ func (c *GuardDuty) StartMonitoringMembersRequest(input *StartMonitoringMembersI
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMonitoringMembers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMonitoringMembers
 func (c *GuardDuty) StartMonitoringMembers(input *StartMonitoringMembersInput) (*StartMonitoringMembersOutput, error) {
 	req, out := c.StartMonitoringMembersRequest(input)
 	return out, req.Send()
@@ -2934,7 +2934,7 @@ const opStopMonitoringMembers = "StopMonitoringMembers"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StopMonitoringMembers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StopMonitoringMembers
 func (c *GuardDuty) StopMonitoringMembersRequest(input *StopMonitoringMembersInput) (req *request.Request, output *StopMonitoringMembersOutput) {
 	op := &request.Operation{
 		Name:       opStopMonitoringMembers,
@@ -2972,7 +2972,7 @@ func (c *GuardDuty) StopMonitoringMembersRequest(input *StopMonitoringMembersInp
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StopMonitoringMembers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StopMonitoringMembers
 func (c *GuardDuty) StopMonitoringMembers(input *StopMonitoringMembersInput) (*StopMonitoringMembersOutput, error) {
 	req, out := c.StopMonitoringMembersRequest(input)
 	return out, req.Send()
@@ -3019,7 +3019,7 @@ const opUnarchiveFindings = "UnarchiveFindings"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindings
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindings
 func (c *GuardDuty) UnarchiveFindingsRequest(input *UnarchiveFindingsInput) (req *request.Request, output *UnarchiveFindingsOutput) {
 	op := &request.Operation{
 		Name:       opUnarchiveFindings,
@@ -3054,7 +3054,7 @@ func (c *GuardDuty) UnarchiveFindingsRequest(input *UnarchiveFindingsInput) (req
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindings
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindings
 func (c *GuardDuty) UnarchiveFindings(input *UnarchiveFindingsInput) (*UnarchiveFindingsOutput, error) {
 	req, out := c.UnarchiveFindingsRequest(input)
 	return out, req.Send()
@@ -3101,7 +3101,7 @@ const opUpdateDetector = "UpdateDetector"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetector
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetector
 func (c *GuardDuty) UpdateDetectorRequest(input *UpdateDetectorInput) (req *request.Request, output *UpdateDetectorOutput) {
 	op := &request.Operation{
 		Name:       opUpdateDetector,
@@ -3136,7 +3136,7 @@ func (c *GuardDuty) UpdateDetectorRequest(input *UpdateDetectorInput) (req *requ
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetector
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetector
 func (c *GuardDuty) UpdateDetector(input *UpdateDetectorInput) (*UpdateDetectorOutput, error) {
 	req, out := c.UpdateDetectorRequest(input)
 	return out, req.Send()
@@ -3183,7 +3183,7 @@ const opUpdateFindingsFeedback = "UpdateFindingsFeedback"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedback
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedback
 func (c *GuardDuty) UpdateFindingsFeedbackRequest(input *UpdateFindingsFeedbackInput) (req *request.Request, output *UpdateFindingsFeedbackOutput) {
 	op := &request.Operation{
 		Name:       opUpdateFindingsFeedback,
@@ -3218,7 +3218,7 @@ func (c *GuardDuty) UpdateFindingsFeedbackRequest(input *UpdateFindingsFeedbackI
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedback
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedback
 func (c *GuardDuty) UpdateFindingsFeedback(input *UpdateFindingsFeedbackInput) (*UpdateFindingsFeedbackOutput, error) {
 	req, out := c.UpdateFindingsFeedbackRequest(input)
 	return out, req.Send()
@@ -3265,7 +3265,7 @@ const opUpdateIPSet = "UpdateIPSet"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSet
 func (c *GuardDuty) UpdateIPSetRequest(input *UpdateIPSetInput) (req *request.Request, output *UpdateIPSetOutput) {
 	op := &request.Operation{
 		Name:       opUpdateIPSet,
@@ -3300,7 +3300,7 @@ func (c *GuardDuty) UpdateIPSetRequest(input *UpdateIPSetInput) (req *request.Re
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSet
 func (c *GuardDuty) UpdateIPSet(input *UpdateIPSetInput) (*UpdateIPSetOutput, error) {
 	req, out := c.UpdateIPSetRequest(input)
 	return out, req.Send()
@@ -3347,7 +3347,7 @@ const opUpdateThreatIntelSet = "UpdateThreatIntelSet"
 //        fmt.Println(resp)
 //    }
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSet
 func (c *GuardDuty) UpdateThreatIntelSetRequest(input *UpdateThreatIntelSetInput) (req *request.Request, output *UpdateThreatIntelSetOutput) {
 	op := &request.Operation{
 		Name:       opUpdateThreatIntelSet,
@@ -3382,7 +3382,7 @@ func (c *GuardDuty) UpdateThreatIntelSetRequest(input *UpdateThreatIntelSetInput
 //   * ErrCodeInternalServerErrorException "InternalServerErrorException"
 //   Error response object.
 //
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSet
 func (c *GuardDuty) UpdateThreatIntelSet(input *UpdateThreatIntelSetInput) (*UpdateThreatIntelSetOutput, error) {
 	req, out := c.UpdateThreatIntelSetRequest(input)
 	return out, req.Send()
@@ -3405,7 +3405,7 @@ func (c *GuardDuty) UpdateThreatIntelSetWithContext(ctx aws.Context, input *Upda
 }
 
 // AcceptInvitation request body.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptInvitationRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptInvitationRequest
 type AcceptInvitationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3460,7 +3460,7 @@ func (s *AcceptInvitationInput) SetMasterId(v string) *AcceptInvitationInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptInvitationResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptInvitationResponse
 type AcceptInvitationOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -3476,7 +3476,7 @@ func (s AcceptInvitationOutput) GoString() string {
 }
 
 // An object containing the member's accountId and email address.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccountDetail
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccountDetail
 type AccountDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -3510,7 +3510,7 @@ func (s *AccountDetail) SetEmail(v string) *AccountDetail {
 }
 
 // Information about the activity described in a finding.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Action
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Action
 type Action struct {
 	_ struct{} `type:"structure"`
 
@@ -3562,7 +3562,7 @@ func (s *Action) SetNetworkConnectionAction(v *NetworkConnectionAction) *Action 
 }
 
 // Archive Findings Request
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ArchiveFindingsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ArchiveFindingsRequest
 type ArchiveFindingsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3608,7 +3608,7 @@ func (s *ArchiveFindingsInput) SetFindingIds(v []*string) *ArchiveFindingsInput 
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ArchiveFindingsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ArchiveFindingsResponse
 type ArchiveFindingsOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -3624,7 +3624,7 @@ func (s ArchiveFindingsOutput) GoString() string {
 }
 
 // Information about the AWS_API_CALL action described in this finding.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AwsApiCallAction
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AwsApiCallAction
 type AwsApiCallAction struct {
 	_ struct{} `type:"structure"`
 
@@ -3685,7 +3685,7 @@ func (s *AwsApiCallAction) SetServiceName(v string) *AwsApiCallAction {
 }
 
 // City information of the remote IP address.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/City
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/City
 type City struct {
 	_ struct{} `type:"structure"`
 
@@ -3711,7 +3711,7 @@ func (s *City) SetCityName(v string) *City {
 
 // Finding attribute (for example, accountId) for which conditions and values
 // must be specified when querying findings.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Condition
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Condition
 type Condition struct {
 	_ struct{} `type:"structure"`
 
@@ -3787,7 +3787,7 @@ func (s *Condition) SetNeq(v []*string) *Condition {
 }
 
 // Country information of the remote IP address.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Country
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Country
 type Country struct {
 	_ struct{} `type:"structure"`
 
@@ -3821,7 +3821,7 @@ func (s *Country) SetCountryName(v string) *Country {
 }
 
 // Create Detector Request
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetectorRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetectorRequest
 type CreateDetectorInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3846,7 +3846,7 @@ func (s *CreateDetectorInput) SetEnable(v bool) *CreateDetectorInput {
 }
 
 // CreateDetector response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetectorResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetectorResponse
 type CreateDetectorOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3871,7 +3871,7 @@ func (s *CreateDetectorOutput) SetDetectorId(v string) *CreateDetectorOutput {
 }
 
 // Create IP Set Request
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSetRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSetRequest
 type CreateIPSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3948,7 +3948,7 @@ func (s *CreateIPSetInput) SetName(v string) *CreateIPSetInput {
 }
 
 // CreateIPSet response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSetResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSetResponse
 type CreateIPSetOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3973,7 +3973,7 @@ func (s *CreateIPSetOutput) SetIpSetId(v string) *CreateIPSetOutput {
 }
 
 // CreateMembers body
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMembersRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMembersRequest
 type CreateMembersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4021,7 +4021,7 @@ func (s *CreateMembersInput) SetDetectorId(v string) *CreateMembersInput {
 }
 
 // CreateMembers response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMembersResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMembersResponse
 type CreateMembersOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4047,7 +4047,7 @@ func (s *CreateMembersOutput) SetUnprocessedAccounts(v []*UnprocessedAccount) *C
 }
 
 // Create Sample Findings Request
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateSampleFindingsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateSampleFindingsRequest
 type CreateSampleFindingsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4093,7 +4093,7 @@ func (s *CreateSampleFindingsInput) SetFindingTypes(v []*string) *CreateSampleFi
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateSampleFindingsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateSampleFindingsResponse
 type CreateSampleFindingsOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -4109,7 +4109,7 @@ func (s CreateSampleFindingsOutput) GoString() string {
 }
 
 // Create Threat Intel Set Request
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSetRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSetRequest
 type CreateThreatIntelSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4185,7 +4185,7 @@ func (s *CreateThreatIntelSetInput) SetName(v string) *CreateThreatIntelSetInput
 }
 
 // CreateThreatIntelSet response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSetResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSetResponse
 type CreateThreatIntelSetOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4210,7 +4210,7 @@ func (s *CreateThreatIntelSetOutput) SetThreatIntelSetId(v string) *CreateThreat
 }
 
 // DeclineInvitations request body.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeclineInvitationsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeclineInvitationsRequest
 type DeclineInvitationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4236,7 +4236,7 @@ func (s *DeclineInvitationsInput) SetAccountIds(v []*string) *DeclineInvitations
 }
 
 // DeclineInvitations response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeclineInvitationsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeclineInvitationsResponse
 type DeclineInvitationsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4261,7 +4261,7 @@ func (s *DeclineInvitationsOutput) SetUnprocessedAccounts(v []*UnprocessedAccoun
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetectorRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetectorRequest
 type DeleteDetectorInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4298,7 +4298,7 @@ func (s *DeleteDetectorInput) SetDetectorId(v string) *DeleteDetectorInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetectorResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetectorResponse
 type DeleteDetectorOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -4313,7 +4313,7 @@ func (s DeleteDetectorOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteIPSetRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteIPSetRequest
 type DeleteIPSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4362,7 +4362,7 @@ func (s *DeleteIPSetInput) SetIpSetId(v string) *DeleteIPSetInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteIPSetResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteIPSetResponse
 type DeleteIPSetOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -4378,7 +4378,7 @@ func (s DeleteIPSetOutput) GoString() string {
 }
 
 // DeleteInvitations request body.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteInvitationsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteInvitationsRequest
 type DeleteInvitationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4404,7 +4404,7 @@ func (s *DeleteInvitationsInput) SetAccountIds(v []*string) *DeleteInvitationsIn
 }
 
 // DeleteInvitations response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteInvitationsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteInvitationsResponse
 type DeleteInvitationsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4430,7 +4430,7 @@ func (s *DeleteInvitationsOutput) SetUnprocessedAccounts(v []*UnprocessedAccount
 }
 
 // DeleteMembers request body.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteMembersRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteMembersRequest
 type DeleteMembersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4477,7 +4477,7 @@ func (s *DeleteMembersInput) SetDetectorId(v string) *DeleteMembersInput {
 }
 
 // DeleteMembers response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteMembersResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteMembersResponse
 type DeleteMembersOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4502,7 +4502,7 @@ func (s *DeleteMembersOutput) SetUnprocessedAccounts(v []*UnprocessedAccount) *D
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSetRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSetRequest
 type DeleteThreatIntelSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4551,7 +4551,7 @@ func (s *DeleteThreatIntelSetInput) SetThreatIntelSetId(v string) *DeleteThreatI
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSetResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSetResponse
 type DeleteThreatIntelSetOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -4566,7 +4566,7 @@ func (s DeleteThreatIntelSetOutput) GoString() string {
 	return s.String()
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromMasterAccountRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromMasterAccountRequest
 type DisassociateFromMasterAccountInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4603,7 +4603,7 @@ func (s *DisassociateFromMasterAccountInput) SetDetectorId(v string) *Disassocia
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromMasterAccountResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromMasterAccountResponse
 type DisassociateFromMasterAccountOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -4619,7 +4619,7 @@ func (s DisassociateFromMasterAccountOutput) GoString() string {
 }
 
 // DisassociateMembers request body.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateMembersRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateMembersRequest
 type DisassociateMembersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4667,7 +4667,7 @@ func (s *DisassociateMembersInput) SetDetectorId(v string) *DisassociateMembersI
 }
 
 // DisassociateMembers response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateMembersResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateMembersResponse
 type DisassociateMembersOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4693,7 +4693,7 @@ func (s *DisassociateMembersOutput) SetUnprocessedAccounts(v []*UnprocessedAccou
 }
 
 // Information about the DNS_REQUEST action described in this finding.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DnsRequestAction
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DnsRequestAction
 type DnsRequestAction struct {
 	_ struct{} `type:"structure"`
 
@@ -4718,7 +4718,7 @@ func (s *DnsRequestAction) SetDomain(v string) *DnsRequestAction {
 }
 
 // Domain information for the AWS API call.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DomainDetails
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DomainDetails
 type DomainDetails struct {
 	_ struct{} `type:"structure"`
 }
@@ -4734,7 +4734,7 @@ func (s DomainDetails) GoString() string {
 }
 
 // Representation of a abnormal or suspicious activity.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Finding
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Finding
 type Finding struct {
 	_ struct{} `type:"structure"`
 
@@ -4888,7 +4888,7 @@ func (s *Finding) SetUpdatedAt(v string) *Finding {
 }
 
 // Represents the criteria used for querying findings.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingCriteria
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingCriteria
 type FindingCriteria struct {
 	_ struct{} `type:"structure"`
 
@@ -4914,7 +4914,7 @@ func (s *FindingCriteria) SetCriterion(v map[string]*Condition) *FindingCriteria
 }
 
 // Finding statistics object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingStatistics
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingStatistics
 type FindingStatistics struct {
 	_ struct{} `type:"structure"`
 
@@ -4939,7 +4939,7 @@ func (s *FindingStatistics) SetCountBySeverity(v map[string]*int64) *FindingStat
 }
 
 // Location information of the remote IP address.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GeoLocation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GeoLocation
 type GeoLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -4972,7 +4972,7 @@ func (s *GeoLocation) SetLon(v float64) *GeoLocation {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetectorRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetectorRequest
 type GetDetectorInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5010,7 +5010,7 @@ func (s *GetDetectorInput) SetDetectorId(v string) *GetDetectorInput {
 }
 
 // GetDetector response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetectorResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetectorResponse
 type GetDetectorOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5062,7 +5062,7 @@ func (s *GetDetectorOutput) SetUpdatedAt(v string) *GetDetectorOutput {
 }
 
 // Get Findings Request
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsRequest
 type GetFindingsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5118,7 +5118,7 @@ func (s *GetFindingsInput) SetSortCriteria(v *SortCriteria) *GetFindingsInput {
 }
 
 // GetFindings response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsResponse
 type GetFindingsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5143,7 +5143,7 @@ func (s *GetFindingsOutput) SetFindings(v []*Finding) *GetFindingsOutput {
 }
 
 // Get Findings Statistics Request
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatisticsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatisticsRequest
 type GetFindingsStatisticsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5199,7 +5199,7 @@ func (s *GetFindingsStatisticsInput) SetFindingStatisticTypes(v []*string) *GetF
 }
 
 // GetFindingsStatistics response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatisticsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatisticsResponse
 type GetFindingsStatisticsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5223,7 +5223,7 @@ func (s *GetFindingsStatisticsOutput) SetFindingStatistics(v *FindingStatistics)
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSetRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSetRequest
 type GetIPSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5273,7 +5273,7 @@ func (s *GetIPSetInput) SetIpSetId(v string) *GetIPSetInput {
 }
 
 // GetIPSet response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSetResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSetResponse
 type GetIPSetOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5326,7 +5326,7 @@ func (s *GetIPSetOutput) SetStatus(v string) *GetIPSetOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvitationsCountRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvitationsCountRequest
 type GetInvitationsCountInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -5342,7 +5342,7 @@ func (s GetInvitationsCountInput) GoString() string {
 }
 
 // GetInvitationsCount response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvitationsCountResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvitationsCountResponse
 type GetInvitationsCountOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5366,7 +5366,7 @@ func (s *GetInvitationsCountOutput) SetInvitationsCount(v int64) *GetInvitations
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccountRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccountRequest
 type GetMasterAccountInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5404,7 +5404,7 @@ func (s *GetMasterAccountInput) SetDetectorId(v string) *GetMasterAccountInput {
 }
 
 // GetMasterAccount response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccountResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccountResponse
 type GetMasterAccountOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5429,7 +5429,7 @@ func (s *GetMasterAccountOutput) SetMaster(v *Master) *GetMasterAccountOutput {
 }
 
 // GetMembers request body.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMembersRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMembersRequest
 type GetMembersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5476,7 +5476,7 @@ func (s *GetMembersInput) SetDetectorId(v string) *GetMembersInput {
 }
 
 // GetMembers response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMembersResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMembersResponse
 type GetMembersOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5510,7 +5510,7 @@ func (s *GetMembersOutput) SetUnprocessedAccounts(v []*UnprocessedAccount) *GetM
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSetRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSetRequest
 type GetThreatIntelSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5560,7 +5560,7 @@ func (s *GetThreatIntelSetInput) SetThreatIntelSetId(v string) *GetThreatIntelSe
 }
 
 // GetThreatIntelSet response object
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSetResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSetResponse
 type GetThreatIntelSetOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5613,7 +5613,7 @@ func (s *GetThreatIntelSetOutput) SetStatus(v string) *GetThreatIntelSetOutput {
 }
 
 // The profile information of the EC2 instance.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/IamInstanceProfile
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/IamInstanceProfile
 type IamInstanceProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -5648,7 +5648,7 @@ func (s *IamInstanceProfile) SetId(v string) *IamInstanceProfile {
 
 // The information about the EC2 instance associated with the activity that
 // prompted GuardDuty to generate a finding.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InstanceDetails
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InstanceDetails
 type InstanceDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -5763,7 +5763,7 @@ func (s *InstanceDetails) SetTags(v []*Tag) *InstanceDetails {
 }
 
 // Invitation from an AWS account to become the current account's master.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Invitation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Invitation
 type Invitation struct {
 	_ struct{} `type:"structure"`
 
@@ -5815,7 +5815,7 @@ func (s *Invitation) SetRelationshipStatus(v string) *Invitation {
 }
 
 // InviteMembers request body.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembersRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembersRequest
 type InviteMembersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5873,7 +5873,7 @@ func (s *InviteMembersInput) SetMessage(v string) *InviteMembersInput {
 }
 
 // InviteMembers response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembersResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembersResponse
 type InviteMembersOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5898,7 +5898,7 @@ func (s *InviteMembersOutput) SetUnprocessedAccounts(v []*UnprocessedAccount) *I
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListDetectorsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListDetectorsRequest
 type ListDetectorsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5945,7 +5945,7 @@ func (s *ListDetectorsInput) SetNextToken(v string) *ListDetectorsInput {
 }
 
 // ListDetectors response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListDetectorsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListDetectorsResponse
 type ListDetectorsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5982,7 +5982,7 @@ func (s *ListDetectorsOutput) SetNextToken(v string) *ListDetectorsOutput {
 }
 
 // List Findings Request
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFindingsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFindingsRequest
 type ListFindingsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6063,7 +6063,7 @@ func (s *ListFindingsInput) SetSortCriteria(v *SortCriteria) *ListFindingsInput 
 }
 
 // ListFindings response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFindingsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFindingsResponse
 type ListFindingsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6099,7 +6099,7 @@ func (s *ListFindingsOutput) SetNextToken(v string) *ListFindingsOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSetsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSetsRequest
 type ListIPSetsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6158,7 +6158,7 @@ func (s *ListIPSetsInput) SetNextToken(v string) *ListIPSetsInput {
 }
 
 // ListIPSets response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSetsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSetsResponse
 type ListIPSetsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6194,7 +6194,7 @@ func (s *ListIPSetsOutput) SetNextToken(v string) *ListIPSetsOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvitationsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvitationsRequest
 type ListInvitationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6241,7 +6241,7 @@ func (s *ListInvitationsInput) SetNextToken(v string) *ListInvitationsInput {
 }
 
 // ListInvitations response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvitationsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvitationsResponse
 type ListInvitationsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6277,7 +6277,7 @@ func (s *ListInvitationsOutput) SetNextToken(v string) *ListInvitationsOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembersRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembersRequest
 type ListMembersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6344,7 +6344,7 @@ func (s *ListMembersInput) SetOnlyAssociated(v string) *ListMembersInput {
 }
 
 // ListMembers response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembersResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembersResponse
 type ListMembersOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6380,7 +6380,7 @@ func (s *ListMembersOutput) SetNextToken(v string) *ListMembersOutput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSetsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSetsRequest
 type ListThreatIntelSetsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6439,7 +6439,7 @@ func (s *ListThreatIntelSetsInput) SetNextToken(v string) *ListThreatIntelSetsIn
 }
 
 // ListThreatIntelSets response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSetsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSetsResponse
 type ListThreatIntelSetsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6476,7 +6476,7 @@ func (s *ListThreatIntelSetsOutput) SetThreatIntelSetIds(v []*string) *ListThrea
 }
 
 // Local port information of the connection.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/LocalPortDetails
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/LocalPortDetails
 type LocalPortDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -6510,7 +6510,7 @@ func (s *LocalPortDetails) SetPortName(v string) *LocalPortDetails {
 }
 
 // Contains details about the master account.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Master
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Master
 type Master struct {
 	_ struct{} `type:"structure"`
 
@@ -6562,7 +6562,7 @@ func (s *Master) SetRelationshipStatus(v string) *Master {
 }
 
 // Contains details about the member account.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Member
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Member
 type Member struct {
 	_ struct{} `type:"structure"`
 
@@ -6641,7 +6641,7 @@ func (s *Member) SetUpdatedAt(v string) *Member {
 }
 
 // Information about the NETWORK_CONNECTION action described in this finding.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/NetworkConnectionAction
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/NetworkConnectionAction
 type NetworkConnectionAction struct {
 	_ struct{} `type:"structure"`
 
@@ -6711,7 +6711,7 @@ func (s *NetworkConnectionAction) SetRemotePortDetails(v *RemotePortDetails) *Ne
 }
 
 // The network interface information of the EC2 instance.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/NetworkInterface
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/NetworkInterface
 type NetworkInterface struct {
 	_ struct{} `type:"structure"`
 
@@ -6808,7 +6808,7 @@ func (s *NetworkInterface) SetVpcId(v string) *NetworkInterface {
 }
 
 // ISP Organization information of the remote IP address.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Organization
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Organization
 type Organization struct {
 	_ struct{} `type:"structure"`
 
@@ -6860,7 +6860,7 @@ func (s *Organization) SetOrg(v string) *Organization {
 }
 
 // Other private IP address information of the EC2 instance.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/PrivateIpAddressDetails
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/PrivateIpAddressDetails
 type PrivateIpAddressDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -6894,7 +6894,7 @@ func (s *PrivateIpAddressDetails) SetPrivateIpAddress(v string) *PrivateIpAddres
 }
 
 // The product code of the EC2 instance.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ProductCode
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ProductCode
 type ProductCode struct {
 	_ struct{} `type:"structure"`
 
@@ -6928,7 +6928,7 @@ func (s *ProductCode) SetProductType(v string) *ProductCode {
 }
 
 // Remote IP information of the connection.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RemoteIpDetails
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RemoteIpDetails
 type RemoteIpDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -6989,7 +6989,7 @@ func (s *RemoteIpDetails) SetOrganization(v *Organization) *RemoteIpDetails {
 }
 
 // Remote port information of the connection.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RemotePortDetails
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RemotePortDetails
 type RemotePortDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -7024,7 +7024,7 @@ func (s *RemotePortDetails) SetPortName(v string) *RemotePortDetails {
 
 // The AWS resource associated with the activity that prompted GuardDuty to
 // generate a finding.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Resource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Resource
 type Resource struct {
 	_ struct{} `type:"structure"`
 
@@ -7059,7 +7059,7 @@ func (s *Resource) SetResourceType(v string) *Resource {
 }
 
 // Security groups associated with the EC2 instance.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SecurityGroup
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SecurityGroup
 type SecurityGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -7093,7 +7093,7 @@ func (s *SecurityGroup) SetGroupName(v string) *SecurityGroup {
 }
 
 // Additional information assigned to the generated finding by GuardDuty.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Service
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Service
 type Service struct {
 	_ struct{} `type:"structure"`
 
@@ -7192,7 +7192,7 @@ func (s *Service) SetUserFeedback(v string) *Service {
 }
 
 // Represents the criteria used for sorting findings.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SortCriteria
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SortCriteria
 type SortCriteria struct {
 	_ struct{} `type:"structure"`
 
@@ -7227,7 +7227,7 @@ func (s *SortCriteria) SetOrderBy(v string) *SortCriteria {
 }
 
 // StartMonitoringMembers request body.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMonitoringMembersRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMonitoringMembersRequest
 type StartMonitoringMembersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7275,7 +7275,7 @@ func (s *StartMonitoringMembersInput) SetDetectorId(v string) *StartMonitoringMe
 }
 
 // StartMonitoringMembers response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMonitoringMembersResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMonitoringMembersResponse
 type StartMonitoringMembersOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -7301,7 +7301,7 @@ func (s *StartMonitoringMembersOutput) SetUnprocessedAccounts(v []*UnprocessedAc
 }
 
 // StopMonitoringMembers request body.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StopMonitoringMembersRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StopMonitoringMembersRequest
 type StopMonitoringMembersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7349,7 +7349,7 @@ func (s *StopMonitoringMembersInput) SetDetectorId(v string) *StopMonitoringMemb
 }
 
 // StopMonitoringMembers response object.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StopMonitoringMembersResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StopMonitoringMembersResponse
 type StopMonitoringMembersOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -7375,7 +7375,7 @@ func (s *StopMonitoringMembersOutput) SetUnprocessedAccounts(v []*UnprocessedAcc
 }
 
 // A tag of the EC2 instance.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Tag
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -7409,7 +7409,7 @@ func (s *Tag) SetValue(v string) *Tag {
 }
 
 // Unrchive Findings Request
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindingsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindingsRequest
 type UnarchiveFindingsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7455,7 +7455,7 @@ func (s *UnarchiveFindingsInput) SetFindingIds(v []*string) *UnarchiveFindingsIn
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindingsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindingsResponse
 type UnarchiveFindingsOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -7472,7 +7472,7 @@ func (s UnarchiveFindingsOutput) GoString() string {
 
 // An object containing the unprocessed account and a result string explaining
 // why it was unprocessed.
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnprocessedAccount
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnprocessedAccount
 type UnprocessedAccount struct {
 	_ struct{} `type:"structure"`
 
@@ -7506,7 +7506,7 @@ func (s *UnprocessedAccount) SetResult(v string) *UnprocessedAccount {
 }
 
 // Update Detector Request
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorRequest
 type UpdateDetectorInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7553,7 +7553,7 @@ func (s *UpdateDetectorInput) SetEnable(v bool) *UpdateDetectorInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorResponse
 type UpdateDetectorOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -7569,7 +7569,7 @@ func (s UpdateDetectorOutput) GoString() string {
 }
 
 // Update findings feedback body
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedbackRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedbackRequest
 type UpdateFindingsFeedbackInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7633,7 +7633,7 @@ func (s *UpdateFindingsFeedbackInput) SetFindingIds(v []*string) *UpdateFindings
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedbackResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedbackResponse
 type UpdateFindingsFeedbackOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -7649,7 +7649,7 @@ func (s UpdateFindingsFeedbackOutput) GoString() string {
 }
 
 // Update IP Set Request
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSetRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSetRequest
 type UpdateIPSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7725,7 +7725,7 @@ func (s *UpdateIPSetInput) SetName(v string) *UpdateIPSetInput {
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSetResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSetResponse
 type UpdateIPSetOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -7741,7 +7741,7 @@ func (s UpdateIPSetOutput) GoString() string {
 }
 
 // Update Threat Intel Set Request
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSetRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSetRequest
 type UpdateThreatIntelSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7819,7 +7819,7 @@ func (s *UpdateThreatIntelSetInput) SetThreatIntelSetId(v string) *UpdateThreatI
 	return s
 }
 
-// See also, https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSetResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSetResponse
 type UpdateThreatIntelSetOutput struct {
 	_ struct{} `type:"structure"`
 }
