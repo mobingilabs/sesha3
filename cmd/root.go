@@ -1,16 +1,22 @@
 package cmd
 
 import (
+	goflag "flag"
+
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/cmdline"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/spf13/cobra"
+	flag "github.com/spf13/pflag"
 )
 
 var rootCmd = &cobra.Command{
 	Use:   "sesha3",
 	Short: "Secure Shell and Application Access Server",
 	Long:  "Mobingi Secure Shell and Application Access Server.",
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		goflag.Parse()
+	},
 }
 
 func Execute() {
@@ -41,4 +47,6 @@ Simply type '` + cmdline.Args0() + ` help [path to command]' for full details.`,
 		SetupRoute53Cmd(),
 		SetupHttpsCmd(),
 	)
+
+	flag.CommandLine.AddGoFlagSet(goflag.CommandLine)
 }

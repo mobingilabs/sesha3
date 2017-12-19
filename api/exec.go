@@ -1,23 +1,6 @@
 package api
 
-import (
-	"crypto/md5"
-	"encoding/json"
-	"fmt"
-	"io/ioutil"
-	"net/http"
-	"os"
-	"strings"
-
-	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
-	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
-	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
-	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
-	"github.com/mobingilabs/sesha3/pkg/execute"
-	"github.com/mobingilabs/sesha3/pkg/notify"
-	"github.com/mobingilabs/sesha3/pkg/token"
-)
-
+/*
 func handleHttpExec(c *ApiController) {
 	var in sesha3.ExecScriptPayload
 
@@ -145,3 +128,4 @@ func handleHttpExec(c *ApiController) {
 	c.Data["json"] = sout
 	c.ServeJSON()
 }
+*/
