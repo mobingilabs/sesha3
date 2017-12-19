@@ -29,7 +29,6 @@ func Execute() {
 func init() {
 	rootCmd.Flags().SortFlags = false
 	rootCmd.PersistentFlags().BoolVar(&params.IsDev, "rundev", params.IsDev, "run as dev, otherwise, prod")
-	rootCmd.PersistentFlags().BoolVar(&params.UseSyslog, "syslog", false, "set log output to syslog")
 	rootCmd.PersistentFlags().StringArray("notify-endpoints", []string{"slack"}, "values: slack")
 	rootCmd.SetHelpCommand(&cobra.Command{
 		Use:   "help",

@@ -86,20 +86,6 @@ func ServeCmd() *cobra.Command {
 		Short: "run as server",
 		Long:  `Run as server.`,
 		Run: func(cmd *cobra.Command, args []string) {
-			if params.UseSyslog {
-				/*
-					logger, err := syslog.New(syslog.LOG_NOTICE|syslog.LOG_USER, "sesha3")
-					if err != nil {
-						notify.HookPost(errors.Wrap(err, "syslog setup failed"))
-						glog.Exitf("syslog setup failed: %v", err)
-					}
-
-					log.SetFlags(0)
-					log.SetPrefix("[" + util.GetEc2Id() + "] ")
-					log.SetOutput(logger)
-				*/
-			}
-
 			err := downloadTokenFiles()
 			if err != nil {
 				notify.HookPost(errors.Wrap(err, "download token files failed, fatal"))

@@ -9,9 +9,9 @@ go:
 script:
   - go build -v
   - if [[ "$TRAVIS_BRANCH" == "production" ]]; then
-      echo 'command=/home/ec2-user/sesha3/sesha3 serve --logtostderr --syslog' > cmdline;
+      echo 'command=/home/ec2-user/sesha3/sesha3 serve --logtostderr' > cmdline;
     else
-      echo 'command=/home/ec2-user/sesha3/sesha3 serve --logtostderr --syslog --rundev' > cmdline;
+      echo 'command=/home/ec2-user/sesha3/sesha3 serve --logtostderr --rundev' > cmdline;
     fi
 
 before_deploy:
