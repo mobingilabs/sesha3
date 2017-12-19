@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	as "github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
-	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
+	"github.com/golang/glog"
 	"github.com/mobingilabs/sesha3/pkg/util"
 )
 
@@ -73,7 +73,7 @@ func (n *HttpMetrics) postMetrics() {
 
 			_, err := cli.PutMetricData(req)
 			if err != nil {
-				d.Error(err)
+				glog.Errorf("putmetric failed: %v", err)
 			}
 
 			infoCnt += 1

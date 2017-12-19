@@ -4,7 +4,7 @@ import (
 	"sync"
 	"syscall"
 
-	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
+	"github.com/golang/glog"
 	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/pkg/errors"
 )
@@ -20,7 +20,7 @@ func (s *sessions) Add(item Session) {
 	s.Lock()
 	defer s.Unlock()
 	s.ss = append(s.ss, item)
-	d.Info("session added:", item.Id())
+	glog.Infof("session added: %v", item.Id())
 }
 
 func (s *sessions) Remove(id string) error {
@@ -40,7 +40,7 @@ func (s *sessions) Remove(id string) error {
 
 	s.ss[idx] = s.ss[len(s.ss)-1] // replace it with the last one
 	s.ss = s.ss[:len(s.ss)-1]     // remove the last one
-	d.Info("session removed:", id)
+	glog.Infof("session removed: %v", id)
 	return nil
 }
 
@@ -81,20 +81,19 @@ func (s *sessions) TerminateAll() []error {
 	ret := make([]error, 0)
 	for _, sess := range s.ss {
 		// close aws port before terminate
-		d.Info("attempt close port:", sess.HttpsPort)
+		glog.Infof("attempt close port: %v", sess.HttpsPort)
 		err := sess.portReq.ClosePort()
 		if err != nil {
 			notify.HookPost(err)
-			d.Error(err)
+			glog.Errorf("closeport: %v", err)
 		}
 
 		// try kill process
-		d.Info("attempt kill pid:", sess.Cmd.Process.Pid)
+		glog.Infof("attempt kill pid: %v", sess.Cmd.Process.Pid)
 		err = sess.Cmd.Process.Signal(syscall.SIGTERM)
 		if err != nil {
-			err := errors.Wrap(err, "sigterm failed")
 			if err != nil {
-				d.Error(err)
+				glog.Errorf("sigterm failed: %v", err)
 			}
 
 			ret = append(ret, err)

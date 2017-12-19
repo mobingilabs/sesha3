@@ -9,7 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/route53"
-	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
+	"github.com/golang/glog"
 	"github.com/mobingilabs/sesha3/pkg/constants"
 	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/mobingilabs/sesha3/pkg/params"
@@ -18,13 +18,13 @@ import (
 )
 
 func validCname(domain, target string) bool {
-	d.Info("check if", domain, "points to", target)
+	glog.Infof("check if %v points to %v...", domain, target)
 	out, err := exec.Command("dig", domain).CombinedOutput()
 	if err != nil {
 		return false
 	}
 
-	d.Info("dig:out:", string(out))
+	glog.Infof("dig:out: %v", string(out))
 	return strings.Contains(string(out), target)
 }
 
@@ -35,7 +35,7 @@ func AddLocalUrlToRoute53(wait bool) (string, error) {
 
 	// check once first, in case it's already done
 	if validCname(domain, dns) {
-		d.Info("already cnamed:", domain, dns)
+		glog.Infof("already cnamed: %v, %v", domain, dns)
 		return domain, nil
 	}
 
@@ -85,13 +85,13 @@ func AddLocalUrlToRoute53(wait bool) (string, error) {
 
 	resp, err := svc.ChangeResourceRecordSets(r53p)
 	if err != nil {
-		d.Error(err)
+		glog.Errorf("change recordset failed: %v", err)
 		return domain, err
 	}
 
 	m := "route53 (add/update): " + domain + " [cname] " + dns
 	notify.HookPost(m)
-	d.Info(m)
+	glog.Info(m)
 
 	if wait {
 		// one day? why not?
@@ -104,7 +104,7 @@ func AddLocalUrlToRoute53(wait bool) (string, error) {
 		}
 	}
 
-	d.Info(resp)
+	glog.Infof("resp: %v", resp)
 	return domain, nil
 }
 
@@ -126,7 +126,8 @@ func SetupLetsEncryptCert(wait bool) error {
 		"--agree-tos",
 		"--email", "chew.esmero@mobingi.com")
 
-	d.Info("cmd:", cmd.Args)
+	glog.Infof("cmd: %v", cmd.Args)
+
 	_, err = cmd.CombinedOutput()
 	if err != nil {
 		return errors.Wrap(err, "certbot failed")

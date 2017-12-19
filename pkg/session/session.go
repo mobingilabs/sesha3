@@ -10,8 +10,8 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/golang/glog"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/cmdline"
-	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/pkg/awsports"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
@@ -226,10 +226,10 @@ func (s *Session) GetFullURL() string {
 
 func (s *Session) info(v ...interface{}) {
 	m := fmt.Sprint(v...)
-	d.Info("["+s.Id()+"]", m)
+	glog.Infof("[session:%v] %v", s.Id, m)
 }
 
 func (s *Session) error(v ...interface{}) {
 	m := fmt.Sprint(v...)
-	d.Error("["+s.Id()+"]", m)
+	glog.Errorf("[session:%v] %v", s.Id, m)
 }
