@@ -75,7 +75,7 @@ func downloadTokenFiles() error {
 			return err
 		}
 
-		glog.Infof("download s3 file: %v (bytes = %v", i, n)
+		glog.Infof("download s3 file: %v (bytes = %v)", i, n)
 	}
 
 	return nil
@@ -148,13 +148,18 @@ func ServeCmd() *cobra.Command {
 					// request handlers, right before/after replying to caller.
 					c.Set("fnelapsed", func(ctx echo.Context) {
 						start := ctx.Get("starttime").(time.Time)
-						glog.Infof("<-- %v, %v, delta: %v",
+						glog.Infof("<-- %v, %v %v, delta: %v",
 							ctx.Get("contextid"),
 							c.Request().URL.String(),
+							c.Request().Method,
 							time.Now().Sub(start))
 					})
 
-					glog.Infof("--> %v, %v", cid, c.Request().URL.String())
+					glog.Infof("--> %v, %v %v",
+						cid,
+						c.Request().URL.String(),
+						c.Request().Method)
+
 					return next(c)
 				}
 			})
@@ -183,7 +188,6 @@ func ServeCmd() *cobra.Command {
 			})
 
 			ep := api.New()
-
 			e.POST("/token", ep.HandleHttpToken)
 			e.POST("/ttyurl", ep.HandleHttpTtyUrl)
 			e.POST("/exec", ep.HandleHttpExec)
