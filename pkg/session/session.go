@@ -226,10 +226,10 @@ func (s *Session) GetFullURL() string {
 
 func (s *Session) info(v ...interface{}) {
 	m := fmt.Sprint(v...)
-	glog.Infof("[session:%v] %v", s.Id, m)
+	glog.Infof("[session:%v] %v", s.Id(), m)
 }
 
 func (s *Session) error(v ...interface{}) {
 	m := fmt.Sprint(v...)
-	glog.Errorf("[session:%v] %v", s.Id, m)
+	glog.Errorf("[session:%v] %v", s.Id(), m)
 }
