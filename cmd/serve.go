@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"log/syslog"
 	"net/http"
 	"os"
@@ -102,7 +101,6 @@ func ServeCmd() *cobra.Command {
 			glog.Infof("--- server start ---")
 			glog.Infof("dns: %v:%v", util.GetPublicDns(), params.Port)
 			glog.Infof("ec2: %v", util.GetEc2Id())
-			glog.Infof("syslog: %v", params.UseSyslog)
 			glog.Infof("region: %v", util.GetRegion())
 
 			// try setting up LetsEncrypt certificates locally
@@ -118,8 +116,7 @@ func ServeCmd() *cobra.Command {
 			startm := "--- server start ---\n"
 			startm += "dns: " + util.GetPublicDns() + "\n"
 			startm += "region: " + util.GetRegion() + "\n"
-			startm += "ec2: " + util.GetEc2Id() + "\n"
-			startm += "syslog: " + fmt.Sprintf("%v", params.UseSyslog)
+			startm += "ec2: " + util.GetEc2Id()
 			notify.HookPost(startm)
 
 			e := echo.New()
