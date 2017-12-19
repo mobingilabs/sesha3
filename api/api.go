@@ -142,13 +142,13 @@ func (e *ep) HandleHttpTtyUrl(c echo.Context) error {
 	ok, err := token.CheckToken(fmt.Sprintf("%s", u), md5p)
 	if !ok {
 		m := "check token failed"
-		e.simpleResponse(c, http.StatusUnauthorized, m)
+		e.simpleResponse(c, http.StatusInternalServerError, m)
 		glog.Errorf(m)
 		return errors.New(m)
 	}
 
 	if err != nil {
-		e.simpleResponse(c, http.StatusUnauthorized, err.Error())
+		e.simpleResponse(c, http.StatusInternalServerError, err.Error())
 		glog.Errorf("check token failed: %v", err)
 		return err
 	}
