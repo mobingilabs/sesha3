@@ -183,9 +183,10 @@ func ServeCmd() *cobra.Command {
 			})
 
 			e.GET("/", func(c echo.Context) error {
-				c.String(http.StatusOK, "Copyright (c) Mobingi, 2015-2017. All rights reserved.")
-				return nil
+				return c.String(http.StatusOK, "Copyright (c) Mobingi, 2015-2017. All rights reserved.")
 			})
+
+			e.POST("/", func(c echo.Context) error { return c.NoContent(http.StatusOK) })
 
 			ep := api.New()
 			e.POST("/token", ep.HandleHttpToken)
