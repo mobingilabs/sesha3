@@ -97,12 +97,12 @@ func (s *SecurityGroupRequest) ClosePort() error {
 	}
 
 	svc := s.Ec2client
-	p, err := svc.RevokeSecurityGroupIngress(s.RevokeSecurityGroupIngressInput)
+	_, err := svc.RevokeSecurityGroupIngress(s.RevokeSecurityGroupIngressInput)
 	if err != nil {
 		return errors.Wrap(err, "close port failed")
 	}
 
-	glog.Infof("port close: %v %v", s.RequestPort, p)
+	glog.Infof("port close: %v", s.RequestPort)
 	return nil
 }
 
