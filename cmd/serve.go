@@ -122,7 +122,7 @@ func ServeCmd() *cobra.Command {
 			err = cert.SetupLetsEncryptCert(true)
 			if err != nil {
 				notify.HookPost(err)
-				d.Error(err)
+				d.ErrorTraceExit(err, 1)
 			} else {
 				certfolder := "/etc/letsencrypt/live/" + util.Domain()
 				d.Info("certificate folder:", certfolder)

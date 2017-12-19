@@ -5,8 +5,10 @@ import (
 	"time"
 
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
+	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
+	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/pkg/errors"
 )
 
@@ -25,9 +27,12 @@ func handleHttpToken(c *ApiController) {
 
 	ctx, err := jwt.NewCtx()
 	if err != nil {
+		notify.HookPost(err)
 		c.Ctx.ResponseWriter.Write(sesha3.NewSimpleError(err).Marshal())
 		c.err(errors.Wrap(err, "jwt ctx failed"))
-		return
+
+		// if this fails, try force restart to redownload token files
+		d.ErrorTraceExit(err, 1)
 	}
 
 	var creds credentials
