@@ -135,35 +135,6 @@ func ServeCmd() *cobra.Command {
 			startm += "syslog: " + fmt.Sprintf("%v", params.UseSyslog)
 			notify.HookPost(startm)
 
-			/*
-				beego.BConfig.ServerName = constants.SERVER_NAME + ":1.0.0"
-				beego.BConfig.RunMode = beego.PROD
-				if params.IsDev {
-					beego.BConfig.RunMode = beego.DEV
-				}
-
-				// needed for http input body in request to be available for non-get and head reqs
-				beego.BConfig.CopyRequestBody = true
-
-				beego.Router("/", &api.ApiController{}, "get:DispatchRoot")
-				beego.Router("/scratch", &api.ApiController{}, "get:DispatchScratch")
-				beego.Router("/token", &api.ApiController{}, "post:DispatchToken")
-				beego.Router("/ttyurl", &api.ApiController{}, "post:DispatchTtyUrl")
-				beego.Router("/exec", &api.ApiController{}, "post:DispatchExec")
-				beego.Handler("/debug/vars", metrics.MetricsHandler)
-
-				// try enable cors
-				beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
-					AllowAllOrigins:  true,
-					AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-					AllowHeaders:     []string{"Origin", "Authorization", "Access-Control-Allow-Origin", "Content-Type"},
-					ExposeHeaders:    []string{"Content-Length", "Access-Control-Allow-Origin"},
-					AllowCredentials: true,
-				}))
-
-				beego.Run(":" + params.Port)
-			*/
-
 			e := echo.New()
 
 			// time in, should be the first middleware
@@ -177,10 +148,13 @@ func ServeCmd() *cobra.Command {
 					// request handlers, right before/after replying to caller.
 					c.Set("fnelapsed", func(ctx echo.Context) {
 						start := ctx.Get("starttime").(time.Time)
-						glog.Infof("<-- %v, delta: %v", ctx.Get("contextid"), time.Now().Sub(start))
+						glog.Infof("<-- %v, %v, delta: %v",
+							ctx.Get("contextid"),
+							c.Request().URL.String(),
+							time.Now().Sub(start))
 					})
 
-					glog.Infof("--> %v", cid)
+					glog.Infof("--> %v, %v", cid, c.Request().URL.String())
 					return next(c)
 				}
 			})
