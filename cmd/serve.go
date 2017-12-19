@@ -212,6 +212,7 @@ func ServeCmd() *cobra.Command {
 
 			e.POST("/token", ep.HandleHttpToken)
 			e.POST("/ttyurl", ep.HandleHttpTtyUrl)
+			e.POST("/exec", ep.HandleHttpExec)
 
 			// serve
 			glog.Infof("serving on :%v", params.Port)
