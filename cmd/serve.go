@@ -74,7 +74,7 @@ func downloadTokenFiles() error {
 			return err
 		}
 
-		glog.Infof("download s3 file: %v (bytes = %v)", i, n)
+		glog.Infof("download s3 file: %v (bytes = %v)", fl, n)
 	}
 
 	return nil
