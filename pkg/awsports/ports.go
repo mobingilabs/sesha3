@@ -11,8 +11,8 @@ import (
 	"github.com/aws/aws-sdk-go/service/ec2"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
+	"github.com/golang/glog"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/cmdline"
-	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/pkg/errors"
 )
@@ -67,7 +67,7 @@ func (s *SecurityGroupRequest) OpenedList() {
 		s.OpenPortList = append(s.OpenPortList, *i.FromPort)
 	}
 
-	d.Info("openlist:", s.OpenPortList)
+	glog.Infof("openlist: %v", s.OpenPortList)
 }
 
 func (s *SecurityGroupRequest) OpenPort() error {
@@ -77,7 +77,7 @@ func (s *SecurityGroupRequest) OpenPort() error {
 		return errors.Wrap(err, "open port failed")
 	}
 
-	d.Info("port open:", s.RequestPort, p)
+	glog.Infof("port open: %v %v", s.RequestPort, p)
 	return nil
 }
 
@@ -92,17 +92,17 @@ func (s *SecurityGroupRequest) ClosePort() error {
 	}
 
 	if !found {
-		d.Info("cannot find port", s.RequestPort, "in open list, do nothing")
+		glog.Infof("cannot find port %v in open list, do nothing", s.RequestPort)
 		return nil
 	}
 
 	svc := s.Ec2client
-	p, err := svc.RevokeSecurityGroupIngress(s.RevokeSecurityGroupIngressInput)
+	_, err := svc.RevokeSecurityGroupIngress(s.RevokeSecurityGroupIngressInput)
 	if err != nil {
 		return errors.Wrap(err, "close port failed")
 	}
 
-	d.Info("port close:", s.RequestPort, p)
+	glog.Infof("port close: %v", s.RequestPort)
 	return nil
 }
 
@@ -179,7 +179,8 @@ func Download(awsRegion string, profilename string) error {
 			return errors.Wrap(err, "s3 download failed")
 		}
 
-		d.Info("download file:", i, "|", "bytes:", n)
+		// d.Info("download file:", i, "|", "bytes:", n)
+		_ = n
 	}
 
 	return nil

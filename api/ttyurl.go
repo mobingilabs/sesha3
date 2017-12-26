@@ -1,26 +1,6 @@
 package api
 
-import (
-	"crypto/md5"
-	"encoding/json"
-	"fmt"
-	"io/ioutil"
-	"net/http"
-	"os"
-	"strings"
-	"time"
-
-	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
-	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
-	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
-	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
-	"github.com/mobingilabs/sesha3/pkg/metrics"
-	"github.com/mobingilabs/sesha3/pkg/notify"
-	"github.com/mobingilabs/sesha3/pkg/session"
-	"github.com/mobingilabs/sesha3/pkg/token"
-	"github.com/pkg/errors"
-)
-
+/*
 func handleHttpTtyUrl(c *ApiController) {
 	start := time.Now()
 	metrics.MetricsCurrentConnection.Add(1)
@@ -180,3 +160,4 @@ func handleHttpTtyUrl(c *ApiController) {
 	c.Data["json"] = reply
 	c.ServeJSON()
 }
+*/

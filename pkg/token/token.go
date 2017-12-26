@@ -5,10 +5,9 @@ import (
 	as "github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
+	"github.com/golang/glog"
 	"github.com/guregu/dynamo"
-	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
 	"github.com/mobingilabs/sesha3/pkg/util"
-	"github.com/pkg/errors"
 )
 
 type event struct {
@@ -41,13 +40,13 @@ func CheckToken(uname string, pwdmd5 string) (bool, error) {
 	err := table.Get("username", uname).All(&results)
 	for _, data := range results {
 		if pwdmd5 == data.Pass && data.Status != "deleted" {
-			d.Info("valid subuser:", uname)
+			glog.Infof("valid subuser: %v", uname)
 			return true, nil
 		}
 	}
 
 	if err != nil {
-		d.Error("error in table get:", err)
+		glog.Errorf("error in table get: %v", err)
 	}
 
 	// try looking at the root users table
@@ -68,21 +67,21 @@ func CheckToken(uname string, pwdmd5 string) (bool, error) {
 
 	resp, err := dbsvc.Query(queryInput)
 	if err != nil {
-		d.Error(errors.Wrap(err, "query failed"))
+		glog.Errorf("query failed: %v", err)
 	} else {
 		ru := []root{}
 		err = dynamodbattribute.UnmarshalListOfMaps(resp.Items, &ru)
 		if err != nil {
-			d.Error(errors.Wrap(err, "dynamo obj unmarshal failed"))
+			glog.Errorf("dynamo obj unmarshal failed: %v", err)
 		}
 
-		d.Info("raw:", ru)
+		glog.Infof("raw: %v", ru)
 
 		// should be a valid root user
 		for _, u := range ru {
 			if u.Email == uname && u.Password == pwdmd5 {
 				if u.Status == "" || u.Status == "trial" {
-					d.Info("valid root user:", uname)
+					glog.Infof("valid root user: %v", uname)
 					ret = true
 					break
 				}

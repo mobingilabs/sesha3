@@ -5,7 +5,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	d "github.com/mobingilabs/mobingi-sdk-go/pkg/debug"
+	"github.com/golang/glog"
 	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/mobingilabs/sesha3/pkg/session"
 )
@@ -24,11 +24,11 @@ func SignalHandler() {
 			switch s {
 			case syscall.SIGINT, syscall.SIGTERM:
 				// try cleanup remaining sessions, if any
-				d.Info("remaining sessions:", session.Sessions.Count())
+				glog.Infof("remaining sessions: %v", session.Sessions.Count())
 				notify.HookPost("sesha3 server is stopped.")
 				errs := session.Sessions.TerminateAll()
 				if len(errs) > 0 {
-					d.Error(errs)
+					glog.Errorf("term all failed: %v", errs)
 				}
 
 				os.Exit(0)
