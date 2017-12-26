@@ -155,6 +155,7 @@ func ServeCmd() *cobra.Command {
 			e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 				return func(c echo.Context) error {
 					glog.Infof("remoteaddr: %v", c.Request().RemoteAddr)
+					glog.Infof("url rawquery: %v", c.Request().URL.RawQuery)
 					return next(c)
 				}
 			})

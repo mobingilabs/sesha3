@@ -68,19 +68,21 @@ func (e *ep) HandleHttpToken(c echo.Context) error {
 
 	var creds credentials
 
-	err = c.Bind(&creds)
+	body, err := ioutil.ReadAll(c.Request().Body)
 	if err != nil {
-		glog.Errorf("bind failed: %v", err)
+		glog.Errorf("readall body failed: %v", err)
+		return err
+	}
+
+	defer c.Request().Body.Close()
+	glog.Infof("body (raw): %v", string(body))
+	err = json.Unmarshal(body, &creds)
+	if err != nil {
+		glog.Errorf("unmarshal failed: %v", err)
 		return err
 	}
 
 	glog.Infof("body: %+v", creds)
-
-	body, err := ioutil.ReadAll(c.Request().Body)
-	defer c.Request().Body.Close()
-	if err == nil {
-		glog.Infof("body (raw): %v", string(body))
-	}
 
 	m := make(map[string]interface{})
 	m["username"] = creds.Username
