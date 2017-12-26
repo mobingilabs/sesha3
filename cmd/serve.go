@@ -4,6 +4,7 @@ import (
 	"log/syslog"
 	"net/http"
 	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -17,6 +18,7 @@ import (
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/api"
 	"github.com/mobingilabs/sesha3/pkg/cert"
+	"github.com/mobingilabs/sesha3/pkg/constants"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/mobingilabs/sesha3/pkg/params"
@@ -44,9 +46,8 @@ func downloadTokenFiles() error {
 	})
 
 	// create dir if necessary
-	tmpdir := os.TempDir() + "/jwt/rsa/"
-	if !private.Exists(tmpdir) {
-		err := os.MkdirAll(tmpdir, 0700)
+	if !private.Exists(constants.DATA_DIR) {
+		err := os.MkdirAll(constants.DATA_DIR, 0700)
 		if err != nil {
 			glog.Errorf("mkdirall failed: %v", err)
 			return err
@@ -55,7 +56,7 @@ func downloadTokenFiles() error {
 
 	downloader := s3manager.NewDownloaderWithClient(svc)
 	for _, i := range fnames {
-		fl := tmpdir + i
+		fl := filepath.Join(constants.DATA_DIR, i)
 		f, err := os.Create(fl)
 		if err != nil {
 			glog.Errorf("create file failed: %v", err)

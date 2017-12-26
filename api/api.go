@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -15,6 +16,7 @@ import (
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
+	"github.com/mobingilabs/sesha3/pkg/constants"
 	"github.com/mobingilabs/sesha3/pkg/execute"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
@@ -73,6 +75,12 @@ func (e *ep) HandleHttpToken(c echo.Context) error {
 	}
 
 	glog.Infof("body: %+v", creds)
+
+	body, err := ioutil.ReadAll(c.Request().Body)
+	defer c.Request().Body.Close()
+	if err == nil {
+		glog.Infof("body (raw): %v", string(body))
+	}
 
 	m := make(map[string]interface{})
 	m["username"] = creds.Username
@@ -177,8 +185,8 @@ func (e *ep) HandleHttpTtyUrl(c echo.Context) error {
 	sess.Timeout = "120"
 
 	flag := fmt.Sprintf("%v", m["flag"])
-	pemdir := os.TempDir() + "/sesha3/pem/"
-	pemfile := pemdir + sess.StackId + "-" + flag + ".pem"
+	pemdir := filepath.Join(constants.DATA_DIR, "pem")
+	pemfile := filepath.Join(pemdir, sess.StackId+"-"+flag+".pem")
 	sess.PemFile = pemfile
 
 	// create the pem file only if not existent
@@ -343,7 +351,7 @@ func (e *ep) HandleHttpExec(c echo.Context) error {
 		return err
 	}
 
-	workdir := os.TempDir() + "/" + in.Target.StackId + "_" + in.Target.Flag + "/"
+	workdir := filepath.Join(constants.DATA_DIR, in.Target.StackId+"_"+in.Target.Flag)
 	glog.Infof("workdir: %v", workdir)
 
 	if !private.Exists(workdir) {
@@ -357,7 +365,7 @@ func (e *ep) HandleHttpExec(c echo.Context) error {
 		glog.Infof("workdir created: %v", workdir)
 	}
 
-	pemfile := workdir + in.Target.Ip + ".pem"
+	pemfile := filepath.Join(workdir, in.Target.Ip+".pem")
 	glog.Infof("pemfile: %v", pemfile)
 
 	if !private.Exists(pemfile) {
@@ -372,7 +380,7 @@ func (e *ep) HandleHttpExec(c echo.Context) error {
 	}
 
 	// write script to temporary file
-	script := workdir + "_runscript"
+	script := filepath.Join(workdir, "_runscript")
 	err = ioutil.WriteFile(script, in.Script, 0755)
 	if err != nil {
 		glog.Errorf("write file failed: %v", err)
