@@ -279,10 +279,18 @@ func (e *ep) HandleHttpExec(c echo.Context) error {
 
 	var in sesha3.ExecScriptPayload
 
-	err := c.Bind(&in)
+	body, err := ioutil.ReadAll(c.Request().Body)
 	if err != nil {
-		glog.Errorf("bind failed: %v", err)
-		notify.HookPost(err)
+		glog.Errorf("readall body failed: %v", err)
+		return err
+	}
+
+	defer c.Request().Body.Close()
+	glog.Infof("body (raw): %v", string(body))
+
+	err = json.Unmarshal(body, &in)
+	if err != nil {
+		glog.Errorf("unmarshal failed: %v", err)
 		return err
 	}
 

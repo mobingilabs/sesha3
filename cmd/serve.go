@@ -110,7 +110,7 @@ func ServeCmd() *cobra.Command {
 				notify.HookPost(err)
 				glog.Exitf("setup letsencrypt failed: %v", err)
 			} else {
-				certfolder := "/etc/letsencrypt/live/" + util.Domain()
+				certfolder := filepath.Join("/etc/letsencrypt/live", util.Domain())
 				glog.Infof("certificate folder: %v", certfolder)
 			}
 
