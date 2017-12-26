@@ -122,7 +122,7 @@ func ServeCmd() *cobra.Command {
 
 			e := echo.New()
 
-			// time in, should be the first middleware
+			// prep, should be the first middleware
 			e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 				return func(c echo.Context) error {
 					cid := uuid.NewV4().String()
@@ -151,7 +151,7 @@ func ServeCmd() *cobra.Command {
 
 			e.Use(middleware.CORS())
 
-			// some information about request
+			// print request information
 			e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 				return func(c echo.Context) error {
 					glog.Infof("remoteaddr: %v", c.Request().RemoteAddr)
