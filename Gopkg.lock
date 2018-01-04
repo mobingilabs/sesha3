@@ -47,8 +47,8 @@
     "service/s3/s3manager",
     "service/sts"
   ]
-  revision = "82ad808f2307df0776c038bfd7ea85440a35c02e"
-  version = "v1.12.53"
+  revision = "f62f7b7c5425f2b1a630932617477bdeac6dc371"
+  version = "v1.12.55"
 
 [[projects]]
   name = "github.com/cenkalti/backoff"
@@ -185,8 +185,8 @@
     "pkg/notification",
     "pkg/private"
   ]
-  revision = "60282744cb55e139b09b9903b8684e4f7925d87b"
-  version = "v0.1.30"
+  revision = "794248f344769119b3f5a6d27c980f18ff305959"
+  version = "v0.1.31"
 
 [[projects]]
   name = "github.com/moul/gotty-client"
@@ -210,7 +210,7 @@
   branch = "master"
   name = "github.com/spf13/cobra"
   packages = ["."]
-  revision = "ccaecb155a2177302cb56cae929251a256d0f646"
+  revision = "b95ab734e27d33e0d8fbabf71ca990568d4e2020"
 
 [[projects]]
   name = "github.com/spf13/pflag"
@@ -238,7 +238,7 @@
     "acme/autocert",
     "ssh/terminal"
   ]
-  revision = "d585fd2cc9195196078f516b69daff6744ef5e84"
+  revision = "0fcca4842a8d74bfddc2c96a073bd2a4d2a7a2e8"
 
 [[projects]]
   branch = "master"
@@ -253,7 +253,7 @@
     "unix",
     "windows"
   ]
-  revision = "83801418e1b59fb1880e363299581ee543af32ca"
+  revision = "28a7276518d399b9634904daad79e18b44d481bc"
 
 [solve-meta]
   analyzer-name = "dep"
