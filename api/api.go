@@ -57,7 +57,7 @@ func (e *ep) HandleHttpToken(c echo.Context) error {
 	metrics.MetricsTokenRequest.Add(1)
 	defer metrics.MetricsTokenRequest.Add(-1)
 
-	ctx, err := jwt.NewCtx()
+	ctx, err := jwt.NewCtx(constants.DATA_DIR)
 	if err != nil {
 		notify.HookPost(err)
 		e.simpleResponse(c, http.StatusUnauthorized, err.Error())
@@ -126,7 +126,7 @@ func (e *ep) HandleHttpTtyUrl(c echo.Context) error {
 		return err
 	}
 
-	ctx, err := jwt.NewCtx()
+	ctx, err := jwt.NewCtx(constants.DATA_DIR)
 	if err != nil {
 		notify.HookPost(err)
 		e.simpleResponse(c, http.StatusUnauthorized, err.Error())
@@ -305,7 +305,7 @@ func (e *ep) HandleHttpExec(c echo.Context) error {
 		return err
 	}
 
-	ctx, err := jwt.NewCtx()
+	ctx, err := jwt.NewCtx(constants.DATA_DIR)
 	if err != nil {
 		notify.HookPost(err)
 		e.simpleResponse(c, http.StatusUnauthorized, err.Error())
