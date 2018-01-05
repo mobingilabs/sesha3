@@ -244,7 +244,7 @@
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context"]
-  revision = "d866cfc389cec985d6fda2859936a575a55a3ab6"
+  revision = "42fe2e1c20de1054d3d30f82cc9fb5b41e2e3767"
 
 [[projects]]
   branch = "master"
@@ -253,7 +253,7 @@
     "unix",
     "windows"
   ]
-  revision = "28a7276518d399b9634904daad79e18b44d481bc"
+  revision = "a3f2cbd54cf5dfe3fbaccf76375fdb12f67654c8"
 
 [solve-meta]
   analyzer-name = "dep"

@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"log/syslog"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -27,8 +26,6 @@ import (
 	uuid "github.com/satori/go.uuid"
 	"github.com/spf13/cobra"
 )
-
-var logger *syslog.Writer
 
 func downloadTokenFiles() error {
 	fnames := []string{"token.pem", "token.pem.pub"}
@@ -88,7 +85,7 @@ func ServeCmd() *cobra.Command {
 		Run: func(cmd *cobra.Command, args []string) {
 			err := downloadTokenFiles()
 			if err != nil {
-				notify.HookPost(errors.Wrap(err, "download token files failed, fatal"))
+				notify.HookPost(errors.Wrap(err, "download token files failed"))
 				glog.Exitf("download token files failed: %v", err)
 			}
 
@@ -107,7 +104,7 @@ func ServeCmd() *cobra.Command {
 			// try setting up LetsEncrypt certificates locally
 			err = cert.SetupLetsEncryptCert(true)
 			if err != nil {
-				notify.HookPost(err)
+				notify.HookPost(errors.Wrap(err, "setup letsencrypt failed"))
 				glog.Exitf("setup letsencrypt failed: %v", err)
 			} else {
 				certfolder := filepath.Join("/etc/letsencrypt/live", util.Domain())
