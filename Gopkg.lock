@@ -47,8 +47,8 @@
     "service/s3/s3manager",
     "service/sts"
   ]
-  revision = "f62f7b7c5425f2b1a630932617477bdeac6dc371"
-  version = "v1.12.55"
+  revision = "5177d71d80f123f6d82aaf762387e39b88c5ba23"
+  version = "v1.12.57"
 
 [[projects]]
   name = "github.com/cenkalti/backoff"
@@ -244,7 +244,7 @@
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context"]
-  revision = "42fe2e1c20de1054d3d30f82cc9fb5b41e2e3767"
+  revision = "434ec0c7fe3742c984919a691b2018a6e9694425"
 
 [[projects]]
   branch = "master"
@@ -253,7 +253,7 @@
     "unix",
     "windows"
   ]
-  revision = "a3f2cbd54cf5dfe3fbaccf76375fdb12f67654c8"
+  revision = "d38bf781f16e180a1b2ad82697d2f81d7b7ecfac"
 
 [solve-meta]
   analyzer-name = "dep"

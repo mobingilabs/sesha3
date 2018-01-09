@@ -85,18 +85,21 @@ func (s *Session) Start() (string, error) {
 			s.error(errors.Wrap(err, "ssh shell exec failed"))
 		}
 
+		// Diego request: 2017/01/01:
+		// change default timeout to 2hrs
 		s.info(ssh + " -t " + shell)
 		s.info("shell-out: ", string(dshellb))
 		defaultshell := strings.TrimSpace(string(dshellb))
 		s.info("default: ", defaultshell)
-		timeout := "export TMOUT=" + s.Timeout
+		// timeout := "export TMOUT=" + s.Timeout
+		timeout := "export TMOUT=7200"
 		term := "export TERM=xterm"
 		s.Cmd = exec.Command(svrtool,
 			"--port", fmt.Sprint(ec2req.RequestPort),
 			"-w",
 			"--random-url",
 			"--random-url-length", "36",
-			"--timeout", "30",
+			"--timeout", "7200",
 			"-once",
 			"--tls",
 			"--tls-crt",
