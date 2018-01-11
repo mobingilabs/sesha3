@@ -17,6 +17,7 @@ import (
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/pkg/constants"
+	"github.com/mobingilabs/sesha3/pkg/creds"
 	"github.com/mobingilabs/sesha3/pkg/execute"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
@@ -43,12 +44,6 @@ func (e *ep) simpleResponse(c echo.Context, code int, m string) error {
 	return c.JSON(code, resp)
 }
 
-type credentials struct {
-	Username  string `json:"username"`
-	Password  string `json:"passwd"`
-	GrantType string `json:"grant_type,omitempty"`
-}
-
 func (e *ep) HandleHttpToken(c echo.Context) error {
 	defer e.elapsed(c)
 
@@ -68,7 +63,7 @@ func (e *ep) HandleHttpToken(c echo.Context) error {
 		glog.Exitf("jwt ctx failed: %+v", util.ErrV(err))
 	}
 
-	var creds credentials
+	var credentials creds.Credentials
 
 	body, err := ioutil.ReadAll(c.Request().Body)
 	if err != nil {
@@ -78,17 +73,31 @@ func (e *ep) HandleHttpToken(c echo.Context) error {
 
 	defer c.Request().Body.Close()
 	glog.V(2).Infof("body (raw): %v", string(body))
-	err = json.Unmarshal(body, &creds)
+	err = json.Unmarshal(body, &credentials)
 	if err != nil {
 		glog.Errorf("unmarshal failed: %+v", util.ErrV(err))
 		return err
 	}
 
-	glog.V(2).Infof("body: %+v", creds)
+	glog.V(2).Infof("body: %+v", credentials)
+
+	ok, err := credentials.Validate()
+	if !ok {
+		m := "credentials validation failed"
+		e.simpleResponse(c, http.StatusInternalServerError, m)
+		glog.Errorf("%+v", util.ErrV(err, m))
+		return errors.New(m)
+	}
+
+	if err != nil {
+		e.simpleResponse(c, http.StatusInternalServerError, err.Error())
+		glog.Errorf("credentials validation failed: %+v", util.ErrV(err))
+		return err
+	}
 
 	m := make(map[string]interface{})
-	m["username"] = creds.Username
-	m["password"] = creds.Password
+	m["username"] = credentials.Username
+	m["password"] = credentials.Password
 	tokenobj, stoken, err := ctx.GenerateToken(m)
 	if err != nil {
 		glog.Errorf("generate token failed: %+v", util.ErrV(err))
@@ -131,8 +140,8 @@ func (e *ep) HandleHttpTtyUrl(c echo.Context) error {
 
 	ctx, err := jwt.NewCtx(constants.DATA_DIR)
 	if err != nil {
-		notify.HookPost(err)
 		e.simpleResponse(c, http.StatusUnauthorized, err.Error())
+		notify.HookPost(err)
 
 		// if this fails, try force restart to redownload token files
 		glog.Exitf("jwt ctx failed: %+v", util.ErrV(err))
@@ -146,23 +155,32 @@ func (e *ep) HandleHttpTtyUrl(c echo.Context) error {
 		return err
 	}
 
-	nc := pt.Claims.(*jwt.WrapperClaims)
-	u, _ := nc.Data["username"]
-	p, _ := nc.Data["password"]
-	glog.V(2).Infof("user: %v", u)
+	/*
+		nc := pt.Claims.(*jwt.WrapperClaims)
+		u, _ := nc.Data["username"]
+		p, _ := nc.Data["password"]
+		glog.V(2).Infof("user: %v", u)
 
-	md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
-	ok, err := token.CheckToken(fmt.Sprintf("%s", u), md5p)
-	if !ok {
-		m := "check token failed"
-		e.simpleResponse(c, http.StatusInternalServerError, m)
-		glog.Errorf("%+v", util.ErrV(err, m))
-		return errors.New(m)
-	}
+		md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
+		ok, err := token.ValidateCreds(fmt.Sprintf("%s", u), md5p)
+		if !ok {
+			m := "check token failed"
+			e.simpleResponse(c, http.StatusInternalServerError, m)
+			glog.Errorf("%+v", util.ErrV(err, m))
+			return errors.New(m)
+		}
 
-	if err != nil {
+		if err != nil {
+			e.simpleResponse(c, http.StatusInternalServerError, err.Error())
+			glog.Errorf("check token failed: %+v", util.ErrV(err))
+			return err
+		}
+	*/
+
+	if !pt.Valid {
+		err = fmt.Errorf("invalid token")
 		e.simpleResponse(c, http.StatusInternalServerError, err.Error())
-		glog.Errorf("check token failed: %+v", util.ErrV(err))
+		glog.Errorf("invalid token: %+v", util.ErrV(err))
 		return err
 	}
 
@@ -333,7 +351,7 @@ func (e *ep) HandleHttpExec(c echo.Context) error {
 	glog.Infof("user: %v", u)
 
 	md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
-	ok, err := token.CheckToken(fmt.Sprintf("%s", u), md5p)
+	ok, err := token.ValidateCreds(fmt.Sprintf("%s", u), md5p)
 	if !ok {
 		m := "check token failed"
 		e.simpleResponse(c, http.StatusUnauthorized, m)
