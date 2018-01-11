@@ -123,9 +123,9 @@ func SetupLetsEncryptCert(wait bool) error {
 		"--standalone",
 		"-d", util.Domain(),
 		"--debug",
-		"--quiet",
 		"--agree-tos",
-		"--email", "chew.esmero@mobingi.com")
+		"--email", "chew.esmero@mobingi.com",
+		"-n")
 
 	glog.V(1).Infof("cmd: %v", cmd.Args)
 
