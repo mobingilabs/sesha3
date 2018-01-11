@@ -55,12 +55,14 @@ func (s *Session) Start() (string, error) {
 	ttyurl := make(chan string)
 	wsclose := make(chan string)
 
+	glog.V(1).Infof("request port: %v", s.HttpsPort)
+
 	// port closer function
 	fnClosePort := func() {
 		err := ec2req.ClosePort()
 		if err != nil {
+			s.error(util.ErrV(err, "close port failed"))
 			notify.HookPost(err)
-			s.error(errors.Wrap(err, "close port failed"))
 		}
 	}
 
@@ -71,8 +73,8 @@ func (s *Session) Start() (string, error) {
 		// make sure to open port first
 		err := ec2req.OpenPort()
 		if err != nil {
+			s.error(util.ErrV(err, "open port failed"))
 			notify.HookPost(err)
-			s.error(errors.Wrap(err, "open port failed"))
 		}
 
 		svrtool := cmdline.Dir() + "/tools/" + runtime.GOOS + "/gotty"
@@ -81,12 +83,13 @@ func (s *Session) Start() (string, error) {
 		shell := "grep " + s.User + " /etc/passwd | cut -d: -f7"
 		dshellb, err := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
 		if err != nil {
+			s.error(util.ErrV(err, "ssh shell exec failed"))
 			notify.HookPost(err)
-			s.error(errors.Wrap(err, "ssh shell exec failed"))
 		}
 
-		// Diego request: 2017/01/01:
+		// Diego request: 2018/01/09:
 		// change default timeout to 2hrs
+		// TODO: user should be able to configure timeout in alm.
 		s.info(ssh + " -t " + shell)
 		s.info("shell-out: ", string(dshellb))
 		defaultshell := strings.TrimSpace(string(dshellb))
@@ -115,8 +118,8 @@ func (s *Session) Start() (string, error) {
 		s.info("svrtool args: ", s.Cmd.Args)
 		errpipe, err := s.Cmd.StderrPipe()
 		if err != nil {
+			s.error(util.ErrV(err, "stderr pipe connect failed"))
 			notify.HookPost(err)
-			s.error(errors.Wrap(err, "stderr pipe connect failed"))
 			fnClosePort()
 		}
 
@@ -229,7 +232,7 @@ func (s *Session) GetFullURL() string {
 
 func (s *Session) info(v ...interface{}) {
 	m := fmt.Sprint(v...)
-	glog.Infof("[session:%v] %v", s.Id(), m)
+	glog.V(1).Infof("[session:%v] %v", s.Id(), m)
 }
 
 func (s *Session) error(v ...interface{}) {

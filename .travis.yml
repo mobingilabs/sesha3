@@ -1,71 +1,71 @@
 os:
-  - linux
+- linux
 
 language: go
 
 go:
-  - 1.9.2
+- 1.9.2
 
 script:
-  - go build -v
-  - if [[ "$TRAVIS_BRANCH" == "production" ]]; then
-      echo 'command=/home/ec2-user/sesha3/sesha3 serve --logtostderr' > cmdline;
-    else
-      echo 'command=/home/ec2-user/sesha3/sesha3 serve --logtostderr --rundev' > cmdline;
-    fi
+- go build -v
+- if [[ "$TRAVIS_BRANCH" == "production" ]]; then
+    echo 'command=/home/ec2-user/sesha3/sesha3 serve --v=2 --logtostderr=true' > cmdline;
+  else
+    echo 'command=/home/ec2-user/sesha3/sesha3 serve --v=2 --logtostderr=true --rundev=true' > cmdline;
+  fi
 
 before_deploy:
-  - tar cvzf app.tar.gz sesha3 cmdline appspec.yml scripts/ tools/
-  - mkdir -p dpl_cd_upload
-  - cp app.tar.gz dpl_cd_upload/
+- tar cvzf app.tar.gz sesha3 cmdline appspec.yml scripts/ tools/
+- mkdir -p dpl_cd_upload
+- cp app.tar.gz dpl_cd_upload/
 
 deploy:
-  # development
-  - provider: s3
-    access_key_id: AKIAJCZ3WU4AKS6RPDRQ
-    secret_access_key: &1
-      secure: iLtp/o0lBwHSwpbFXHB7CAmlKzFH5RvO93h7csTlbx2qy+1wDTXyDgbwoZ3igP23S3TZNNVA9gbv4oPZT+7eCK5ofRjZc6j78oZ38tUA+w41oIb2UaSw7/n0IXKQBYOz/5GlYfqweKG9xeNlhYtnsKjLq/cJE/vD35Mz1ffjxL7cymx4shx0apBYZsUWDMMhIyNhdj4xR4r6jjV0b3Ta6Na7K2k3CgtITsoqYxN3jPHPd0oJz28ePkKi0yDlHXaUge6aDzgM7lQf1L2tfFkzKrxuKSz66vyFrIHXNvsfno6Kr2AqqXaoYbykv9osnsRk30VdXT/zQj3UZMEqqnXASTkqcB34PBWJzmJKmcYIqophe3ZVnwW5dPRTRS4mwqQy+oYRj9hy5tjCf8/FLorAXZKHKyc8fElvig/FwQYU9JNqQgt3RVH4XxkDal1vmjoZ6AFUPNbYodPujkqWOSvtI7QmET95tFWxNyv1xJOvi8SDlhWnGKxp3LRTb7TeCQzJHFObl/Lr/FHjwQ4TKE63FhkRXVQKNVyvbWAV+rB5K9BSaA6wq7iEbrHpOF3mg6upQMSbKOe1xWHZAcUJzSuA5Ex9igOy4R3OnTHNlwlyTPDaUL2J8iaXpOnv1VidkRHaeZYHoDkWfuWy5dMAqTQunxCAM4p4XrtfiUKGP5uxuzA=
-    local_dir: dpl_cd_upload
-    skip_cleanup: true
-    on: &2
-      repo: mobingilabs/sesha3
-      branch: master
-    bucket: sesha3
-    upload_dir: latest
-    region: ap-northeast-1
-  - provider: codedeploy
-    access_key_id: AKIAJCZ3WU4AKS6RPDRQ
-    secret_access_key: *1
-    bucket: sesha3
-    key: latest/app.tar.gz
-    bundle_type: tgz
-    application: sesha3
-    deployment_group: sesha3dg
-    region: ap-northeast-1
-    on: *2
-  # production
-  - provider: s3
-    access_key_id: AKIAIKOA4NUGKY5TWT5A
-    secret_access_key: &3
-      secure: lOJgrCDewQPejS7/39e7wPyHGCDntya3DxXuOai6Op9fQQzK9g82++YjKpkqqR4zD++eH/hDoiKUOdEeo+H9Cai2paiihJ5cf4kkjtnYTvIiS9fVHP7TuzLy1o544W7bCtWci3a3ApRJq4dmv56yQwrWhXqhQZBPrlYN2/yyVY0UHB9MDvoMcguYjtxsTrvw1hwSlfC8AG1CyRj4kiquE+oJWgQu2a4H+8ekm8N6dBX2i4twDUtuSBpc/ewOnro9R71jbxz4JeMcyjbOSClhxP2kvdZB+3WtW+91BkkE4xFDBhjzRap0MGnTiPbelVrmWjUrmFvBBJN8119PjPwgcl4k6L4DXwo0Q/jVl2KNfMDsWg6GweL0HJHPInMgOWNgROlJfvXy+ujGfmhUWX0Jbfu//LMtYJV351AcHsCWkh6SEiXedDJAPml25WdTCIzhEUCeep9QMKUE3DgvutCr7HYSSXtSVbqkG6DHb3Ng1eqqjfMfLB1pMVrzYeJQ22J494ow22jmDLilhZV+ebiRyK1AeE9c+KBEfuE6wdyymiTiAu7sbibJhtGpl6wxHjsUzBvNnS3Ql5N6vFX88yia20vQDbTwyvfIGC5urjcE8gN0xCjRW80JpemP+RS2MHEh6qDoVnOlcWLfz+QVGzVBZdpSFg2k9rGqXT4oHQCoGyE=
-    local_dir: dpl_cd_upload
-    skip_cleanup: true
-    on: &4
-      repo: mobingilabs/sesha3
-      branch: production
-    bucket: sesha3-prod
-    upload_dir: latest
-    region: ap-northeast-1
-  - provider: codedeploy
-    access_key_id: AKIAIKOA4NUGKY5TWT5A
-    secret_access_key: *3
-    bucket: sesha3-prod
-    key: latest/app.tar.gz
-    bundle_type: tgz
-    application: sesha3
-    deployment_group: sesha3dg
-    region: ap-northeast-1
-    on: *4
+# development
+- provider: s3
+  access_key_id: AKIAJCZ3WU4AKS6RPDRQ
+  secret_access_key: &1
+    secure: iLtp/o0lBwHSwpbFXHB7CAmlKzFH5RvO93h7csTlbx2qy+1wDTXyDgbwoZ3igP23S3TZNNVA9gbv4oPZT+7eCK5ofRjZc6j78oZ38tUA+w41oIb2UaSw7/n0IXKQBYOz/5GlYfqweKG9xeNlhYtnsKjLq/cJE/vD35Mz1ffjxL7cymx4shx0apBYZsUWDMMhIyNhdj4xR4r6jjV0b3Ta6Na7K2k3CgtITsoqYxN3jPHPd0oJz28ePkKi0yDlHXaUge6aDzgM7lQf1L2tfFkzKrxuKSz66vyFrIHXNvsfno6Kr2AqqXaoYbykv9osnsRk30VdXT/zQj3UZMEqqnXASTkqcB34PBWJzmJKmcYIqophe3ZVnwW5dPRTRS4mwqQy+oYRj9hy5tjCf8/FLorAXZKHKyc8fElvig/FwQYU9JNqQgt3RVH4XxkDal1vmjoZ6AFUPNbYodPujkqWOSvtI7QmET95tFWxNyv1xJOvi8SDlhWnGKxp3LRTb7TeCQzJHFObl/Lr/FHjwQ4TKE63FhkRXVQKNVyvbWAV+rB5K9BSaA6wq7iEbrHpOF3mg6upQMSbKOe1xWHZAcUJzSuA5Ex9igOy4R3OnTHNlwlyTPDaUL2J8iaXpOnv1VidkRHaeZYHoDkWfuWy5dMAqTQunxCAM4p4XrtfiUKGP5uxuzA=
+  local_dir: dpl_cd_upload
+  skip_cleanup: true
+  on: &2
+    repo: mobingilabs/sesha3
+    branch: master
+  bucket: sesha3
+  upload_dir: latest
+  region: ap-northeast-1
+- provider: codedeploy
+  access_key_id: AKIAJCZ3WU4AKS6RPDRQ
+  secret_access_key: *1
+  bucket: sesha3
+  key: latest/app.tar.gz
+  bundle_type: tgz
+  application: sesha3
+  deployment_group: sesha3dg
+  region: ap-northeast-1
+  on: *2
+# production
+- provider: s3
+  access_key_id: AKIAIKOA4NUGKY5TWT5A
+  secret_access_key: &3
+    secure: lOJgrCDewQPejS7/39e7wPyHGCDntya3DxXuOai6Op9fQQzK9g82++YjKpkqqR4zD++eH/hDoiKUOdEeo+H9Cai2paiihJ5cf4kkjtnYTvIiS9fVHP7TuzLy1o544W7bCtWci3a3ApRJq4dmv56yQwrWhXqhQZBPrlYN2/yyVY0UHB9MDvoMcguYjtxsTrvw1hwSlfC8AG1CyRj4kiquE+oJWgQu2a4H+8ekm8N6dBX2i4twDUtuSBpc/ewOnro9R71jbxz4JeMcyjbOSClhxP2kvdZB+3WtW+91BkkE4xFDBhjzRap0MGnTiPbelVrmWjUrmFvBBJN8119PjPwgcl4k6L4DXwo0Q/jVl2KNfMDsWg6GweL0HJHPInMgOWNgROlJfvXy+ujGfmhUWX0Jbfu//LMtYJV351AcHsCWkh6SEiXedDJAPml25WdTCIzhEUCeep9QMKUE3DgvutCr7HYSSXtSVbqkG6DHb3Ng1eqqjfMfLB1pMVrzYeJQ22J494ow22jmDLilhZV+ebiRyK1AeE9c+KBEfuE6wdyymiTiAu7sbibJhtGpl6wxHjsUzBvNnS3Ql5N6vFX88yia20vQDbTwyvfIGC5urjcE8gN0xCjRW80JpemP+RS2MHEh6qDoVnOlcWLfz+QVGzVBZdpSFg2k9rGqXT4oHQCoGyE=
+  local_dir: dpl_cd_upload
+  skip_cleanup: true
+  on: &4
+    repo: mobingilabs/sesha3
+    branch: production
+  bucket: sesha3-prod
+  upload_dir: latest
+  region: ap-northeast-1
+- provider: codedeploy
+  access_key_id: AKIAIKOA4NUGKY5TWT5A
+  secret_access_key: *3
+  bucket: sesha3-prod
+  key: latest/app.tar.gz
+  bundle_type: tgz
+  application: sesha3
+  deployment_group: sesha3dg
+  region: ap-northeast-1
+  on: *4
 
 notifications:
   slack:
