@@ -44,8 +44,9 @@ func (e *ep) simpleResponse(c echo.Context, code int, m string) error {
 }
 
 type credentials struct {
-	Username string `json:"username"`
-	Password string `json:"passwd"`
+	Username  string `json:"username"`
+	Password  string `json:"passwd"`
+	GrantType string `json:"grant_type,omitempty"`
 }
 
 func (e *ep) HandleHttpToken(c echo.Context) error {
