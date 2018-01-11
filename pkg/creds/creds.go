@@ -49,8 +49,10 @@ func (c *Credentials) Validate() (bool, error) {
 	var md5p string
 
 	if c.GrantType == "hashpassword" {
+		glog.V(1).Infof("input password already hashed, use directly")
 		md5p = c.Password
 	} else {
+		glog.V(1).Infof("will compute md5.sum() to password")
 		md5p = fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", c.Password))))
 	}
 

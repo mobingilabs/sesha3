@@ -54,8 +54,8 @@ func (e *ep) HandleHttpToken(c echo.Context) error {
 
 	ctx, err := jwt.NewCtx(constants.DATA_DIR)
 	if err != nil {
-		notify.HookPost(err)
 		e.simpleResponse(c, http.StatusUnauthorized, err.Error())
+		notify.HookPost(err)
 
 		// if this fails, try force restart to redownload token files
 		glog.Exitf("jwt ctx failed: %+v", util.ErrV(err))
