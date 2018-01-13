@@ -47,8 +47,8 @@
     "service/s3/s3manager",
     "service/sts"
   ]
-  revision = "3c754f1d340244540350f0a00b940781bae9c905"
-  version = "v1.12.59"
+  revision = "0cebc639926eb91b0192dae4b28bc808417e764c"
+  version = "v1.12.61"
 
 [[projects]]
   name = "github.com/cenkalti/backoff"
@@ -238,13 +238,13 @@
     "acme/autocert",
     "ssh/terminal"
   ]
-  revision = "b3c9a1d25cfbbbab0ff4780b71c4f54e6e92a0de"
+  revision = "13931e22f9e72ea58bb73048bc752b48c6d4d4ac"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context"]
-  revision = "ab555f366c4508dbe0802550b1b20c46c5c18aa0"
+  revision = "5ccada7d0a7ba9aeb5d3aca8d3501b4c2a509fec"
 
 [[projects]]
   branch = "master"
