@@ -47,8 +47,8 @@
     "service/s3/s3manager",
     "service/sts"
   ]
-  revision = "f62f7b7c5425f2b1a630932617477bdeac6dc371"
-  version = "v1.12.55"
+  revision = "3c754f1d340244540350f0a00b940781bae9c905"
+  version = "v1.12.59"
 
 [[projects]]
   name = "github.com/cenkalti/backoff"
@@ -203,8 +203,8 @@
 [[projects]]
   name = "github.com/satori/go.uuid"
   packages = ["."]
-  revision = "879c5887cd475cd7864858769793b2ceb0d44feb"
-  version = "v1.1.0"
+  revision = "f58768cc1a7a7e77a3bd49e98cdd21419399b6a3"
+  version = "v1.2.0"
 
 [[projects]]
   branch = "master"
@@ -238,13 +238,13 @@
     "acme/autocert",
     "ssh/terminal"
   ]
-  revision = "0fcca4842a8d74bfddc2c96a073bd2a4d2a7a2e8"
+  revision = "b3c9a1d25cfbbbab0ff4780b71c4f54e6e92a0de"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context"]
-  revision = "d866cfc389cec985d6fda2859936a575a55a3ab6"
+  revision = "ab555f366c4508dbe0802550b1b20c46c5c18aa0"
 
 [[projects]]
   branch = "master"
@@ -253,7 +253,7 @@
     "unix",
     "windows"
   ]
-  revision = "28a7276518d399b9634904daad79e18b44d481bc"
+  revision = "810d7000345868fc619eb81f46307107118f4ae1"
 
 [solve-meta]
   analyzer-name = "dep"

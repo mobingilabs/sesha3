@@ -1,7 +1,6 @@
 package api
 
 import (
-	"crypto/md5"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -17,11 +16,12 @@ import (
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/jwt"
 	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/mobingilabs/sesha3/pkg/constants"
+	"github.com/mobingilabs/sesha3/pkg/creds"
 	"github.com/mobingilabs/sesha3/pkg/execute"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/mobingilabs/sesha3/pkg/session"
-	"github.com/mobingilabs/sesha3/pkg/token"
+	"github.com/mobingilabs/sesha3/pkg/util"
 	"github.com/pkg/errors"
 )
 
@@ -42,11 +42,6 @@ func (e *ep) simpleResponse(c echo.Context, code int, m string) error {
 	return c.JSON(code, resp)
 }
 
-type credentials struct {
-	Username string `json:"username"`
-	Password string `json:"passwd"`
-}
-
 func (e *ep) HandleHttpToken(c echo.Context) error {
 	defer e.elapsed(c)
 
@@ -59,45 +54,59 @@ func (e *ep) HandleHttpToken(c echo.Context) error {
 
 	ctx, err := jwt.NewCtx(constants.DATA_DIR)
 	if err != nil {
-		notify.HookPost(err)
 		e.simpleResponse(c, http.StatusUnauthorized, err.Error())
+		notify.HookPost(err)
 
 		// if this fails, try force restart to redownload token files
-		glog.Exitf("jwt ctx failed: %v", err)
+		glog.Exitf("jwt ctx failed: %+v", util.ErrV(err))
 	}
 
-	var creds credentials
+	var credentials creds.Credentials
 
 	body, err := ioutil.ReadAll(c.Request().Body)
 	if err != nil {
-		glog.Errorf("readall body failed: %v", err)
+		glog.Errorf("readall body failed: %+v", util.ErrV(err))
 		return err
 	}
 
 	defer c.Request().Body.Close()
-	glog.Infof("body (raw): %v", string(body))
-	err = json.Unmarshal(body, &creds)
+	glog.V(2).Infof("body (raw): %v", string(body))
+	err = json.Unmarshal(body, &credentials)
 	if err != nil {
-		glog.Errorf("unmarshal failed: %v", err)
+		glog.Errorf("unmarshal failed: %+v", util.ErrV(err))
 		return err
 	}
 
-	glog.Infof("body: %+v", creds)
+	glog.V(2).Infof("body: %+v", credentials)
+
+	ok, err := credentials.Validate()
+	if !ok {
+		m := "credentials validation failed"
+		e.simpleResponse(c, http.StatusInternalServerError, m)
+		glog.Errorf("%+v", util.ErrV(err, m))
+		return errors.New(m)
+	}
+
+	if err != nil {
+		e.simpleResponse(c, http.StatusInternalServerError, err.Error())
+		glog.Errorf("credentials validation failed: %+v", util.ErrV(err))
+		return err
+	}
 
 	m := make(map[string]interface{})
-	m["username"] = creds.Username
-	m["password"] = creds.Password
+	m["username"] = credentials.Username
+	m["password"] = credentials.Password
 	tokenobj, stoken, err := ctx.GenerateToken(m)
 	if err != nil {
-		glog.Errorf("generate token failed: %v", err)
+		glog.Errorf("generate token failed: %+v", util.ErrV(err))
 		return err
 	}
 
 	end := time.Now()
 	metrics.MetricsTokenResponseTime.Set(end.Sub(start).String())
 
-	glog.Infof("token (obj): %v", tokenobj)
-	glog.Infof("token: %v", stoken)
+	glog.V(2).Infof("token (obj): %v", tokenobj)
+	glog.V(1).Infof("token: %v", stoken)
 
 	reply := make(map[string]string)
 	reply["key"] = stoken
@@ -118,65 +127,75 @@ func (e *ep) HandleHttpTtyUrl(c echo.Context) error {
 	var m map[string]interface{}
 
 	auth := strings.Split(c.Request().Header.Get("Authorization"), " ")
-	glog.Infof("auth header: %v", auth)
+	glog.V(1).Infof("auth header: %v", auth)
+
 	if len(auth) != 2 {
 		c.NoContent(http.StatusUnauthorized)
-		err := errors.New("bad authorization")
-		glog.Errorf("auth header failed: %v", err)
+		err := fmt.Errorf("bad authorization")
+		glog.Errorf("auth header failed: %+v", util.ErrV(err))
 		return err
 	}
 
 	ctx, err := jwt.NewCtx(constants.DATA_DIR)
 	if err != nil {
-		notify.HookPost(err)
 		e.simpleResponse(c, http.StatusUnauthorized, err.Error())
+		notify.HookPost(err)
 
 		// if this fails, try force restart to redownload token files
-		glog.Exitf("jwt ctx failed: %v", err)
+		glog.Exitf("jwt ctx failed: %+v", util.ErrV(err))
 	}
 
 	btoken := auth[1]
 	pt, err := ctx.ParseToken(btoken)
 	if err != nil {
 		e.simpleResponse(c, http.StatusInternalServerError, err.Error())
-		glog.Errorf("parse token failed: %v", err)
+		glog.Errorf("parse token failed: %+v", util.ErrV(err))
 		return err
 	}
 
-	nc := pt.Claims.(*jwt.WrapperClaims)
-	u, _ := nc.Data["username"]
-	p, _ := nc.Data["password"]
-	glog.Infof("user: %v", u)
+	/*
+		nc := pt.Claims.(*jwt.WrapperClaims)
+		u, _ := nc.Data["username"]
+		p, _ := nc.Data["password"]
+		glog.V(2).Infof("user: %v", u)
 
-	md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
-	ok, err := token.CheckToken(fmt.Sprintf("%s", u), md5p)
-	if !ok {
-		m := "check token failed"
-		e.simpleResponse(c, http.StatusInternalServerError, m)
-		glog.Errorf(m)
-		return errors.New(m)
-	}
+		md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
+		ok, err := token.ValidateCreds(fmt.Sprintf("%s", u), md5p)
+		if !ok {
+			m := "check token failed"
+			e.simpleResponse(c, http.StatusInternalServerError, m)
+			glog.Errorf("%+v", util.ErrV(err, m))
+			return errors.New(m)
+		}
 
-	if err != nil {
+		if err != nil {
+			e.simpleResponse(c, http.StatusInternalServerError, err.Error())
+			glog.Errorf("check token failed: %+v", util.ErrV(err))
+			return err
+		}
+	*/
+
+	if !pt.Valid {
+		err = fmt.Errorf("invalid token")
 		e.simpleResponse(c, http.StatusInternalServerError, err.Error())
-		glog.Errorf("check token failed: %v", err)
+		glog.Errorf("invalid token: %+v", util.ErrV(err))
 		return err
 	}
 
-	glog.Infof("token: %v", btoken)
+	glog.V(2).Infof("token: %v", btoken)
 
 	body, err := ioutil.ReadAll(c.Request().Body)
 	if err != nil {
-		glog.Errorf("readall body failed: %v", err)
+		glog.Errorf("readall body failed: %+v", util.ErrV(err))
 		return err
 	}
 
 	defer c.Request().Body.Close()
-	glog.Infof("body: %v", string(body))
+	glog.V(2).Infof("body: %v", string(body))
 
 	err = json.Unmarshal(body, &m)
 	if err != nil {
-		glog.Errorf("unmarshal failed: %v", err)
+		glog.Errorf("unmarshal failed: %+v", util.ErrV(err))
 		return err
 	}
 
@@ -194,21 +213,21 @@ func (e *ep) HandleHttpTtyUrl(c echo.Context) error {
 	// create the pem file only if not existent
 	if !private.Exists(pemfile) {
 		if !private.Exists(pemdir) {
-			glog.Infof("create dir: %v", pemdir)
+			glog.V(2).Infof("create dir: %v", pemdir)
 			err = os.MkdirAll(pemdir, 0700)
 			if err != nil {
-				glog.Errorf("mkdirall failed: %v", err)
+				glog.Errorf("mkdirall failed: %+v", util.ErrV(err))
 				notify.HookPost(err)
 				return err
 			}
 		}
 
 		pemurl := m["pem"].(string)
-		glog.Infof("raw url: %v", pemurl)
+		glog.V(2).Infof("raw url: %v", pemurl)
 
 		resp, err := http.Get(fmt.Sprintf("%v", pemurl))
 		if err != nil {
-			glog.Errorf("http get failed: %v", err)
+			glog.Errorf("http get failed: %+v", util.ErrV(err))
 			notify.HookPost(err)
 			return err
 		}
@@ -216,25 +235,27 @@ func (e *ep) HandleHttpTtyUrl(c echo.Context) error {
 		defer resp.Body.Close()
 		body, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
-			glog.Errorf("readall failed: %v", err)
+			glog.Errorf("readall failed: %+v", util.ErrV(err))
 			notify.HookPost(err)
 			return err
 		}
 
 		err = ioutil.WriteFile(pemfile, body, 0600)
 		if err != nil {
-			glog.Errorf("write file failed: %v", err)
+			glog.Errorf("write file failed: %+v", util.ErrV(err))
 			notify.HookPost(err)
 			return err
 		}
 	} else {
-		glog.Infof("reuse: %v", pemfile)
+		glog.V(1).Infof("reuse: %v", pemfile)
 	}
+
+	glog.V(2).Infof("session: %+v", sess)
 
 	// start the ssh session
 	randomurl, err := sess.Start()
 	if err != nil {
-		glog.Errorf("session start failed: %v", err)
+		glog.Errorf("session start failed: %+v", util.ErrV(err))
 		notify.HookPost(err)
 		return err
 	}
@@ -281,74 +302,61 @@ func (e *ep) HandleHttpExec(c echo.Context) error {
 
 	body, err := ioutil.ReadAll(c.Request().Body)
 	if err != nil {
-		glog.Errorf("readall body failed: %v", err)
+		glog.Errorf("readall body failed: %+v", util.ErrV(err))
 		return err
 	}
 
 	defer c.Request().Body.Close()
-	glog.Infof("body (raw): %v", string(body))
+	glog.V(2).Infof("body (raw): %v", string(body))
 
 	err = json.Unmarshal(body, &in)
 	if err != nil {
-		glog.Errorf("unmarshal failed: %v", err)
+		glog.Errorf("unmarshal failed: %+v", util.ErrV(err))
 		return err
 	}
 
-	glog.Infof("body: %+v", in)
+	glog.V(2).Infof("body: %+v", in)
 
 	// token check
 	auth := strings.Split(c.Request().Header.Get("Authorization"), " ")
 	if len(auth) != 2 {
 		c.NoContent(http.StatusUnauthorized)
-		err := errors.New("bad authorization")
-		glog.Errorf("auth header failed: %v", err)
+		err = fmt.Errorf("bad authorization")
+		glog.Errorf("auth header failed: %+v", util.ErrV(err))
 		return err
 	}
 
 	ctx, err := jwt.NewCtx(constants.DATA_DIR)
 	if err != nil {
-		notify.HookPost(err)
 		e.simpleResponse(c, http.StatusUnauthorized, err.Error())
+		notify.HookPost(err)
 
 		// if this fails, try force restart to redownload token files
-		glog.Exitf("jwt ctx failed: %v", err)
+		glog.Exitf("jwt ctx failed: %+v", util.ErrV(err))
 	}
 
 	btoken := auth[1]
 	pt, err := ctx.ParseToken(btoken)
 	if err != nil {
 		e.simpleResponse(c, http.StatusInternalServerError, err.Error())
-		glog.Errorf("parse token failed: %v", err)
+		glog.Errorf("parse token failed: %+v", util.ErrV(err))
 		return err
 	}
 
-	nc := pt.Claims.(*jwt.WrapperClaims)
-	u, _ := nc.Data["username"]
-	p, _ := nc.Data["password"]
-	glog.Infof("user: %v", u)
-
-	md5p := fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", p))))
-	ok, err := token.CheckToken(fmt.Sprintf("%s", u), md5p)
-	if !ok {
-		m := "check token failed"
-		e.simpleResponse(c, http.StatusUnauthorized, m)
-		glog.Errorf(m)
-		return errors.New(m)
-	}
-
-	if err != nil {
-		e.simpleResponse(c, http.StatusUnauthorized, err.Error())
-		glog.Errorf("check token failed: %v", err)
+	if !pt.Valid {
+		err = fmt.Errorf("invalid token")
+		e.simpleResponse(c, http.StatusInternalServerError, err.Error())
+		glog.Errorf("invalid token: %+v", util.ErrV(err))
 		return err
 	}
 
-	glog.Infof("token: %v", btoken)
-	glog.Infof("pemurl: %v", in.Target.PemUrl)
+	glog.V(1).Infof("token: %v", btoken)
+	glog.V(1).Infof("pemurl: %v", in.Target.PemUrl)
 
 	// pemfile download for ssh
 	resp, err := http.Get(fmt.Sprintf("%v", in.Target.PemUrl))
 	if err != nil {
-		glog.Errorf("http get failed: %v", err)
+		glog.Errorf("http get failed: %+v", util.ErrV(err))
 		notify.HookPost(err)
 		return err
 	}
@@ -356,58 +364,58 @@ func (e *ep) HandleHttpExec(c echo.Context) error {
 	defer resp.Body.Close()
 	body, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
-		glog.Errorf("readall failed: %v", err)
+		glog.Errorf("readall failed: %+v", util.ErrV(err))
 		notify.HookPost(err)
 		return err
 	}
 
 	workdir := filepath.Join(constants.DATA_DIR, in.Target.StackId+"_"+in.Target.Flag)
-	glog.Infof("workdir: %v", workdir)
+	glog.V(2).Infof("workdir: %v", workdir)
 
 	if !private.Exists(workdir) {
 		err = os.MkdirAll(workdir, 0700)
 		if err != nil {
-			glog.Errorf("mkdirall failed: %v", err)
+			glog.Errorf("mkdirall failed: %+v", util.ErrV(err))
 			notify.HookPost(err)
 			return err
 		}
 
-		glog.Infof("workdir created: %v", workdir)
+		glog.V(2).Infof("workdir created: %v", workdir)
 	}
 
 	pemfile := filepath.Join(workdir, in.Target.Ip+".pem")
-	glog.Infof("pemfile: %v", pemfile)
+	glog.V(2).Infof("pemfile: %v", pemfile)
 
 	if !private.Exists(pemfile) {
 		err = ioutil.WriteFile(pemfile, body, 0600)
 		if err != nil {
-			glog.Errorf("write file failed: %v", err)
+			glog.Errorf("write file failed: %+v", util.ErrV(err))
 			notify.HookPost(err)
 			return err
 		}
 
-		glog.Infof("pemfile created: %v", pemfile)
+		glog.V(2).Infof("pemfile created: %v", pemfile)
 	}
 
 	// write script to temporary file
 	script := filepath.Join(workdir, "_runscript")
 	err = ioutil.WriteFile(script, in.Script, 0755)
 	if err != nil {
-		glog.Errorf("write file failed: %v", err)
+		glog.Errorf("write file failed: %+v", util.ErrV(err))
 		notify.HookPost(err)
 		return err
 	}
 
 	err = os.Chmod(script, 0755)
-	glog.Infof("script: %v", script)
+	glog.V(2).Infof("script: %v", script)
 
 	if err != nil {
-		glog.Errorf("chmod failed: %v", err)
+		glog.Errorf("chmod failed: %+v", util.ErrV(err))
 		notify.HookPost(err)
 		return err
 	}
 
-	glog.Infof("script created: %v", script)
+	glog.V(2).Infof("script created: %v", script)
 
 	// actual script execution
 	out := execute.SshCmd(execute.SshCmdInput{
@@ -424,74 +432,3 @@ func (e *ep) HandleHttpExec(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, sout)
 }
-
-/*
-type ApiController struct {
-	beego.Controller
-	noAuth    bool
-	sessionId string
-}
-
-func (c *ApiController) Prepare() {
-	if c.sessionId == "" {
-		c.sessionId = fmt.Sprintf("{%s}", uuid.NewV4())
-	}
-
-	// do auth by default
-	if !c.noAuth {
-		c.info("base auth:")
-	}
-
-	c.info("remote:", c.Ctx.Request.RemoteAddr)
-	c.info("urlpath:", c.Ctx.Request.URL.Path)
-}
-
-// info is our local info logger with session id as prefix.
-func (c *ApiController) info(v ...interface{}) {
-	m := fmt.Sprintln(v...)
-	log.Print(fmt.Sprintf("s-%s:info: %s", c.sessionId, m))
-}
-
-// info is our local error logger with session id as prefix.
-func (c *ApiController) err(v ...interface{}) {
-	m := fmt.Sprintln(v...)
-	log.Print(fmt.Sprintf("s-%s:error: %s", c.sessionId, m))
-}
-
-func (c *ApiController) getClientIp() string {
-	s := strings.Split(c.Ctx.Request.RemoteAddr, ":")
-	if len(s) == 0 {
-		return "?"
-	}
-
-	return s[0]
-}
-
-func (c *ApiController) DispatchScratch() {
-	type x struct {
-		Name  string `json:"name"`
-		Value string `json:"value"`
-	}
-
-	c.info("hello info")
-	c.err("hello error")
-	c.Data["json"] = x{Name: "foo", Value: "bar"}
-	c.ServeJSON()
-}
-
-func (c *ApiController) DispatchRoot() {
-	c.Ctx.ResponseWriter.Write([]byte("Copyright (c) Mobingi. All rights reserved."))
-}
-
-func (c *ApiController) DispatchToken() {
-	handleHttpToken(c)
-}
-
-func (c *ApiController) DispatchTtyUrl() {
-	handleHttpTtyUrl(c)
-}
-
-func (c *ApiController) DispatchExec() {
-	handleHttpExec(c)
-}
-*/

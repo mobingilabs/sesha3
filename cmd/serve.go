@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"log/syslog"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -28,14 +27,15 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var logger *syslog.Writer
-
 func downloadTokenFiles() error {
 	fnames := []string{"token.pem", "token.pem.pub"}
 	bucket := "sesha3-prod"
 	if params.IsDev {
 		bucket = "sesha3"
 	}
+
+	glog.V(2).Infof("fnames: %v", fnames)
+	glog.V(2).Infof("bucket: %v", bucket)
 
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigDisable,
@@ -49,7 +49,7 @@ func downloadTokenFiles() error {
 	if !private.Exists(constants.DATA_DIR) {
 		err := os.MkdirAll(constants.DATA_DIR, 0700)
 		if err != nil {
-			glog.Errorf("mkdirall failed: %v", err)
+			glog.Errorf("mkdirall failed: %+v", util.ErrV(err))
 			return err
 		}
 	}
@@ -59,9 +59,11 @@ func downloadTokenFiles() error {
 		fl := filepath.Join(constants.DATA_DIR, i)
 		f, err := os.Create(fl)
 		if err != nil {
-			glog.Errorf("create file failed: %v", err)
+			glog.Errorf("create file failed: %+v", util.ErrV(err))
 			return err
 		}
+
+		glog.V(2).Infof("file created: %v", fl)
 
 		// write the contents of S3 Object to the file
 		n, err := downloader.Download(f, &s3.GetObjectInput{
@@ -70,7 +72,7 @@ func downloadTokenFiles() error {
 		})
 
 		if err != nil {
-			glog.Errorf("s3 download failed: %v", err)
+			glog.Errorf("s3 download failed: %+v", util.ErrV(err))
 			return err
 		}
 
@@ -86,17 +88,19 @@ func ServeCmd() *cobra.Command {
 		Short: "run as server",
 		Long:  `Run as server.`,
 		Run: func(cmd *cobra.Command, args []string) {
+			glog.V(1).Infof("rundev: %v", params.IsDev)
+
 			err := downloadTokenFiles()
 			if err != nil {
-				notify.HookPost(errors.Wrap(err, "download token files failed, fatal"))
-				glog.Exitf("download token files failed: %v", err)
+				notify.HookPost(errors.Wrap(err, "download token files failed"))
+				glog.Exitf("download token files failed: %+v", util.ErrV(err))
 			}
 
 			metrics.MetricsType.MetricsInit()
 			eps, _ := cmd.Flags().GetStringArray("notify-endpoints")
 			err = notify.Notifier.Init(eps)
 			if err != nil {
-				glog.Errorf("notifier init failed: %v", err)
+				glog.Errorf("notifier init failed: %+v", util.ErrV(err))
 			}
 
 			glog.Infof("--- server start ---")
@@ -107,8 +111,8 @@ func ServeCmd() *cobra.Command {
 			// try setting up LetsEncrypt certificates locally
 			err = cert.SetupLetsEncryptCert(true)
 			if err != nil {
-				notify.HookPost(err)
-				glog.Exitf("setup letsencrypt failed: %v", err)
+				notify.HookPost(errors.Wrap(err, "setup letsencrypt failed"))
+				glog.Exitf("setup letsencrypt failed: %+v", util.ErrV(err))
 			} else {
 				certfolder := filepath.Join("/etc/letsencrypt/live", util.Domain())
 				glog.Infof("certificate folder: %v", certfolder)
@@ -133,14 +137,14 @@ func ServeCmd() *cobra.Command {
 					// request handlers, right before/after replying to caller.
 					c.Set("fnelapsed", func(ctx echo.Context) {
 						start := ctx.Get("starttime").(time.Time)
-						glog.Infof("<-- %v, %v %v, delta: %v",
+						glog.V(1).Infof("<-- %v, %v %v, delta: %v",
 							ctx.Get("contextid"),
 							c.Request().URL.String(),
 							c.Request().Method,
 							time.Now().Sub(start))
 					})
 
-					glog.Infof("--> %v, %v %v",
+					glog.V(1).Infof("--> %v, %v %v",
 						cid,
 						c.Request().URL.String(),
 						c.Request().Method)
@@ -154,8 +158,8 @@ func ServeCmd() *cobra.Command {
 			// print request information
 			e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 				return func(c echo.Context) error {
-					glog.Infof("remoteaddr: %v", c.Request().RemoteAddr)
-					glog.Infof("url rawquery: %v", c.Request().URL.RawQuery)
+					glog.V(1).Infof("remoteaddr: %v", c.Request().RemoteAddr)
+					glog.V(1).Infof("url rawquery: %v", c.Request().URL.RawQuery)
 					return next(c)
 				}
 			})

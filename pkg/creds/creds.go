@@ -1,6 +1,9 @@
-package token
+package creds
 
 import (
+	"crypto/md5"
+	"fmt"
+
 	"github.com/aws/aws-sdk-go/aws"
 	as "github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
@@ -23,7 +26,16 @@ type root struct {
 	Status   string `json:"status"`
 }
 
-func ValidateCreds(uname string, pwdmd5 string) (bool, error) {
+type Credentials struct {
+	Username string `json:"username"`
+	Password string `json:"passwd"`
+
+	// GrantType is the type of password this object has.
+	// Valid value(s): 'hashpassword'
+	GrantType string `json:"grant_type,omitempty"`
+}
+
+func (c *Credentials) Validate() (bool, error) {
 	sess := as.Must(as.NewSessionWithOptions(as.Options{
 		SharedConfigState: as.SharedConfigDisable,
 	}))
@@ -34,19 +46,30 @@ func ValidateCreds(uname string, pwdmd5 string) (bool, error) {
 
 	var results []event
 	var ret bool
+	var md5p string
+
+	if c.GrantType == "hashpassword" {
+		glog.V(1).Infof("input password already hashed, use directly")
+		md5p = c.Password
+	} else {
+		glog.V(1).Infof("will compute md5.sum() to password")
+		md5p = fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", c.Password))))
+	}
+
+	glog.V(2).Infof("hashed passwd: %v", md5p)
 
 	// look in subusers first
 	table := db.Table("MC_IDENTITY")
-	err := table.Get("username", uname).All(&results)
+	err := table.Get("username", c.Username).All(&results)
 	for _, data := range results {
-		if pwdmd5 == data.Pass && data.Status != "deleted" {
-			glog.Infof("valid subuser: %v", uname)
+		if md5p == data.Pass && data.Status != "deleted" {
+			glog.V(1).Infof("valid subuser: %v", c.Username)
 			return true, nil
 		}
 	}
 
 	if err != nil {
-		glog.Errorf("error in table get: %v", err)
+		glog.Errorf("error in table get: %+v", util.ErrV(err))
 	}
 
 	// try looking at the root users table
@@ -56,7 +79,7 @@ func ValidateCreds(uname string, pwdmd5 string) (bool, error) {
 		KeyConditionExpression: aws.String("email = :e"),
 		ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
 			":e": {
-				S: aws.String(uname),
+				S: aws.String(c.Username),
 			},
 		},
 	}
@@ -67,21 +90,21 @@ func ValidateCreds(uname string, pwdmd5 string) (bool, error) {
 
 	resp, err := dbsvc.Query(queryInput)
 	if err != nil {
-		glog.Errorf("query failed: %v", err)
+		glog.Errorf("query failed: %+v", util.ErrV(err))
 	} else {
 		ru := []root{}
 		err = dynamodbattribute.UnmarshalListOfMaps(resp.Items, &ru)
 		if err != nil {
-			glog.Errorf("dynamo obj unmarshal failed: %v", err)
+			glog.Errorf("dynamo obj unmarshal failed: %+v", util.ErrV(err))
 		}
 
-		glog.Infof("raw: %v", ru)
+		glog.V(2).Infof("raw: %v", ru)
 
 		// should be a valid root user
 		for _, u := range ru {
-			if u.Email == uname && u.Password == pwdmd5 {
+			if u.Email == c.Username && u.Password == md5p {
 				if u.Status == "" || u.Status == "trial" {
-					glog.Infof("valid root user: %v", uname)
+					glog.V(1).Infof("valid root user: %v", c.Username)
 					ret = true
 					break
 				}

@@ -14,17 +14,16 @@ import (
 	"github.com/mobingilabs/sesha3/pkg/notify"
 	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/mobingilabs/sesha3/pkg/util"
-	"github.com/pkg/errors"
 )
 
 func validCname(domain, target string) bool {
-	glog.Infof("check if %v points to %v...", domain, target)
+	glog.V(1).Infof("check if %v points to %v...", domain, target)
 	out, err := exec.Command("dig", domain).CombinedOutput()
 	if err != nil {
 		return false
 	}
 
-	glog.Infof("dig:out: %v", string(out))
+	glog.V(2).Infof("dig:out: %v", string(out))
 	return strings.Contains(string(out), target)
 }
 
@@ -35,7 +34,7 @@ func AddLocalUrlToRoute53(wait bool) (string, error) {
 
 	// check once first, in case it's already done
 	if validCname(domain, dns) {
-		glog.Infof("already cnamed: %v, %v", domain, dns)
+		glog.V(1).Infof("already cnamed: %v, %v", domain, dns)
 		return domain, nil
 	}
 
@@ -85,20 +84,22 @@ func AddLocalUrlToRoute53(wait bool) (string, error) {
 
 	resp, err := svc.ChangeResourceRecordSets(r53p)
 	if err != nil {
-		glog.Errorf("change recordset failed: %v", err)
+		glog.Errorf("change recordset failed: %+v", util.ErrV(err))
 		return domain, err
 	}
 
 	m := "route53 (add/update): " + domain + " [cname] " + dns
 	notify.HookPost(m)
-	glog.Info(m)
+	glog.V(1).Info(m)
 
 	if wait {
 		// one day? why not?
 		for i := 0; i < 720; i++ {
 			if validCname(domain, dns) {
+				glog.V(2).Infof("cname valid")
 				break
 			} else {
+				glog.V(2).Infof("attempt # %v", i)
 				time.Sleep(time.Second * 5)
 			}
 		}
@@ -113,7 +114,7 @@ func AddLocalUrlToRoute53(wait bool) (string, error) {
 func SetupLetsEncryptCert(wait bool) error {
 	_, err := AddLocalUrlToRoute53(wait)
 	if err != nil {
-		return errors.Wrap(err, "route53 add failed")
+		return util.ErrV(err, "route53 add failed")
 	}
 
 	cmd := exec.Command(
@@ -122,16 +123,17 @@ func SetupLetsEncryptCert(wait bool) error {
 		"--standalone",
 		"-d", util.Domain(),
 		"--debug",
-		"--quiet",
 		"--agree-tos",
-		"--email", "chew.esmero@mobingi.com")
+		"--email", "chew.esmero@mobingi.com",
+		"-n")
 
-	glog.Infof("cmd: %v", cmd.Args)
+	glog.V(1).Infof("cmd: %v", cmd.Args)
 
-	_, err = cmd.CombinedOutput()
+	out, err := cmd.CombinedOutput()
 	if err != nil {
-		return errors.Wrap(err, "certbot failed")
+		return util.ErrV(err, "certbot failed")
 	}
 
+	glog.V(2).Infof("certbot out: %v", string(out))
 	return nil
 }

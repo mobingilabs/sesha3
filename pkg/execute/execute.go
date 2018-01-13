@@ -6,6 +6,7 @@ import (
 
 	"github.com/golang/glog"
 	"github.com/mobingilabs/mobingi-sdk-go/mobingi/sesha3"
+	"github.com/mobingilabs/sesha3/pkg/util"
 )
 
 type SshCmdInput struct {
@@ -26,12 +27,12 @@ func SshCmd(in SshCmdInput) sesha3.ExecScriptInstanceResponse {
 		in.VmUser+"@"+in.Ip+":/tmp/",
 	)
 
-	glog.Info("run-scp: %v", cmdscp.Args)
+	glog.V(2).Info("run-scp: %v", cmdscp.Args)
 
 	scpb, err := cmdscp.CombinedOutput()
 	if err != nil {
 		// TODO: should we return err here?
-		glog.Errorf("scp failed: %v", err)
+		glog.Errorf("scp failed: %+v", util.ErrV(err))
 		out.CmdOut = scpb
 		out.Err = err
 	} else {
@@ -44,12 +45,14 @@ func SshCmd(in SshCmdInput) sesha3.ExecScriptInstanceResponse {
 			"/tmp/"+filepath.Base(in.Script),
 		)
 
-		glog.Infof("run-ssh: %v", cmdscript.Args)
+		glog.V(2).Infof("run-ssh: %v", cmdscript.Args)
 
 		scriptout, err := cmdscript.CombinedOutput()
 		if err != nil {
-			glog.Errorf("ssh exec failed: %v", err)
+			glog.Errorf("ssh exec failed: %+v", util.ErrV(err))
 		}
+
+		glog.V(2).Infof("run-ssh out: %v", string(scriptout))
 
 		out.CmdOut = scriptout
 		out.Err = err
