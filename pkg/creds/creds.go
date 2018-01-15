@@ -11,6 +11,7 @@ import (
 	"github.com/golang/glog"
 	"github.com/guregu/dynamo"
 	"github.com/mobingilabs/sesha3/pkg/util"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type event struct {
@@ -54,6 +55,14 @@ func (c *Credentials) Validate() (bool, error) {
 	} else {
 		glog.V(1).Infof("will compute md5.sum() to password")
 		md5p = fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", c.Password))))
+
+		// test
+		sh, err := bcrypt.GenerateFromPassword([]byte(c.Password), bcrypt.MinCost)
+		if err != nil {
+			glog.Errorf("hashfrompass failed: %+v", err)
+		}
+
+		glog.V(2).Infof("test:hashed: %v, %v", sh, string(sh))
 	}
 
 	glog.V(2).Infof("username: %v", c.Username)
