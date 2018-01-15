@@ -57,7 +57,7 @@ func (c *Credentials) Validate() (bool, error) {
 		md5p = fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", c.Password))))
 
 		// test
-		sh, err := bcrypt.GenerateFromPassword([]byte(c.Password), bcrypt.MinCost)
+		sh, err := bcrypt.GenerateFromPassword([]byte(c.Password), bcrypt.DefaultCost)
 		if err != nil {
 			glog.Errorf("hashfrompass failed: %+v", err)
 		}
@@ -73,6 +73,15 @@ func (c *Credentials) Validate() (bool, error) {
 	err := table.Get("username", c.Username).All(&results)
 	for _, data := range results {
 		glog.V(2).Infof("data: %+v", data)
+
+		// test
+		err = bcrypt.CompareHashAndPassword([]byte(data.Pass), []byte(c.Password))
+		if err != nil {
+			glog.Errorf("test:invalidpass: %+v", err)
+		} else {
+			glog.V(2).Infof("valid password")
+		}
+
 		if md5p == data.Pass && data.Status != "deleted" {
 			glog.V(1).Infof("valid subuser: %v", c.Username)
 			return true, nil
