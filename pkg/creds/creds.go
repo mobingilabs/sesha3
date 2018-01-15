@@ -1,9 +1,6 @@
 package creds
 
 import (
-	"crypto/md5"
-	"fmt"
-
 	"github.com/aws/aws-sdk-go/aws"
 	as "github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
@@ -47,44 +44,24 @@ func (c *Credentials) Validate() (bool, error) {
 
 	var results []event
 	var ret bool
-	var md5p string
-
-	if c.GrantType == "hashpassword" {
-		glog.V(1).Infof("input password already hashed, use directly")
-		md5p = c.Password
-	} else {
-		glog.V(1).Infof("will compute md5.sum() to password")
-		md5p = fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%s", c.Password))))
-
-		// test
-		sh, err := bcrypt.GenerateFromPassword([]byte(c.Password), bcrypt.DefaultCost)
-		if err != nil {
-			glog.Errorf("hashfrompass failed: %+v", err)
-		}
-
-		glog.V(2).Infof("test:hashed: %v, %v", sh, string(sh))
-	}
-
-	glog.V(2).Infof("username: %v", c.Username)
-	glog.V(2).Infof("hashed passwd: %v", md5p)
 
 	// look in subusers first
 	table := db.Table("MC_IDENTITY")
 	err := table.Get("username", c.Username).All(&results)
 	for _, data := range results {
 		glog.V(2).Infof("data: %+v", data)
-
-		// test
-		err = bcrypt.CompareHashAndPassword([]byte(data.Pass), []byte(c.Password))
-		if err != nil {
-			glog.Errorf("test:invalidpass: %+v", err)
+		if c.GrantType == "hashpassword" {
+			// direct text compare here
+			if data.Pass == c.Password && data.Status != "deleted" {
+				glog.V(1).Infof("(direct text compare) valid subuser: %v", c.Username)
+				return true, nil
+			}
 		} else {
-			glog.V(2).Infof("valid password")
-		}
-
-		if md5p == data.Pass && data.Status != "deleted" {
-			glog.V(1).Infof("valid subuser: %v", c.Username)
-			return true, nil
+			err = bcrypt.CompareHashAndPassword([]byte(data.Pass), []byte(c.Password))
+			if err == nil {
+				glog.V(1).Infof("(blowfish) valid subuser: %v", c.Username)
+				return true, nil
+			}
 		}
 	}
 
@@ -118,15 +95,26 @@ func (c *Credentials) Validate() (bool, error) {
 			glog.Errorf("dynamo obj unmarshal failed: %+v", util.ErrV(err))
 		}
 
-		glog.V(2).Infof("raw: %v", ru)
+		glog.V(2).Infof("raw root user: %+v", ru)
 
 		// should be a valid root user
 		for _, u := range ru {
-			if u.Email == c.Username && u.Password == md5p {
+			glog.V(2).Infof("raw root user (iter): %+v", u)
+			if c.GrantType == "hashpassword" {
+				if u.Email == c.Username && u.Password == c.Password {
+					if u.Status == "" || u.Status == "trial" {
+						glog.V(1).Infof("valid root user: %v", c.Username)
+						ret = true
+						break
+					}
+				}
+			} else {
 				if u.Status == "" || u.Status == "trial" {
-					glog.V(1).Infof("valid root user: %v", c.Username)
-					ret = true
-					break
+					err = bcrypt.CompareHashAndPassword([]byte(u.Password), []byte(c.Password))
+					if err == nil {
+						glog.V(1).Infof("(blowfish) valid root user: %v", c.Username)
+						return true, nil
+					}
 				}
 			}
 		}
