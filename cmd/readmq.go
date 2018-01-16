@@ -1,13 +1,22 @@
 package cmd
 
 import (
-	"os"
+	"encoding/json"
+	"io/ioutil"
 	"strconv"
 
 	"github.com/flowerinthenight/rmq"
 	"github.com/golang/glog"
+	"github.com/mobingilabs/mobingi-sdk-go/pkg/private"
 	"github.com/spf13/cobra"
 )
+
+type rmqConfig struct {
+	Host     string `json:"host"`
+	Port     string `json:"port"`
+	Username string `json:"user"`
+	Password string `json:"pass"`
+}
 
 // SetupHttpsCmd attempts to install LetsEncrypt certificates locally using the instance id
 // and registers it to Route53. This function assumes that certbot is already installed.
@@ -17,16 +26,31 @@ func SetupReadMqCmd() *cobra.Command {
 		Short: "read mochi message queue for requests",
 		Long:  `Read mochi message queue for requests.`,
 		Run: func(cmd *cobra.Command, args []string) {
-			port, err := strconv.Atoi(os.Getenv("RABBITMQ_PORT"))
+			if !private.Exists("rmqconf.json") {
+				glog.Fatalf("cannot find rmq.conf")
+			}
+
+			b, err := ioutil.ReadFile("rmq.conf")
 			if err != nil {
-				glog.Fatalf("port env failed: %v", err)
+				glog.Fatalf("read rmq.conf failed: %v", err)
+			}
+
+			var conf rmqConfig
+			err = json.Unmarshal(b, &conf)
+			if err != nil {
+				glog.Fatalf("unmarshal rmq.conf failed: %v", err)
+			}
+
+			port, err := strconv.Atoi(conf.Port)
+			if err != nil {
+				glog.Fatalf("port failed: %v", err)
 			}
 
 			con := rmq.New(&rmq.Config{
-				Host:     os.Getenv("RABBITMQ_HOST"),
+				Host:     conf.Host,
 				Port:     port,
-				Username: os.Getenv("RABBITMQ_USER"),
-				Password: os.Getenv("RABBITMQ_PASS"),
+				Username: conf.Username,
+				Password: conf.Password,
 				Vhost:    "/",
 			})
 
@@ -58,10 +82,11 @@ func SetupReadMqCmd() *cobra.Command {
 				},
 			})
 
-			glog.Infof("binding added (id = %v)", bindId)
 			if err != nil {
 				glog.Fatalf("add binding failed: %v", err)
 			}
+
+			glog.Infof("binding added (id = %v)", bindId)
 
 			forever := make(chan int)
 			<-forever
