@@ -18,6 +18,8 @@ type rmqConfig struct {
 	Password string `json:"pass"`
 }
 
+var confFile string
+
 // SetupHttpsCmd attempts to install LetsEncrypt certificates locally using the instance id
 // and registers it to Route53. This function assumes that certbot is already installed.
 func SetupReadMqCmd() *cobra.Command {
@@ -26,11 +28,11 @@ func SetupReadMqCmd() *cobra.Command {
 		Short: "read mochi message queue for requests",
 		Long:  `Read mochi message queue for requests.`,
 		Run: func(cmd *cobra.Command, args []string) {
-			if !private.Exists("rmqconf.json") {
+			if !private.Exists(confFile) {
 				glog.Fatalf("cannot find rmq.conf")
 			}
 
-			b, err := ioutil.ReadFile("rmq.conf")
+			b, err := ioutil.ReadFile(confFile)
 			if err != nil {
 				glog.Fatalf("read rmq.conf failed: %v", err)
 			}
@@ -94,6 +96,7 @@ func SetupReadMqCmd() *cobra.Command {
 	}
 
 	cmd.Flags().SortFlags = false
+	cmd.Flags().StringVar(&confFile, "rmq-conf", "rmq.conf", "rmq config file")
 	return cmd
 }
 

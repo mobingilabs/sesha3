@@ -16,7 +16,7 @@ script:
   fi
 
 before_deploy:
-- tar cvzf app.tar.gz sesha3 rmqconf.json cmdline appspec.yml scripts/ tools/
+- tar cvzf app.tar.gz sesha3 rmq.conf cmdline appspec.yml scripts/ tools/
 - mkdir -p dpl_cd_upload
 - cp app.tar.gz dpl_cd_upload/
 
