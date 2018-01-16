@@ -65,13 +65,13 @@ func SetupReadMqCmd() *cobra.Command {
 
 			bindId, err := con.AddBinding(&rmq.BindConfig{
 				ExchangeOpt: &rmq.ExchangeOptions{
-					Name:       "sesha3.exchange.direct",
+					Name:       "sesha3.direct",
 					Type:       "direct",
 					Durable:    false,
 					AutoDelete: true,
 				},
 				QueueOpt: &rmq.QueueOptions{
-					QueueName:  "sesha3.queue.ttyurl",
+					QueueName:  "sesha3.cmd",
 					Durable:    false,
 					AutoDelete: true,
 				},
