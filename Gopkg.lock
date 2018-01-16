@@ -47,8 +47,8 @@
     "service/s3/s3manager",
     "service/sts"
   ]
-  revision = "0cebc639926eb91b0192dae4b28bc808417e764c"
-  version = "v1.12.61"
+  revision = "fe3adbda9bc845e750e3e5767c0a14dff202b2cc"
+  version = "v1.12.62"
 
 [[projects]]
   name = "github.com/cenkalti/backoff"
@@ -210,7 +210,7 @@
   branch = "master"
   name = "github.com/spf13/cobra"
   packages = ["."]
-  revision = "b95ab734e27d33e0d8fbabf71ca990568d4e2020"
+  revision = "0c34d16c3123764e413b9ed982ada58b1c3d53ea"
 
 [[projects]]
   name = "github.com/spf13/pflag"
@@ -255,7 +255,7 @@
     "unix",
     "windows"
   ]
-  revision = "810d7000345868fc619eb81f46307107118f4ae1"
+  revision = "fff93fa7cd278d84afc205751523809c464168ab"
 
 [solve-meta]
   analyzer-name = "dep"
