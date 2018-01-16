@@ -102,6 +102,12 @@
   version = "v1.5.0"
 
 [[projects]]
+  name = "github.com/flowerinthenight/rmq"
+  packages = ["."]
+  revision = "12f116f1a649879795af1eadcacfffc3bdca695b"
+  version = "v0.1.0"
+
+[[projects]]
   name = "github.com/go-ini/ini"
   packages = ["."]
   revision = "32e4c1e6bc4e7d0d8451aa6b75200d19e37a536a"
@@ -220,6 +226,12 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/streadway/amqp"
+  packages = ["."]
+  revision = "a354ab84f102bc6eb31c9be006ca89446cf5b372"
+
+[[projects]]
+  branch = "master"
   name = "github.com/valyala/bytebufferpool"
   packages = ["."]
   revision = "e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7"
@@ -260,6 +272,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "434049b398671fe6052443dc755289f729d72e8488913bd1ec8919c151429290"
+  inputs-digest = "00ffb00a056a99839e55c087070a4d66ebadf69740c8c43757724fa2ddc0eb81"
   solver-name = "gps-cdcl"
   solver-version = 1
