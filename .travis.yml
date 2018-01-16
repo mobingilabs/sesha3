@@ -12,7 +12,7 @@ script:
     echo 'command=/home/ec2-user/sesha3/sesha3 serve --v=2 --logtostderr=true' > cmdline;
   else
     echo 'command=/home/ec2-user/sesha3/sesha3 serve --v=2 --logtostderr=true --rundev=true' > cmdline;
-    echo '{"host":"${RMQ_HOST}","port":"${RMQ_PORT}","user":"${RMQ_USER}","pass":"${RMQ_PASS}"}' > rmq.conf;
+    echo "{\"host\":\"${RMQ_HOST}\",\"port\":\"${RMQ_PORT}\",\"user\":\"${RMQ_USER}\",\"pass\":\"${RMQ_PASS}\"}" > rmq.conf;
   fi
 
 before_deploy:
