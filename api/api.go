@@ -83,7 +83,6 @@ func (e *ep) HandleHttpToken(c echo.Context) error {
 	if !ok {
 		m := "credentials validation failed"
 		e.simpleResponse(c, http.StatusInternalServerError, m)
-		glog.Errorf("%+v", util.ErrV(err, m))
 		return errors.New(m)
 	}
 

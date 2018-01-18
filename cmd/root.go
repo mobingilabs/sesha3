@@ -45,6 +45,7 @@ Simply type '` + cmdline.Args0() + ` help [path to command]' for full details.`,
 		ServeCmd(),
 		SetupRoute53Cmd(),
 		SetupHttpsCmd(),
+		SetupReadMqCmd(),
 	)
 
 	flag.CommandLine.AddGoFlagSet(goflag.CommandLine)

@@ -47,8 +47,8 @@
     "service/s3/s3manager",
     "service/sts"
   ]
-  revision = "3c754f1d340244540350f0a00b940781bae9c905"
-  version = "v1.12.59"
+  revision = "fe3adbda9bc845e750e3e5767c0a14dff202b2cc"
+  version = "v1.12.62"
 
 [[projects]]
   name = "github.com/cenkalti/backoff"
@@ -100,6 +100,12 @@
   packages = ["."]
   revision = "570b54cabe6b8eb0bc2dfce68d964677d63b5260"
   version = "v1.5.0"
+
+[[projects]]
+  name = "github.com/flowerinthenight/rmq"
+  packages = ["."]
+  revision = "12f116f1a649879795af1eadcacfffc3bdca695b"
+  version = "v0.1.0"
 
 [[projects]]
   name = "github.com/go-ini/ini"
@@ -210,13 +216,19 @@
   branch = "master"
   name = "github.com/spf13/cobra"
   packages = ["."]
-  revision = "b95ab734e27d33e0d8fbabf71ca990568d4e2020"
+  revision = "0c34d16c3123764e413b9ed982ada58b1c3d53ea"
 
 [[projects]]
   name = "github.com/spf13/pflag"
   packages = ["."]
   revision = "e57e3eeb33f795204c1ca35f56c44f83227c6e66"
   version = "v1.0.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/streadway/amqp"
+  packages = ["."]
+  revision = "a354ab84f102bc6eb31c9be006ca89446cf5b372"
 
 [[projects]]
   branch = "master"
@@ -236,15 +248,17 @@
   packages = [
     "acme",
     "acme/autocert",
+    "bcrypt",
+    "blowfish",
     "ssh/terminal"
   ]
-  revision = "b3c9a1d25cfbbbab0ff4780b71c4f54e6e92a0de"
+  revision = "13931e22f9e72ea58bb73048bc752b48c6d4d4ac"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context"]
-  revision = "ab555f366c4508dbe0802550b1b20c46c5c18aa0"
+  revision = "5ccada7d0a7ba9aeb5d3aca8d3501b4c2a509fec"
 
 [[projects]]
   branch = "master"
@@ -253,11 +267,11 @@
     "unix",
     "windows"
   ]
-  revision = "810d7000345868fc619eb81f46307107118f4ae1"
+  revision = "fff93fa7cd278d84afc205751523809c464168ab"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "16a4978898f4ae1d7762c20ea1580913ec390754f0ff286b1cf69d955c72397b"
+  inputs-digest = "00ffb00a056a99839e55c087070a4d66ebadf69740c8c43757724fa2ddc0eb81"
   solver-name = "gps-cdcl"
   solver-version = 1
