@@ -2,6 +2,7 @@ package session
 
 import (
 	"bufio"
+	"crypto/md5"
 	"fmt"
 	"net/url"
 	"os/exec"
@@ -15,6 +16,7 @@ import (
 	"github.com/mobingilabs/sesha3/pkg/awsports"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
+	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/mobingilabs/sesha3/pkg/util"
 	"github.com/pkg/errors"
 	uuid "github.com/satori/go.uuid"
@@ -97,23 +99,37 @@ func (s *Session) Start() (string, error) {
 		// timeout := "export TMOUT=" + s.Timeout
 		timeout := "export TMOUT=7200"
 		term := "export TERM=xterm"
-		s.Cmd = exec.Command(svrtool,
-			"--port", fmt.Sprint(ec2req.RequestPort),
-			"-w",
-			"--random-url",
-			"--random-url-length", "36",
-			"--timeout", "7200",
-			"-once",
-			"--tls",
-			"--tls-crt",
-			certpath+"/fullchain.pem",
-			"--tls-key",
-			certpath+"/privkey.pem",
-			"--title-format", "Mobingi - {{ .Command }}",
-			"bash",
-			"-c",
-			ssh+" -t \""+timeout+" && "+term+" && "+defaultshell+" --login \"",
-		)
+
+		if params.UseProxy {
+			s.Cmd = exec.Command(svrtool,
+				"--port", fmt.Sprint(ec2req.RequestPort),
+				"-w",
+				"--timeout", "7200",
+				"-once",
+				"--title-format", "Mobingi - {{ .Command }}",
+				"bash",
+				"-c",
+				ssh+" -t \""+timeout+" && "+term+" && "+defaultshell+" --login \"",
+			)
+		} else {
+			s.Cmd = exec.Command(svrtool,
+				"--port", fmt.Sprint(ec2req.RequestPort),
+				"-w",
+				"--random-url",
+				"--random-url-length", "36",
+				"--timeout", "7200",
+				"-once",
+				"--tls",
+				"--tls-crt",
+				certpath+"/fullchain.pem",
+				"--tls-key",
+				certpath+"/privkey.pem",
+				"--title-format", "Mobingi - {{ .Command }}",
+				"bash",
+				"-c",
+				ssh+" -t \""+timeout+" && "+term+" && "+defaultshell+" --login \"",
+			)
+		}
 
 		s.info("svrtool args: ", s.Cmd.Args)
 		errpipe, err := s.Cmd.StderrPipe()
@@ -175,6 +191,8 @@ func (s *Session) Start() (string, error) {
 
 	ret := <-ttyurl
 
+	glog.V(2).Infof("extracted url from pipe: %v", ret)
+
 	// workaround for websocket close not exiting gotty immediately
 	go func() {
 		for wsc := range wsclose {
@@ -217,6 +235,15 @@ func (s *Session) Start() (string, error) {
 func (s *Session) GetFullURL() string {
 	var furl string
 	if !s.Online {
+		return furl
+	}
+
+	if params.UseProxy {
+		iid := strings.Replace(util.GetEc2Id(), "-", "", -1)
+		md5rand := fmt.Sprintf("%x", md5.Sum([]byte(iid+s.HttpsPort)))
+		furl = "https://sesha3-mapper.demo.labs.mobingi.com/sesha3-" + iid +
+			"/" + s.HttpsPort + "/" + md5rand + "/"
+		glog.V(2).Infof("full url: %v", furl)
 		return furl
 	}
 

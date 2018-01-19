@@ -192,5 +192,6 @@ func ServeCmd() *cobra.Command {
 
 	cmd.Flags().SortFlags = false
 	cmd.Flags().StringVar(&params.Port, "port", "8080", "server port")
+	cmd.Flags().BoolVar(&params.UseProxy, "use-proxy", params.UseProxy, "use port mapper proxy")
 	return cmd
 }

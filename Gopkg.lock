@@ -47,8 +47,8 @@
     "service/s3/s3manager",
     "service/sts"
   ]
-  revision = "fe3adbda9bc845e750e3e5767c0a14dff202b2cc"
-  version = "v1.12.62"
+  revision = "c13a879e75646fe750d21bcb05bf2cabea9791c1"
+  version = "v1.12.65"
 
 [[projects]]
   name = "github.com/cenkalti/backoff"
@@ -228,7 +228,7 @@
   branch = "master"
   name = "github.com/streadway/amqp"
   packages = ["."]
-  revision = "a354ab84f102bc6eb31c9be006ca89446cf5b372"
+  revision = "54ded0531dfd699a7893861d39a7a949c5749bc9"
 
 [[projects]]
   branch = "master"
@@ -267,7 +267,7 @@
     "unix",
     "windows"
   ]
-  revision = "fff93fa7cd278d84afc205751523809c464168ab"
+  revision = "2c42eef0765b9837fbdab12011af7830f55f88f0"
 
 [solve-meta]
   analyzer-name = "dep"

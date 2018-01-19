@@ -1,3 +1,27 @@
+Release v1.12.65 (2018-01-18)
+===
+
+### Service Client Updates
+* `service/sagemaker`: Updates service API and documentation
+  * CreateTrainingJob and CreateEndpointConfig now supports KMS Key for volume encryption.
+
+Release v1.12.64 (2018-01-17)
+===
+
+### Service Client Updates
+* `service/autoscaling-plans`: Updates service documentation
+* `service/ec2`: Updates service documentation
+  * Documentation updates for EC2
+
+Release v1.12.63 (2018-01-17)
+===
+
+### Service Client Updates
+* `service/application-autoscaling`: Updates service API and documentation
+* `service/autoscaling-plans`: Adds new service
+* `service/rds`: Updates service API and documentation
+  * With this release you can now integrate RDS DB instances with CloudWatch Logs. We have added parameters to the operations for creating and modifying DB instances (for example CreateDBInstance) to allow you to take advantage of this capability through the CLI and API. Once you enable this feature, a stream of log events will publish to CloudWatch Logs for each log type you enable.
+
 Release v1.12.62 (2018-01-15)
 ===
 
