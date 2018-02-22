@@ -241,7 +241,7 @@ func (s *Session) GetFullURL() string {
 	if params.UseProxy {
 		iid := strings.Replace(util.GetEc2Id(), "-", "", -1)
 		md5rand := fmt.Sprintf("%x", md5.Sum([]byte(iid+s.HttpsPort)))
-		furl = "https://sesha3-mapper.demo.labs.mobingi.com/sesha3-" + iid +
+		furl = "https://mochi-sesha3mapperdev.mobingi.com/sesha3-" + iid +
 			"/" + s.HttpsPort + "/" + md5rand + "/"
 		glog.V(2).Infof("full url: %v", furl)
 		return furl

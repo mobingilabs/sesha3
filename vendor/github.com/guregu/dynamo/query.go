@@ -35,6 +35,7 @@ type Query struct {
 	subber
 
 	err error
+	cc  *ConsumedCapacity
 }
 
 var (
@@ -96,6 +97,13 @@ func (q *Query) Range(name string, op Operator, values ...interface{}) *Query {
 	q.rangeOp = op
 	q.rangeValues, err = marshalSlice(values)
 	q.setError(err)
+	return q
+}
+
+// StartFrom makes this query continue from a previous one.
+// Use Query.Iter's LastEvaluatedKey.
+func (q *Query) StartFrom(key PagingKey) *Query {
+	q.startKey = key
 	return q
 }
 
@@ -172,6 +180,12 @@ func (q *Query) Order(order Order) *Query {
 	return q
 }
 
+// ConsumedCapacity will measure the throughput capacity consumed by this operation and add it to cc.
+func (q *Query) ConsumedCapacity(cc *ConsumedCapacity) *Query {
+	q.cc = cc
+	return q
+}
+
 // One executes this query and retrieves a single result,
 // unmarshaling the result to out.
 func (q *Query) One(out interface{}) error {
@@ -204,6 +218,9 @@ func (q *Query) OneWithContext(ctx aws.Context, out interface{}) error {
 		if err != nil {
 			return err
 		}
+		if q.cc != nil {
+			addConsumedCapacity(q.cc, res.ConsumedCapacity)
+		}
 
 		return unmarshalItem(res.Item, out)
 	}
@@ -232,6 +249,9 @@ func (q *Query) OneWithContext(ctx aws.Context, out interface{}) error {
 	})
 	if err != nil {
 		return err
+	}
+	if q.cc != nil {
+		addConsumedCapacity(q.cc, res.ConsumedCapacity)
 	}
 
 	return unmarshalItem(res.Items[0], out)
@@ -269,6 +289,9 @@ func (q *Query) CountWithContext(ctx aws.Context) (int64, error) {
 		})
 		if err != nil {
 			return 0, err
+		}
+		if q.cc != nil {
+			addConsumedCapacity(q.cc, res.ConsumedCapacity)
 		}
 
 		q.startKey = res.LastEvaluatedKey
@@ -326,7 +349,7 @@ func (itr *queryIter) NextWithContext(ctx aws.Context, out interface{}) bool {
 	}
 	if itr.output != nil && itr.idx >= len(itr.output.Items) {
 		// have we exhausted all results?
-		if itr.output.LastEvaluatedKey == nil {
+		if itr.output.LastEvaluatedKey == nil || itr.query.searchLimit > 0 {
 			return false
 		}
 
@@ -341,7 +364,13 @@ func (itr *queryIter) NextWithContext(ctx aws.Context, out interface{}) bool {
 		return err
 	})
 
-	if itr.err != nil || len(itr.output.Items) == 0 {
+	if itr.err != nil {
+		return false
+	}
+	if itr.query.cc != nil {
+		addConsumedCapacity(itr.query.cc, itr.output.ConsumedCapacity)
+	}
+	if len(itr.output.Items) == 0 {
 		if itr.output.LastEvaluatedKey != nil {
 			// we need to retry until we get some data
 			return itr.NextWithContext(ctx, out)
@@ -362,20 +391,46 @@ func (itr *queryIter) Err() error {
 	return itr.err
 }
 
+func (itr *queryIter) LastEvaluatedKey() PagingKey {
+	if itr.output != nil {
+		return itr.output.LastEvaluatedKey
+	}
+	return nil
+}
+
 // All executes this request and unmarshals all results to out, which must be a pointer to a slice.
 func (q *Query) All(out interface{}) error {
+	ctx, cancel := defaultContext()
+	defer cancel()
+	return q.AllWithContext(ctx, out)
+}
+
+func (q *Query) AllWithContext(ctx aws.Context, out interface{}) error {
+	_, err := q.AllWithLastEvaluatedKeyContext(ctx, out)
+	return err
+}
+
+// AllWithLastEvaluatedKey executes this request and unmarshals all results to out, which must be a pointer to a slice.
+// This returns a PagingKey you can use with StartFrom to split up results.
+func (q *Query) AllWithLastEvaluatedKey(out interface{}) (PagingKey, error) {
+	ctx, cancel := defaultContext()
+	defer cancel()
+	return q.AllWithLastEvaluatedKeyContext(ctx, out)
+}
+
+func (q *Query) AllWithLastEvaluatedKeyContext(ctx aws.Context, out interface{}) (PagingKey, error) {
 	iter := &queryIter{
 		query:     q,
 		unmarshal: unmarshalAppend,
 		err:       q.err,
 	}
-	for iter.Next(out) {
+	for iter.NextWithContext(ctx, out) {
 	}
-	return iter.Err()
+	return iter.LastEvaluatedKey(), iter.Err()
 }
 
 // Iter returns a results iterator for this request.
-func (q *Query) Iter() Iter {
+func (q *Query) Iter() PagingIter {
 	iter := &queryIter{
 		query:     q,
 		unmarshal: unmarshalItem,
@@ -430,6 +485,9 @@ func (q *Query) queryInput() *dynamodb.QueryInput {
 	if q.order != nil {
 		req.ScanIndexForward = (*bool)(q.order)
 	}
+	if q.cc != nil {
+		req.ReturnConsumedCapacity = aws.String(dynamodb.ReturnConsumedCapacityIndexes)
+	}
 	return req
 }
 
@@ -460,6 +518,9 @@ func (q *Query) getItemInput() *dynamodb.GetItemInput {
 	}
 	if q.projection != "" {
 		req.ProjectionExpression = &q.projection
+	}
+	if q.cc != nil {
+		req.ReturnConsumedCapacity = aws.String(dynamodb.ReturnConsumedCapacityIndexes)
 	}
 	return req
 }

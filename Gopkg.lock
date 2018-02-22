@@ -26,6 +26,7 @@
     "aws/request",
     "aws/session",
     "aws/signer/v4",
+    "internal/sdkrand",
     "internal/shareddefaults",
     "private/protocol",
     "private/protocol/ec2query",
@@ -47,8 +48,8 @@
     "service/s3/s3manager",
     "service/sts"
   ]
-  revision = "c13a879e75646fe750d21bcb05bf2cabea9791c1"
-  version = "v1.12.65"
+  revision = "adeb60566bc8c9202b0f1be7e3a675beedbc11f0"
+  version = "v1.13.2"
 
 [[projects]]
   name = "github.com/cenkalti/backoff"
@@ -60,7 +61,7 @@
   branch = "master"
   name = "github.com/creack/goselect"
   packages = ["."]
-  revision = "1bd5ca702c6154bccc56ecd598932ee8b295cab2"
+  revision = "528c74964609a58f7c17471525659c9b71cd499b"
 
 [[projects]]
   name = "github.com/dgrijalva/jwt-go"
@@ -98,8 +99,8 @@
 [[projects]]
   name = "github.com/fatih/color"
   packages = ["."]
-  revision = "570b54cabe6b8eb0bc2dfce68d964677d63b5260"
-  version = "v1.5.0"
+  revision = "507f6050b8568533fb3f5504de8e5205fa62a114"
+  version = "v1.6.0"
 
 [[projects]]
   name = "github.com/flowerinthenight/rmq"
@@ -132,7 +133,7 @@
     ".",
     "internal/exprs"
   ]
-  revision = "78f36f7876767b1899b4bac7381d109fe5a58539"
+  revision = "1f756eeb447053e489bc2be321c9092751ae533b"
 
 [[projects]]
   name = "github.com/inconshreveable/mousetrap"
@@ -191,8 +192,8 @@
     "pkg/notification",
     "pkg/private"
   ]
-  revision = "794248f344769119b3f5a6d27c980f18ff305959"
-  version = "v0.1.31"
+  revision = "269ab47439b504dd341584ebf847b52437c252d5"
+  version = "v0.1.32"
 
 [[projects]]
   name = "github.com/moul/gotty-client"
@@ -213,10 +214,10 @@
   version = "v1.2.0"
 
 [[projects]]
-  branch = "master"
   name = "github.com/spf13/cobra"
   packages = ["."]
-  revision = "0c34d16c3123764e413b9ed982ada58b1c3d53ea"
+  revision = "7b2c5ac9fc04fc5efafb60700713d4fa609b777b"
+  version = "v0.0.1"
 
 [[projects]]
   name = "github.com/spf13/pflag"
@@ -228,7 +229,7 @@
   branch = "master"
   name = "github.com/streadway/amqp"
   packages = ["."]
-  revision = "54ded0531dfd699a7893861d39a7a949c5749bc9"
+  revision = "fc7fda2371f5327ad39211e09482845b8734cc72"
 
 [[projects]]
   branch = "master"
@@ -252,13 +253,13 @@
     "blowfish",
     "ssh/terminal"
   ]
-  revision = "13931e22f9e72ea58bb73048bc752b48c6d4d4ac"
+  revision = "432090b8f568c018896cd8a0fb0345872bbac6ce"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context"]
-  revision = "5ccada7d0a7ba9aeb5d3aca8d3501b4c2a509fec"
+  revision = "cbe0f9307d0156177f9dd5dc85da1a31abc5f2fb"
 
 [[projects]]
   branch = "master"
@@ -267,11 +268,11 @@
     "unix",
     "windows"
   ]
-  revision = "2c42eef0765b9837fbdab12011af7830f55f88f0"
+  revision = "37707fdb30a5b38865cfb95e5aab41707daec7fd"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "00ffb00a056a99839e55c087070a4d66ebadf69740c8c43757724fa2ddc0eb81"
+  inputs-digest = "098b91e106f48c6d29cbe803f95314577026af2576f0d8085bd6b2798e0131db"
   solver-name = "gps-cdcl"
   solver-version = 1
