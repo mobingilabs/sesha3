@@ -57,6 +57,13 @@ func (s *Session) Start() (string, error) {
 	ttyurl := make(chan string)
 	wsclose := make(chan string)
 
+	if s.User == "" {
+		// AWS stack id.
+		if strings.HasPrefix(s.StackId, "mo-") {
+			s.User = "ec2-user"
+		}
+	}
+
 	glog.V(1).Infof("request port: %v", s.HttpsPort)
 
 	// port closer function
