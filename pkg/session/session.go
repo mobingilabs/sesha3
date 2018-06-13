@@ -228,10 +228,7 @@ func (s *Session) Start() (string, error) {
 				if err != nil {
 					s.error(errors.Wrap(err, "sigterm failed"))
 					// when all else fail
-					err = s.Cmd.Process.Signal(syscall.SIGKILL)
-					if err != nil {
-						s.error(errors.Wrap(err, "sigkill failed"))
-					}
+					_ = s.Cmd.Process.Signal(syscall.SIGKILL)
 				}
 			}
 		}
