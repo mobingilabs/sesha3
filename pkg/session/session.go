@@ -49,6 +49,7 @@ func (s *Session) Id() string {
 func (s *Session) Start() (string, error) {
 	// set member 'id'
 	s.info("starting session: ", s.Id())
+	sshuser := s.User
 
 	// try to open port for gotty
 	ec2req := awsports.Make(util.GetRegion(), util.GetEc2Id())
@@ -57,10 +58,10 @@ func (s *Session) Start() (string, error) {
 	ttyurl := make(chan string)
 	wsclose := make(chan string)
 
-	if s.User == "" {
+	if sshuser == "" || sshuser == "<nil>" {
 		// AWS stack id.
 		if strings.HasPrefix(s.StackId, "mo-") {
-			s.User = "ec2-user"
+			sshuser = "ec2-user"
 		}
 	}
 
@@ -88,8 +89,8 @@ func (s *Session) Start() (string, error) {
 
 		svrtool := cmdline.Dir() + "/tools/" + runtime.GOOS + "/gotty"
 		certpath := "/etc/letsencrypt/live/" + util.Domain()
-		ssh := "/usr/bin/ssh -oStrictHostKeyChecking=no -i " + s.PemFile + " " + s.User + "@" + s.Ip
-		shell := "grep " + s.User + " /etc/passwd | cut -d: -f7"
+		ssh := "/usr/bin/ssh -oStrictHostKeyChecking=no -i " + s.PemFile + " " + sshuser + "@" + s.Ip
+		shell := "grep " + sshuser + " /etc/passwd | cut -d: -f7"
 		dshellb, err := exec.Command("bash", "-c", ssh+" -t "+shell).Output()
 		if err != nil {
 			s.error(util.ErrV(err, "ssh shell exec failed"))
