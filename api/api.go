@@ -20,6 +20,7 @@ import (
 	"github.com/mobingilabs/sesha3/pkg/execute"
 	"github.com/mobingilabs/sesha3/pkg/metrics"
 	"github.com/mobingilabs/sesha3/pkg/notify"
+	"github.com/mobingilabs/sesha3/pkg/params"
 	"github.com/mobingilabs/sesha3/pkg/session"
 	"github.com/mobingilabs/sesha3/pkg/util"
 	"github.com/pkg/errors"
@@ -261,18 +262,24 @@ func (e *ep) HandleHttpTtyUrl(c echo.Context) error {
 
 	// add this session to our list of running sessions
 	session.Sessions.Add(sess)
-	if randomurl == "" {
-		err := fmt.Errorf("%s", "cannot initialize secure tty access")
-		e.simpleResponse(c, http.StatusInternalServerError, err.Error())
-		glog.Errorf("session add failed")
-		notify.HookPost(err)
-		return err
-	} else {
-		sess.Online = true
-	}
 
 	var fullurl string
-	sess.TtyURL = randomurl
+
+	if params.UseProxy {
+		// we don't need randomurl with proxy
+	} else {
+		if randomurl == "" {
+			err := fmt.Errorf("%s", "cannot initialize secure tty access")
+			e.simpleResponse(c, http.StatusInternalServerError, err.Error())
+			glog.Errorf("session add failed")
+			notify.HookPost(err)
+			return err
+		}
+
+		sess.TtyURL = randomurl
+	}
+
+	sess.Online = true
 	fullurl = sess.GetFullURL()
 	if fullurl == "" {
 		err := fmt.Errorf("%s", "cannot initialize secure tty access")
